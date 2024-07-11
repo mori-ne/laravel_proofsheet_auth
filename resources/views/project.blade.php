@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -32,30 +33,65 @@
         <!-- Page Content -->
         <div class="flex flex-row items-stretch">
 
-            <aside class="flex-none bg-white p-6 w-72 border-neutral-300 border-r h-screen">
+            <aside class="flex-none bg-white p-6 w-60 border-neutral-300 border-r h-screen">
                 {{-- メインメニュー --}}
-                <div class="mb-6">
+                <div class="mb-8">
                     <h3 class="font-bold text-lg mb-3">メインメニュー</h3>
                     <ul>
-                        <li><a class="block mb-2 text-gray-500" href="{{ route('dashboard') }}">ダッシュボード</a></li>
+                        <li class="mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="at-package-bold"></i>
+                                <a class="block text-gray-500" href="{{ route('dashboard') }}">ダッシュボード</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 {{-- 管理者項目 --}}
-                <div class="mb-6">
+                <div class="mb-8">
                     <h3 class="font-bold text-lg mb-3">管理者項目</h3>
                     <ul>
-                        <li><a class="block mb-2 text-gray-500" href="{{ route('project') }}">プロジェクト管理</a></li>
-                        <li><a class="block mb-2 text-gray-500" href="{{ route('dashboard') }}">フォーム管理</a></li>
-                        <li><a class="block mb-2 text-gray-500" href="{{ route('dashboard') }}">入力項目管理</a></li>
-                        <li><a class="block mb-2 text-gray-500" href="{{ route('dashboard') }}">メール管理</a></li>
+                        <li class="mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="at-box-filing-bold"></i>
+                                <a class="block text-gray-500" href="{{ route('project') }}">プロジェクト管理</a>
+                            </div>
+                        </li>
+                        <li class="mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="at-plus-clipboard-bold"></i>
+                                <a class="block text-gray-500" href="{{ route('dashboard') }}">フォーム管理</a>
+                            </div>
+                        </li>
+                        <li class="mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="at-write-book-bold"></i>
+                                <a class="block text-gray-500" href="{{ route('dashboard') }}">入力項目管理</a>
+                            </div>
+                        </li>
+                        <li class="mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="at-envelope-bold"></i>
+                                <a class="block text-gray-500" href="{{ route('dashboard') }}">メール管理</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 {{-- 投稿者項目 --}}
-                <div class="mb-6">
+                <div class="mb-8">
                     <h3 class="font-bold text-lg mb-3">投稿者項目</h3>
                     <ul>
-                        <li><a class="block mb-2 text-gray-500" href="{{ route('dashboard') }}">投稿一覧</a></li>
-                        <li><a class="block mb-2 text-gray-500" href="{{ route('dashboard') }}">アカウント管理</a></li>
+                        <li class="mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="at-list-bold"></i>
+                                <a class="block text-gray-500" href="{{ route('dashboard') }}">投稿一覧</a>
+                            </div>
+                        </li>
+                        <li class="mb-2">
+                            <div class="flex items-center gap-3">
+                                <i class="at-account-bold"></i>
+                                <a class="block text-gray-500" href="{{ route('dashboard') }}">アカウント管理</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </aside>
