@@ -19,5 +19,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'rootuser@rootuser.jp',
         ]);
+
+        $this->call([
+            ProjectSeeder::class,
+        ]);
     }
 }

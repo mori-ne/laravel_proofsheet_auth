@@ -31,9 +31,9 @@
         @endisset
 
         <!-- Page Content -->
-        <div class="flex flex-row items-stretch">
+        <div class="flex flex-row items-stretch min-h-screen">
 
-            <aside class="flex-none bg-white p-6 w-60 border-neutral-300 border-r h-screen">
+            <aside class="flex-none bg-white p-6 w-60 border-neutral-300 border-r">
                 {{-- メインメニュー --}}
                 <div class="mb-8">
                     <h3 class="font-bold text-lg mb-3">メインメニュー</h3>
@@ -53,25 +53,25 @@
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-box-filing-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('project') }}">プロジェクト管理</a>
+                                <a class="block text-gray-500" href="{{ route('project.index') }}">プロジェクト管理</a>
                             </div>
                         </li>
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-plus-clipboard-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('dashboard') }}">フォーム管理</a>
+                                <a class="block text-gray-500" href="{{ route('form') }}">フォーム管理</a>
                             </div>
                         </li>
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-write-book-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('dashboard') }}">入力項目管理</a>
+                                <a class="block text-gray-300" href="#">入力項目管理</a>
                             </div>
                         </li>
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-envelope-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('dashboard') }}">メール管理</a>
+                                <a class="block text-gray-300" href="#">メール管理</a>
                             </div>
                         </li>
                     </ul>
@@ -83,13 +83,13 @@
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-list-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('dashboard') }}">投稿一覧</a>
+                                <a class="block text-gray-300" href="#">投稿一覧</a>
                             </div>
                         </li>
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-account-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('dashboard') }}">アカウント管理</a>
+                                <a class="block text-gray-300" href="#">アカウント管理</a>
                             </div>
                         </li>
                     </ul>
@@ -110,6 +110,8 @@
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 
+                    {{--  --}}
+                    <div class="text-gray-500 text-sm w-full flex items-center justify-center mt-96">まだ何もないです...</div>
                     {{--  --}}
                 </div>
             </main>
