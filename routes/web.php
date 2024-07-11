@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
 // project（そのうちresourceで書き直す）
 Route::get('/project', [ProjectController::class, 'index'])->name('project.index')->middleware('auth', 'verified');
+Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show')->middleware('auth', 'verified');
 
 // form
 Route::get('/form', function () {

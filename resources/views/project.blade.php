@@ -165,7 +165,7 @@
                                 @endif
 
                                 <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
-                                    {{ $project->project_name }}
+                                    <a href="{{ route('project.show', $project->id) }}">{{ $project->project_name }}</a>
                                 </h5>
                             </div>
                             <div class="flex items-center">
@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="flex items-center">
                                     <p class="text-sm text-neutral-500">フォーム数：</p>
-                                    <p class="text-sm text-neutral-900">1</p>
+                                    <p class="text-sm text-neutral-900">null</p>
                                 </div>
                             </div>
                             <div class="my-4 border"></div>

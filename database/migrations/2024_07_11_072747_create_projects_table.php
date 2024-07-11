@@ -13,11 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary()->autoIncrement();
+            $table->unsignedBigInteger('id')->primary()->autoIncrement()->comment('ID');
             $table->string('project_name', 100)->comment('プロジェクト名');
-            $table->uuid('uuid')->unique()->default(DB::raw('uuid()'))->comment('UUID');
+            $table->uuid('uuid')->unique()->comment('UUID');
             $table->text('description')->nullable()->comment('説明');
             $table->boolean('status')->default(0)->comment('0:無効・1:有効');
+            $table->string('mail_subject', 255)->nullable()->comment('返信メール件名');
+            $table->text('mail_content')->nullable()->comment('返信メール内容');
             $table->timestamp('is_deadline')->nullable()->comment('公開期限');
             $table->timestamps();
         });
