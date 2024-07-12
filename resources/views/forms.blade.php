@@ -103,7 +103,7 @@
                     </h2>
                 </x-slot>
 
-                <div class="p-6">
+                <div class="p-6 w-2/3 mx-auto">
 
                     {{-- title --}}
                     <div class="mb-8">
@@ -132,8 +132,10 @@
                     </div>
 
                     {{-- content --}}
-                    <div class="text-gray-500 text-sm w-full flex items-center justify-center mt-96">まだ何もないです...</div>
-
+                    <div
+                        class="text-gray-600 text-sm w-full py-16 px-32 text-center border-dashed rounded-lg border-2 border-gray-300">
+                        まだ何もないです...
+                    </div>
                 </div>
             </main>
         </div>

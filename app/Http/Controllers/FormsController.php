@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class FormsController extends Controller
 {
@@ -19,7 +20,8 @@ class FormsController extends Controller
      */
     public function create()
     {
-        return view('forms.create');
+        $projects = Project::all();
+        return view('forms.create', compact('projects'));
     }
 
     /**

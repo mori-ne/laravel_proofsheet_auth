@@ -24,9 +24,10 @@ Route::middleware('auth')->group(function () {
 
 // project（そのうちresourceで書き直す）
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index')->middleware('auth', 'verified');
+Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create')->middleware('auth', 'verified');
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show')->middleware('auth', 'verified');
 
-// form
+// form（そのうちresourceで書き直す）
 Route::get('/forms', [FormsController::class, 'index'])->name('forms.index')->middleware('auth', 'verified');
 Route::get('/forms/create', [FormsController::class, 'create'])->name('forms.create')->middleware('auth', 'verified');
 

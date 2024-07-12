@@ -120,43 +120,22 @@
                             <div class="mb-6">
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">
-                                        プロジェクトを選択
-                                    </label>
-                                    <span
-                                        class="bg-red-600 text-white relative text-xs font-semibold pl-2 pr-2.5 py-0.5 rounded-full">
-                                        <span>必須</span>
-                                    </span>
-                                    <p class="text-xs text-gray-500">作成するプロジェクトを選択してください</p>
-                                </div>
-
-                                <select name="#" id="#"
-                                    class="py-3 px-4 pe-9 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
-                                    @foreach ($projects as $project)
-                                        <option value="{{ $project->project_name }}">{{ $project->project_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="mb-6">
-                                <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">
-                                        フォーム名
+                                        プロジェクト名
                                     </label>
                                     <span
                                         class="bg-red-600 text-white relative text-xs font-semibold pl-2 pr-2.5 py-0.5 rounded-full">
                                         <span>必須</span>
                                     </span>
                                 </div>
-                                <input type="text" placeholder="フォーム名を記入してください"
+                                <input type="text" placeholder="プロジェクト名を記入してください"
                                     class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                             </div>
 
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">フォームの説明</label>
+                                    <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
                                 </div>
-                                <textarea type="text" placeholder="フォームの説明を記入してください"
+                                <textarea type="text" placeholder="プロジェクトの説明を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
                             </div>
 
@@ -164,12 +143,28 @@
 
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">入力項目</label>
+                                    <label class="text-lg font-bold" for="#">公開期限</label>
                                 </div>
 
                             </div>
 
+                            <hr class="my-8">
 
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">返信メールの件名</label>
+                                </div>
+                                <input type="text" placeholder="メールの件名を記入してください"
+                                    class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                            </div>
+
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">返信メールの本文</label>
+                                </div>
+                                <textarea type="text" placeholder="メールの返信内容を記入してください"
+                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
+                            </div>
 
                             <div class="mt-8">
                                 <button type="submit"

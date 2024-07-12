@@ -103,7 +103,7 @@
                     </h2>
                 </x-slot>
 
-                <div class="p-6">
+                <div class="p-6 w-2/3 mx-auto">
 
                     {{-- title --}}
                     <div class="mb-8">
@@ -124,10 +124,10 @@
                             </form>
                         </div>
                         <div>
-                            <button type="button"
+                            <a href="{{ route('projects.create') }}" type="button"
                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
                                 プロジェクトを新規作成
-                            </button>
+                            </a>
                         </div>
                     </div>
 
