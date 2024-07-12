@@ -53,13 +53,13 @@
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-box-filing-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('project.index') }}">プロジェクト管理</a>
+                                <a class="block text-gray-500" href="{{ route('projects.index') }}">プロジェクト管理</a>
                             </div>
                         </li>
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-plus-clipboard-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('form') }}">フォーム管理</a>
+                                <a class="block text-gray-500" href="{{ route('forms.index') }}">フォーム管理</a>
                             </div>
                         </li>
                         <li class="mb-2">
@@ -124,10 +124,10 @@
                             </form>
                         </div>
                         <div>
-                            <button type="button"
+                            <a href="{{ route('forms.create') }}"
                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
                                 フォームを新規作成
-                            </button>
+                            </a>
                         </div>
                     </div>
 

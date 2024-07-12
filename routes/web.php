@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -22,12 +23,11 @@ Route::middleware('auth')->group(function () {
 });
 
 // project（そのうちresourceで書き直す）
-Route::get('/project', [ProjectController::class, 'index'])->name('project.index')->middleware('auth', 'verified');
-Route::get('/project/{id}', [ProjectController::class, 'show'])->name('project.show')->middleware('auth', 'verified');
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index')->middleware('auth', 'verified');
+Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show')->middleware('auth', 'verified');
 
 // form
-Route::get('/form', function () {
-    return view('form');
-})->middleware(['auth', 'verified'])->name('form');
+Route::get('/forms', [FormsController::class, 'index'])->name('forms.index')->middleware('auth', 'verified');
+Route::get('/forms/create', [FormsController::class, 'create'])->name('forms.create')->middleware('auth', 'verified');
 
 require __DIR__ . '/auth.php';

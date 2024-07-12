@@ -53,13 +53,13 @@
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-box-filing-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('project.index') }}">プロジェクト管理</a>
+                                <a class="block text-gray-500" href="{{ route('projects.index') }}">プロジェクト管理</a>
                             </div>
                         </li>
                         <li class="mb-2">
                             <div class="flex items-center gap-3">
                                 <i class="at-plus-clipboard-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('form') }}">フォーム管理</a>
+                                <a class="block text-gray-500" href="{{ route('forms.index') }}">フォーム管理</a>
                             </div>
                         </li>
                         <li class="mb-2">
@@ -165,7 +165,8 @@
                                 @endif
 
                                 <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
-                                    <a href="{{ route('project.show', $project->id) }}">{{ $project->project_name }}</a>
+                                    <a
+                                        href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
                                 </h5>
                             </div>
                             <div class="flex items-center">
