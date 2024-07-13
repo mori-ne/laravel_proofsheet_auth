@@ -22,13 +22,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// project（そのうちresourceで書き直す）
+// projects（そのうちresourceで書き直す）
+// 一覧
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index')->middleware('auth', 'verified');
+// 新規作成画面
 Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create')->middleware('auth', 'verified');
+// 確認・バリデーション
 Route::post('/projects/confirm', [ProjectController::class, 'confirm'])->name('projects.confirm')->middleware('auth', 'verified');
+// ストア
+Route::post('/project', [ProjectController::class, 'store'])->name('projects.store')->middleware('auth', 'verified');
+// 詳細
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show')->middleware('auth', 'verified');
 
-// form（そのうちresourceで書き直す）
+// forms（そのうちresourceで書き直す）
 Route::get('/forms', [FormsController::class, 'index'])->name('forms.index')->middleware('auth', 'verified');
 Route::get('/forms/create', [FormsController::class, 'create'])->name('forms.create')->middleware('auth', 'verified');
 

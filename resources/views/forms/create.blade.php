@@ -34,68 +34,7 @@
         <!-- Page Content -->
         <div class="flex flex-row items-stretch min-h-screen">
 
-            <aside class="flex-none bg-white p-6 w-60 border-neutral-300 border-r">
-                {{-- メインメニュー --}}
-                <div class="mb-8">
-                    <h3 class="font-bold text-lg mb-3">メインメニュー</h3>
-                    <ul>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-package-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('dashboard') }}">ダッシュボード</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                {{-- 管理者項目 --}}
-                <div class="mb-8">
-                    <h3 class="font-bold text-lg mb-3">管理者項目</h3>
-                    <ul>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-box-filing-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('projects.index') }}">プロジェクト管理</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-plus-clipboard-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('forms.index') }}">フォーム管理</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-write-book-bold"></i>
-                                <a class="block text-gray-300" href="#">入力項目管理</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-envelope-bold"></i>
-                                <a class="block text-gray-300" href="#">メール管理</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                {{-- 投稿者項目 --}}
-                <div class="mb-8">
-                    <h3 class="font-bold text-lg mb-3">投稿者項目</h3>
-                    <ul>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-list-bold"></i>
-                                <a class="block text-gray-300" href="#">投稿一覧</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-account-bold"></i>
-                                <a class="block text-gray-300" href="#">アカウント管理</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            @include('layouts.sidebar')
 
             <main class="w-full">
                 <x-slot name="header">
@@ -114,7 +53,7 @@
 
                     {{-- breadcrumb --}}
                     <div class="mx-auto mb-2 border-neutral-300 ">
-                        <a href="{{ url()->previous() }}">戻る</a>
+                        <a href="javascript:history.back()">戻る</a>
                     </div>
 
                     {{-- content --}}

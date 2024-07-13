@@ -5,68 +5,71 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
-    /**
-     * リソースのリストを表示します。
-     */
+    //    一覧表示
     public function index()
     {
-        $projects = Project::all();
-        return view('/project', compact('projects'));
+        $projects = Project::orderby('id', 'desc')->get();
+        return view('/projects', compact('projects'));
     }
 
-    /**
-     * 新しいリソースを作成するためのフォームを表示します。
-     */
+    // 新規作成
     public function create()
     {
         return view('projects.create');
     }
 
+    // 確認
     public function confirm(Request $request)
     {
+        $validator = $request->validate([
+            'project_name' => 'required|max:100',
+            'mail_subject' => 'max:255',
+        ]);
+
         $project = $request->all();
         return view('projects.confirm', ['project' => $project]);
     }
 
-    /**
-     * 新しく作成されたリソースをストレージに保存します。
-     */
+    // 新規作成の適用
     public function store(Request $request)
     {
-        //
+        $project = Project::create([
+            'project_name' => $request->project_name,
+            'uuid' => (string) Str::uuid(),
+            'description' => $request->description,
+            'status' => 0,
+            'mail_subject' => $request->mail_subject,
+            'mail_content' => $request->mail_content,
+            'is_deadline' => $request->is_deadline,
+        ]);
+
+        return redirect()->route('projects.index')->with('status', 'プロジェクトを新規作成しました');
     }
 
-    /**
-     * 指定されたリソースを表示します。
-     */
+    // 詳細表示
     public function show(string $id)
     {
         $project = Project::find($id);
         return view('projects.show', compact('project'));
     }
 
-    /**
-     * 指定されたリソースを編集するためのフォームを表示します。
-     */
+    // 編集
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * ストレージ内の指定されたリソースを更新します。
-     */
+    // 編集の適用
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * 指定されたリソースをストレージから削除します。
-     */
+    // 削除
     public function destroy(string $id)
     {
         //

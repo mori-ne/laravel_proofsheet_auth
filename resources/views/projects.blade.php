@@ -34,68 +34,7 @@
         <!-- Page Content -->
         <div class="flex flex-row items-stretch min-h-screen">
 
-            <aside class="flex-none bg-white p-6 w-60 border-neutral-300 border-r">
-                {{-- メインメニュー --}}
-                <div class="mb-8">
-                    <h3 class="font-bold text-lg mb-3">メインメニュー</h3>
-                    <ul>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-package-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('dashboard') }}">ダッシュボード</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                {{-- 管理者項目 --}}
-                <div class="mb-8">
-                    <h3 class="font-bold text-lg mb-3">管理者項目</h3>
-                    <ul>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-box-filing-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('projects.index') }}">プロジェクト管理</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-plus-clipboard-bold"></i>
-                                <a class="block text-gray-500" href="{{ route('forms.index') }}">フォーム管理</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-write-book-bold"></i>
-                                <a class="block text-gray-300" href="#">入力項目管理</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-envelope-bold"></i>
-                                <a class="block text-gray-300" href="#">メール管理</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                {{-- 投稿者項目 --}}
-                <div class="mb-8">
-                    <h3 class="font-bold text-lg mb-3">投稿者項目</h3>
-                    <ul>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-list-bold"></i>
-                                <a class="block text-gray-300" href="#">投稿一覧</a>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="flex items-center gap-3">
-                                <i class="at-account-bold"></i>
-                                <a class="block text-gray-300" href="#">アカウント管理</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </aside>
+            @include('layouts.sidebar')
 
             <main class="w-full">
                 <x-slot name="header">
@@ -111,6 +50,19 @@
                         <h4 class="font-bold text-lg mb-1">プロジェクト管理</h4>
                         <p class="text-gray-500 text-sm">プロジェクトの一覧がここに表示されます</p>
                     </div>
+
+                    {{-- フラッシュメッセージ --}}
+                    @if (session('status'))
+                        <div
+                            class="mb-4 relative w-full rounded-lg border border-transparent bg-green-50 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-green-600">
+                            <svg class="w-5 h-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h5 class="mb-1 font-medium leading-none tracking-tight">{{ session('status') }}</h5>
+                        </div>
+                    @endif
 
                     {{-- search and new project --}}
                     <div class="flex justify-between my-3">
