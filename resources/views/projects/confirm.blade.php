@@ -104,85 +104,76 @@
                     </h2>
                 </x-slot>
 
-                <div class="p-6">
 
-                    {{-- title --}}
-                    {{-- <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-1">プロジェクト詳細</h4>
-                        <p class="text-gray-500 text-sm">プロジェクトの詳細がここに表示されます</p>
-                    </div> --}}
+                <div class="p-6 max-w-4xl mx-auto">
+
+                    <div class="mb-8">
+                        <h4 class="font-bold text-lg mb-1">確認画面</h4>
+                        <p class="text-gray-500 text-sm"></p>
+                    </div>
 
                     {{-- breadcrumb --}}
-                    <div class="max-w-4xl mx-auto mb-2 border-neutral-300 ">
+                    <div class="mb-2 border-neutral-300 ">
                         <a href="{{ url()->previous() }}">戻る</a>
                     </div>
 
-                    {{-- detail --}}
-                    <div class="max-w-4xl mx-auto bg-white border border-neutral-300 rounded-md p-8 mb-3">
-                        <div class="flex flex-col gap-2 mb-3">
-                            @if ($project->status)
-                                {{-- 公開中 --}}
-                                <span
-                                    class="w-20 h-8 bg-green-600 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 mb-2 rounded-full">
-                                    <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <span>公開中</span>
-                                </span>
-                            @else
-                                {{-- 非公開 --}}
-                                <span
-                                    class="w-20 h-8 bg-gray-300 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 mb-2 rounded-full">
-                                    <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <span>
-                                        非公開
+                    {{-- content --}}
+                    <div class="bg-white border border-neutral-300 rounded-md p-8 mb-3">
+
+                        <form action="#" method="POST">
+                            @csrf
+
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">
+                                        プロジェクト名
+                                    </label>
+                                    <span
+                                        class="bg-red-600 text-white relative text-xs font-semibold pl-2 pr-2.5 py-0.5 rounded-full">
+                                        <span>必須</span>
                                     </span>
-                                </span>
-                            @endif
-
-
-                            <h5 class="text-2xl font-bold leading-none tracking-tight text-neutral-900">
-                                {{ $project->project_name }}
-                            </h5>
-                        </div>
-                        <div class="flex items-center">
-                            <p class="text-sm text-neutral-500">プロジェクト公開URL：</p>
-                            <a class="text-sm text-neutral-900 underline"
-                                href="#">https://localhost/forms/{{ $project->uuid }}</a>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="flex items-center">
-                                <p class="text-sm text-neutral-500">投稿期限：</p>
-                                <p class="text-sm text-neutral-900">
-                                    {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y/m/d') }}
-                                </p>
+                                </div>
+                                <p>{{ $project['project_name'] }}</p>
                             </div>
-                            <div class="flex items-center">
-                                <p class="text-sm text-neutral-500">フォーム数：</p>
-                                <p class="text-sm text-neutral-900">null</p>
+
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                                </div>
+                                {{ $project['description'] }}
                             </div>
-                        </div>
-                        <div>
-                            <p>
-                                {{ $project->description }}
-                            </p>
-                        </div>
-                        <div class="border p-4">
-                            {{ $project->mail_subject }}
-                        </div>
-                        <div class="border p-4">
-                            {{ $project->mail_content }}
-                        </div>
+
+                            <hr class="my-8">
+
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">公開期限</label>
+                                    {{ $project['is_deadline'] }}
+                                </div>
+                            </div>
+
+                            <hr class="my-8">
+
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">返信メールの件名</label>
+                                </div>
+                                {{ $project['mail_subject'] }}
+                            </div>
+
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">返信メールの本文</label>
+                                </div>
+                                {{ $project['mail_content'] }}
+                            </div>
+
+                            <div class="mt-8">
+                                <button type="submit"
+                                    class="flex items-center justify-center w-96 px-4 py-2 text-sm mx-auto font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">新規作成する</button>
+                            </div>
+                        </form>
                     </div>
-
 
                 </div>
             </main>

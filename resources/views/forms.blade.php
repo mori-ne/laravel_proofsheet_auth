@@ -104,7 +104,7 @@
                     </h2>
                 </x-slot>
 
-                <div class="p-6 w-2/3 mx-auto">
+                <div class="p-6 max-w-4xl mx-auto">
 
                     {{-- title --}}
                     <div class="mb-8">

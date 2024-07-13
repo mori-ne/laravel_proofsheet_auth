@@ -25,6 +25,12 @@ class ProjectController extends Controller
         return view('projects.create');
     }
 
+    public function confirm(Request $request)
+    {
+        $project = $request->all();
+        return view('projects.confirm', ['project' => $project]);
+    }
+
     /**
      * 新しく作成されたリソースをストレージに保存します。
      */

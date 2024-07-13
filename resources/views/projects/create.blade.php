@@ -105,17 +105,22 @@
                 </x-slot>
 
 
-                <div class="p-6">
+                <div class="p-6 max-w-4xl mx-auto">
+
+                    <div class="mb-8">
+                        <h4 class="font-bold text-lg mb-1">プロジェクトを新規作成</h4>
+                        <p class="text-gray-500 text-sm"></p>
+                    </div>
 
                     {{-- breadcrumb --}}
-                    <div class="w-2/3 mx-auto mb-2 border-neutral-300 ">
+                    <div class="mb-2 border-neutral-300 ">
                         <a href="{{ url()->previous() }}">戻る</a>
                     </div>
 
                     {{-- content --}}
-                    <div class="w-2/3 mx-auto bg-white border border-neutral-300 rounded-md p-8 mb-3">
+                    <div class="bg-white border border-neutral-300 rounded-md p-8 mb-3">
 
-                        <form action="#">
+                        <form action="{{ route('projects.confirm') }}" method="POST">
                             @csrf
 
                             <div class="mb-6">
@@ -128,7 +133,7 @@
                                         <span>必須</span>
                                     </span>
                                 </div>
-                                <input type="text" placeholder="プロジェクト名を記入してください"
+                                <input name="project_name" type="text" placeholder="プロジェクト名を記入してください"
                                     class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                             </div>
 
@@ -136,7 +141,7 @@
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
                                 </div>
-                                <textarea type="text" placeholder="プロジェクトの説明を記入してください"
+                                <textarea name="description" type="text" placeholder="プロジェクトの説明を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
                             </div>
 
@@ -145,6 +150,8 @@
                             <div class="mb-6">
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">公開期限</label>
+                                    <input name="is_deadline" class="ml-4 border-gray-300 rounded-md" type="date"
+                                        value="2024-01-01">
                                 </div>
 
                             </div>
@@ -155,7 +162,7 @@
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">返信メールの件名</label>
                                 </div>
-                                <input type="text" placeholder="メールの件名を記入してください"
+                                <input name="mail_subject" type="text" placeholder="メールの件名を記入してください"
                                     class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                             </div>
 
@@ -163,7 +170,7 @@
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">返信メールの本文</label>
                                 </div>
-                                <textarea type="text" placeholder="メールの返信内容を記入してください"
+                                <textarea name="mail_content" type="text" placeholder="メールの返信内容を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
                             </div>
 
