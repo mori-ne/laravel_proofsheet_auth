@@ -128,7 +128,7 @@
                         </div>
 
                         <div class="mt-8">
-                            <p class="text-center mb-4 text-gray-500">この内容で新規登録します。よろしいですか？</p>
+                            <p class="text-sm text-center mb-4 text-gray-500">この内容で新規登録します。よろしいですか？</p>
 
                             <form action="{{ route('projects.store') }}" method="POST">
                                 @csrf
