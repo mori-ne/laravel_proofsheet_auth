@@ -13,6 +13,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
 
+    {{-- tinyMCE --}}
+    <x-head.tinymce-config />
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -84,7 +87,7 @@
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
                                 </div>
-                                <textarea name="description" type="text" placeholder="プロジェクトの説明を記入してください"
+                                <textarea id="projectinstance" name="description" type="text" placeholder="プロジェクトの説明を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('description') }}</textarea>
                             </div>
 
@@ -114,7 +117,7 @@
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">返信メールの本文</label>
                                 </div>
-                                <textarea name="mail_content" type="text" placeholder="メールの返信内容を記入してください"
+                                <textarea id="projectinstance" name="mail_content" type="text" placeholder="メールの返信内容を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('mail_content') }}</textarea>
                             </div>
 

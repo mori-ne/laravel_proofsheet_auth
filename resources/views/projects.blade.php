@@ -124,8 +124,8 @@
                             </div>
                             <div class="flex items-center">
                                 <p class="text-sm text-neutral-500">プロジェクト公開URL：</p>
-                                <a class="text-sm text-neutral-900 underline"
-                                    href="#">https://localhost/forms/{{ $project->uuid }}</a>
+                                <a class="text-sm text-blue-800 underline"
+                                    href="#">{{ url('/') }}/{{ $project->uuid }}</a>
                             </div>
                             <div class="flex items-center gap-4">
                                 <div class="flex items-center">
@@ -139,12 +139,12 @@
                                     <p class="text-sm text-neutral-900">null</p>
                                 </div>
                             </div>
-                            <div class="my-4 border"></div>
+                            {{-- <div class="my-4 border"></div>
                             <div>
                                 <p class="text-xs text-gray-500">
                                     {{ $project->description }}
                                 </p>
-                            </div>
+                            </div> --}}
                         </div>
                     @endforeach
 
