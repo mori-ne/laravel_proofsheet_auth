@@ -76,8 +76,12 @@
                             <div class="mb-2">
                                 <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
                             </div>
-                            <div class="border rounded p-3">
-                                {{ $project['description'] }}
+                            <div class="border rounded p-3 text-sm">
+                                @if (!$project['description'])
+                                    <span class="text-gray-400">なし</span>
+                                @else
+                                    {!! $project['description'] !!}
+                                @endif
                             </div>
                         </div>
 
@@ -87,7 +91,7 @@
                             </div>
                             <div class="border rounded p-3">
                                 @if (!$project['is_deadline'])
-                                    指定しない
+                                    <span class="text-gray-400">指定しない</span>
                                 @else
                                     {{ $project['is_deadline'] }}
                                 @endif
@@ -99,7 +103,11 @@
                                 <label class="text-lg font-bold" for="#">返信メールの件名</label>
                             </div>
                             <div class="border rounded p-3">
-                                {{ $project['mail_subject'] }}
+                                @if (!$project['mail_subject'])
+                                    <span class="text-gray-400">なし</span>
+                                @else
+                                    {{ $project['mail_subject'] }}
+                                @endif
                             </div>
                         </div>
 
@@ -107,8 +115,12 @@
                             <div class="mb-2">
                                 <label class="text-lg font-bold" for="#">返信メールの本文</label>
                             </div>
-                            <div class="border rounded p-3">
-                                {{ $project['mail_content'] }}
+                            <div class="border rounded p-3 text-sm">
+                                @if (!$project['mail_content'])
+                                    <span class="text-gray-400">なし</span>
+                                @else
+                                    {!! $project['mail_content'] !!}
+                                @endif
                             </div>
                         </div>
 
