@@ -55,7 +55,7 @@
                     </div>
 
                     {{-- breadcrumb --}}
-                    <div class="mb-2 border-neutral-300 ">
+                    <div class="mb-4 border-neutral-300 ">
                         <div class="flex gap-1 items-center">
                             <i class="at-arrow-left-circle"></i>
                             <a href="javascript:history.back()">戻る</a>

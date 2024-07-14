@@ -33,7 +33,8 @@ Route::post('/projects/confirm', [ProjectController::class, 'confirm'])->name('p
 Route::post('/project', [ProjectController::class, 'store'])->name('projects.store')->middleware('auth', 'verified');
 // 詳細
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show')->middleware('auth', 'verified');
-
+// 削除
+Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy')->middleware('auth', 'verified');
 // forms（そのうちresourceで書き直す）
 Route::get('/forms', [FormsController::class, 'index'])->name('forms.index')->middleware('auth', 'verified');
 Route::get('/forms/create', [FormsController::class, 'create'])->name('forms.create')->middleware('auth', 'verified');

@@ -50,25 +50,24 @@
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 
-                    {{-- breadcrumb --}}
-                    <div class="mb-2 border-neutral-300 ">
+                    {{-- back --}}
+                    <div class="mb-4 border-neutral-300 ">
                         <div class="flex gap-1 items-center">
                             <i class="at-arrow-left-circle"></i>
                             <a href="javascript:history.back()">戻る</a>
                         </div>
                     </div>
 
-                    {{-- detail --}}
-                    <div class="bg-white border border-neutral-300 rounded-md p-8 ">
+                    {{-- content --}}
+                    <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
                         <div>
-
-                            <div class="flex flex-row items-center gap-2 mb-6">
+                            <div class="flex flex-row items-center gap-2">
                                 {{-- 公開／非公開 --}}
                                 <div>
                                     @if ($project->status)
                                         {{-- 公開中 --}}
                                         <span
-                                            class="w-20 h-8 bg-green-600 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 mb-2 rounded-full">
+                                            class="w-20 h-8 bg-green-600 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 rounded-full">
                                             <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                 fill="currentColor">
@@ -111,76 +110,151 @@
                                 </div>
                                 {{-- 削除 --}}
                                 <div>
-                                    <button type="button"
-                                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-red-500 transition-colors duration-100 rounded-md focus:ring-2 focus:ring-offset-2 focus:ring-red-100 bg-red-50 hover:text-red-600 hover:bg-red-100">
-                                        削除
-                                    </button>
-                                </div>
-                            </div>
+                                    <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false"
+                                        class="relative z-50 w-auto h-auto">
+                                        <button @click="modalOpen=true"
+                                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-red-500 transition-colors duration-100 rounded-md focus:ring-2 focus:ring-offset-2 focus:ring-red-100 bg-red-50 hover:text-red-600 hover:bg-red-100">削除</button>
+                                        <template x-teleport="body">
+                                            <div x-show="modalOpen"
+                                                class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
+                                                x-cloak>
+                                                <div x-show="modalOpen" x-transition:enter="ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0"
+                                                    x-transition:enter-end="opacity-100"
+                                                    x-transition:leave="ease-in duration-300"
+                                                    x-transition:leave-start="opacity-100"
+                                                    x-transition:leave-end="opacity-0" @click="modalOpen=false"
+                                                    class="absolute inset-0 w-full h-full bg-black bg-opacity-40"></div>
 
-                            {{-- プロジェクト名 --}}
-                            <div class="mb-8">
-                                <p class="text-sm text-gray-400 mb-2">プロジェクト名</p>
-                                <h5 class="text-2xl font-bold leading-none text-neutral-900">
-                                    {{ $project->project_name }}
-                                </h5>
-                            </div>
+                                                <div x-show="modalOpen" x-trap.inert.noscroll="modalOpen"
+                                                    x-transition:enter="ease-out duration-300"
+                                                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                                    x-transition:leave="ease-in duration-200"
+                                                    x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                    class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
 
+                                                    <div class="flex items-center justify-between pb-2">
+                                                        <h3 class="text-lg font-semibold">プロジェクトを削除</h3>
+                                                        <button @click="modalOpen=false"
+                                                            class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
 
-                            {{-- 公開URL --}}
-                            <div class="mb-8">
-                                <p class="text-sm text-gray-400">公開URL</p>
-                                <p>
-                                    <a class="text-md  underline"
-                                        href="#">https://localhost/forms/{{ $project->uuid }}
-                                    </a>
-                                </p>
-                            </div>
+                                                    <div class="relative w-auto mb-4">
+                                                        <p>本当に削除してもよろしいですか？</p>
+                                                        <p class="text-sm text-red-500">※この操作は取り消せません</p>
+                                                    </div>
 
+                                                    <div class="flex">
 
-                            {{-- プロジェクトの説明 --}}
-                            <div class="mb-8">
-                                <p class="text-sm text-gray-400 mb-2">プロジェクトの説明</p>
-                                @if (!$project->description)
-                                    <span class="text-gray-400">なし</span>
-                                @else
-                                    <div class="text-sm bg-gray-100 p-4">
-                                        {!! $project->description !!}
+                                                        <form class="ml-auto"
+                                                            action="{{ route('projects.destroy', $project->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class=" inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none">
+                                                                削除
+                                                            </button>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
                                     </div>
-                                @endif
-                            </div>
-
-                            <hr class="border-2 my-12">
-
-                            <div>
-                                <h5 class="text-2xl font-bold leading-none text-neutral-900 mb-4">
-                                    返信メール
-                                </h5>
-                                <div class="mb-8">
-                                    <p class="text-sm text-gray-400 mb-2">件名</p>
-                                    @if (!$project->mail_subject)
-                                        <span class="text-gray-400">なし</span>
-                                    @else
-                                        <div class="text-sm bg-gray-100 p-4">
-                                            {{ $project->mail_subject }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-400 mb-2">内容</p>
-                                    @if (!$project->mail_content)
-                                        <span class="text-gray-400">なし</span>
-                                    @else
-                                        <div class="text-sm bg-gray-100 p-4">
-                                            {!! $project->mail_content !!}
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+
+                    <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
+                        {{-- プロジェクト名 --}}
+                        <div class="mb-8">
+                            <p class="text-sm text-gray-400 mb-2">プロジェクト名</p>
+                            <h5 class="text-2xl font-bold leading-none text-neutral-900">
+                                {{ $project->project_name }}
+                            </h5>
+                        </div>
+                        {{-- 公開URL --}}
+                        <div class="mb-8">
+                            <p class="text-sm text-gray-400 mb-2">公開URL</p>
+                            <div class="text-sm bg-gray-100 p-4 rounded">
+                                <a class="text-md  underline"
+                                    href="#">https://localhost/forms/{{ $project->uuid }}
+                                </a>
+                            </div>
+                        </div>
+                        {{-- プロジェクトの説明 --}}
+                        <div>
+                            <p class="text-sm text-gray-400 mb-2">プロジェクトの説明</p>
+                            @if (!$project->description)
+                                <span class="text-gray-400">なし</span>
+                            @else
+                                <div class="text-sm bg-gray-100 p-4 rounded">
+                                    {!! $project->description !!}
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
+                        <div>
+                            <div class="mb-8">
+                                <p class="text-sm text-gray-400 mb-2">メール件名</p>
+                                @if (!$project->mail_subject)
+                                    <span class="text-gray-400">なし</span>
+                                @else
+                                    <div class="text-sm bg-gray-100 p-4 rounded">
+                                        {{ $project->mail_subject }}
+                                    </div>
+                                @endif
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400 mb-2">メール内容</p>
+                                @if (!$project->mail_content)
+                                    <span class="text-gray-400">なし</span>
+                                @else
+                                    <div class="text-sm bg-gray-100 p-4 rounded">
+                                        {!! $project->mail_content !!}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-xs text-gray-400 pr-4">
+                            プロジェクト作成日：
+                            @if (!$project->created_at)
+                                <span class="text-gray-700">無し</span>
+                            @else
+                                <span class="text-gray-700">
+                                    {{ $project->created_at }}
+                                </span>
+                            @endif
+                        </span>
+                        <span class="text-xs text-gray-400 pr-4">
+                            プロジェクト更新日：
+                            @if (!$project->updated_at)
+                                <span class="text-gray-700">無し</span>
+                            @else
+                                <span class="text-gray-700">
+                                    {{ $project->updated_at }}
+                                </span>
+                            @endif
+                        </span>
+                    </div>
+
+                </div>
             </main>
         </div>
     </div>
