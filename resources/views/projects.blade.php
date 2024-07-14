@@ -69,7 +69,7 @@
                         <div>
                             <form action="#" class="flex gap-2">
                                 <input type="text" placeholder="プロジェクトを検索"
-                                    class="flex w-80 h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                                    class="flex w-80 h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-gray-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                                 <button type="button"
                                     class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-300 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
                                     検索
@@ -84,67 +84,75 @@
                         </div>
                     </div>
 
+                    @if ($projects->isEmpty())
+                        <div
+                            class="text-gray-600 text-sm w-full py-16 px-32 text-center border-dashed rounded-lg border-2 border-gray-300">
+                            まだ何もないです...
+                        </div>
+                    @endif
 
                     {{-- list --}}
                     @foreach ($projects as $project)
-                        <div class="w-full bg-white border border-neutral-300 rounded-md p-4 mb-3">
-                            <div class="flex items-center gap-2 mb-3">
-                                @if ($project->status)
-                                    {{-- 公開中 --}}
-                                    <span
-                                        class="bg-green-600 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
-                                        <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <span>公開中</span>
-                                    </span>
-                                @else
-                                    {{-- 非公開 --}}
-                                    <span
-                                        class="bg-gray-300 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
-                                        <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
-                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                        <span>
-                                            非公開
-                                        </span>
-                                    </span>
-                                @endif
+                        <div class="mb-3 bg-white border border-gray-300 rounded-md">
 
-                                <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
-                                    <a
-                                        href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
-                                </h5>
-                            </div>
-                            <div class="flex items-center">
-                                <p class="text-sm text-neutral-500">プロジェクト公開URL：</p>
-                                <a class="text-sm text-blue-800 underline"
-                                    href="#">{{ url('/') }}/{{ $project->uuid }}</a>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="flex items-center">
-                                    <p class="text-sm text-neutral-500">投稿期限：</p>
-                                    <p class="text-sm text-neutral-900">
-                                        {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y/m/d') }}
-                                    </p>
+                            <div class="p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    @if ($project->status)
+                                        {{-- 公開中 --}}
+                                        <span
+                                            class="bg-green-600 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
+                                            <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <span>公開中</span>
+                                        </span>
+                                    @else
+                                        {{-- 非公開 --}}
+                                        <span
+                                            class="bg-gray-300 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
+                                            <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
+                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <span>
+                                                非公開
+                                            </span>
+                                        </span>
+                                    @endif
+
+                                    <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
+                                        <a
+                                            href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
+                                    </h5>
                                 </div>
-                                <div class="flex items-center">
-                                    <p class="text-sm text-neutral-500">フォーム数：</p>
-                                    <p class="text-sm text-neutral-900">null</p>
+                                <div class="flex items-center gap-4">
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-500">投稿期限：</p>
+                                        <p class="text-sm text-neutral-900">
+                                            {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y/m/d') }}
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-500">フォーム数：</p>
+                                        <p class="text-sm text-neutral-900">null</p>
+                                    </div>
                                 </div>
                             </div>
-                            {{-- <div class="my-4 border"></div>
-                            <div>
-                                <p class="text-xs text-gray-500">
-                                    {{ $project->description }}
-                                </p>
-                            </div> --}}
+
+                            <div class="py-2 pl-4 pr-4 bg-gray-100 rounded-b-md">
+                                <div class="flex items-center">
+                                    <p class="text-sm text-gray-500">公開URL：</p>
+                                    <a class="text-sm text-gray-700"
+                                        href="#">{{ url('/') }}/{{ $project->uuid }}</a>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
 

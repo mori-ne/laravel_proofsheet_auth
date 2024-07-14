@@ -52,7 +52,10 @@
 
                     {{-- breadcrumb --}}
                     <div class="mb-2 border-neutral-300 ">
-                        <a href="javascript:history.back()">戻る</a>
+                        <div class="flex gap-1 items-center">
+                            <i class="at-arrow-left-circle"></i>
+                            <a href="javascript:history.back()">戻る</a>
+                        </div>
                     </div>
 
                     {{-- detail --}}
@@ -158,7 +161,9 @@
                                     @if (!$project->mail_subject)
                                         <span class="text-gray-400">なし</span>
                                     @else
-                                        {!! $project->mail_subject !!}
+                                        <div class="text-sm bg-gray-100 p-4">
+                                            {{ $project->mail_subject }}
+                                        </div>
                                     @endif
                                 </div>
                                 <div>

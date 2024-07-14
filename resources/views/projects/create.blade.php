@@ -56,7 +56,10 @@
 
                     {{-- breadcrumb --}}
                     <div class="mb-2 border-neutral-300 ">
-                        <a href="javascript:history.back()">戻る</a>
+                        <div class="flex gap-1 items-center">
+                            <i class="at-arrow-left-circle"></i>
+                            <a href="javascript:history.back()">戻る</a>
+                        </div>
                     </div>
 
                     {{-- content --}}

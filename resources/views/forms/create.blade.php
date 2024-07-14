@@ -53,7 +53,10 @@
 
                     {{-- breadcrumb --}}
                     <div class="mx-auto mb-2 border-neutral-300 ">
-                        <a href="javascript:history.back()">戻る</a>
+                        <div class="flex gap-1 items-center">
+                            <i class="at-arrow-left-circle"></i>
+                            <a href="javascript:history.back()">戻る</a>
+                        </div>
                     </div>
 
                     {{-- content --}}
@@ -100,6 +103,7 @@
                             <div class="mb-6">
                                 <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">フォームの説明</label>
+                                    <p class="text-gray-500 text-xs mb-2">記事投稿画面にも表示されます</p>
                                 </div>
                                 <textarea type="text" placeholder="フォームの説明を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"></textarea>

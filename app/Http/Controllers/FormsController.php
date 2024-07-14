@@ -20,7 +20,7 @@ class FormsController extends Controller
      */
     public function create()
     {
-        $projects = Project::all();
+        $projects = Project::orderby('id', 'desc')->get();
         return view('forms.create', compact('projects'));
     }
 
