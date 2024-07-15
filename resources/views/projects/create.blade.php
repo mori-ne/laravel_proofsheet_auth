@@ -80,7 +80,7 @@
                                 </div>
                                 <input name="project_name" type="text" placeholder="プロジェクト名を記入してください"
                                     value="{{ old('project_name') }}"
-                                    class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                                 @error('project_name')
                                     <div class="mt-2 text-red-600">{{ $message }}</div>
                                 @enderror
@@ -102,7 +102,6 @@
                                     <input name="is_deadline" class="ml-4 border-gray-300 rounded-md" type="date"
                                         value="{{ old('is_deadline') }}">
                                 </div>
-
                             </div>
 
                             <hr class="my-8">
@@ -113,7 +112,7 @@
                                 </div>
                                 <input name="mail_subject" type="text" placeholder="メールの件名を記入してください"
                                     value="{{ old('mail_subject') }}"
-                                    class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                             </div>
 
                             <div class="mb-6">

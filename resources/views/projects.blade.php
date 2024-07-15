@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center">
-                                        <p class="text-sm text-gray-500">投稿期限：</p>
+                                        <p class="text-sm text-gray-500">公開期限：</p>
                                         <p class="text-sm text-neutral-900">
                                             {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y/m/d') }}
                                         </p>

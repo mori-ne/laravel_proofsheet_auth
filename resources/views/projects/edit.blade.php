@@ -13,6 +13,9 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
 
+    {{-- tinyMCE --}}
+    <x-head.tinymce-config />
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
@@ -46,7 +49,7 @@
                 <div class="p-6 max-w-4xl mx-auto">
 
                     <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-1">プロジェクトの詳細</h4>
+                        <h4 class="font-bold text-lg mb-1">プロジェクトの編集</h4>
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 
@@ -62,57 +65,30 @@
                     <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
                         <div>
                             <div class="flex flex-row items-center gap-2">
-                                {{-- 公開／非公開 --}}
-                                <div>
-                                    @if ($project->status)
-                                        {{-- 公開中 --}}
-                                        <span
-                                            class="w-20 h-8 bg-green-600 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 rounded-full">
-                                            <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span>公開中</span>
-                                        </span>
-                                    @else
-                                        {{-- 非公開 --}}
-                                        <span
-                                            class="w-20 h-8 bg-gray-300 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 mb-2 rounded-full">
-                                            <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span>
-                                                非公開
-                                            </span>
-                                        </span>
-                                    @endif
+                                {{-- 公開設定 --}}
+                                <div class="mr-4">
+                                    <label class="text-lg font-bold" for="#">公開設定</label>
+                                    <select class="ml-4 border-gray-300 rounded-md name="status" id="">
+                                        @if ($project->status)
+                                            <option value="1" selected>公開中</option>
+                                            <option value="0">非公開</option>
+                                        @else
+                                            <option value="1">公開中</option>
+                                            <option value="0" selected>非公開</option>
+                                        @endif
+                                    </select>
                                 </div>
+
                                 {{-- 公開期限 --}}
-                                <div>
-                                    <p class="text-xs text-gray-400 m-0 leading-3">公開期限</p>
-                                    <p class="text-lg font-bold">
-                                        {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y/m/d') }}
-                                    </p>
+                                <div class="mr-4">
+                                    <label class="text-lg font-bold" for="#">公開期限</label>
+                                    <input name="is_deadline" class="ml-4 border-gray-300 rounded-md" type="date"
+                                        value="{{ $project->is_deadline }}">
+                                    <span class="text-xs text-gray-300 ml-2">後で直す</span>
                                 </div>
-                                {{-- 編集 --}}
-                                <div class="ml-auto">
-                                    <form action="{{ route('projects.edit', $project->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-200/70 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
-                                            編集する
-                                        </button>
-                                    </form>
-                                </div>
+
                                 {{-- 削除 --}}
-                                <div>
+                                <div class="ml-auto">
                                     <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false"
                                         class="relative z-50 w-auto h-auto">
                                         <button @click="modalOpen=true"
@@ -157,7 +133,6 @@
                                                     </div>
 
                                                     <div class="flex">
-
                                                         <form class="ml-auto"
                                                             action="{{ route('projects.destroy', $project->id) }}"
                                                             method="POST">
@@ -168,7 +143,6 @@
                                                                 削除
                                                             </button>
                                                         </form>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,57 +155,59 @@
 
                     <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
                         {{-- プロジェクト名 --}}
-                        <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">プロジェクト名</p>
-                            <h5 class="text-2xl font-bold leading-none text-neutral-900">
-                                {{ $project->project_name }}
-                            </h5>
-                        </div>
-                        {{-- 公開URL --}}
-                        <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">公開URL</p>
-                            <div class="text-sm bg-gray-100 p-4 rounded">
-                                <a class="text-md  underline"
-                                    href="#">https://localhost/forms/{{ $project->uuid }}
-                                </a>
+                        <div class="mb-6">
+                            <div class="mb-2">
+                                <label class="text-lg font-bold" for="#">
+                                    プロジェクト名
+                                </label>
+                                <span
+                                    class="bg-red-600 text-white relative text-xs font-semibold pl-2 pr-2.5 py-0.5 rounded-full">
+                                    <span>必須</span>
+                                </span>
                             </div>
+                            <input name="project_name" type="text" placeholder="プロジェクト名を記入してください"
+                                value="{{ $project->project_name }}"
+                                class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                            @error('project_name')
+                                <div class="mt-2 text-red-600">{{ $message }}</div>
+                            @enderror
                         </div>
+
                         {{-- プロジェクトの説明 --}}
-                        <div>
-                            <p class="text-sm text-gray-400 mb-2">プロジェクトの説明</p>
-                            @if (!$project->description)
-                                <span class="text-gray-400">なし</span>
-                            @else
-                                <div class="text-sm bg-gray-100 p-4 rounded">
-                                    {!! $project->description !!}
-                                </div>
-                            @endif
+                        <div class="mb-6">
+                            <div class="mb-2">
+                                <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                            </div>
+                            <textarea id="projectinstance" name="description" type="text" placeholder="プロジェクトの説明を記入してください"
+                                class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ $project->description }}</textarea>
                         </div>
                     </div>
 
                     <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
                         <div>
-                            <div class="mb-8">
-                                <p class="text-sm text-gray-400 mb-2">メール件名</p>
-                                @if (!$project->mail_subject)
-                                    <span class="text-gray-400">なし</span>
-                                @else
-                                    <div class="text-sm bg-gray-100 p-4 rounded">
-                                        {{ $project->mail_subject }}
-                                    </div>
-                                @endif
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">返信メールの件名</label>
+                                </div>
+                                <input name="mail_subject" type="text" placeholder="メールの件名を記入してください"
+                                    value="{{ $project->mail_subject }}"
+                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                             </div>
-                            <div>
-                                <p class="text-sm text-gray-400 mb-2">メール内容</p>
-                                @if (!$project->mail_content)
-                                    <span class="text-gray-400">なし</span>
-                                @else
-                                    <div class="text-sm bg-gray-100 p-4 rounded">
-                                        {!! $project->mail_content !!}
-                                    </div>
-                                @endif
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">返信メールの本文</label>
+                                </div>
+                                <textarea id="projectinstance" name="mail_content" type="text" placeholder="メールの返信内容を記入してください"
+                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{!! $project->mail_content !!}</textarea>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
+                        <button type="submit"
+                            class="flex items-center justify-center w-96 px-4 py-2 text-sm mx-auto font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">更新する</button>
+                        <span class="text-xs text-gray-300 ml-2">まだ未実装</span>
+
                     </div>
 
                     <div>

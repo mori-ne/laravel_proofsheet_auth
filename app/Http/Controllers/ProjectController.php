@@ -60,7 +60,8 @@ class ProjectController extends Controller
     // 編集
     public function edit(string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view('projects.edit', ['project' => $project]);
     }
 
     // 編集の適用
