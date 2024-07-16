@@ -50,6 +50,19 @@
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 
+                    {{-- フラッシュメッセージ --}}
+                    @if (session('status'))
+                        <div
+                            class="mb-4 relative w-full rounded-lg border border-transparent bg-green-50 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-green-600">
+                            <svg class="w-5 h-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h5 class="mb-1 font-medium leading-none tracking-tight">{{ session('status') }}</h5>
+                        </div>
+                    @endif
+
                     {{-- back --}}
                     <div class="mb-4 border-neutral-300 ">
                         <div class="flex gap-1 items-center">
@@ -66,39 +79,53 @@
                                 <div>
                                     @if ($project->status)
                                         {{-- 公開中 --}}
-                                        <span
-                                            class="w-20 h-8 bg-green-600 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 rounded-full">
-                                            <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span>公開中</span>
-                                        </span>
+                                        <form name="toggleStatus"
+                                            action="{{ route('projects.toggle', ['id' => $project->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="w-20 h-8 bg-green-600 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 rounded-full">
+                                                <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <span>公開中</span>
+                                            </button>
+                                        </form>
                                     @else
                                         {{-- 非公開 --}}
-                                        <span
-                                            class="w-20 h-8 bg-gray-300 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 mb-2 rounded-full">
-                                            <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span>
-                                                非公開
-                                            </span>
-                                        </span>
+                                        <form name="toggleStatus"
+                                            action="{{ route('projects.toggle', ['id' => $project->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="sumbit"
+                                                class="w-20 h-8 bg-gray-300 text-white relative flex items-center justify-center text-sm font-semibold pl-2 pr-2.5 py-1 rounded-full">
+                                                <svg class="relative w-4 h-4 -translate-x-0.5 opacity-90"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <span>
+                                                    非公開
+                                                </span>
+                                            </button>
+                                        </form>
                                     @endif
                                 </div>
                                 {{-- 公開期限 --}}
                                 <div>
                                     <p class="text-xs text-gray-400 m-0 leading-3">公開期限</p>
                                     <p class="text-lg font-bold">
-                                        {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y/m/d') }}
+                                        @if ($project->is_deadline)
+                                            {{ $project->is_deadline }}
+                                        @else
+                                            設定なし
+                                        @endif
                                     </p>
                                 </div>
                                 {{-- 編集 --}}

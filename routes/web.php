@@ -37,8 +37,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
     // 編集
     Route::post('/projects/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
+    // 編集の適用
+    Route::put('/projects/edit/{id}', [ProjectController::class, 'update'])->name('projects.update');
     // 削除
     Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    // 公開・非公開の切り替え
+    Route::post('projects/{id}', [ProjectController::class, 'toggleStatus'])->name('projects.toggle');
 });
 
 // forms（そのうちresourceで書き直す）

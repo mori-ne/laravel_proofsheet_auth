@@ -82,17 +82,33 @@ class ProjectController extends Controller
         return view('projects.show', compact('project'));
     }
 
-    // 編集
+    // 更新
     public function edit(string $id)
     {
         $project = Project::findOrFail($id);
         return view('projects.edit', ['project' => $project]);
     }
 
-    // 編集の適用
+    // 更新の適用
     public function update(Request $request, string $id)
     {
-        //
+        // バリデーションルールの定義
+        $validatedData = $request->validate([
+            // project_nameが空白だとgetリクエストエラーになる（要改善）
+            'project_name' => 'required|max:100',
+            'status' => 'integer',
+            'description' => 'nullable|string',
+            'is_deadline' => 'nullable',
+            'mail_subject' => 'max:255|nullable|string',
+            'mail_content' => 'nullable|string',
+        ]);
+
+        // プロジェクトを検索して更新
+        $project = Project::findOrFail($id);
+        $project->update($validatedData);
+
+        // リダイレクトしてフラッシュメッセージを設定
+        return redirect()->route('projects.show', ['id' => $id])->with('status', 'プロジェクトを更新しました');
     }
 
     // 削除
@@ -102,5 +118,21 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('projects.index')->with('status', 'プロジェクトを削除しました');
+    }
+
+    // 公開・非公開の切り替え
+    public function toggleStatus($id)
+    {
+        $project = Project::findOrFail($id);
+        if (!$project->status) {
+            $project->update([
+                'status' => 1,
+            ]);
+        } else {
+            $project->update([
+                'status' => 0,
+            ]);
+        }
+        return redirect()->back()->with('status', 'プロジェクトの公開・非公開が切り替えられました');
     }
 }

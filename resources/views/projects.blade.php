@@ -114,32 +114,42 @@
 
                                     @if ($project->status)
                                         {{-- 公開中 --}}
-                                        <span
-                                            class="bg-green-600 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
-                                            <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span>公開中</span>
-                                        </span>
+                                        <form name="toggleStatus"
+                                            action="{{ route('projects.toggle', ['id' => $project->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="bg-green-600 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
+                                                <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <span>公開中</span>
+                                            </button>
+                                        </form>
                                     @else
                                         {{-- 非公開 --}}
-                                        <span
-                                            class="bg-gray-300 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
-                                            <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <span>
-                                                非公開
-                                            </span>
-                                        </span>
+                                        <form name="toggleStatus"
+                                            action="{{ route('projects.toggle', ['id' => $project->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            <button type="submit"
+                                                class="bg-gray-300 text-white relative flex items-center text-xs font-semibold pl-2 pr-2.5 py-1 rounded-full">
+                                                <svg class="relative w-3.5 h-3.5 -translate-x-0.5 opacity-90"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                <span>
+                                                    非公開
+                                                </span>
+                                            </button>
+                                        </form>
                                     @endif
 
                                     <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
@@ -147,20 +157,25 @@
                                             href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
                                     </h5>
 
-                                    <p class="text-gray-300 text-md font-bold w-3 ml-auto">
-                                        {{ $project->id }}
-                                    </p>
                                 </div>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">公開期限：</p>
                                         <p class="text-sm text-neutral-900">
-                                            {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y/m/d') }}
+                                            @if ($project->is_deadline)
+                                                {{ $project->is_deadline }}
+                                            @else
+                                                設定なし
+                                            @endif
                                         </p>
                                     </div>
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">フォーム数：</p>
                                         <p class="text-sm text-neutral-900">null</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-500">作成日：</p>
+                                        <p class="text-sm text-neutral-900">{{ $project->created_at }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -170,6 +185,9 @@
                                     <p class="text-sm text-gray-500">公開URL：</p>
                                     <a class="text-sm text-gray-700"
                                         href="#">{{ url('/') }}/{{ $project->uuid }}</a>
+                                    <p class="text-gray-400 text-sm font-bold w-fit ml-auto">
+                                        {{ $project->id }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
