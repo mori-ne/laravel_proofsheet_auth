@@ -19,6 +19,8 @@
 </head>
 
 <body class="font-sans antialiased">
+
+    {{-- {{ dd($projects) }} --}}
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
@@ -67,14 +69,26 @@
                     {{-- search and new project --}}
                     <div class="flex justify-between my-3">
                         <div>
-                            <form action="#" class="flex gap-2">
-                                <input type="text" placeholder="プロジェクトを検索"
+                            {{-- 検索 --}}
+                            <form action="{{ route('projects.index') }}" method="GET" class="flex gap-2">
+                                <input name="search" type="text" placeholder="プロジェクトを検索"
+                                    value="{{ request('search') }}"
                                     class="flex w-80 h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-gray-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
-                                <button type="button"
+
+                                <select name="sort"
+                                    class="w-28 inline-flex items-center justify-center px-4 py-2 text-sm font-medium transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-300 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
+                                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>新しい順
+                                    </option>
+                                    <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>古い順
+                                    </option>
+                                </select>
+
+                                <button type="submit"
                                     class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-300 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
                                     検索
                                 </button>
                             </form>
+
                         </div>
                         <div>
                             <a href="{{ route('projects.create') }}" type="button"
@@ -97,6 +111,7 @@
 
                             <div class="p-4">
                                 <div class="flex items-center gap-2 mb-2">
+
                                     @if ($project->status)
                                         {{-- 公開中 --}}
                                         <span
@@ -131,6 +146,10 @@
                                         <a
                                             href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
                                     </h5>
+
+                                    <p class="text-gray-300 text-md font-bold w-3 ml-auto">
+                                        {{ $project->id }}
+                                    </p>
                                 </div>
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center">

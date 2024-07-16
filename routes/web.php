@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // 一覧
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/projects{query?}', [ProjectController::class, 'index'])->name('projects.index');
     // 新規作成画面
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
     // 確認・バリデーション

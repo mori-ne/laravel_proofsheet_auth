@@ -9,11 +9,36 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
-    //    一覧表示
-    public function index()
+    //    一覧表示・GET検索
+    public function index(Request $request)
     {
-        $projects = Project::orderby('id', 'desc')->get();
+        // クエリビルダーを使用してベースクエリを作成
+        $query = Project::query();
+
+        // 検索パラメーターが存在する場合、クエリに条件を追加
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $search = $request->query('search');
+                $q->where('project_name', 'like', '%' . $search . '%');
+            });
+        }
+
+        // 並び替えパラメーターに基づいてソート
+        if ($request->query('sort') == 'oldest') {
+            $query->orderBy('id', 'asc');
+        } else {
+            // デフォルトはdesc順で並び替える
+            $query->orderBy('id', 'desc');
+        }
+
+        // クエリを実行してデータを取得
+        $projects = $query->get();
+
+        // データをビューに渡す
         return view('/projects', compact('projects'));
+
+        // $projects = Project::orderby('id', 'desc')->get();
+        // return view('/projects', compact('projects'));
     }
 
     // 新規作成
