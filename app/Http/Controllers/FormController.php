@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Form;
 
-class FormsController extends Controller
+class FormController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('forms');
+        $forms = Form::orderby('id', 'desc')->get();
+        // dd($forms);
+        return view('/forms', compact('forms'));
     }
 
     /**

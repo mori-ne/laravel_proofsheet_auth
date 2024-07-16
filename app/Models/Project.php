@@ -40,4 +40,10 @@ class Project extends Model
             }
         });
     }
+
+    // リレーション（親）
+    public function forms()
+    {
+        return $this->hasMany('App\Models\Forms');
+    }
 }

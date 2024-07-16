@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\FormsController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -46,7 +46,10 @@ Route::middleware('auth')->group(function () {
 });
 
 // forms（そのうちresourceで書き直す）
-Route::get('/forms', [FormsController::class, 'index'])->name('forms.index')->middleware('auth', 'verified');
-Route::get('/forms/create', [FormsController::class, 'create'])->name('forms.create')->middleware('auth', 'verified');
+Route::middleware('auth')->group(function () {
+    // 一覧
+    Route::get('/forms{query?}', [FormController::class, 'index'])->name('forms.index');
+    Route::get('/forms/create', [FormController::class, 'create'])->name('forms.create');
+});
 
 require __DIR__ . '/auth.php';
