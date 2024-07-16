@@ -216,10 +216,11 @@
                         </div>
                         {{-- 公開URL --}}
                         <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">公開URL</p>
+                            <p class="text-sm text-gray-400 mb-2">公開URL<span class="text-xs">（公開URLは変更できません）</span>
+                            </p>
                             <div class="text-sm bg-gray-100 p-4 rounded">
                                 <a class="text-md  underline"
-                                    href="#">https://localhost/forms/{{ $project->uuid }}
+                                    href="{{ url('/') . '/forms' }}/{{ $project->uuid }}">{{ url('/') . '/forms' }}/{{ $project->uuid }}
                                 </a>
                             </div>
                         </div>
