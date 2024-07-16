@@ -74,7 +74,7 @@
                     {{-- content --}}
                     <div
                         class="text-gray-600 text-sm w-full py-16 px-32 text-center border-dashed rounded-lg border-2 border-gray-300">
-                        まだ何もないです...
+                        フォームは見つかりませんでした...
                     </div>
                 </div>
             </main>
