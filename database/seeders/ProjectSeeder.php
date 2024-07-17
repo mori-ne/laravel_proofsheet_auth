@@ -16,7 +16,7 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         // 時間取得のクラス
-        $now = Carbon::now();
+        $now = Carbon::now('Asia/Tokyo');
 
         $projects = [
             [

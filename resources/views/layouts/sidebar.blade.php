@@ -29,12 +29,6 @@
             </li>
             <li class="mb-2">
                 <div class="flex items-center gap-3">
-                    <i class="at-write-book-bold"></i>
-                    <a class="block text-gray-300" href="#">入力項目管理</a>
-                </div>
-            </li>
-            <li class="mb-2">
-                <div class="flex items-center gap-3">
                     <i class="at-envelope-bold"></i>
                     <a class="block text-gray-300" href="#">メール管理</a>
                 </div>

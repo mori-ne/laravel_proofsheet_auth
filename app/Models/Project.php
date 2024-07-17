@@ -22,6 +22,8 @@ class Project extends Model
         'is_deadline',
         'mail_subject',
         'mail_content',
+        'created_at',
+        'updated_at',
     ];
 
     // 日付形式としてキャスト

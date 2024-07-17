@@ -3,6 +3,7 @@
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\InputController;
 use Illuminate\Support\Facades\Route;
 
 // index
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     // 公開・非公開の切り替え
     Route::post('projects/{id}', [ProjectController::class, 'toggleStatus'])->name('projects.toggle');
+    // コピー
+    Route::post('/projects/duplicate/{id}', [ProjectController::class, 'duplicate'])->name('projects.duplicate');
 });
 
 // forms（そのうちresourceで書き直す）

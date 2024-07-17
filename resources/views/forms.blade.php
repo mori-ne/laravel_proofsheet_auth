@@ -115,6 +115,10 @@
                                         </div>
                                     </div>
 
+                                    <div>
+                                        <button
+                                            class="text-xs rounded border border-gray-300 py-0.5 px-2">入力項目エディターを開く</button>
+                                    </div>
                                     {{-- ドロップダウンメニュー --}}
                                     <div x-data="{
                                         dropdownOpen: false

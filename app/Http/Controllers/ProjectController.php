@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
@@ -133,6 +134,26 @@ class ProjectController extends Controller
                 'status' => 0,
             ]);
         }
-        return redirect()->back()->with('status', 'プロジェクトの公開・非公開が切り替えられました');
+        return redirect()->back()->with('status', 'プロジェクトの公開・非公開を切り替えました');
+    }
+
+    // コピー
+    public function duplicate($id)
+    {
+        $original = Project::find($id);
+
+        // 見つからない場合
+        if (!$original) {
+            return redirect()->back()->with('error', 'レコードが見つかりませんでした');
+        }
+
+        $duplicate = $original->replicate();
+        $duplicate->uuid = Str::uuid()->toString();
+        $duplicate->project_name = $original->project_name . '_コピー';
+        $duplicate->created_at = Carbon::now('Asia/Tokyo');
+        $duplicate->updated_at = Carbon::now('Asia/Tokyo');
+        $duplicate->save();
+
+        return redirect()->back()->with('status', 'レコードを複製しました');
     }
 }
