@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Form;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+
 
 class ProjectController extends Controller
 {
@@ -32,14 +34,11 @@ class ProjectController extends Controller
             $query->orderBy('id', 'desc');
         }
 
-        // クエリを実行してデータを取得
-        $projects = $query->get();
+        // クエリを実行してデータを取得（フォームのカウント数も一緒に取得）
+        $projects = $query->withCount('forms')->get();
 
         // データをビューに渡す
         return view('/projects', compact('projects'));
-
-        // $projects = Project::orderby('id', 'desc')->get();
-        // return view('/projects', compact('projects'));
     }
 
     // 新規作成
@@ -80,7 +79,9 @@ class ProjectController extends Controller
     public function show(string $id)
     {
         $project = Project::find($id);
-        return view('projects.show', compact('project'));
+        $forms = Project::find($id)->forms()->get();
+        // dd($forms);
+        return view('projects.show', compact('project', 'forms'));
     }
 
     // 更新

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\Form;
 
 class Project extends Model
 {
@@ -46,6 +47,6 @@ class Project extends Model
     // リレーション（親）
     public function forms()
     {
-        return $this->hasMany('App\Models\Forms');
+        return $this->hasMany(Form::class, 'project_id');
     }
 }

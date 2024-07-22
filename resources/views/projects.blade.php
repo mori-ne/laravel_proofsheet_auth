@@ -276,7 +276,7 @@
                                     </div>
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">フォーム数：</p>
-                                        <p class="text-sm text-neutral-900">null</p>
+                                        <p class="text-sm text-neutral-900">{{ $project->forms_count }}</p>
                                     </div>
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">作成日：</p>
