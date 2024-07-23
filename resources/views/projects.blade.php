@@ -20,7 +20,6 @@
 
 <body class="font-sans antialiased">
 
-    {{-- {{ dd($projects) }} --}}
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
@@ -36,6 +35,7 @@
         <!-- Page Content -->
         <div class="flex flex-row items-stretch min-h-screen">
 
+            {{-- sidebar --}}
             @include('layouts.sidebar')
 
             <main class="w-full">
@@ -53,7 +53,7 @@
                         <p class="text-gray-500 text-sm">プロジェクトの一覧がここに表示されます</p>
                     </div>
 
-                    {{-- フラッシュメッセージ --}}
+                    {{-- flash message --}}
                     @if (session('status'))
                         <div
                             class="mb-4 relative w-full rounded-lg border border-transparent bg-green-50 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-green-600">
@@ -66,10 +66,10 @@
                         </div>
                     @endif
 
-                    {{-- search and new project --}}
+                    {{-- search / new project --}}
                     <div class="flex justify-between my-3">
+                        {{-- search --}}
                         <div>
-                            {{-- 検索 --}}
                             <form action="{{ route('projects.index') }}" method="GET" class="flex gap-2">
                                 <input name="search" type="text" placeholder="プロジェクトを検索"
                                     value="{{ request('search') }}"
@@ -90,6 +90,7 @@
                             </form>
 
                         </div>
+                        {{-- new project --}}
                         <div>
                             <a href="{{ route('projects.create') }}" type="button"
                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
@@ -98,6 +99,7 @@
                         </div>
                     </div>
 
+                    {{-- if --}}
                     @if ($projects->isEmpty())
                         <div
                             class="text-gray-600 text-sm w-full py-16 px-32 text-center border-dashed rounded-lg border-2 border-gray-300">
@@ -105,13 +107,14 @@
                         </div>
                     @endif
 
-                    {{-- list --}}
+                    {{-- lists --}}
                     @foreach ($projects as $project)
                         <div class="mb-3 bg-white border border-gray-300 rounded-md">
 
-                            <div class="p-4">
+                            {{-- publish / project name / dropdown menu / published_at / form count / created_at --}}
+                            <div class="py-4 px-8">
+                                {{-- publish / project name / dropdown menu --}}
                                 <div class="flex justify-start items-center gap-2 mb-2">
-
                                     @if ($project->status)
                                         {{-- 公開中 --}}
                                         <form name="toggleStatus"
@@ -152,13 +155,13 @@
                                         </form>
                                     @endif
 
-                                    {{-- プロジェクト名 --}}
+                                    {{-- project name --}}
                                     <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
                                         <a
                                             href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
                                     </h5>
 
-                                    {{-- ドロップダウンメニュー --}}
+                                    {{-- dropdown menu --}}
                                     <div x-data="{
                                         dropdownOpen: false
                                     }" class="ml-auto relative">
@@ -171,35 +174,31 @@
                                             x-transition:enter="ease-out duration-200"
                                             x-transition:enter-start="-translate-y-2"
                                             x-transition:enter-end="translate-y-0"
-                                            class="absolute top-0 z-50 w-24 mt-10 -translate-x-1/2 left-1/2" x-cloak>
+                                            class="absolute top-0 z-50 w-44 mt-10 -translate-x-1/2 left-1/2" x-cloak>
                                             <div
                                                 class="p-1 text-sm bg-white border rounded-md shadow-md border-neutral-200/70 text-neutral-700">
                                                 <a href="{{ route('projects.show', ['id' => $project->id]) }}"
                                                     @click="menuBarOpen=false"
                                                     class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                    <span>詳細</span>
+                                                    <span>プロジェクトの詳細</span>
                                                 </a>
-                                                <form action="{{ route('projects.edit', $project->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    <button type="submit" @click="menuBarOpen=false"
-                                                        class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                        <span>編集</span>
-                                                    </button>
-                                                </form>
+                                                <a href="{{ route('projects.edit', $project->id) }} @click="menuBarOpen=false"
+                                                    class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
+                                                    <span>プロジェクトを編集</span>
+                                                </a>
                                                 <form action="{{ route('projects.duplicate', $project->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     <button type="submit" @click="menuBarOpen=false"
                                                         class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                        <span>コピー</span>
+                                                        <span>プロジェクトをコピー</span>
                                                     </button>
                                                 </form>
                                                 <div x-data="{ modalOpen: false }"
                                                     @keydown.escape.window="modalOpen = false"
                                                     class="relative z-50 w-auto h-auto">
                                                     <button @click="modalOpen=true"
-                                                        class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-red-500">削除</button>
+                                                        class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-red-500">プロジェクトを削除</button>
                                                     <template x-teleport="body">
                                                         <div x-show="modalOpen"
                                                             class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
@@ -261,9 +260,11 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+
+                                {{-- published_at / form count / created_at --}}
                                 <div class="flex items-center gap-4">
+                                    {{-- published_at --}}
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">公開期限：</p>
                                         <p class="text-sm text-neutral-900">
@@ -274,10 +275,12 @@
                                             @endif
                                         </p>
                                     </div>
+                                    {{-- form count --}}
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">フォーム数：</p>
                                         <p class="text-sm text-neutral-900">{{ $project->forms_count }}</p>
                                     </div>
+                                    {{-- created_at --}}
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">作成日：</p>
                                         <p class="text-sm text-neutral-900">{{ $project->created_at }}</p>
@@ -285,14 +288,21 @@
                                 </div>
                             </div>
 
-                            <div class="py-2 pl-4 pr-4 bg-gray-100 rounded-b-md">
+                            {{-- url / id --}}
+                            <div class="py-2 pl-8 pr-8 bg-gray-100 rounded-b-md">
                                 <div class="flex items-center">
-                                    <p class="text-sm text-gray-500">公開URL：</p>
-                                    <a class="text-sm text-gray-700"
-                                        href="{{ url('/') . '/forms' }}/{{ $project->uuid }}">{{ url('/') . '/forms' }}/{{ $project->uuid }}</a>
-                                    <p class="text-gray-400 text-sm font-bold w-fit ml-auto">
-                                        {{ $project->id }}
-                                    </p>
+                                    {{-- url --}}
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-500">公開URL：</p>
+                                        <a class="text-sm text-gray-700"
+                                            href="{{ url('/') . '/forms' }}/{{ $project->uuid }}">{{ url('/') . '/forms' }}/{{ $project->uuid }}</a>
+                                    </div>
+                                    {{-- id --}}
+                                    <div class="flex items-center ml-auto">
+                                        <p class="text-gray-400 text-sm font-bold w-fit ml-auto">
+                                            {{ $project->id }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

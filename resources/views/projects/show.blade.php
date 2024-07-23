@@ -47,7 +47,7 @@
 
                     <div class="mb-8">
                         <h4 class="font-bold text-lg mb-1">プロジェクトの詳細</h4>
-                        <p class="text-gray-500 text-sm"></p>
+                        <p class="text-gray-500 text-sm">プロジェクトの詳細画面です。確認、編集、削除ができます</p>
                     </div>
 
                     {{-- back --}}
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    {{-- フラッシュメッセージ --}}
+                    {{-- flash message --}}
                     @if (session('status'))
                         <div
                             class="mb-4 relative w-full rounded-lg border border-transparent bg-green-50 p-4 [&>svg]:absolute [&>svg]:text-foreground [&>svg]:left-4 [&>svg]:top-4 [&>svg+div]:translate-y-[-3px] [&:has(svg)]:pl-11 text-green-600">
@@ -133,24 +133,21 @@
                             <div x-show="dropdownOpen" @click.away="dropdownOpen=false"
                                 x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2"
                                 x-transition:enter-end="translate-y-0"
-                                class="absolute top-0 z-50 w-24 mt-10 -translate-x-1/2 left-1/2" x-cloak>
+                                class="absolute top-0 z-50 w-44 mt-10 -translate-x-1/2 left-1/2" x-cloak>
                                 <div
                                     class="p-1 text-sm bg-white border rounded-md shadow-md border-neutral-200/70 text-neutral-700">
 
                                     {{-- edit --}}
-                                    <form action="{{ route('projects.edit', $project->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" @click="menuBarOpen=false"
-                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                            <span>編集</span>
-                                        </button>
-                                    </form>
+                                    <a href="{{ route('projects.edit', $project->id) }}" @click="menuBarOpen=false"
+                                        class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
+                                        <span>プロジェクトを編集</span>
+                                    </a>
 
                                     {{-- delete --}}
                                     <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false"
                                         class="relative z-50 w-auto h-auto">
                                         <button @click="modalOpen=true"
-                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-red-500">削除</button>
+                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-red-500">プロジェクトを削除</button>
                                         <template x-teleport="body">
                                             <div x-show="modalOpen"
                                                 class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
@@ -253,7 +250,7 @@
                         {{-- detail --}}
                         <div>
                             @foreach ($project->forms as $form)
-                                <div class="flex flex-col mb-3 bg-white border border-gray-300 rounded-md p-8">
+                                <div class="flex flex-col mb-3 bg-white border border-gray-300 rounded-md px-8 py-4">
 
                                     {{-- col --}}
                                     <div
@@ -261,7 +258,7 @@
 
                                         {{-- form_name --}}
                                         <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
-                                            <a href="#">{{ $form->form_name }}</a>
+                                            <a href="{{ route('forms.show', $form->id) }}">{{ $form->form_name }}</a>
                                         </h5>
 
                                         {{-- input method --}}
@@ -289,29 +286,27 @@
                                                 x-cloak>
                                                 <div
                                                     class="p-1 text-sm bg-white border rounded-md shadow-md border-neutral-200/70 text-neutral-700">
-                                                    <a href="#" @click="menuBarOpen=false"
+                                                    <a href="{{ route('forms.show', $form->id) }}"
+                                                        @click="menuBarOpen=false"
                                                         class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                        <span>詳細</span>
+                                                        <span>フォームの詳細</span>
+                                                    </a>
+                                                    <a href="{{ route('forms.edit', $form->id) }}  @click="menuBarOpen=false"
+                                                        class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
+                                                        <span>フォームを編集</span>
                                                     </a>
                                                     <form action="#" method="POST">
                                                         @csrf
                                                         <button type="submit" @click="menuBarOpen=false"
                                                             class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                            <span>編集</span>
-                                                        </button>
-                                                    </form>
-                                                    <form action="#" method="POST">
-                                                        @csrf
-                                                        <button type="submit" @click="menuBarOpen=false"
-                                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                            <span>コピー</span>
+                                                            <span>フォームをコピー</span>
                                                         </button>
                                                     </form>
                                                     <div x-data="{ modalOpen: false }"
                                                         @keydown.escape.window="modalOpen = false"
                                                         class="relative z-50 w-auto h-auto">
                                                         <button @click="modalOpen=true"
-                                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-red-500">削除</button>
+                                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-red-500">フォームを削除</button>
                                                         <template x-teleport="body">
                                                             <div x-show="modalOpen"
                                                                 class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
@@ -365,7 +360,7 @@
                                                                             @method('DELETE')
                                                                             <button type="submit"
                                                                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none">
-                                                                                削除
+                                                                                プロジェクトを削除
                                                                             </button>
                                                                         </form>
                                                                     </div>
@@ -431,7 +426,7 @@
                                                                             @method('DELETE')
                                                                             <button type="submit"
                                                                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none">
-                                                                                削除
+                                                                                プロジェクトを削除
                                                                             </button>
                                                                         </form>
                                                                     </div>
@@ -451,7 +446,7 @@
                                         {{-- project_name --}}
                                         <div>
                                             <p class="text-xs text-gray-400">
-                                                {{ $forms[0]->project->project_name }}</p>
+                                                {{ $project->project_name }}</p>
                                         </div>
 
                                         {{-- created --}}

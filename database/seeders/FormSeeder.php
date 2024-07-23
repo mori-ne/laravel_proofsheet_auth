@@ -53,6 +53,41 @@ class FormSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
+            [
+                'project_id' => "2",
+                'form_name' => '演題登録 3演題目',
+                'form_description' => 'フォームの説明がはいります',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'project_id' => "2",
+                'form_name' => '演題登録 4演題目',
+                'form_description' => 'フォームの説明がはいります',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'project_id' => "3",
+                'form_name' => '演題登録 1演題目',
+                'form_description' => 'フォームの説明がはいります',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'project_id' => "4",
+                'form_name' => '演題登録 1演題目',
+                'form_description' => 'フォームの説明がはいります',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'project_id' => "5",
+                'form_name' => '演題登録 1演題目',
+                'form_description' => 'フォームの説明がはいります',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
         ];
         DB::table('forms')->insert($forms);
     }

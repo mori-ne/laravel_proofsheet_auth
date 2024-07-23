@@ -78,10 +78,8 @@ class ProjectController extends Controller
     // 詳細表示
     public function show(string $id)
     {
-        $project = Project::find($id);
-        $forms = Project::find($id)->forms()->get();
-        // dd($forms);
-        return view('projects.show', compact('project', 'forms'));
+        $project = Project::with('forms')->find($id);
+        return view('projects.show', compact('project'));
     }
 
     // 更新
@@ -109,8 +107,8 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
         $project->update($validatedData);
 
-        // リダイレクトしてフラッシュメッセージを設定
-        return redirect()->route('projects.show', ['id' => $id])->with('status', 'プロジェクトを更新しました');
+        // リダイレクトしてflash messageを設定
+        return back()->with('status', 'プロジェクトを更新しました');
     }
 
     // 削除

@@ -8,38 +8,27 @@ use App\Models\Form;
 
 class FormController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $forms = Form::with('project')->orderby('id', 'desc')->get();
         return view('forms', compact('forms'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $projects = Project::orderby('id', 'desc')->get();
         return view('forms.create', compact('projects'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $form = Form::with('project')->find($id);
+        return view('forms.show', compact('form'));
     }
 
     /**
@@ -47,7 +36,9 @@ class FormController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $projects = Project::all();
+        $form = Form::findOrFail($id);
+        return view('forms.edit', ['form' => $form, 'projects' => $projects]);
     }
 
     /**
@@ -55,7 +46,19 @@ class FormController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // バリデーションルールの定義
+        $validatedData = $request->validate([
+            'project_id' => 'required|integer',
+            'form_name' => 'required|string',
+            'form_description' => 'nullable|string',
+        ]);
+
+        // フォームを検索して更新
+        $form = Form::findOrFail($id);
+        $form->update($validatedData);
+
+        // リダイレクトしてflash messageを設定
+        return back()->with('status', 'フォームを更新しました');
     }
 
     /**

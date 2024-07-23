@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function () {
     // 詳細
     Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
     // 編集
-    Route::post('/projects/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::get('/projects/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
     // 編集の適用
-    Route::put('/projects/edit/{id}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::put('/projects/update/{id}', [ProjectController::class, 'update'])->name('projects.update');
     // 削除
     Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     // 公開・非公開の切り替え
@@ -52,7 +52,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     // 一覧
     Route::get('/forms{query?}', [FormController::class, 'index'])->name('forms.index');
+    // 新規作成画面
     Route::get('/forms/create', [FormController::class, 'create'])->name('forms.create');
+    // 詳細
+    Route::get('/forms/{id}', [FormController::class, 'show'])->name('forms.show');
+    // 編集
+    Route::get('/forms/edit/{id}', [FormController::class, 'edit'])->name('forms.edit');
+    // 編集の適用
+    Route::put('/forms/update/{id}', [FormController::class, 'update'])->name('forms.update');
 });
 
 require __DIR__ . '/auth.php';
