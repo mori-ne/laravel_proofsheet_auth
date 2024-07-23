@@ -76,10 +76,16 @@
                                 <select name="sort"
                                     class="w-48 inline-flex items-center justify-center px-4 py-2 text-sm font-medium transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-300 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
                                     <option value="desc" {{ request('sort', 'desc') == 'desc' ? 'selected' : '' }}>
-                                        新しい順（更新日）
+                                        更新日（新しい順）
                                     </option>
                                     <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>
-                                        古い順（更新日）
+                                        更新日（古い順）
+                                    </option>
+                                    <option value="iddesc" {{ request('sort') == 'iddesc' ? 'selected' : '' }}>
+                                        ID（大きい順）
+                                    </option>
+                                    <option value="idasc" {{ request('sort') == 'idasc' ? 'selected' : '' }}>
+                                        ID（小さい順）
                                     </option>
                                 </select>
 
@@ -305,7 +311,7 @@
                                     </div>
                                     {{-- id --}}
                                     <div class="flex items-center ml-auto">
-                                        <p class="text-gray-400 text-sm font-bold w-fit ml-auto">
+                                        <p class="text-gray-400 text-md pr-1 font-bold w-fit ml-auto">
                                             {{ $project->id }}
                                         </p>
                                     </div>

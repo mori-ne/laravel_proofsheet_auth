@@ -27,8 +27,15 @@ class ProjectController extends Controller
         // 並び替え
         if ($sort === 'asc') {
             $query->orderBy('updated_at', 'asc');
-        } else {
+        }
+        if ($sort === 'desc') {
             $query->orderBy('updated_at', 'desc');
+        }
+        if ($sort === 'iddesc') {
+            $query->orderBy('id', 'desc');
+        }
+        if ($sort === 'idasc') {
+            $query->orderBy('id', 'asc');
         }
 
         $projects = $query->with('forms')->get();
@@ -40,8 +47,7 @@ class ProjectController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
-        $sort = $request->input('sort', 'desc'); // デフォルトを昇順に設定
-
+        $sort = $request->input('sort', 'desc'); // デフォルトを新しい順（更新日）に設定
         $query = Project::query();
 
         if ($search) {
@@ -52,8 +58,15 @@ class ProjectController extends Controller
         // 並び替え
         if ($sort === 'asc') {
             $query->orderBy('updated_at', 'asc');
-        } else {
+        }
+        if ($sort === 'desc') {
             $query->orderBy('updated_at', 'desc');
+        }
+        if ($sort === 'iddesc') {
+            $query->orderBy('id', 'desc');
+        }
+        if ($sort === 'idasc') {
+            $query->orderBy('id', 'asc');
         }
 
         $projects = $query->with('forms')->get();
