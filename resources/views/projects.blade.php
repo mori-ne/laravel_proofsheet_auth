@@ -39,11 +39,6 @@
             @include('layouts.sidebar')
 
             <main class="w-full">
-                <x-slot name="header">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Dashboard') }}
-                    </h2>
-                </x-slot>
 
                 <div class="p-6 max-w-4xl mx-auto">
 
@@ -68,28 +63,34 @@
 
                     {{-- search / new project --}}
                     <div class="flex justify-between my-3">
+
                         {{-- search --}}
                         <div>
-                            <form action="{{ route('projects.index') }}" method="GET" class="flex gap-2">
+                            <form action="{{ route('projects.search') }}" method="GET" class="flex gap-2">
+                                {{-- input --}}
                                 <input name="search" type="text" placeholder="プロジェクトを検索"
                                     value="{{ request('search') }}"
                                     class="flex w-80 h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-gray-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
 
+                                {{-- sort --}}
                                 <select name="sort"
-                                    class="w-28 inline-flex items-center justify-center px-4 py-2 text-sm font-medium transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-300 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
-                                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>新しい順
+                                    class="w-48 inline-flex items-center justify-center px-4 py-2 text-sm font-medium transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-300 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
+                                    <option value="desc" {{ request('sort', 'desc') == 'desc' ? 'selected' : '' }}>
+                                        新しい順（更新日）
                                     </option>
-                                    <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>古い順
+                                    <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>
+                                        古い順（更新日）
                                     </option>
                                 </select>
 
+                                {{-- submit --}}
                                 <button type="submit"
                                     class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-200 bg-white border rounded-md text-neutral-500 hover:text-neutral-700 border-neutral-300 hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-200/60 focus:shadow-outline">
                                     検索
                                 </button>
                             </form>
-
                         </div>
+
                         {{-- new project --}}
                         <div>
                             <a href="{{ route('projects.create') }}" type="button"
@@ -278,12 +279,17 @@
                                     {{-- form count --}}
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">フォーム数：</p>
-                                        <p class="text-sm text-neutral-900">{{ $project->forms_count }}</p>
+                                        <p class="text-sm text-neutral-900">{{ $project->forms->count() }}</p>
                                     </div>
                                     {{-- created_at --}}
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">作成日：</p>
                                         <p class="text-sm text-neutral-900">{{ $project->created_at }}</p>
+                                    </div>
+                                    {{-- updated_at --}}
+                                    <div class="flex items-center">
+                                        <p class="text-sm text-gray-500">更新日：</p>
+                                        <p class="text-sm text-neutral-900">{{ $project->updated_at }}</p>
                                     </div>
                                 </div>
                             </div>

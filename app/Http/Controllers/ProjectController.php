@@ -12,34 +12,56 @@ use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
-    //    一覧表示・GET検索
+    // 一覧表示
     public function index(Request $request)
     {
-        // クエリビルダーを使用してベースクエリを作成
+        $search = $request->input('search');
+        $sort = $request->input('sort', 'desc'); // デフォルトを新しい順（更新日）に設定
         $query = Project::query();
 
-        // 検索パラメーターが存在する場合、クエリに条件を追加
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $search = $request->query('search');
-                $q->where('project_name', 'like', '%' . $search . '%');
-            });
+        if ($search) {
+            // クエリがある場合、プロジェクトを検索
+            $query->where('project_name', 'LIKE', '%' . $search . '%');
         }
 
-        // 並び替えパラメーターに基づいてソート
-        if ($request->query('sort') == 'oldest') {
-            $query->orderBy('id', 'asc');
+        // 並び替え
+        if ($sort === 'asc') {
+            $query->orderBy('updated_at', 'asc');
         } else {
-            // デフォルトはdesc順で並び替える
-            $query->orderBy('id', 'desc');
+            $query->orderBy('updated_at', 'desc');
         }
 
-        // クエリを実行してデータを取得（フォームのカウント数も一緒に取得）
-        $projects = $query->withCount('forms')->get();
+        $projects = $query->with('forms')->get();
 
-        // データをビューに渡す
         return view('/projects', compact('projects'));
     }
+
+    // 検索
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $sort = $request->input('sort', 'desc'); // デフォルトを昇順に設定
+
+        $query = Project::query();
+
+        if ($search) {
+            // クエリがある場合、プロジェクトを検索
+            $query->where('project_name', 'LIKE', '%' . $search . '%');
+        }
+
+        // 並び替え
+        if ($sort === 'asc') {
+            $query->orderBy('updated_at', 'asc');
+        } else {
+            $query->orderBy('updated_at', 'desc');
+        }
+
+        $projects = $query->with('forms')->get();
+
+        return view('/projects', compact('projects'));
+    }
+
+
 
     // 新規作成
     public function create()

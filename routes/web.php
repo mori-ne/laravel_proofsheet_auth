@@ -3,7 +3,6 @@
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\InputController;
 use Illuminate\Support\Facades\Route;
 
 // index
@@ -27,7 +26,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // 一覧
-    Route::get('/projects{query?}', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    // 検索
+    Route::get('/projects/search', [ProjectController::class, 'search'])->name('projects.search');
     // 新規作成画面
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
     // 確認・バリデーション
