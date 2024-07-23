@@ -51,6 +51,7 @@
                         <p class="text-gray-500 text-sm">フォームの一覧がここに表示されます</p>
                     </div>
 
+
                     {{-- フラッシュメッセージ --}}
                     @if (session('status'))
                         <div
@@ -90,36 +91,31 @@
                     @if ($forms->isEmpty())
                         <div
                             class="text-gray-600 text-sm w-full py-16 px-32 text-center border-dashed rounded-lg border-2 border-gray-300">
-                            フォームはは見つかりませんでした...
+                            フォームは見つかりませんでした...
                         </div>
                     @endif
 
-                    <div class="mb-3 bg-white border border-gray-300 rounded-md">
+                    <div class="">
                         @foreach ($forms as $form)
-                            <div class="p-4 border-b">
-                                <div class="flex justify-start items-center gap-2">
+                            <div class="flex flex-col mb-3 bg-white border border-gray-300 rounded-md p-4">
 
-                                    {{-- フォーム名 --}}
+                                {{-- col --}}
+                                <div class="flex justify-start items-center gap-2 border-b border-gray-300 mb-2 pb-2">
+
+                                    {{-- form_name --}}
                                     <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
                                         <a href="#">{{ $form->form_name }}</a>
                                     </h5>
 
-                                    <div class="ml-auto w-80 flex gap-4">
-                                        <div class="flex items-center">
-                                            <p class="text-sm text-gray-500">入力項目数：</p>
-                                            <p class="text-sm text-neutral-900">null</p>
-                                        </div>
-                                        <div class="flex items-center">
-                                            <p class="text-sm text-gray-500">作成日：</p>
-                                            <p class="text-sm text-neutral-900">{{ $form->created_at }}</p>
-                                        </div>
+                                    {{-- input method --}}
+                                    <div class="ml-auto">
+                                        <button
+                                            class="text-xs rounded border border-gray-300 py-1 px-3">入力項目エディターを開く</button>
+                                        <button
+                                            class="text-xs rounded border bg-red-500 text-white py-1 px-3">PDF一括DL</button>
                                     </div>
 
-                                    <div>
-                                        <button
-                                            class="text-xs rounded border border-gray-300 py-0.5 px-2">入力項目エディターを開く</button>
-                                    </div>
-                                    {{-- ドロップダウンメニュー --}}
+                                    {{-- dropdown menu form --}}
                                     <div x-data="{
                                         dropdownOpen: false
                                     }" class="relative">
@@ -172,7 +168,8 @@
                                                                 class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
 
                                                                 <div class="flex items-center justify-between pb-2">
-                                                                    <h3 class="text-lg font-semibold">プロジェクトを削除</h3>
+                                                                    <h3 class="text-lg font-semibold">プロジェクトを削除
+                                                                    </h3>
                                                                     <button @click="modalOpen=false"
                                                                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
                                                                         <svg class="w-5 h-5"
@@ -187,7 +184,8 @@
                                                                 </div>
                                                                 <div class="relative w-auto mb-4">
                                                                     <p>本当に削除してもよろしいですか？</p>
-                                                                    <p class="text-sm text-red-500">※この操作は取り消せません</p>
+                                                                    <p class="text-sm text-red-500">※この操作は取り消せません
+                                                                    </p>
                                                                 </div>
                                                                 <div class="flex">
                                                                     <form class="ml-auto" action="#"
@@ -208,8 +206,26 @@
                                         </div>
                                     </div>
 
-
                                 </div>
+
+                                {{-- col --}}
+                                <div class="flex items-center justify-start">
+
+                                    {{-- project_name --}}
+                                    {{-- project_name --}}
+                                    <div>
+                                        <p class="text-xs text-gray-500">
+                                            {{ $form->project->project_name }}
+                                        </p>
+                                    </div>
+
+                                    {{-- created --}}
+                                    <div class="flex gap-4 ml-auto">
+                                        <p class="text-xs text-gray-500">作成日：{{ $form->created_at }}</p>
+                                        <p class="text-xs text-gray-500">更新日：{{ $form->updated_at }}</p>
+                                    </div>
+                                </div>
+
                             </div>
                         @endforeach
                     </div>

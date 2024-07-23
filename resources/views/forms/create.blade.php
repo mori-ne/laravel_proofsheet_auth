@@ -62,7 +62,7 @@
                     {{-- content --}}
                     <div class="mx-auto bg-white border border-neutral-300 rounded-md p-8 mb-3">
 
-                        <form action="#">
+                        <form action="#" method="POST">
                             @csrf
 
                             <div class="mb-6">
@@ -77,10 +77,11 @@
                                     <p class="text-xs text-gray-500">作成するプロジェクトを選択してください</p>
                                 </div>
 
-                                <select name="#" id="#"
+                                <select name="selectProject" id="selectProject"
                                     class="py-3 px-4 pe-9 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                    <option value="null">設定しない</option>
                                     @foreach ($projects as $project)
-                                        <option value="{{ $project->project_name }}">{{ $project->project_name }}
+                                        <option value="{{ $project->id }}">{{ $project->project_name }}
                                         </option>
                                     @endforeach
                                 </select>

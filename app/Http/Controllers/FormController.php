@@ -13,9 +13,8 @@ class FormController extends Controller
      */
     public function index()
     {
-        $forms = Form::orderby('id', 'desc')->get();
-        // dd($forms);
-        return view('/forms', compact('forms'));
+        $forms = Form::with('project')->orderby('id', 'desc')->get();
+        return view('forms', compact('forms'));
     }
 
     /**

@@ -15,6 +15,7 @@ class Form extends Model
     protected $fillable = [
         'project_id',
         'form_name',
+        'form_description',
     ];
 
     public function project()

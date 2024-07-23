@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('forms', function (Blueprint $table) {
             $table->id()->comment('ID');
             $table->unsignedBigInteger('project_id')->comment('プロジェクトID:FK');
-            $table->string('form_name', 100)->comment('フォーム名');
+            $table->string('form_name', 100)->required()->comment('フォーム名');
+            $table->text('form_description')->nullable()->comment('フォームの説明');
             $table->timestamps();
         });
     }
