@@ -9,7 +9,7 @@ use App\Models\Form;
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory, SerializeDate;
 
     // DBとの関連付け
     protected $table = 'projects';
@@ -18,6 +18,8 @@ class Project extends Model
     protected $fillable = [
         'uuid',
         'project_name',
+        'project_date',
+        'project_message',
         'description',
         'status',
         'is_deadline',
@@ -28,9 +30,11 @@ class Project extends Model
     ];
 
     // 日付形式としてキャスト
-    protected $dates = [
-        'is_deadline',
-    ];
+    // protected $dates = [
+    //     'is_deadline',
+    //     'created_at',
+    //     'updated_at',
+    // ];
 
     // UUIDを生成するイベントを追加
     protected static function boot()

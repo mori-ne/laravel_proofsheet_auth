@@ -129,8 +129,9 @@ class ProjectController extends Controller
     {
         // バリデーションルールの定義
         $validatedData = $request->validate([
-            // project_nameが空白だとgetリクエストエラーになる（要改善）
             'project_name' => 'required|max:100',
+            'project_date' => 'nullable|max:100',
+            'project_message' => 'nullable|string',
             'status' => 'integer',
             'description' => 'nullable|string',
             'is_deadline' => 'nullable',

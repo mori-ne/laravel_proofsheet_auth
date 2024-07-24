@@ -208,27 +208,34 @@
                     </div>
 
                     {{-- project --}}
-                    <div class="border-t border-gray-300">
+                    <div class="border-t border-gray-300 py-8">
 
-                        {{-- project name / description --}}
-                        <div class=" py-6">
-                            {{-- project name --}}
+                        {{-- project name --}}
+                        <div class="mb-8">
                             <p class="text-sm text-gray-400 mb-2">プロジェクト名</p>
                             <h5 class="text-2xl font-bold leading-none text-neutral-900 mb-2">
                                 {{ $project->project_name }}
                             </h5>
+                        </div>
 
-                            {{-- description --}}
-                            @if (!$project->description)
-                                <span class="text-md text-gray-400">なし</span>
-                            @else
-                                <div class="text-md text-gray-600">{!! $project->description !!}</div>
-                            @endif
+                        {{-- description --}}
+                        <div class="mb-8">
+                            <p class="text-sm text-gray-400 mb-2">概要</p>
+                            <h5 class="text-lg font-bold leading-none text-neutral-900 mb-2">
+                                <div class="text-md">{!! $project->description !!}</div>
+                            </h5>
+                        </div>
+
+                        {{-- project date --}}
+                        <div class="mb-8">
+                            <p class="text-sm text-gray-400 mb-2">プロジェクトの期間（登録ページに表示されます）</p>
+                            <h5 class="text-lg font-bold leading-none text-neutral-900 mb-2">
+                                {{ $project->project_date }}</h5>
                         </div>
 
                         {{-- public url --}}
                         <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-1">公開URL（公開URLは変更できません）</p>
+                            <p class="text-sm text-gray-400 mb-2">公開URL（URLは変更できません）</p>
                             <a class="text-md underline text-blue-700"
                                 href="{{ url('/') . '/forms' }}/{{ $project->uuid }}" target="_blank">
                                 {{ url('/') . '/forms' }}/{{ $project->uuid }}
@@ -461,6 +468,13 @@
                         </div>
                     </div>
 
+                    <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
+                        {{-- project message --}}
+                        <div class="mb-8">
+                            <p class="text-sm text-gray-400 mb-2">プロジェクトの説明（登録ページに表示されます）</p>
+                            <h5 class="text-sm text-gray-400 mb-2">{!! $project->project_message !!}</h5>
+                        </div>
+                    </div>
                     {{-- mail --}}
                     <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
                         <div>

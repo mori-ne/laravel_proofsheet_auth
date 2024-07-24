@@ -8,7 +8,7 @@ use App\Models\Project;
 
 class Form extends Model
 {
-    use HasFactory;
+    use HasFactory, SerializeDate;
 
     protected $table = 'forms';
 
