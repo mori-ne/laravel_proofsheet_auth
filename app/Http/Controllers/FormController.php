@@ -22,12 +22,29 @@ class FormController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $validator = $request->validate([
+            'project_id' => 'required|integer', // project_id も必須で整数であること
+            'form_name' => 'required|max:100',
+            'form_description' => 'nullable|max:255', // 空でも許容し、最大255文字まで
+        ]);
+
+        $form = Form::create([
+            'project_id' => $request->project_id,
+            'form_name' => $request->form_name,
+            'form_description' => $request->form_description,
+        ]);
+
+        return redirect()->route('forms.index')->with('status', 'フォームを新規作成しました');
     }
 
     public function show(string $id)
     {
+
         $form = Form::with('project')->find($id);
+        // 見つからなかった場合
+        if (!$form) {
+            return redirect('forms');
+        }
         return view('forms.show', compact('form'));
     }
 
@@ -38,6 +55,12 @@ class FormController extends Controller
     {
         $projects = Project::all();
         $form = Form::findOrFail($id);
+
+        // 見つからなかった場合
+        if (!$form) {
+            return redirect('forms');
+        }
+
         return view('forms.edit', ['form' => $form, 'projects' => $projects]);
     }
 
@@ -61,11 +84,17 @@ class FormController extends Controller
         return back()->with('status', 'フォームを更新しました');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $form = Form::findOrFail($id);
+        $form->delete();
+
+        return back()->with('status', 'フォームを削除しました');
+    }
+
+    public function destroyAll(string $project_id)
+    {
+        // $form = Form::findOrFail($id);
+        // $form->delete();
     }
 }

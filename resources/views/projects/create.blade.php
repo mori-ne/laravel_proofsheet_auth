@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
+    <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
 
     {{-- tinyMCE --}}
     <x-head.tinymce-config />
@@ -88,10 +89,10 @@
 
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                                    <label class="text-lg font-bold" for="#">プロジェクトの概要</label>
                                 </div>
-                                <textarea id="projectinstance" name="description" type="text" placeholder="プロジェクトの説明を記入してください"
-                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('description') }}</textarea>
+                                <textarea id="projectinstance" name="project_description" type="text" placeholder="プロジェクトの概要を記入してください"
+                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_description') }}</textarea>
                             </div>
 
                             <hr class="my-8">
@@ -108,12 +109,37 @@
 
                             <div class="mb-6">
                                 <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">
+                                        プロジェクトの期間情報
+                                    </label>
+                                </div>
+                                <input name="project_date" type="text" placeholder="プロジェクトの期間情報を記入してください"
+                                    value="{{ old('project_date') }}"
+                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                                @error('project_date')
+                                    <div class="mt-2 text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                                </div>
+                                <textarea id="projectinstance" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください"
+                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_message') }}</textarea>
+                            </div>
+
+                            <hr class="my-8">
+
+                            <div class="mb-6">
+                                <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">返信メールの件名</label>
                                 </div>
                                 <input name="mail_subject" type="text" placeholder="メールの件名を記入してください"
                                     value="{{ old('mail_subject', '「●●●●●●●●●●●●●●●●●●●●」演題登録 投稿受付通知') }}"
                                     class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
                             </div>
+
 
                             <div class="mb-6">
                                 <div class="mb-2">

@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
+    <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -77,13 +78,13 @@
 
                         <div class="mb-6">
                             <div class="mb-2">
-                                <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                                <label class="text-lg font-bold" for="#">プロジェクトの概要</label>
                             </div>
                             <div class="border rounded p-3 text-sm">
-                                @if (!$project['description'])
+                                @if (!$project['project_description'])
                                     <span class="text-gray-400">なし</span>
                                 @else
-                                    {!! $project['description'] !!}
+                                    {!! $project['project_description'] !!}
                                 @endif
                             </div>
                         </div>
@@ -97,6 +98,28 @@
                                     <span class="text-gray-400">指定しない</span>
                                 @else
                                     {{ $project['is_deadline'] }}
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="mb-2">
+                                <label class="text-lg font-bold" for="#">
+                                    プロジェクトの期間情報
+                                </label>
+                            </div>
+                            <div class="border rounded p-3">{{ $project['project_date'] }}</div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="mb-2">
+                                <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                            </div>
+                            <div class="border rounded p-3">
+                                @if (!$project['project_message'])
+                                    <span class="text-gray-400">なし</span>
+                                @else
+                                    {!! $project['project_message'] !!}
                                 @endif
                             </div>
                         </div>
@@ -133,7 +156,8 @@
                             <form action="{{ route('projects.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="project_name" value="{{ $project['project_name'] }}">
-                                <input type="hidden" name="description" value="{{ $project['description'] }}">
+                                <input type="hidden" name="project_description"
+                                    value="{{ $project['project_description'] }}">
                                 <input type="hidden" name="is_deadline" value="{{ $project['is_deadline'] }}">
                                 <input type="hidden" name="mail_subject" value="{{ $project['mail_subject'] }}">
                                 <input type="hidden" name="mail_content" value="{{ $project['mail_content'] }}">

@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
+    <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
 
     {{-- tinyMCE --}}
     <x-head.tinymce-config />
@@ -40,16 +41,11 @@
             @include('layouts.sidebar')
 
             <main class="w-full">
-                <x-slot name="header">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Dashboard') }}
-                    </h2>
-                </x-slot>
 
                 <div class="p-6 max-w-4xl mx-auto">
 
                     <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-1">プロジェクトの編集</h4>
+                        <h4 class="font-bold text-md mb-1">プロジェクトの編集</h4>
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 
@@ -78,40 +74,41 @@
                     <form action="{{ route('projects.update', $project->id) }}" method="POST">
                         @csrf
                         @method('PUT')
+                        {{-- 公開設定・公開期限 --}}
+                        <h4 class="text-md font-bold mb-2 text-gray-500">公開情報</h4>
                         <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
-                            <div>
-                                <div class="flex flex-row items-center gap-2">
-                                    {{-- 公開設定 --}}
-                                    <div class="mr-4">
-                                        <label class="text-lg font-bold" for="#">公開設定</label>
-                                        <select name="status" class="ml-4 border-gray-300 rounded-md">
-                                            @if ($project->status)
-                                                <option value="1" selected>公開中</option>
-                                                <option value="0">非公開</option>
-                                            @else
-                                                <option value="1">公開中</option>
-                                                <option value="0" selected>非公開</option>
-                                            @endif
-                                        </select>
-                                    </div>
-
-                                    {{-- 公開期限 --}}
-                                    <div class="mr-4">
-                                        <label class="text-lg font-bold" for="#">公開期限</label>
-                                        <input name="is_deadline" class="ml-4 border-gray-300 rounded-md"
-                                            type="datetime-local"
-                                            value="{{ old('is_deadline', $project->is_deadline) }}">
-                                    </div>
-
+                            <div class="flex flex-row items-center gap-2">
+                                {{-- 公開設定 --}}
+                                <div class="mr-4">
+                                    <label class="text-md font-bold">公開設定</label>
+                                    <select name="status" class="ml-4 border-gray-300 rounded-md">
+                                        @if ($project->status)
+                                            <option value="1" selected>公開中</option>
+                                            <option value="0">非公開</option>
+                                        @else
+                                            <option value="1">公開中</option>
+                                            <option value="0" selected>非公開</option>
+                                        @endif
+                                    </select>
                                 </div>
+
+                                {{-- 公開期限 --}}
+                                <div class="mr-4">
+                                    <label class="text-md font-bold">公開期限</label>
+                                    <input name="is_deadline" class="ml-4 border-gray-300 rounded-md"
+                                        type="datetime-local" value="{{ old('is_deadline', $project->is_deadline) }}">
+                                </div>
+
                             </div>
                         </div>
 
+                        {{-- プロジェクト名・プロジェクトの説明 --}}
+                        <h4 class="text-md font-bold mb-2 text-gray-500">プロジェクト概要</h4>
                         <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
                             {{-- プロジェクト名 --}}
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">
+                                    <label class="text-md font-bold">
                                         プロジェクト名
                                     </label>
                                     <span
@@ -130,18 +127,48 @@
                             {{-- プロジェクトの説明 --}}
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                                    <label class="text-md font-bold">プロジェクトの説明</label>
                                 </div>
-                                <textarea id="projectinstance" name="description" type="text" placeholder="プロジェクトの説明を記入してください"
-                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('description', $project->description) }}</textarea>
+                                <textarea id="projectinstance" name="project_description" type="text" placeholder="プロジェクトの説明を記入してください"
+                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_description', $project->project_description) }}</textarea>
                             </div>
                         </div>
 
+                        {{-- プロジェクトの期間情報・プロジェクトの内容情報 --}}
+                        <h4 class="text-md font-bold mb-2 text-gray-500">プロジェクト情報</h4>
+                        <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
+                            {{-- 期間情報 --}}
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-md font-bold">
+                                        期間情報
+                                    </label>
+                                </div>
+                                <input name="project_date" type="text" placeholder="プロジェクト名を記入してください"
+                                    value="{{ old('project_date', $project->project_date) }}"
+                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                                @error('project_date')
+                                    <div class="mt-2 text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- 内容情報 --}}
+                            <div class="mb-6">
+                                <div class="mb-2">
+                                    <label class="text-md font-bold">内容情報</label>
+                                </div>
+                                <textarea id="projectinstance" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください"
+                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_message', $project->project_message) }}</textarea>
+                            </div>
+                        </div>
+
+                        {{-- 返信メールの件名・本文 --}}
+                        <h4 class="text-md font-bold mb-2 text-gray-500">返信メール情報</h4>
                         <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
                             <div>
                                 <div class="mb-6">
                                     <div class="mb-2">
-                                        <label class="text-lg font-bold" for="#">返信メールの件名</label>
+                                        <label class="text-md font-bold">返信メールの件名</label>
                                     </div>
                                     <input name="mail_subject" type="text" placeholder="メールの件名を記入してください"
                                         value="{{ old('mail_subject', $project->mail_subject) }}"
@@ -149,7 +176,7 @@
                                 </div>
                                 <div class="mb-6">
                                     <div class="mb-2">
-                                        <label class="text-lg font-bold" for="#">返信メールの本文</label>
+                                        <label class="text-md font-bold">返信メールの本文</label>
                                     </div>
                                     <textarea id="projectinstance" name="mail_content" type="text" placeholder="メールの返信内容を記入してください"
                                         class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{!! old('mail_content', $project->mail_content) !!}</textarea>

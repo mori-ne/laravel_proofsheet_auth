@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
+    <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -22,14 +23,7 @@
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
+
 
         <!-- Page Content -->
         <div class="flex flex-row items-stretch min-h-screen">
@@ -62,12 +56,11 @@
                     {{-- content --}}
                     <div class="mx-auto bg-white border border-neutral-300 rounded-md p-8 mb-3">
 
-                        <form action="#" method="POST">
+                        <form action="{{ route('forms.store') }}" method="POST">
                             @csrf
-
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">
+                                    <label class="text-lg font-bold">
                                         プロジェクトを選択
                                     </label>
                                     <span
@@ -77,10 +70,11 @@
                                     <p class="text-xs text-gray-500">作成するプロジェクトを選択してください</p>
                                 </div>
 
-                                <select name="selectProject" id="selectProject"
+                                <select name="project_id" id="selectProject"
                                     class="py-3 px-4 pe-9 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none">
                                     @foreach ($projects as $project)
-                                        <option value="{{ $project->id }}">{{ $project->project_name }}
+                                        <option value="{{ $project->id }}">
+                                            {{ $project->project_name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -88,7 +82,7 @@
 
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">
+                                    <label class="text-lg font-bold">
                                         フォーム名
                                     </label>
                                     <span
@@ -96,17 +90,17 @@
                                         <span>必須</span>
                                     </span>
                                 </div>
-                                <input type="text" placeholder="フォーム名を記入してください"
-                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+                                <input name="form_name" type="text" placeholder="フォーム名を記入してください"
+                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"
+                                    value="{{ old('form_name') }}" />
                             </div>
 
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">フォームの説明</label>
-                                    <p class="text-gray-500 text-xs mb-2">記事投稿画面にも表示されます</p>
+                                    <label class="text-lg font-bold">フォームの説明</label>
                                 </div>
-                                <textarea type="text" placeholder="フォームの説明を記入してください"
-                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50"></textarea>
+                                <textarea name="form_description" type="text" placeholder="フォームの説明を記入してください"
+                                    class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('form_description') }}</textarea>
                             </div>
 
                             <hr class="my-8">

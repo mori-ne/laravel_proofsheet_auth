@@ -88,6 +88,8 @@ class ProjectController extends Controller
         $validator = $request->validate([
             'project_name' => 'required|max:100',
             'mail_subject' => 'max:255',
+            'project_date' => 'nullable|max:100',
+            'project_message' => 'nullable|max:255',
         ]);
 
         $project = $request->all();
@@ -100,7 +102,9 @@ class ProjectController extends Controller
         $project = Project::create([
             'project_name' => $request->project_name,
             'uuid' => (string) Str::uuid(),
-            'description' => $request->description,
+            'project_description' => $request->project_description,
+            'project_date' => $request->project_date,
+            'project_message' => $request->project_message,
             'status' => 0,
             'mail_subject' => $request->mail_subject,
             'mail_content' => $request->mail_content,
@@ -114,6 +118,12 @@ class ProjectController extends Controller
     public function show(string $id)
     {
         $project = Project::with('forms')->find($id);
+
+        // 見つからなかった場合
+        if (!$project) {
+            return redirect('projects');
+        }
+
         return view('projects.show', compact('project'));
     }
 
@@ -121,6 +131,12 @@ class ProjectController extends Controller
     public function edit(string $id)
     {
         $project = Project::findOrFail($id);
+
+        // 見つからなかった場合
+        if (!$project) {
+            return redirect('projects');
+        }
+
         return view('projects.edit', ['project' => $project]);
     }
 
@@ -133,7 +149,7 @@ class ProjectController extends Controller
             'project_date' => 'nullable|max:100',
             'project_message' => 'nullable|string',
             'status' => 'integer',
-            'description' => 'nullable|string',
+            'project_description' => 'nullable|string',
             'is_deadline' => 'nullable',
             'mail_subject' => 'max:255|nullable|string',
             'mail_content' => 'nullable|string',

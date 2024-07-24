@@ -20,7 +20,7 @@ class Project extends Model
         'project_name',
         'project_date',
         'project_message',
-        'description',
+        'project_description',
         'status',
         'is_deadline',
         'mail_subject',

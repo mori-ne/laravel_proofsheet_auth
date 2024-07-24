@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
+    <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -307,7 +308,8 @@
                                     <div class="flex items-center">
                                         <p class="text-sm text-gray-500">公開URL：</p>
                                         <a class="text-sm text-gray-700"
-                                            href="{{ url('/') . '/forms' }}/{{ $project->uuid }}">{{ url('/') . '/forms' }}/{{ $project->uuid }}</a>
+                                            href="{{ url('/') . '/userpage' }}/{{ $project->uuid }}"
+                                            target="_blank">{{ url('/') . '/userpage' }}/{{ $project->uuid }}</a>
                                     </div>
                                     {{-- id --}}
                                     <div class="flex items-center ml-auto">

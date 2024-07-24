@@ -1,0 +1,29 @@
+.documentstyle h1 {
+  padding: 0.25em 1em;
+  background: #f6f6f6;
+  margin-bottom: 1em;
+  font-size: 1.25em;
+  border-left: 5px solid orange;
+}
+.documentstyle h2 {
+  color: orange;
+  margin-bottom: 0.25em;
+  font-size: 1.15em;
+}
+.documentstyle h3 {
+  font-size: 1.1em;
+}
+.documentstyle ul {
+  margin-bottom: 0.5em;
+  list-style-type: disc;
+}
+.documentstyle ol {
+  list-style-type: decimal;
+}
+.documentstyle li {
+  margin-left: 1.4em;
+  margin-bottom: 0.25em;
+}
+.documentstyle p {
+  margin-bottom: 0.5em;
+}/*# sourceMappingURL=documentstyle.css.map */

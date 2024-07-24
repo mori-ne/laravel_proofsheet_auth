@@ -3,6 +3,7 @@
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserPageController;
 use Illuminate\Support\Facades\Route;
 
 // index
@@ -26,41 +27,50 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // 一覧
-    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
     // 検索
-    Route::get('/projects/search', [ProjectController::class, 'search'])->name('projects.search');
+    Route::get('projects/search', [ProjectController::class, 'search'])->name('projects.search');
     // 新規作成画面
-    Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+    Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
     // 確認・バリデーション
-    Route::post('/projects/confirm', [ProjectController::class, 'confirm'])->name('projects.confirm');
+    Route::post('projects/confirm', [ProjectController::class, 'confirm'])->name('projects.confirm');
     // ストア
     Route::post('/project', [ProjectController::class, 'store'])->name('projects.store');
     // 詳細
-    Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
+    Route::get('projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
     // 編集
-    Route::get('/projects/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::get('projects/edit/{id}', [ProjectController::class, 'edit'])->name('projects.edit');
     // 編集の適用
-    Route::put('/projects/update/{id}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::put('projects/update/{id}', [ProjectController::class, 'update'])->name('projects.update');
     // 削除
     Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
     // 公開・非公開の切り替え
     Route::post('projects/{id}', [ProjectController::class, 'toggleStatus'])->name('projects.toggle');
     // コピー
-    Route::post('/projects/duplicate/{id}', [ProjectController::class, 'duplicate'])->name('projects.duplicate');
+    Route::post('projects/duplicate/{id}', [ProjectController::class, 'duplicate'])->name('projects.duplicate');
 });
 
 // forms（そのうちresourceで書き直す）
 Route::middleware('auth')->group(function () {
     // 一覧
-    Route::get('/forms{query?}', [FormController::class, 'index'])->name('forms.index');
+    Route::get('forms', [FormController::class, 'index'])->name('forms.index');
     // 新規作成画面
-    Route::get('/forms/create', [FormController::class, 'create'])->name('forms.create');
+    Route::get('forms/create', [FormController::class, 'create'])->name('forms.create');
+    // ストア処理
+    Route::post('forms', [FormController::class, 'store'])->name('forms.store');
     // 詳細
-    Route::get('/forms/{id}', [FormController::class, 'show'])->name('forms.show');
+    Route::get('forms/{id}', [FormController::class, 'show'])->name('forms.show');
     // 編集
-    Route::get('/forms/edit/{id}', [FormController::class, 'edit'])->name('forms.edit');
+    Route::get('forms/edit/{id}', [FormController::class, 'edit'])->name('forms.edit');
     // 編集の適用
-    Route::put('/forms/update/{id}', [FormController::class, 'update'])->name('forms.update');
+    Route::put('forms/update/{id}', [FormController::class, 'update'])->name('forms.update');
+    // 削除
+    Route::delete('forms/{id}', [FormController::class, 'destroy'])->name('forms.destroy');
+    // 全て削除
+    Route::delete('forms/{project_id}', [FormController::class, 'destroyAll'])->name('forms.destroyAll');
 });
+
+// userpage(UUID)
+Route::get('userpage/{uuid}', [UserPageController::class, 'index'])->name('posts.index');
 
 require __DIR__ . '/auth.php';

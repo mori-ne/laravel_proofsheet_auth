@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
+    <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -72,7 +73,7 @@
                     @endif
 
                     {{-- controll --}}
-                    <div class="flex items-center gap-4 border-gray-300 mb-4">
+                    <div class="flex items-center gap-4 mb-4">
                         {{-- 公開／非公開 --}}
                         <div>
                             @if ($project->status)
@@ -208,43 +209,30 @@
                     </div>
 
                     {{-- project --}}
-                    <div class="border-t border-gray-300 py-8">
-
-                        {{-- project name --}}
-                        <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">プロジェクト名</p>
-                            <h5 class="text-2xl font-bold leading-none text-neutral-900 mb-2">
+                    <div class="mb-8 border-t border-b border-gray-300 py-6">
+                        <h4 class="text-md font-bold mb-2 text-gray-500">プロジェクト情報</h4>
+                        {{-- project name / project description --}}
+                        <div class="mb-6">
+                            <h5 class="text-2xl font-bold leading-none text-neutral-900 mb-3">
                                 {{ $project->project_name }}
                             </h5>
-                        </div>
-
-                        {{-- description --}}
-                        <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">概要</p>
-                            <h5 class="text-lg font-bold leading-none text-neutral-900 mb-2">
-                                <div class="text-md">{!! $project->description !!}</div>
+                            <h5 class="text-lg leading-none mb-2">
+                                <div class="text-md">{!! $project->project_description !!}</div>
                             </h5>
                         </div>
-
-                        {{-- project date --}}
-                        <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">プロジェクトの期間（登録ページに表示されます）</p>
-                            <h5 class="text-lg font-bold leading-none text-neutral-900 mb-2">
-                                {{ $project->project_date }}</h5>
-                        </div>
-
                         {{-- public url --}}
-                        <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">公開URL（URLは変更できません）</p>
+                        <div class="">
+                            <p class="text-sm text-gray-400">公開URL（URLは変更できません）</p>
                             <a class="text-md underline text-blue-700"
-                                href="{{ url('/') . '/forms' }}/{{ $project->uuid }}" target="_blank">
-                                {{ url('/') . '/forms' }}/{{ $project->uuid }}
+                                href="{{ url('/') . '/userpage' }}/{{ $project->uuid }}" target="_blank">
+                                {{ url('/') . '/userpage' }}/{{ $project->uuid }}
                             </a>
                         </div>
                     </div>
 
                     {{-- forms --}}
                     <div class="mb-8">
+                        <h4 class="text-md font-bold mb-2 text-gray-500">フォーム情報</h4>
 
                         {{-- if --}}
                         @if ($project->forms->isEmpty())
@@ -298,7 +286,8 @@
                                                         class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
                                                         <span>フォームの詳細</span>
                                                     </a>
-                                                    <a href="{{ route('forms.edit', $form->id) }}  @click="menuBarOpen=false"
+                                                    <a href="{{ route('forms.edit', $form->id) }}"
+                                                        @click="menuBarOpen=false"
                                                         class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
                                                         <span>フォームを編集</span>
                                                     </a>
@@ -306,7 +295,7 @@
                                                         @csrf
                                                         <button type="submit" @click="menuBarOpen=false"
                                                             class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                            <span>フォームをコピー</span>
+                                                            <span class="text-gray-300">フォームをコピー</span>
                                                         </button>
                                                     </form>
                                                     <div x-data="{ modalOpen: false }"
@@ -340,7 +329,7 @@
 
                                                                     <div
                                                                         class="flex items-center justify-between pb-2">
-                                                                        <h3 class="text-lg font-semibold">プロジェクトを削除
+                                                                        <h3 class="text-lg font-semibold">フォームを削除
                                                                         </h3>
                                                                         <button @click="modalOpen=false"
                                                                             class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
@@ -361,13 +350,14 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="flex">
-                                                                        <form class="ml-auto" action="#"
+                                                                        <form class="ml-auto"
+                                                                            action="{{ route('forms.destroy', $form->id) }}"
                                                                             method="POST">
                                                                             @csrf
                                                                             @method('DELETE')
                                                                             <button type="submit"
                                                                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none">
-                                                                                プロジェクトを削除
+                                                                                フォームを削除
                                                                             </button>
                                                                         </form>
                                                                     </div>
@@ -379,7 +369,7 @@
                                                         @keydown.escape.window="modalOpen = false"
                                                         class="relative z-50 w-auto h-auto">
                                                         <button @click="modalOpen=true"
-                                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-red-500">すべてのフォームを削除</button>
+                                                            class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none text-gray-300">すべてのフォームを削除</button>
                                                         <template x-teleport="body">
                                                             <div x-show="modalOpen"
                                                                 class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
@@ -406,7 +396,7 @@
 
                                                                     <div
                                                                         class="flex items-center justify-between pb-2">
-                                                                        <h3 class="text-lg font-semibold">プロジェクトを削除
+                                                                        <h3 class="text-lg font-semibold">すべてのフォームを削除
                                                                         </h3>
                                                                         <button @click="modalOpen=false"
                                                                             class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
@@ -427,13 +417,14 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="flex">
-                                                                        <form class="ml-auto" action="#"
+                                                                        <form class="ml-auto"
+                                                                            action="{{-- {{ route('forms.destroyAll', $form->project->id) }} --}}"
                                                                             method="POST">
                                                                             @csrf
                                                                             @method('DELETE')
                                                                             <button type="submit"
                                                                                 class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-red-600 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none">
-                                                                                プロジェクトを削除
+                                                                                すべてのフォームを削除
                                                                             </button>
                                                                         </form>
                                                                     </div>
@@ -468,35 +459,49 @@
                         </div>
                     </div>
 
-                    <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
-                        {{-- project message --}}
-                        <div class="mb-8">
-                            <p class="text-sm text-gray-400 mb-2">プロジェクトの説明（登録ページに表示されます）</p>
-                            <h5 class="text-sm text-gray-400 mb-2">{!! $project->project_message !!}</h5>
+                    {{-- description --}}
+                    <div class="mb-8">
+                        <h4 class="text-md font-bold mb-2 text-gray-500">プロジェクトの説明（ユーザーページに表示されます）</h4>
+                        <div class="bg-white border border-neutral-300 rounded-md mb-8 p-8">
+                            {{-- project date --}}
+                            <div class="mb-8">
+                                <p class="text-sm text-gray-400 mb-2">期間情報</p>
+                                <h5 class="text-lg font-bold leading-none text-neutral-900 mb-2">
+                                    {{ $project->project_date }}</h5>
+                            </div>
+                            {{-- project message --}}
+                            <div class="mb-8">
+                                <p class="text-sm text-gray-400 mb-2">内容情報</p>
+                                <div class="documentstyle">{!! $project->project_message !!}</div>
+                            </div>
                         </div>
                     </div>
+
                     {{-- mail --}}
-                    <div class="bg-white border border-neutral-300 rounded-md mb-3 p-8">
-                        <div>
-                            <div class="mb-8">
-                                <p class="text-sm text-gray-400 mb-2">メール件名</p>
-                                @if (!$project->mail_subject)
-                                    <span class="text-gray-400">なし</span>
-                                @else
-                                    <div class="text-sm bg-gray-100 p-4 rounded">
-                                        {{ $project->mail_subject }}
-                                    </div>
-                                @endif
-                            </div>
+                    <div class="mb-2">
+                        <h4 class="text-md font-bold mb-2 text-gray-500">返信メール情報</h4>
+                        <div class="bg-white border border-neutral-300 rounded-md p-8">
                             <div>
-                                <p class="text-sm text-gray-400 mb-2">メール内容</p>
-                                @if (!$project->mail_content)
-                                    <span class="text-gray-400">なし</span>
-                                @else
-                                    <div class="text-sm bg-gray-100 p-4 rounded">
-                                        {!! $project->mail_content !!}
-                                    </div>
-                                @endif
+                                <div class="mb-8">
+                                    <p class="text-sm text-gray-400 mb-2">メール件名</p>
+                                    @if (!$project->mail_subject)
+                                        <span class="text-gray-400">なし</span>
+                                    @else
+                                        <div class="text-sm bg-gray-100 p-4 rounded">
+                                            {{ $project->mail_subject }}
+                                        </div>
+                                    @endif
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400 mb-2">メール内容</p>
+                                    @if (!$project->mail_content)
+                                        <span class="text-gray-400">なし</span>
+                                    @else
+                                        <div class="text-sm bg-gray-100 p-4 rounded">
+                                            {!! $project->mail_content !!}
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
