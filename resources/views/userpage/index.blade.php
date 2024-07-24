@@ -31,7 +31,7 @@
 
         <div class="max-w-6xl mx-auto py-8 flex flex-row gap-4 justify-center">
             <div class="w-full">
-                <div class="documentstyle border border-gray-300 rounded p-6 bg-white">
+                <div class="documentstyle h-full border border-gray-300 rounded p-6 bg-white">
                     {!! $project->project_message !!}
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         </p>
                     </form>
                 </div>
-                <div class="border border-gray-300 rounded p-6 bg-white mb-4">
+                <div class="border border-gray-300 rounded p-6 bg-white">
                     <h3 class="text-lg font-bold mb-2">・初めてのかたはこちらから</h3>
                     <div class="mb-4">
                         <button class="rounded bg-orange-500 text-white w-full py-2 font-bold"

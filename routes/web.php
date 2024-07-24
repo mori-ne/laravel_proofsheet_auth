@@ -18,8 +18,11 @@ Route::get('/dashboard', function () {
 
 // profile
 Route::middleware('auth')->group(function () {
+    // 編集
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // 更新
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // 削除
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
@@ -70,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('forms/{project_id}', [FormController::class, 'destroyAll'])->name('forms.destroyAll');
 });
 
-// userpage(UUID)
+// userpage (UUID)
 Route::get('userpage/{uuid}', [UserPageController::class, 'index'])->name('posts.index');
 
 require __DIR__ . '/auth.php';

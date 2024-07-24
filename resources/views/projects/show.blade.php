@@ -478,7 +478,7 @@
                     </div>
 
                     {{-- mail --}}
-                    <div class="mb-2">
+                    <div class="mb-8">
                         <h4 class="text-md font-bold mb-2 text-gray-500">返信メール情報</h4>
                         <div class="bg-white border border-neutral-300 rounded-md p-8">
                             <div>
@@ -503,6 +503,14 @@
                                     @endif
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    {{-- users --}}
+                    <div class="mb-2">
+                        <h4 class="text-md font-bold mb-2 text-gray-500">ユーザー情報</h4>
+                        <div class="bg-white border border-neutral-300 rounded-md p-8">
+                            <p>アカウント登録した人の情報をテーブルで表示する</p>
                         </div>
                     </div>
 
