@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Form;
+use Carbon\Carbon;
 
 class FormController extends Controller
 {
@@ -92,9 +93,32 @@ class FormController extends Controller
         return back()->with('status', 'フォームを削除しました');
     }
 
-    public function destroyAll(string $project_id)
+    public function destroyAll(string $id)
     {
-        // $form = Form::findOrFail($id);
-        // $form->delete();
+        $form = Form::findOrFail($id);
+        // フォームのIDからプロジェクトのIDを取り出し
+        $project_id = $form->project_id;
+        Form::where('project_id', $project_id)->delete();
+
+        return redirect()->back()->with('status', ' すべてのフォームを複製しました');
+    }
+
+    // 複製
+    public function duplicate(string $id)
+    {
+        $form = Form::findOrFail($id);
+
+        // 見つからない場合
+        if (!$form) {
+            return redirect()->back()->with('error', '複製するフォームが見つかりませんでした');
+        }
+
+        $duplicate = $form->replicate();
+        $duplicate->form_name = $form->form_name . '_複製';
+        $duplicate->created_at = Carbon::now('Asia/Tokyo');
+        $duplicate->updated_at = Carbon::now('Asia/Tokyo');
+        $duplicate->save();
+
+        return redirect()->back()->with('status', $form->form_name . ' を複製しました');
     }
 }

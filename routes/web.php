@@ -27,7 +27,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // projects（そのうちresourceで書き直す）
-
 Route::middleware('auth')->group(function () {
     // 一覧
     Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
@@ -70,7 +69,9 @@ Route::middleware('auth')->group(function () {
     // 削除
     Route::delete('forms/{id}', [FormController::class, 'destroy'])->name('forms.destroy');
     // 全て削除
-    Route::delete('forms/{project_id}', [FormController::class, 'destroyAll'])->name('forms.destroyAll');
+    Route::post('forms/{project_id}', [FormController::class, 'destroyAll'])->name('forms.destroyAll');
+    // 複製
+    Route::post('forms/duplicate/{id}', [FormController::class, 'duplicate'])->name('forms.duplicate');
 });
 
 // userpage (UUID)
