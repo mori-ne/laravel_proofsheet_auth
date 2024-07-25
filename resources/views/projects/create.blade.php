@@ -40,7 +40,7 @@
 
             @include('layouts.sidebar')
 
-            <main class="flex-1">
+            <main class="flex-1 h-svh overflow-y-scroll">
                 <x-slot name="header">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Dashboard') }}
@@ -48,7 +48,7 @@
                 </x-slot>
 
 
-                <div class="p-6 max-w-4xl mx-auto">
+                <div class="p-6 max-w-5xl mx-auto">
 
                     <div class="mb-8">
                         <h4 class="font-bold text-lg mb-1">プロジェクトを新規作成</h4>

@@ -40,9 +40,9 @@
 
             @include('layouts.sidebar')
 
-            <main class="flex-1">
+            <main class="flex-1 h-svh overflow-y-scroll">
 
-                <div class="p-6 max-w-4xl mx-auto">
+                <div class="p-6 max-w-5xl mx-auto">
 
                     <div class="mb-8">
                         <h4 class="font-bold text-md mb-1">プロジェクトの編集</h4>

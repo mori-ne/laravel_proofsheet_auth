@@ -40,14 +40,14 @@
 
             @include('layouts.sidebar')
 
-            <main class="flex-1">
+            <main class="flex-1 h-svh overflow-y-scroll">
                 <x-slot name="header">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Dashboard') }}
                     </h2>
                 </x-slot>
 
-                <div class="p-6 max-w-4xl mx-auto">
+                <div class="p-6 max-w-5xl mx-auto">
 
                     {{-- title --}}
                     <div class="mb-8">
