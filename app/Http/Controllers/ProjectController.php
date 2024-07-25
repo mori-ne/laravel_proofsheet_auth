@@ -189,7 +189,7 @@ class ProjectController extends Controller
     // 複製
     public function duplicate($id)
     {
-        $original = Project::find($id);
+        $original = Project::with('forms')->find($id);
 
         // 見つからない場合
         if (!$original) {
@@ -203,6 +203,13 @@ class ProjectController extends Controller
         $duplicate->updated_at = Carbon::now('Asia/Tokyo');
         $duplicate->save();
 
-        return redirect()->back()->with('status', $original['project_name'] . '&nbsp;を複製しました');
+        // 複製元データのリレーションデータを複製
+        $original->forms->each(function ($form) use ($duplicate) {
+            $newForm = $form->replicate();
+            $newForm->project_id = $duplicate->id; // 外部キーに複製後のidを指定
+            $newForm->save();
+        });
+
+        return redirect()->back()->with('status', $original->project_name . ' を複製しました');
     }
 }
