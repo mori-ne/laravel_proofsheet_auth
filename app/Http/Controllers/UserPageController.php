@@ -19,4 +19,8 @@ class UserPageController extends Controller
 
         return view('userpage.index', compact('project'));
     }
+
+    public function edit($uuid, string $id)
+    {
+    }
 }

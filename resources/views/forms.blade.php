@@ -37,7 +37,7 @@
 
             @include('layouts.sidebar')
 
-            <main class="w-full">
+            <main class="flex-1">
                 <x-slot name="header">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Dashboard') }}
@@ -113,8 +113,8 @@
 
                                         {{-- input method --}}
                                         <div class="ml-auto">
-                                            <button
-                                                class="text-xs rounded border border-gray-300 py-1 px-3">入力項目エディターを開く</button>
+                                            <a href="{{ route('forms.inputEdit', $form->id) }}"
+                                                class="text-xs rounded border border-gray-300 py-1 px-3">入力項目エディターを開く</a>
                                             <button
                                                 class="text-xs rounded border border-gray-300 py-1 px-3">投稿一覧</button>
                                             <button

@@ -72,9 +72,12 @@ Route::middleware('auth')->group(function () {
     Route::post('forms/{project_id}', [FormController::class, 'destroyAll'])->name('forms.destroyAll');
     // 複製
     Route::post('forms/duplicate/{id}', [FormController::class, 'duplicate'])->name('forms.duplicate');
+
+    // 入力項目エディター
+    Route::get('forms/inputs/{id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');
 });
 
 // userpage (UUID)
-Route::get('userpage/{uuid}', [UserPageController::class, 'index'])->name('posts.index');
+Route::get('userpage/{uuid}', [UserPageController::class, 'index'])->name('userpage.index');
 
 require __DIR__ . '/auth.php';

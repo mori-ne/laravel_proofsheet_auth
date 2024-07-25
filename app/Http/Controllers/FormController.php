@@ -121,4 +121,10 @@ class FormController extends Controller
 
         return redirect()->back()->with('status', $form->form_name . ' を複製しました');
     }
+
+    public function inputEdit($id)
+    {
+        $form = Form::with('project')->findOrFail($id);
+        return view('inputs.edit', compact('form'));
+    }
 }

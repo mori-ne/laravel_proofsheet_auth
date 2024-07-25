@@ -37,7 +37,7 @@
 
             @include('layouts.sidebar')
 
-            <main class="w-full">
+            <main class="flex-1">
                 <x-slot name="header">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Dashboard') }}
