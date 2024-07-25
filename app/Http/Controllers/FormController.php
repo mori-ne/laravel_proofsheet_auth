@@ -78,11 +78,10 @@ class FormController extends Controller
         ]);
 
         // フォームを検索して更新
-        $form = Form::findOrFail($id);
+        $form = Form::with('project')->findOrFail($id);
         $form->update($validatedData);
-
         // リダイレクトしてflash messageを設定
-        return back()->with('status', 'フォームを更新しました');
+        return redirect()->route('projects.show', $form->project_id)->with('status', 'フォームを新規作成しました');
     }
 
     public function destroy(string $id)

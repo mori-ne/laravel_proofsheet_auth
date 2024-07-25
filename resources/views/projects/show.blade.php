@@ -306,8 +306,10 @@
 
                                                     {{-- input method --}}
                                                     <div class="ml-auto">
-                                                        <button
-                                                            class="text-xs rounded border border-gray-300 py-1 px-3">入力項目エディターを開く</button>
+                                                        <a href="{{ route('forms.inputEdit', $form->id) }}"
+                                                            target="_blank"
+                                                            class="text-xs rounded border border-gray-300 py-1 px-3"
+                                                            target="_blank">入力項目エディターを開く</a>
                                                         <button
                                                             class="text-xs rounded border border-gray-300 py-1 px-3">投稿一覧</button>
                                                         <button
