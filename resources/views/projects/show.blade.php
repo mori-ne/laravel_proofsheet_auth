@@ -295,7 +295,7 @@
                                                         @csrf
                                                         <button type="submit" @click="menuBarOpen=false"
                                                             class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                            <span class="text-gray-300">フォームをコピー</span>
+                                                            <span class="text-gray-300">フォームを複製</span>
                                                         </button>
                                                     </form>
                                                     <div x-data="{ modalOpen: false }"
@@ -463,12 +463,7 @@
                     <div class="mb-8">
                         <h4 class="text-md font-bold mb-2 text-gray-500">プロジェクトの説明（ユーザーページに表示されます）</h4>
                         <div class="bg-white border border-neutral-300 rounded-md mb-8 p-8">
-                            {{-- project date --}}
-                            <div class="mb-8">
-                                <p class="text-sm text-gray-400 mb-2">期間情報</p>
-                                <h5 class="text-lg font-bold leading-none text-neutral-900 mb-2">
-                                    {{ $project->project_date }}</h5>
-                            </div>
+
                             {{-- project message --}}
                             <div class="mb-8">
                                 <p class="text-sm text-gray-400 mb-2">内容情報</p>

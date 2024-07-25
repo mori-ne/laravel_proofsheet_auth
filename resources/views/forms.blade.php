@@ -150,7 +150,7 @@
                                                         @csrf
                                                         <button type="submit" @click="menuBarOpen=false"
                                                             class="relative flex justify-between w-full cursor-default select-none group items-center rounded px-2 py-1.5 hover:bg-neutral-100 hover:text-neutral-900 outline-none data-[disabled]:opacity-50 data-[disabled]:pointer-events-none">
-                                                            <span class="text-gray-300">フォームをコピー</span>
+                                                            <span class="text-gray-300">フォームを複製</span>
                                                         </button>
                                                     </form>
                                                     <div x-data="{ modalOpen: false }"

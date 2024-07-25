@@ -18,7 +18,6 @@ class Project extends Model
     protected $fillable = [
         'uuid',
         'project_name',
-        'project_date',
         'project_message',
         'project_description',
         'status',

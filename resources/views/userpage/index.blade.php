@@ -25,7 +25,6 @@
         <div class="bg-white border-b border-gray-300 py-4 px-8">
             <div class="max-w-6xl mx-auto">
                 <h1 class="text-2xl font-bold">{{ $project->project_name }}</h1>
-                <p>{{ $project->project_date }}</p>
             </div>
         </div>
 

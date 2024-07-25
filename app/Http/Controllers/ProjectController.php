@@ -15,13 +15,16 @@ class ProjectController extends Controller
     // 一覧表示
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $sort = $request->input('sort', 'desc'); // デフォルトを新しい順（更新日）に設定
+        // パラメータ取得
+        $input = $request->input('search');
+        // デフォルトの並び順
+        $sort = $request->input('sort', 'desc');
+        // クエリ発行
         $query = Project::query();
 
-        if ($search) {
-            // クエリがある場合、プロジェクトを検索
-            $query->where('project_name', 'LIKE', '%' . $search . '%');
+        // クエリがある場合、プロジェクトを検索
+        if ($input) {
+            $query->where('project_name', 'LIKE', '%' . $input . '%');
         }
 
         // 並び替え
@@ -39,20 +42,22 @@ class ProjectController extends Controller
         }
 
         $projects = $query->with('forms')->get();
-
         return view('/projects', compact('projects'));
     }
 
     // 検索
     public function search(Request $request)
     {
-        $search = $request->input('search');
-        $sort = $request->input('sort', 'desc'); // デフォルトを新しい順（更新日）に設定
+        // パラメータ取得
+        $input = $request->input('search');
+        // デフォルトの並び順
+        $sort = $request->input('sort', 'desc');
+        // クエリ発行
         $query = Project::query();
 
-        if ($search) {
-            // クエリがある場合、プロジェクトを検索
-            $query->where('project_name', 'LIKE', '%' . $search . '%');
+        // クエリがある場合、プロジェクトを検索
+        if ($input) {
+            $query->where('project_name', 'LIKE', '%' . $input . '%');
         }
 
         // 並び替え
@@ -70,11 +75,8 @@ class ProjectController extends Controller
         }
 
         $projects = $query->with('forms')->get();
-
         return view('/projects', compact('projects'));
     }
-
-
 
     // 新規作成
     public function create()
@@ -86,10 +88,12 @@ class ProjectController extends Controller
     public function confirm(Request $request)
     {
         $validator = $request->validate([
-            'project_name' => 'required|max:100',
-            'mail_subject' => 'max:255',
-            'project_date' => 'nullable|max:100',
-            'project_message' => 'nullable|max:255',
+            'project_name' => 'required|string|max:100',
+            'project_description' => 'nullable|string',
+            'project_message' => 'nullable|string',
+            'status' => 'boolean',
+            'mail_subject' => 'nullable|string|max:255',
+            'main_content' => 'nullable|string',
         ]);
 
         $project = $request->all();
@@ -101,10 +105,9 @@ class ProjectController extends Controller
     {
         $project = Project::create([
             'project_name' => $request->project_name,
-            'uuid' => (string) Str::uuid(),
             'project_description' => $request->project_description,
-            'project_date' => $request->project_date,
             'project_message' => $request->project_message,
+            'uuid' => (string) Str::uuid(),
             'status' => 0,
             'mail_subject' => $request->mail_subject,
             'mail_content' => $request->mail_content,
@@ -119,7 +122,7 @@ class ProjectController extends Controller
     {
         $project = Project::with('forms')->find($id);
 
-        // 見つからなかった場合
+        // 見つからなかった場合はリダイレクト
         if (!$project) {
             return redirect('projects');
         }
@@ -132,11 +135,6 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
 
-        // 見つからなかった場合
-        if (!$project) {
-            return redirect('projects');
-        }
-
         return view('projects.edit', ['project' => $project]);
     }
 
@@ -146,7 +144,6 @@ class ProjectController extends Controller
         // バリデーションルールの定義
         $validatedData = $request->validate([
             'project_name' => 'required|max:100',
-            'project_date' => 'nullable|max:100',
             'project_message' => 'nullable|string',
             'status' => 'integer',
             'project_description' => 'nullable|string',
@@ -167,9 +164,10 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         $project = Project::findOrFail($id);
+        Form::where('project_id', $id)->delete();
         $project->delete();
 
-        return redirect()->route('projects.index')->with('status', 'プロジェクトを削除しました');
+        return redirect()->route('projects.index')->with('status', $project['project_name'] . 'を削除しました');
     }
 
     // 公開・非公開の切り替え
@@ -188,23 +186,23 @@ class ProjectController extends Controller
         return redirect()->back()->with('status', 'プロジェクトの公開・非公開を切り替えました');
     }
 
-    // コピー
+    // 複製
     public function duplicate($id)
     {
         $original = Project::find($id);
 
         // 見つからない場合
         if (!$original) {
-            return redirect()->back()->with('error', 'レコードが見つかりませんでした');
+            return redirect()->back()->with('error', '複製するプロジェクトが見つかりませんでした');
         }
 
         $duplicate = $original->replicate();
         $duplicate->uuid = Str::uuid()->toString();
-        $duplicate->project_name = $original->project_name . '_コピー';
+        $duplicate->project_name = $original->project_name . '_複製';
         $duplicate->created_at = Carbon::now('Asia/Tokyo');
         $duplicate->updated_at = Carbon::now('Asia/Tokyo');
         $duplicate->save();
 
-        return redirect()->back()->with('status', 'レコードを複製しました');
+        return redirect()->back()->with('status', $original['project_name'] . '&nbsp;を複製しました');
     }
 }

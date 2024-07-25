@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id')->primary()->autoIncrement()->comment('ID');
             $table->string('project_name', 100)->comment('プロジェクト名');
             $table->text('project_description')->nullable()->comment('説明');
-            $table->string('project_date')->nullable()->comment('プロジェクト開催日時');
             $table->text('project_message')->nullable()->comment('プロジェクトの説明文（トップ掲載）');
             $table->uuid('uuid')->unique()->comment('UUID');
             $table->boolean('status')->default(0)->comment('0:無効・1:有効');

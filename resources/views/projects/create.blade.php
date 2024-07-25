@@ -93,6 +93,9 @@
                                 </div>
                                 <textarea id="projectinstance" name="project_description" type="text" placeholder="プロジェクトの概要を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_description') }}</textarea>
+                                @error('project_description')
+                                    <div class="mt-2 text-red-600">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <hr class="my-8">
@@ -109,24 +112,13 @@
 
                             <div class="mb-6">
                                 <div class="mb-2">
-                                    <label class="text-lg font-bold" for="#">
-                                        プロジェクトの期間情報
-                                    </label>
-                                </div>
-                                <input name="project_date" type="text" placeholder="プロジェクトの期間情報を記入してください"
-                                    value="{{ old('project_date') }}"
-                                    class="flex w-full h-10 px-3 py-2 text-md bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
-                                @error('project_date')
-                                    <div class="mt-2 text-red-600">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="mb-6">
-                                <div class="mb-2">
                                     <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
                                 </div>
-                                <textarea id="projectinstance" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください"
+                                <textarea name="project_message" id="projectinstance" type="text" placeholder="プロジェクトの説明を記入してください"
                                     class="flex w-full h-48 min-h-[80px] px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_message') }}</textarea>
+                                @error('project_message')
+                                    <div class="mt-2 text-red-600">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <hr class="my-8">

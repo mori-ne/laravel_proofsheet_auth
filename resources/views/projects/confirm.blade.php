@@ -104,15 +104,6 @@
 
                         <div class="mb-6">
                             <div class="mb-2">
-                                <label class="text-lg font-bold" for="#">
-                                    プロジェクトの期間情報
-                                </label>
-                            </div>
-                            <div class="border rounded p-3">{{ $project['project_date'] }}</div>
-                        </div>
-
-                        <div class="mb-6">
-                            <div class="mb-2">
                                 <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
                             </div>
                             <div class="border rounded p-3">
@@ -158,6 +149,7 @@
                                 <input type="hidden" name="project_name" value="{{ $project['project_name'] }}">
                                 <input type="hidden" name="project_description"
                                     value="{{ $project['project_description'] }}">
+                                <input type="hidden" name="project_message" value="{{ $project['project_message'] }}">
                                 <input type="hidden" name="is_deadline" value="{{ $project['is_deadline'] }}">
                                 <input type="hidden" name="mail_subject" value="{{ $project['mail_subject'] }}">
                                 <input type="hidden" name="mail_content" value="{{ $project['mail_content'] }}">
