@@ -1,14 +1,29 @@
 <script setup>
 import { ref, watch, defineProps } from "vue";
 
+/*********************
+ * リアクティブ配列操作
+ *********************/
+
 // props
 const props = defineProps({
     formAttribute: Object,
     inputAttribute: Object,
 });
 
-// 配列
+// リアクティブ配列
 const inputFields = ref([]);
+
+// props.items を ref に変換してリアクティブな配列を作成
+// const inputFields = ref([props.inputAttribute]);
+
+// props.items が変更されたときに localItems を更新する
+// watch(
+//     () => props.inputAttribute,
+//     (newItems) => {
+//         inputFields.value = [...newItems];
+//     }
+// );
 
 // デバッグ用フラグ
 const debugFlg = ref(false);
@@ -167,8 +182,8 @@ const hideController = (id) => {
 </script>
 
 <template>
-    <p>{{ formAttribute }}</p>
-    <p>{{ inputAttribute }}</p>
+    <!-- <pre>{{ formAttribute }}</pre> -->
+    <pre class="text-xs">{{ inputAttribute }}</pre>
     <!-- デバッグモード -->
     <div class="flex justify-end space-x-2 mb-2 ml-auto">
         <input

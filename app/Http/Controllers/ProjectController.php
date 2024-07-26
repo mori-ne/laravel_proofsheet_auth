@@ -120,8 +120,7 @@ class ProjectController extends Controller
     // 詳細表示
     public function show(string $id)
     {
-        $project = Project::with('forms')->find($id);
-
+        $project = Project::with('forms.input')->find($id);
         // 見つからなかった場合はリダイレクト
         if (!$project) {
             return redirect('projects');

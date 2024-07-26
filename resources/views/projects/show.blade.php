@@ -498,9 +498,21 @@
                                                 <div class="flex items-center justify-start">
 
                                                     {{-- project_name --}}
-                                                    <div>
+                                                    <div class="flex gap-4">
                                                         <p class="text-xs text-gray-400">
-                                                            {{ $project->project_name }}</p>
+                                                            {{ $project->project_name }}
+                                                        </p>
+
+                                                        <p class="text-xs text-gray-400">
+                                                            入力項目：
+                                                            <span class="text-gray-600">
+                                                                @if ($form->input)
+                                                                    入力済
+                                                                @else
+                                                                    無し
+                                                                @endif
+                                                            </span>
+                                                        </p>
                                                     </div>
 
                                                     {{-- created --}}

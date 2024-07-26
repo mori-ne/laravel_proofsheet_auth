@@ -7,7 +7,5 @@ import InputComponent from "./Components/InputComponent.vue";
 import { createApp } from "vue";
 
 const app = createApp({});
-
-app.component("input-component", InputComponent);
-
+app.component("InputComponent", InputComponent);
 app.mount("#app");

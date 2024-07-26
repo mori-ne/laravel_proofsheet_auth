@@ -21,6 +21,7 @@
 
 <body class="font-sans antialiased">
     <div id="app">
+
         <div class="min-h-screen bg-gray-100">
             <div class="max-w-7xl mx-auto p-8">
 
@@ -51,8 +52,8 @@
                 </div>
 
                 {{-- vue component --}}
-                <InputComponent :form-attribute='@json($form)'
-                    :input-attribute='@json($input)'></InputComponent>
+                <input-component :form-attribute='@json($form)'
+                    :input-attribute='@json($input)'></input-component>
 
             </div>
             <!-- ボトム -->
@@ -64,5 +65,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </body>
