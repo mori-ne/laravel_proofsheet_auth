@@ -1,5 +1,11 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, defineProps } from "vue";
+
+// props
+const props = defineProps({
+    formAttribute: Object,
+    inputAttribute: Object,
+});
 
 // 配列
 const inputFields = ref([]);
@@ -161,6 +167,8 @@ const hideController = (id) => {
 </script>
 
 <template>
+    <p>{{ formAttribute }}</p>
+    <p>{{ inputAttribute }}</p>
     <!-- デバッグモード -->
     <div class="flex justify-end space-x-2 mb-2 ml-auto">
         <input

@@ -20,45 +20,48 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        <div class="max-w-7xl mx-auto p-8">
+    <div id="app">
+        <div class="min-h-screen bg-gray-100">
+            <div class="max-w-7xl mx-auto p-8">
 
-            <!-- top -->
-            <div class="mb-4">
-                <div class="flex gap-4 border-b border-gray-300 pb-2">
-                    <p class="text-lg text-gray-900 font-bold">入力項目編集画面</p>
-                    <div class="ml-auto flex gap-1 items-center text-sm text-red-600">
-                        <i class="at-xmark-circle"></i>
-                        <a href="#">閉じる</a>
+                <!-- top -->
+                <div class="mb-4">
+                    <div class="flex gap-4 border-b border-gray-300 pb-2">
+                        <p class="text-lg text-gray-900 font-bold">入力項目編集画面</p>
+                        <div class="ml-auto flex gap-1 items-center text-sm text-red-600">
+                            <i class="at-xmark-circle"></i>
+                            <a href="#">閉じる</a>
+                        </div>
+                    </div>
+                    <!-- プロジェクト・フォーム -->
+                    <div class="flex gap-4 pt-2">
+                        <div class="flex flex-row items-center">
+                            <p class="text-sm text-gray-400">プロジェクト名：</p>
+                            <h2 class="text-sm text-gray-900 font-bold">
+                                {{ $form->project->project_name }}
+                            </h2>
+                        </div>
+                        <div class="flex flex-row items-center">
+                            <p class="text-sm text-gray-400">フォーム名：</p>
+                            <h2 class="text-sm text-gray-900 font-bold">{{ $form->form_name }}</h2>
+                        </div>
+
+
                     </div>
                 </div>
-                <!-- プロジェクト・フォーム -->
-                <div class="flex gap-4 pt-2">
-                    <div class="flex flex-row items-center">
-                        <p class="text-sm text-gray-400">プロジェクト名：</p>
-                        <h2 class="text-sm text-gray-900 font-bold">
-                            {{ $form->project->project_name }}
-                        </h2>
-                    </div>
-                    <div class="flex flex-row items-center">
-                        <p class="text-sm text-gray-400">フォーム名：</p>
-                        <h2 class="text-sm text-gray-900 font-bold">{{ $form->form_name }}</h2>
-                    </div>
 
+                {{-- vue component --}}
+                <InputComponent :form-attribute='@json($form)'
+                    :input-attribute='@json($input)'></InputComponent>
 
-                </div>
             </div>
-
-            {{-- vue component --}}
-            <div id="app" :form='@json($form)'></div>
-
-        </div>
-        <!-- ボトム -->
-        <div class="fixed bottom-0 w-full border-t border-gray-300 bg-white">
-            <div class="max-w-7xl mx-auto flex justify-end py-4 px-8">
-                <button type="button" class="rounded text-md text-white bg-gray-700 font-bold px-4 py-1">
-                    更新する
-                </button>
+            <!-- ボトム -->
+            <div class="fixed bottom-0 w-full border-t border-gray-300 bg-white">
+                <div class="max-w-7xl mx-auto flex justify-end py-4 px-8">
+                    <button type="button" class="rounded text-md text-white bg-gray-700 font-bold px-4 py-1">
+                        更新する
+                    </button>
+                </div>
             </div>
         </div>
     </div>

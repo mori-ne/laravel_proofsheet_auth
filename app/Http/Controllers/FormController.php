@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Form;
+use App\Models\Input;
 use Carbon\Carbon;
 
 class FormController extends Controller
@@ -124,6 +125,8 @@ class FormController extends Controller
     public function inputEdit($id)
     {
         $form = Form::with('project')->findOrFail($id);
-        return view('inputs.edit', compact('form'));
+        $input = Input::findOrFail($id);
+
+        return view('inputs.edit', compact('form', 'input'));
     }
 }

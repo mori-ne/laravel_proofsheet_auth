@@ -18,8 +18,15 @@ class Form extends Model
         'form_description',
     ];
 
+    // 子から親（Project <- Form）
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    // 親から子（Form -> Input）
+    public function input()
+    {
+        return $this->hasOne(Input::class, 'form_id');
     }
 }

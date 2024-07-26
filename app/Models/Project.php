@@ -28,13 +28,6 @@ class Project extends Model
         'updated_at',
     ];
 
-    // 日付形式としてキャスト
-    // protected $dates = [
-    //     'is_deadline',
-    //     'created_at',
-    //     'updated_at',
-    // ];
-
     // UUIDを生成するイベントを追加
     protected static function boot()
     {
@@ -47,7 +40,7 @@ class Project extends Model
         });
     }
 
-    // リレーション（親）
+    // 親から子（Project -> Form）
     public function forms()
     {
         return $this->hasMany(Form::class, 'project_id');
