@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     // 一覧
     Route::get('forms', [FormController::class, 'index'])->name('forms.index');
+    // 検索
+    Route::get('forms/search', [FormController::class, 'search'])->name('forms.search');
     // 新規作成画面
     Route::get('forms/create', [FormController::class, 'create'])->name('forms.create');
     // ストア処理

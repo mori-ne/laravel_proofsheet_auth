@@ -10,10 +10,44 @@ use Carbon\Carbon;
 
 class FormController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $forms = Form::with('project')->orderby('id', 'desc')->get();
+
+        // パラメータ取得
+        $input = $request->input('search');
+        // デフォルトの並び順
+        // $sort = $request->input('sort', 'desc');
+        // クエリ発行
+        $query = Form::query();
+
+        // クエリがある場合、フォームを検索
+        if ($input) {
+            $query->where('form_name', 'LIKE', '%' . $input . '%');
+        }
+
+        $forms = $query->get();
         return view('forms', compact('forms'));
+    }
+
+
+    // 検索
+    public function search(Request $request)
+    {
+        // パラメータ取得
+        $input = $request->input('search');
+        // デフォルトの並び順
+        // $sort = $request->input('sort', 'desc');
+        // クエリ発行
+        $query = Form::query();
+
+        // クエリがある場合、プロジェクトを検索
+        if ($input) {
+            $query->where('form_name', 'LIKE', '%' . $input . '%');
+        }
+
+        $forms = $query->get();
+        return view('/forms', compact('forms'));
     }
 
     public function create()

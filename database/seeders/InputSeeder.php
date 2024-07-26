@@ -13,26 +13,26 @@ class InputSeeder extends Seeder
     {
 
         // JSONファイルのパス
-        $jsonFilePath = base_path('database/seeders/sample.json');
+        // $jsonFilePath = base_path('database/seeders/sample.json');
 
         // JSONファイルが存在することを確認
-        if (!File::exists($jsonFilePath)) {
-            throw new \Exception('JSON file not found.');
-        }
+        // if (!File::exists($jsonFilePath)) {
+        //     throw new \Exception('JSON file not found.');
+        // }
 
         // JSONファイルの内容を取得
-        $jsonData = File::get($jsonFilePath);
+        // $jsonData = File::get($jsonFilePath);
 
         // JSONデータをデコード
-        $data = json_decode($jsonData, true);
+        // $data = json_decode($jsonData, true);
 
         // データが正しくデコードされているか確認
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Error decoding JSON data.');
-        }
+        // if (json_last_error() !== JSON_ERROR_NONE) {
+        // throw new \Exception('Error decoding JSON data.');
+        // }
 
         // データベースにデータを挿入
-        DB::table('forms')->insert($data);
+        // DB::table('forms')->insert($data);
 
         // $inputs = [
         //     [
