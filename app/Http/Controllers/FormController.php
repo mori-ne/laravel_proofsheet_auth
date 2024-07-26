@@ -36,6 +36,11 @@ class FormController extends Controller
             'form_description' => $request->form_description,
         ]);
 
+        // ここにinputのdbにも作成する処理を記述
+        // $input = Input::create([
+        // 'form_id' => $form->id,
+        // ]);
+
         return redirect()->route('forms.index')->with('status', 'フォームを新規作成しました');
     }
 

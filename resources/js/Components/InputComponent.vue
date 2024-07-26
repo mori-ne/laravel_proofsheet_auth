@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, defineProps } from "vue";
+import { ref, watch, defineProps, toRefs, computed } from "vue";
 
 /*********************
  * リアクティブ配列操作
@@ -11,19 +11,14 @@ const props = defineProps({
     inputAttribute: Object,
 });
 
+// propsから受け継いだinputAttributeを変数で扱えるようrefへ
+const { inputAttribute } = toRefs(props);
+// 再度ref変換しながらJSONをパース
+const inputFields = ref(JSON.parse(inputAttribute.value["inputs"]));
+console.log(inputFields);
+
 // リアクティブ配列
-const inputFields = ref([]);
-
-// props.items を ref に変換してリアクティブな配列を作成
-// const inputFields = ref([props.inputAttribute]);
-
-// props.items が変更されたときに localItems を更新する
-// watch(
-//     () => props.inputAttribute,
-//     (newItems) => {
-//         inputFields.value = [...newItems];
-//     }
-// );
+// const inputFields = ref([]);
 
 // デバッグ用フラグ
 const debugFlg = ref(false);
@@ -182,8 +177,9 @@ const hideController = (id) => {
 </script>
 
 <template>
-    <!-- <pre>{{ formAttribute }}</pre> -->
-    <pre class="text-xs">{{ inputAttribute }}</pre>
+    <!-- <pre class="text-xs">{{ formAttribute }}</pre> -->
+    <!-- <pre class="text-xs">{{ inputAttribute["inputs"] }}</pre> -->
+
     <!-- デバッグモード -->
     <div class="flex justify-end space-x-2 mb-2 ml-auto">
         <input

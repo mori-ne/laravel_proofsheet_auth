@@ -10,21 +10,23 @@ class Input extends Model
     use HasFactory;
 
     // MySQL関連付け
-    protected $table = 'inputs';
+    protected $table = 'input_json';
 
     // ホワイトリスト
     protected $fillable = [
-        'inputType',
-        'inputCode',
-        'inputTitle',
-        'inputLabel',
-        'inputLimit',
-        'inputContent',
-        'checkContent',
-        'radioContent',
-        'selectContent',
-        'isRequired',
-        'isOpen',
+        'json',
+        'form_id',
+        // 'inputType',
+        // 'inputCode',
+        // 'inputTitle',
+        // 'inputLabel',
+        // 'inputLimit',
+        // 'inputContent',
+        // 'checkContent',
+        // 'radioContent',
+        // 'selectContent',
+        // 'isRequired',
+        // 'isOpen',
 
     ];
 
