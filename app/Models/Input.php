@@ -16,18 +16,6 @@ class Input extends Model
     protected $fillable = [
         'json',
         'form_id',
-        // 'inputType',
-        // 'inputCode',
-        // 'inputTitle',
-        // 'inputLabel',
-        // 'inputLimit',
-        // 'inputContent',
-        // 'checkContent',
-        // 'radioContent',
-        // 'selectContent',
-        // 'isRequired',
-        // 'isOpen',
-
     ];
 
     // 子から親（Form <- Input）

@@ -2,17 +2,37 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class InputSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+
+        // JSONファイルのパス
+        $jsonFilePath = base_path('database/seeders/sample.json');
+
+        // JSONファイルが存在することを確認
+        if (!File::exists($jsonFilePath)) {
+            throw new \Exception('JSON file not found.');
+        }
+
+        // JSONファイルの内容を取得
+        $jsonData = File::get($jsonFilePath);
+
+        // JSONデータをデコード
+        $data = json_decode($jsonData, true);
+
+        // データが正しくデコードされているか確認
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Error decoding JSON data.');
+        }
+
+        // データベースにデータを挿入
+        DB::table('forms')->insert($data);
 
         // $inputs = [
         //     [

@@ -10,8 +10,10 @@ class Form extends Model
 {
     use HasFactory, SerializeDate;
 
+    // DBとの関連付け
     protected $table = 'forms';
 
+    // ホワイトリスト
     protected $fillable = [
         'project_id',
         'form_name',
