@@ -276,6 +276,13 @@
                                 <div class="mb-8">
                                     <h4 class="text-md font-bold mb-2 text-gray-500">フォーム情報</h4>
 
+                                    {{-- create --}}
+                                    <div class="flex justify-end mb-3">
+                                        <a href="{{ route('forms.create', 'project=' . $project->id) }}"
+                                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
+                                            フォームを新規作成
+                                        </a>
+                                    </div>
                                     {{-- if --}}
                                     @if ($project->forms->isEmpty())
                                         <div

@@ -31,4 +31,11 @@ class Form extends Model
     {
         return $this->hasOne(Input::class, 'form_id');
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($form) {
+            $form->input()->delete();
+        });
+    }
 }

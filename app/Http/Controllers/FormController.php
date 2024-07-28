@@ -7,17 +7,16 @@ use App\Models\Project;
 use App\Models\Form;
 use App\Models\Input;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
     public function index(Request $request)
     {
-        $forms = Form::with('project')->orderby('id', 'desc')->get();
+        $forms = Form::with('project')->orderBy('updated_at', 'desc')->get();
 
         // パラメータ取得
         $input = $request->input('search');
-        // デフォルトの並び順
-        // $sort = $request->input('sort', 'desc');
         // クエリ発行
         $query = Form::query();
 
@@ -26,33 +25,31 @@ class FormController extends Controller
             $query->where('form_name', 'LIKE', '%' . $input . '%');
         }
 
-        $forms = $query->get();
+        $forms = $query->orderBy('updated_at', 'desc')->get();
         return view('forms', compact('forms'));
     }
 
-
-    // 検索
     public function search(Request $request)
     {
+        $forms = Form::with('project')->orderBy('updated_at', 'desc')->get();
+
         // パラメータ取得
         $input = $request->input('search');
-        // デフォルトの並び順
-        // $sort = $request->input('sort', 'desc');
         // クエリ発行
         $query = Form::query();
 
-        // クエリがある場合、プロジェクトを検索
+        // クエリがある場合、フォームを検索
         if ($input) {
             $query->where('form_name', 'LIKE', '%' . $input . '%');
         }
 
-        $forms = $query->get();
-        return view('/forms', compact('forms'));
+        $forms = $query->orderBy('updated_at', 'desc')->get();
+        return view('forms', compact('forms'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $projects = Project::orderby('id', 'desc')->get();
+        $projects = Project::orderBy('id', 'desc')->get();
         return view('forms.create', compact('projects'));
     }
 
@@ -64,18 +61,31 @@ class FormController extends Controller
             'form_description' => 'nullable|max:255', // 空でも許容し、最大255文字まで
         ]);
 
-        $form = Form::create([
-            'project_id' => $request->project_id,
-            'form_name' => $request->form_name,
-            'form_description' => $request->form_description,
-        ]);
+        // トランザクションの開始
+        DB::beginTransaction();
 
-        // ここにinputのdbにも作成する処理を記述
-        // $input = Input::create([
-        // 'form_id' => $form->id,
-        // ]);
+        try {
+            // フォームを作成
+            $form = Form::create([
+                'project_id' => $request->project_id,
+                'form_name' => $request->form_name,
+                'form_description' => $request->form_description,
+            ]);
 
-        return redirect()->route('forms.index')->with('status', 'フォームを新規作成しました');
+            // inputを作成
+            $inputData = $request->input('input');
+            $inputData['form_id'] = $form->id; // form_idを追加
+            Input::create($inputData);
+
+            // コミット
+            DB::commit();
+
+            return redirect()->route('forms.index')->with('status', 'フォームを新規作成しました');
+        } catch (\Exception $e) {
+            // ロールバック
+            DB::rollBack();
+            return redirect()->route('forms.create')->withErrors('フォームの作成に失敗しました。もう一度お試しください。');
+        }
     }
 
     public function show(string $id)
@@ -137,9 +147,26 @@ class FormController extends Controller
         $form = Form::findOrFail($id);
         // フォームのIDからプロジェクトのIDを取り出し
         $project_id = $form->project_id;
-        Form::where('project_id', $project_id)->delete();
 
-        return redirect()->back()->with('status', ' すべてのフォームを複製しました');
+        // トランザクションの開始
+        DB::beginTransaction();
+
+        try {
+            // プロジェクトに関連するすべてのフォームを削除
+            $forms = Form::where('project_id', $project_id)->get();
+            foreach ($forms as $form) {
+                $form->delete(); // これにより関連するInputも自動的に削除される
+            }
+
+            // コミット
+            DB::commit();
+
+            return redirect()->back()->with('status', 'すべてのフォームを削除しました');
+        } catch (\Exception $e) {
+            // ロールバック
+            DB::rollBack();
+            return redirect()->back()->withErrors('フォームの削除に失敗しました。もう一度お試しください。');
+        }
     }
 
     // 複製
@@ -164,8 +191,7 @@ class FormController extends Controller
     public function inputEdit($id)
     {
         $form = Form::with('project')->findOrFail($id);
-        $input = Input::findOrFail($id);
-
+        $input = Input::where('form_id', $id)->firstOrFail();
         return view('inputs.edit', compact('form', 'input'));
     }
 }

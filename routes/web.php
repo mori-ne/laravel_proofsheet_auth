@@ -76,7 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::post('forms/duplicate/{id}', [FormController::class, 'duplicate'])->name('forms.duplicate');
 
     // 入力項目エディター
-    Route::get('forms/inputs/{id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');
+    Route::get('forms/inputs/{form_id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');
 });
 
 // userpage (UUID)

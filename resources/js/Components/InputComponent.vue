@@ -186,11 +186,9 @@ const hideController = (id) => {
             v-model="debugFlg"
             name="debugSwitch"
             type="checkbox"
-            class="w-4 h-4 border rounded-sm border-gray-300"
+            class="w-4 h-4 border rounded-sm border-gray-300 ml-auto mr-2"
         />
-        <label for="debugSwitch" class="text-xs ml-auto">
-            デバッグモード
-        </label>
+        <label for="debugSwitch" class="text-xs"> デバッグモード </label>
     </div>
     <div
         class="max-w-7xl mx-auto flex flex-row bg-white border border-gray-300 rounded-lg overflow-hidden mb-14"

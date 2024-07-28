@@ -156,7 +156,8 @@ class ProjectController extends Controller
         $project->update($validatedData);
 
         // リダイレクトしてflash messageを設定
-        return back()->with('status', 'プロジェクトを更新しました');
+        // return back()->with('status', 'プロジェクトを更新しました');
+        return redirect()->route('projects.show', $project->id)->with('status', 'プロジェクトを更新しました');
     }
 
     // 削除
