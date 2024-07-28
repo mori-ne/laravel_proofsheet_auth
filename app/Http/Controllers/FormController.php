@@ -172,7 +172,7 @@ class FormController extends Controller
     // 複製
     public function duplicate(string $id)
     {
-        $form = Form::findOrFail($id);
+        $form = Form::with('input')->findOrFail($id);
 
         // 見つからない場合
         if (!$form) {
@@ -184,6 +184,16 @@ class FormController extends Controller
         $duplicate->created_at = Carbon::now('Asia/Tokyo');
         $duplicate->updated_at = Carbon::now('Asia/Tokyo');
         $duplicate->save();
+
+        // 入力フィールドの複製
+        $input = $form->input; // 1対1の関係なので1つの入力フィールドを取得
+        if ($input) {
+            $duplicateInput = $input->replicate();
+            $duplicateInput->form_id = $duplicate->id;
+            $duplicateInput->created_at = Carbon::now('Asia/Tokyo');
+            $duplicateInput->updated_at = Carbon::now('Asia/Tokyo');
+            $duplicateInput->save();
+        }
 
         return redirect()->back()->with('status', $form->form_name . ' を複製しました');
     }
