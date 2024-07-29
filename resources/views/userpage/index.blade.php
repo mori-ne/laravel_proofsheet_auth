@@ -36,18 +36,24 @@
                         {!! $project->project_message !!}
                     </div>
                 </div>
-                <div class="w-80 shrink-0">
+                <div class="w-96 shrink-0">
+
+                    {{-- registerd user --}}
                     <div class="border border-gray-300 rounded p-6 bg-white mb-4">
-                        <h3 class="text-lg font-bold mb-2">・登録済の方はこちらから</h3>
+                        <h3 class="bg-gray-100 py-1 px-2 border-l-4 border-orange-500 text-lg font-bold mb-6">
+                            登録済の方はこちらから
+                        </h3>
                         <form action="#">
                             <div class="mb-8">
                                 <div class="mb-4">
                                     <label class="block mb-1 text-sm" for="email">メールアドレス</label>
-                                    <input class="border border-gray-300 rounded w-full" type="text" value="メールアドレス">
+                                    <input class="border border-gray-300 rounded w-full" type="text" value=""
+                                        placeholder="メールアドレス">
                                 </div>
                                 <div class="mb-4">
                                     <label class="block mb-1 text-sm" for="password">パスワード</label>
-                                    <input class="border border-gray-300 rounded w-full" type="password" value="パスワード">
+                                    <input class="border border-gray-300 rounded w-full" type="password" value=""
+                                        placeholder="パスワード">
                                 </div>
                             </div>
                             <div class="mb-4">
@@ -55,18 +61,28 @@
                                     type="submit">ログイン</button>
                             </div>
                             <p class="text-center text-sm text-orange-700">
-                                <a class="underline" href="#">※パスワードをお忘れの方はこちら</a>
+                                <a class="underline" href="#">※パスワードをお忘れの方</a>
                             </p>
                         </form>
                     </div>
+
+                    {{-- new user --}}
                     <div class="border border-gray-300 rounded p-6 bg-white">
-                        <h3 class="text-lg font-bold mb-2">・初めてのかたはこちらから</h3>
+                        <h3 class="bg-gray-100 py-1 px-2 border-l-4 border-orange-500 text-lg font-bold mb-6">
+                            初めてのかたはこちらから
+                        </h3>
                         <div class="mb-4">
                             <button class="rounded bg-orange-500 text-white w-full py-2 font-bold"
                                 type="submit">新規登録</button>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div>
+                <p class="text-center text-gray-400 text-sm py-2">
+                    Powered by Proofsheet
+                </p>
             </div>
         </div>
 
