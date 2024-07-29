@@ -1,21 +1,54 @@
 <script setup>
 import { ref, watch, defineProps, toRefs, computed } from "vue";
+import Editor from "@tinymce/tinymce-vue";
 
-/*********************
+/***************************************************
  * リアクティブ配列操作
- *********************/
+ ***************************************************/
 
-// props
+// propsの定義
 const props = defineProps({
     formAttribute: Object,
     inputAttribute: Object,
 });
 
-// propsから受け継いだinputAttributeを変数で扱えるようrefへ
+// propsからtoRefsでreactiveなオブジェクトを作成
 const { inputAttribute } = toRefs(props);
-// 再度ref変換しながらJSONをパース
-const inputFields = ref(JSON.parse(inputAttribute.value["inputs"]));
-console.log(inputFields);
+
+// JSONをパースしてrefに設定
+let parsedInputFields;
+try {
+    parsedInputFields = JSON.parse(inputAttribute.value.inputs);
+} catch (e) {
+    console.error("Failed to parse inputAttribute.inputs:", e);
+    parsedInputFields = null;
+}
+
+// 初期値の設定
+const inputFields = ref(parsedInputFields);
+
+// nullまたはundefinedなら初期値を設定
+if (!inputFields.value) {
+    inputFields.value = [];
+    const newField = {
+        id: 0,
+        inputType: "text",
+        inputCode: "code01",
+        inputTitle: "テキスト（1行）",
+        inputLabel: "テキスト（1行）のサブラベルがはいります2",
+        inputLimit: 100,
+        inputContent: "",
+        checkContent: "",
+        radioContent: "",
+        selectContent: "",
+        isRequired: false,
+        isOpen: false,
+        isShow: false,
+    };
+    inputFields.value.push(newField);
+}
+
+console.log(inputFields.value);
 
 // リアクティブ配列
 // const inputFields = ref([]);
@@ -177,8 +210,8 @@ const hideController = (id) => {
 </script>
 
 <template>
-    <!-- <pre class="text-xs">{{ formAttribute }}</pre> -->
-    <!-- <pre class="text-xs">{{ inputAttribute["inputs"] }}</pre> -->
+    <!-- <pre v-text="formAttribute" class="text-xs"></pre> -->
+    <!-- <pre v-text="inputFields" class="text-xs"></pre> -->
 
     <!-- デバッグモード -->
     <div class="flex justify-end space-x-2 mb-2 ml-auto">
@@ -656,14 +689,26 @@ const hideController = (id) => {
 
                                 <!-- textare_rtf -->
                                 <!-- tiny MCEへ置き換える -->
-                                <textarea
+                                <!-- <textarea
                                     v-if="
                                         inputField.inputType === 'textarea_rtf'
                                     "
                                     type="textarea"
                                     v-model="inputField.inputContent"
                                     class="w-full border rounded border-gray-300 p-2 h-32"
-                                ></textarea>
+                                ></textarea> -->
+                                <Editor
+                                    v-if="
+                                        inputField.inputType === 'textarea_rtf'
+                                    "
+                                    v-model="inputField.inputContent"
+                                    api-key="9vs0qfvaptabc555wnnfa7azwz22jq0pykxs1j8x8t1pcb0i"
+                                    :init="{
+                                        plugins:
+                                            'lists link code help wordcount',
+                                        menubar: 'none',
+                                    }"
+                                />
 
                                 <!-- checkbox -->
                                 <div v-if="inputField.inputType === 'checkbox'">

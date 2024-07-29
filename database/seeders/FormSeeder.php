@@ -19,6 +19,7 @@ class FormSeeder extends Seeder
 
         $forms = [
             [
+                'id' => 1,
                 'project_id' => "1",
                 'form_name' => '演題登録',
                 'form_description' => 'フォームの説明がはいります',
@@ -26,6 +27,7 @@ class FormSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
+                'id' => 2,
                 'project_id' => "1",
                 'form_name' => '演題登録 2演題目',
                 'form_description' => 'フォームの説明がはいります',
@@ -33,57 +35,9 @@ class FormSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
+                'id' => 3,
                 'project_id' => "1",
                 'form_name' => '演題登録 3演題目',
-                'form_description' => 'フォームの説明がはいります',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'project_id' => "2",
-                'form_name' => '演題登録',
-                'form_description' => 'フォームの説明がはいります',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'project_id' => "2",
-                'form_name' => '演題登録 2演題目',
-                'form_description' => 'フォームの説明がはいります',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'project_id' => "2",
-                'form_name' => '演題登録 3演題目',
-                'form_description' => 'フォームの説明がはいります',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'project_id' => "2",
-                'form_name' => '演題登録 4演題目',
-                'form_description' => 'フォームの説明がはいります',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'project_id' => "3",
-                'form_name' => '演題登録 1演題目',
-                'form_description' => 'フォームの説明がはいります',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'project_id' => "4",
-                'form_name' => '演題登録 1演題目',
-                'form_description' => 'フォームの説明がはいります',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'project_id' => "5",
-                'form_name' => '演題登録 1演題目',
                 'form_description' => 'フォームの説明がはいります',
                 'created_at' => $now,
                 'updated_at' => $now,
