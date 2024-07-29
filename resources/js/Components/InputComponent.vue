@@ -1,5 +1,13 @@
 <script setup>
-import { ref, watch, defineProps, toRefs, computed } from "vue";
+import {
+    ref,
+    watch,
+    defineProps,
+    toRefs,
+    computed,
+    onMounted,
+    onUnmounted,
+} from "vue";
 import Editor from "@tinymce/tinymce-vue";
 
 /***************************************************
@@ -207,11 +215,121 @@ const hideController = (id) => {
     const index = inputFields.value.findIndex((field) => field.id === id);
     inputFields.value[index].isShow = false;
 };
+
+// ウィンドウを閉じる前に警告
+let windowCloseFlg = ref(false);
+
+const isWindowClose = () => {
+    windowCloseFlg.value = !windowCloseFlg.value;
+    console.log(windowCloseFlg);
+};
+
+// ウィンドウを閉じる->実行
+const doCloseWindow = () => {
+    window.close();
+};
+
+// ウィンドウを閉じる際に警告を出す
+const handleBeforeUnload = (event) => {
+    const message =
+        "このページを離れますか？変更内容が保存されない可能性があります。";
+    event.returnValue = message; // 標準に従った方法
+    return message; // 一部のブラウザではこの戻り値を使用
+};
+
+onMounted(() => {
+    window.addEventListener("beforeunload", handleBeforeUnload);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("beforeunload", handleBeforeUnload);
+});
 </script>
 
 <template>
     <!-- <pre v-text="formAttribute" class="text-xs"></pre> -->
     <!-- <pre v-text="inputFields" class="text-xs"></pre> -->
+    <div v-show="windowCloseFlg">
+        <div
+            class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
+        >
+            <div
+                @click="windowCloseFlg = false"
+                class="absolute inset-0 w-full h-full bg-black bg-opacity-40"
+            ></div>
+            <div
+                class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg"
+            >
+                <div class="flex items-center justify-between pb-2">
+                    <h3 class="text-lg font-semibold">ウィンドウを閉じる</h3>
+                    <button
+                        @click="windowCloseFlg = false"
+                        class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50"
+                    >
+                        <svg
+                            class="w-5 h-5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <div class="relative w-auto mb-4">
+                    <p>本当にウィンドウを閉じてもよろしいですか？</p>
+                    <p class="text-sm text-red-500">
+                        ※作業内容は保存されません
+                    </p>
+                </div>
+                <div class="flex">
+                    <button
+                        @click="doCloseWindow"
+                        type="button"
+                        class="ml-auto inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-red transition-colors duration-200 text-red-600 rounded-md focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none"
+                    >
+                        閉じる
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- top -->
+    <div class="mb-4">
+        <div class="flex gap-4 border-b border-gray-300 pb-2">
+            <p class="text-lg text-gray-900 font-bold">入力項目編集画面</p>
+            <button
+                @click="isWindowClose"
+                class="text-sm text-red-600 bg-white px-2 rounded-md hover:bg-gray-500 ml-auto"
+            >
+                <i class="at-xmark-circle"></i>
+                閉じる
+            </button>
+        </div>
+
+        <!-- プロジェクト・フォーム -->
+        <div class="flex gap-4 pt-2">
+            <div class="flex flex-row items-center">
+                <p class="text-sm text-gray-400">プロジェクト名：</p>
+                <h2 class="text-sm text-gray-900 font-bold">
+                    {{ formAttribute.project.project_name }}
+                </h2>
+            </div>
+            <div class="flex flex-row items-center">
+                <p class="text-sm text-gray-400">フォーム名：</p>
+                <h2 class="text-sm text-gray-900 font-bold">
+                    {{ formAttribute.form_name }}
+                </h2>
+            </div>
+        </div>
+    </div>
 
     <!-- デバッグモード -->
     <div class="flex justify-end space-x-2 mb-2 ml-auto">
@@ -601,7 +719,7 @@ const hideController = (id) => {
             </ul>
         </div>
 
-        <!-- プレビュー -->
+        <!-- preview -->
         <div class="flex-1 mx-auto bg-white">
             <!-- title -->
             <div class="text-gray-500 p-4 border-b border-gray-300 bg-white">

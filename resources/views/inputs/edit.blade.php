@@ -25,32 +25,6 @@
         <div class="min-h-screen bg-gray-100">
             <div class="max-w-7xl mx-auto p-8">
 
-                <!-- top -->
-                <div class="mb-4">
-                    <div class="flex gap-4 border-b border-gray-300 pb-2">
-                        <p class="text-lg text-gray-900 font-bold">入力項目編集画面</p>
-                        <div class="ml-auto flex gap-1 items-center text-sm text-red-600">
-                            <i class="at-xmark-circle"></i>
-                            <a href="#">閉じる</a>
-                        </div>
-                    </div>
-                    <!-- プロジェクト・フォーム -->
-                    <div class="flex gap-4 pt-2">
-                        <div class="flex flex-row items-center">
-                            <p class="text-sm text-gray-400">プロジェクト名：</p>
-                            <h2 class="text-sm text-gray-900 font-bold">
-                                {{ $form->project->project_name }}
-                            </h2>
-                        </div>
-                        <div class="flex flex-row items-center">
-                            <p class="text-sm text-gray-400">フォーム名：</p>
-                            <h2 class="text-sm text-gray-900 font-bold">{{ $form->form_name }}</h2>
-                        </div>
-
-
-                    </div>
-                </div>
-
                 {{-- vue component --}}
                 <input-component :form-attribute='@json($form)'
                     :input-attribute='@json($input)'></input-component>
