@@ -77,6 +77,8 @@ Route::middleware('auth')->group(function () {
 
     // 入力項目エディター
     Route::get('forms/inputs/{form_id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');
+
+    Route::post('/forms/inputs/submit/{id}', [FormController::class, 'submit']);
 });
 
 // userpage (UUID)

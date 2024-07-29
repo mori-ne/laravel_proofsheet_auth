@@ -204,4 +204,10 @@ class FormController extends Controller
         $input = Input::where('form_id', $id)->firstOrFail();
         return view('inputs.edit', compact('form', 'input'));
     }
+
+    public function submit($id, Request $request)
+    {
+        // 受け取ったデータを処理
+        return response()->json(['message' => 'Data submitted successfully']);
+    }
 }

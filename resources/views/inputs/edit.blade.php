@@ -22,23 +22,11 @@
 <body class="font-sans antialiased">
     <div id="app">
 
-        <div class="min-h-screen bg-gray-100">
-            <div class="max-w-7xl mx-auto p-8">
+        {{-- vue component --}}
+        <input-component :form-attribute='@json($form)'
+            :input-attribute='@json($input)'></input-component>
 
-                {{-- vue component --}}
-                <input-component :form-attribute='@json($form)'
-                    :input-attribute='@json($input)'></input-component>
-
-            </div>
-            <!-- ボトム -->
-            <div class="fixed bottom-0 w-full border-t border-gray-300 bg-white">
-                <div class="max-w-7xl mx-auto flex justify-end py-4 px-8">
-                    <button type="button" class="rounded text-md text-white bg-gray-700 font-bold px-4 py-1">
-                        更新する
-                    </button>
-                </div>
-            </div>
-        </div>
+    </div>
 
     </div>
 </body>
