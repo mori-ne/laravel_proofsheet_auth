@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Form;
+use App\Models\Input;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -163,11 +164,24 @@ class ProjectController extends Controller
     // 削除
     public function destroy(string $id)
     {
-        $project = Project::findOrFail($id);
-        Form::where('project_id', $id)->delete();
+        $project = Project::with('forms.input')->findOrFail($id);
+
+        // 各formに関連するinputを削除
+        foreach ($project->forms as $form) {
+            if ($form->input) {
+                $form->input->delete();
+            }
+        }
+
+        // 各formを削除
+        foreach ($project->forms as $form) {
+            $form->delete();
+        }
+
+        // プロジェクトを削除
         $project->delete();
 
-        return redirect()->route('projects.index')->with('status', $project['project_name'] . 'を削除しました');
+        return redirect()->route('projects.index')->with('status', $project->project_name . 'を削除しました');
     }
 
     // 公開・非公開の切り替え
@@ -189,7 +203,7 @@ class ProjectController extends Controller
     // 複製
     public function duplicate($id)
     {
-        $original = Project::with('forms')->find($id);
+        $original = Project::with('forms.input')->find($id);
 
         // 見つからない場合
         if (!$original) {
@@ -203,11 +217,18 @@ class ProjectController extends Controller
         $duplicate->updated_at = Carbon::now('Asia/Tokyo');
         $duplicate->save();
 
-        // 複製元データのリレーションデータを複製
+        // formを複製
         $original->forms->each(function ($form) use ($duplicate) {
             $newForm = $form->replicate();
             $newForm->project_id = $duplicate->id; // 外部キーに複製後のidを指定
             $newForm->save();
+
+            // inputを複製
+            if ($form->input) {
+                $newInput = $form->input->replicate();
+                $newInput->form_id = $newForm->id; // 外部キーに新しいformのidを指定
+                $newInput->save();
+            }
         });
 
         return redirect()->back()->with('status', $original->project_name . ' を複製しました');
