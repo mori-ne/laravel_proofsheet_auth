@@ -49,8 +49,8 @@
                 <div class="p-6 max-w-5xl mx-auto">
 
                     <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-1">フォームの詳細</h4>
-                        <p class="text-gray-500 text-sm">フォームの詳細画面です。確認、編集、削除ができます</p>
+                        <h4 class="font-bold text-lg">フォームの詳細</h4>
+                        {{-- <p class="text-gray-500 text-sm">フォームの詳細画面です。確認、編集、削除ができます</p> --}}
                     </div>
 
                     {{-- back --}}

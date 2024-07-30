@@ -43,7 +43,7 @@
                 <div class="p-6 max-w-5xl mx-auto">
 
                     <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-1">フォームを作成</h4>
+                        <h4 class="font-bold text-lg">フォームを作成</h4>
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 

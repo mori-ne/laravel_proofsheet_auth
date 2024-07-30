@@ -27,11 +27,11 @@
 
         <!-- Page Heading -->
         @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
         @endisset
 
         <!-- Page Content -->
@@ -50,7 +50,7 @@
                 <div class="p-6 max-w-5xl mx-auto">
 
                     <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-1">確認画面</h4>
+                        <h4 class="font-bold text-lg">確認画面</h4>
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 
@@ -70,8 +70,7 @@
                                 <label class="text-lg font-bold" for="#">
                                     プロジェクト名
                                 </label>
-                                <span
-                                    class="bg-red-600 text-white relative text-xs font-semibold pl-2 pr-2.5 py-0.5 rounded-full">
+                                <span class="bg-red-600 text-white relative text-xs font-semibold pl-2 pr-2.5 py-0.5 rounded-full">
                                     <span>必須</span>
                                 </span>
                             </div>
@@ -84,9 +83,9 @@
                             </div>
                             <div class="border rounded p-3 text-sm">
                                 @if (!$project['project_description'])
-                                    <span class="text-gray-400">なし</span>
+                                <span class="text-gray-400">なし</span>
                                 @else
-                                    {!! $project['project_description'] !!}
+                                {!! $project['project_description'] !!}
                                 @endif
                             </div>
                         </div>
@@ -97,9 +96,9 @@
                             </div>
                             <div class="border rounded p-3">
                                 @if (!$project['is_deadline'])
-                                    <span class="text-gray-400">指定しない</span>
+                                <span class="text-gray-400">指定しない</span>
                                 @else
-                                    {{ $project['is_deadline'] }}
+                                {{ $project['is_deadline'] }}
                                 @endif
                             </div>
                         </div>
@@ -110,9 +109,9 @@
                             </div>
                             <div class="border rounded p-3">
                                 @if (!$project['project_message'])
-                                    <span class="text-gray-400">なし</span>
+                                <span class="text-gray-400">なし</span>
                                 @else
-                                    {!! $project['project_message'] !!}
+                                {!! $project['project_message'] !!}
                                 @endif
                             </div>
                         </div>
@@ -123,9 +122,9 @@
                             </div>
                             <div class="border rounded p-3">
                                 @if (!$project['mail_subject'])
-                                    <span class="text-gray-400">なし</span>
+                                <span class="text-gray-400">なし</span>
                                 @else
-                                    {{ $project['mail_subject'] }}
+                                {{ $project['mail_subject'] }}
                                 @endif
                             </div>
                         </div>
@@ -136,9 +135,9 @@
                             </div>
                             <div class="border rounded p-3 text-sm">
                                 @if (!$project['mail_content'])
-                                    <span class="text-gray-400">なし</span>
+                                <span class="text-gray-400">なし</span>
                                 @else
-                                    {!! $project['mail_content'] !!}
+                                {!! $project['mail_content'] !!}
                                 @endif
                             </div>
                         </div>
@@ -149,14 +148,12 @@
                             <form action="{{ route('projects.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="project_name" value="{{ $project['project_name'] }}">
-                                <input type="hidden" name="project_description"
-                                    value="{{ $project['project_description'] }}">
+                                <input type="hidden" name="project_description" value="{{ $project['project_description'] }}">
                                 <input type="hidden" name="project_message" value="{{ $project['project_message'] }}">
                                 <input type="hidden" name="is_deadline" value="{{ $project['is_deadline'] }}">
                                 <input type="hidden" name="mail_subject" value="{{ $project['mail_subject'] }}">
                                 <input type="hidden" name="mail_content" value="{{ $project['mail_content'] }}">
-                                <button type="submit"
-                                    class="flex items-center justify-center w-96 px-4 py-2 text-sm mx-auto font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
+                                <button type="submit" class="flex items-center justify-center w-96 px-4 py-2 text-sm mx-auto font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
                                     新規作成する
                                 </button>
                         </div>

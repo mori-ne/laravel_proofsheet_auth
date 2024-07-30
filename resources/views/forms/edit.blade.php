@@ -53,7 +53,7 @@
 
                     {{-- title --}}
                     <div class="mb-8">
-                        <h4 class="font-bold text-lg mb-1">フォームの編集</h4>
+                        <h4 class="font-bold text-lg">フォームの編集</h4>
                         <p class="text-gray-500 text-sm"></p>
                     </div>
 
