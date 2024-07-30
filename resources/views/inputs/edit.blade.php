@@ -21,10 +21,10 @@
 
 <body class="font-sans antialiased">
     <div id="app">
-
         {{-- vue component --}}
         <input-component :form-attribute='@json($form)'
             :input-attribute='@json($input)'></input-component>
+
 
     </div>
 

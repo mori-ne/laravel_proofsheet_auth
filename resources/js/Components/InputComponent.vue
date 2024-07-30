@@ -21,6 +21,8 @@ const props = defineProps({
     inputAttribute: Object,
 });
 
+const index = ref();
+
 // propsから値を取得
 const { formAttribute } = toRefs(props); // ref でラップする
 
@@ -220,14 +222,6 @@ const hideController = (id) => {
     inputFields.value[index].isShow = false;
 };
 
-// ウィンドウを閉じる前に警告
-let windowCloseFlg = ref(false);
-
-const isWindowClose = () => {
-    windowCloseFlg.value = !windowCloseFlg.value;
-    console.log(windowCloseFlg);
-};
-
 // ウィンドウを閉じる->実行
 const doCloseWindow = () => {
     window.close();
@@ -257,22 +251,6 @@ onUnmounted(() => {
  * 更新処理
  ***************************************************/
 const response = ref("");
-// const sendData = async () => {
-//     try {
-//         const res = await axios.post(
-//             "/forms/inputs/submit/" + formAttribute.value.id,
-//             inputFields.value,
-//             {
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                 },
-//             }
-//         );
-//         response.value = res.data.message;
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
 const sendData = async () => {
     try {
         const url = `/forms/inputs/submit/${formAttribute.value.id}`;
@@ -290,610 +268,622 @@ const sendData = async () => {
 </script>
 
 <template>
-    <div class="max-w-7xl mx-auto p-8">
-        <!-- <pre v-text="formAttribute" class="text-xs"></pre> -->
-        <!-- <pre v-text="inputFields" class="text-xs"></pre> -->
-        <div v-show="windowCloseFlg">
+    <div class="min-h-screen w-full bg-gray-100 relative">
+        <div class="max-w-7xl mx-auto p-8 flex flex-col">
+            <!-- <pre v-text="formAttribute" class="text-xs"></pre> -->
+            <!-- <pre v-text="inputFields" class="text-xs"></pre> -->
+
+            <!-- top -->
+            <div class="mb-4">
+                <div class="flex gap-4 border-b border-gray-300 pb-2">
+                    <p class="text-lg text-gray-900 font-bold">
+                        入力項目編集画面
+                    </p>
+                    <!-- <button
+                        @click="doCloseWindow"
+                        class="text-sm text-red-600 bg-white px-2 rounded-md hover:bg-gray-500 ml-auto"
+                    >
+                        <i class="at-xmark-circle"></i>
+                        閉じる
+                    </button> -->
+                </div>
+
+                <!-- プロジェクト・フォーム -->
+                <div class="flex gap-4 pt-2">
+                    <div class="flex flex-row items-center">
+                        <p class="text-sm text-gray-400">プロジェクト名：</p>
+                        <h2 class="text-sm text-gray-900 font-bold">
+                            {{ formAttribute.project.project_name }}
+                        </h2>
+                    </div>
+                    <div class="flex flex-row items-center">
+                        <p class="text-sm text-gray-400">フォーム名：</p>
+                        <h2 class="text-sm text-gray-900 font-bold">
+                            {{ formAttribute.form_name }}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- デバッグモード -->
+            <div class="flex justify-end space-x-2 mb-2 ml-auto">
+                <input
+                    v-model="debugFlg"
+                    name="debugSwitch"
+                    type="checkbox"
+                    class="w-4 h-4 border rounded-sm border-gray-300 ml-auto mr-2"
+                />
+                <label for="debugSwitch" class="text-xs">
+                    デバッグモード
+                </label>
+            </div>
             <div
-                class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
+                class="w-full mx-auto flex flex-row bg-white border border-gray-300 rounded-lg overflow-hidden mb-14"
             >
+                <!-- セット項目 -->
                 <div
-                    @click="windowCloseFlg = false"
-                    class="absolute inset-0 w-full h-full bg-black bg-opacity-40"
-                ></div>
-                <div
-                    class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg"
+                    class="flex-shrink-0 bg-white w-80 border-r border-gray-300"
                 >
-                    <div class="flex items-center justify-between pb-2">
-                        <h3 class="text-lg font-semibold">
-                            ウィンドウを閉じる
-                        </h3>
-                        <button
-                            @click="windowCloseFlg = false"
-                            class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50"
-                        >
-                            <svg
-                                class="w-5 h-5"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M6 18L18 6M6 6l12 12"
-                                />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="relative w-auto mb-4">
-                        <p>本当にウィンドウを閉じてもよろしいですか？</p>
-                        <p class="text-sm text-red-500">
-                            ※作業内容は保存されません
-                        </p>
-                    </div>
-                    <div class="flex">
-                        <button
-                            @click="doCloseWindow"
-                            type="button"
-                            class="ml-auto inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-red transition-colors duration-200 text-red-600 rounded-md focus:ring-offset-2 focus:ring-red-700 focus:shadow-outline focus:outline-none"
-                        >
-                            閉じる
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- top -->
-        <div class="mb-4">
-            <div class="flex gap-4 border-b border-gray-300 pb-2">
-                <p class="text-lg text-gray-900 font-bold">入力項目編集画面</p>
-                <button
-                    @click="isWindowClose"
-                    class="text-sm text-red-600 bg-white px-2 rounded-md hover:bg-gray-500 ml-auto"
-                >
-                    <i class="at-xmark-circle"></i>
-                    閉じる
-                </button>
-            </div>
-
-            <!-- プロジェクト・フォーム -->
-            <div class="flex gap-4 pt-2">
-                <div class="flex flex-row items-center">
-                    <p class="text-sm text-gray-400">プロジェクト名：</p>
-                    <h2 class="text-sm text-gray-900 font-bold">
-                        {{ formAttribute.project.project_name }}
-                    </h2>
-                </div>
-                <div class="flex flex-row items-center">
-                    <p class="text-sm text-gray-400">フォーム名：</p>
-                    <h2 class="text-sm text-gray-900 font-bold">
-                        {{ formAttribute.form_name }}
-                    </h2>
-                </div>
-            </div>
-        </div>
-
-        <!-- デバッグモード -->
-        <div class="flex justify-end space-x-2 mb-2 ml-auto">
-            <input
-                v-model="debugFlg"
-                name="debugSwitch"
-                type="checkbox"
-                class="w-4 h-4 border rounded-sm border-gray-300 ml-auto mr-2"
-            />
-            <label for="debugSwitch" class="text-xs"> デバッグモード </label>
-        </div>
-        <div
-            class="max-w-7xl mx-auto flex flex-row bg-white border border-gray-300 rounded-lg overflow-hidden mb-14"
-        >
-            <!-- セット項目 -->
-            <div class="flex-shrink-0 bg-white w-80 border-r border-gray-300">
-                <!-- title -->
-                <div
-                    class="text-gray-500 p-4 border-b border-gray-300 bg-white"
-                >
-                    <h3 class="font-bold text-xl">セット項目</h3>
-                </div>
-
-                <!-- select field -->
-                <div class="p-4 border-b border-gray-300 bg-white">
-                    <select
-                        v-model="selectedFieldType"
-                        class="border rounded py-1 px-2 w-full mb-2 border-gray-300"
-                        name=""
-                        id=""
+                    <!-- title -->
+                    <div
+                        class="text-gray-500 p-4 border-b border-gray-300 bg-white"
                     >
-                        <option value="text">テキスト（1行）</option>
-                        <option value="textarea">テキストエリア（標準）</option>
-                        <option value="textarea_rtf">
-                            テキストエリア（RTF）
-                        </option>
-                        <option value="checkbox">チェックリスト</option>
-                        <option value="radio">ラジオボタン</option>
-                        <option value="select">セレクトリスト</option>
-                        <option value="headline">見出し</option>
-                        <option value="paragraph">段落</option>
-                        <option value="hr">罫線</option>
-                    </select>
-                    <div class="flex justify-end gap-3">
-                        <button
-                            @click="toggleAll"
-                            type="button"
-                            class="text-xs text-gray-500"
-                        >
-                            すべて開く / すべて閉じる
-                        </button>
-                        <button
-                            @click="addField"
-                            class="rounded py-1 px-2 text-xs bg-gray-700 text-white"
-                            type="button"
-                        >
-                            フィールドを追加
-                        </button>
+                        <h3 class="font-bold text-xl">セット項目</h3>
                     </div>
-                </div>
 
-                <!-- input field -->
-                <ul>
-                    <li
-                        :class="{
-                            'sticky top-0 bg-white': inputField.isOpen,
-                            'w-full border-b border-gray-300 relative': true,
-                        }"
-                        v-for="inputField in inputFields"
-                        :key="inputField.id"
-                        v-on:mouseover="showController(inputField.id)"
-                        v-on:mouseleave="hideController(inputField.id)"
-                        class="w-full border-b border-gray-300"
-                    >
-                        <div
-                            class="flex flex-row gap-2 justify-between items-center p-4 bg-white"
+                    <!-- select field -->
+                    <div class="p-4 border-b border-gray-300 bg-white">
+                        <select
+                            v-model="selectedFieldType"
+                            class="border rounded py-1 px-2 w-full mb-2 border-gray-300"
+                            name=""
+                            id=""
                         >
-                            <!-- input field title -->
-                            <div class="w-full">
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="inputField.inputType === 'text'"
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>テキスト（1行）</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="inputField.inputType === 'textarea'"
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>テキストエリア（標準）</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="
-                                        inputField.inputType === 'textarea_rtf'
-                                    "
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>テキストエリア（RTF）</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="inputField.inputType === 'checkbox'"
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>チェックリスト</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="inputField.inputType === 'radio'"
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>ラジオボタン</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="inputField.inputType === 'select'"
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>セレクトリスト</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="inputField.inputType === 'headline'"
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>見出し</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    v-if="inputField.inputType === 'paragraph'"
-                                    class="font-bold cursor-pointer flex gap-2 items-center"
-                                >
-                                    <p>段落</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                                <div
-                                    v-if="inputField.inputType === 'hr'"
-                                    class="font-bold flex gap-1 items-center"
-                                >
-                                    <p>罫線</p>
-                                    <span
-                                        class="w-4 text-center text-xs text-gray-300 ml-auto"
-                                        >{{ inputField.id }}</span
-                                    >
-                                </div>
-                            </div>
-
-                            <!-- controller -->
-                            <div
-                                v-if="inputField.isShow"
-                                class="ml-auto flex gap-2 items-center"
+                            <option value="text">テキスト（1行）</option>
+                            <option value="textarea">
+                                テキストエリア（標準）
+                            </option>
+                            <option value="textarea_rtf">
+                                テキストエリア（RTF）
+                            </option>
+                            <option value="checkbox">チェックリスト</option>
+                            <option value="radio">ラジオボタン</option>
+                            <option value="select">セレクトリスト</option>
+                            <option value="headline">見出し</option>
+                            <option value="paragraph">段落</option>
+                            <option value="hr">罫線</option>
+                        </select>
+                        <div class="flex justify-end gap-3">
+                            <button
+                                @click="toggleAll"
+                                type="button"
+                                class="text-xs text-gray-500"
                             >
-                                <button
-                                    @click="upField(inputField.id)"
-                                    type="button"
-                                    class="text-sm"
-                                >
-                                    <i class="at-arrow-up-circle"></i>
-                                </button>
-                                <button
-                                    @click="downField(inputField.id)"
-                                    type="button"
-                                    class="text-sm"
-                                >
-                                    <i class="at-arrow-down-circle"></i>
-                                </button>
-                                <button
-                                    @click="deleteField(inputField.id)"
-                                    type="button"
-                                    class="text-red-500 text-sm"
-                                >
-                                    <i class="at-xmark-circle"></i>
-                                </button>
-                                <button
-                                    @click="
-                                        inputField.isOpen = !inputField.isOpen
-                                    "
-                                    type="button"
-                                    class="text-gray-500 text-sm"
-                                >
-                                    <!-- {{ inputField.isOpen ? '閉じる' : '開く' }} -->
-                                    <i class="at-info-circle"></i>
-                                </button>
-                            </div>
+                                すべて開く / すべて閉じる
+                            </button>
+                            <button
+                                @click="addField"
+                                class="rounded py-1 px-2 text-xs bg-gray-700 text-white"
+                                type="button"
+                            >
+                                フィールドを追加
+                            </button>
                         </div>
+                    </div>
 
-                        <!-- detail -->
-                        <Transition>
+                    <!-- input field -->
+                    <ul>
+                        <li
+                            :class="{
+                                'sticky top-0 bg-white': inputField.isOpen,
+                                'w-full border-b border-gray-300 relative': true,
+                            }"
+                            v-for="inputField in inputFields"
+                            :key="inputField.id"
+                            v-on:mouseover="showController(inputField.id)"
+                            v-on:mouseleave="hideController(inputField.id)"
+                            class="w-full border-b border-gray-300"
+                        >
                             <div
-                                v-if="inputField.isOpen"
-                                id="detail"
-                                class="p-4"
+                                class="flex flex-row gap-2 justify-between items-center p-4 bg-white"
                             >
-                                <!-- title -->
-                                <div
-                                    v-if="!(inputField.inputType === 'hr')"
-                                    class="mb-2"
-                                >
-                                    <p class="text-xs text-gray-500 mb-1">
-                                        タイトル
-                                    </p>
-                                    <input
-                                        v-model="inputField.inputTitle"
-                                        class="border border-gray-300 rounded w-full py-1 px-2 text-sm"
-                                        type="text"
-                                        placeholder="タイトル"
-                                    />
-                                </div>
-
-                                <!-- sub label -->
-                                <div
-                                    v-if="!(inputField.inputType === 'hr')"
-                                    class="mb-2"
-                                >
-                                    <p class="text-xs text-gray-500 mb-1">
-                                        サブラベル
-                                    </p>
-                                    <input
-                                        v-model="inputField.inputLabel"
-                                        class="border border-gray-300 rounded w-full py-1 px-2 text-sm"
-                                        type="text"
-                                        value=""
-                                        placeholder="サブラベルが入ります"
-                                    />
-                                </div>
-
-                                <!-- checkbox -->
-                                <div
-                                    v-if="inputField.inputType === 'checkbox'"
-                                    class="mb-2"
-                                >
-                                    <div>
-                                        <p class="text-xs text-gray-500 mb-1">
-                                            チェックリスト（1行で1つ）
-                                        </p>
-                                        <textarea
-                                            v-model="inputField.inputContent"
-                                            @input="
-                                                convertCheckbox(inputField.id)
-                                            "
-                                            class="w-full border rounded border-gray-300 text-sm px-2 py-1"
-                                            name=""
-                                            id=""
-                                            cols="10"
-                                        ></textarea>
-                                    </div>
-                                </div>
-
-                                <!-- radio -->
-                                <div
-                                    v-if="inputField.inputType === 'radio'"
-                                    class="mb-2"
-                                >
-                                    <div>
-                                        <p class="text-xs text-gray-500 mb-1">
-                                            ラジオボタン（1行で1つ）
-                                        </p>
-                                        <textarea
-                                            v-model="inputField.inputContent"
-                                            @input="
-                                                convertRadioButton(
-                                                    inputField.id
-                                                )
-                                            "
-                                            class="w-full border rounded border-gray-300 text-sm px-2 py-1"
-                                            name=""
-                                            id=""
-                                            cols="10"
-                                        ></textarea>
-                                    </div>
-                                </div>
-
-                                <!-- checkbox -->
-                                <div
-                                    v-if="inputField.inputType === 'select'"
-                                    class="mb-2"
-                                >
-                                    <div>
-                                        <p class="text-xs text-gray-500 mb-1">
-                                            セレクトリスト（1行で1つ）
-                                        </p>
-                                        <textarea
-                                            v-model="inputField.inputContent"
-                                            @input="
-                                                convertSelectList(inputField.id)
-                                            "
-                                            class="w-full border rounded border-gray-300 text-sm px-2 py-1"
-                                            name=""
-                                            id=""
-                                            cols="10"
-                                        ></textarea>
-                                    </div>
-                                </div>
-
-                                <!-- code / limit / required -->
-                                <div class="flex gap-2">
-                                    <!-- code -->
+                                <!-- input field title -->
+                                <div class="w-full">
                                     <div
-                                        v-if="!(inputField.inputType === 'hr')"
-                                        class="mb-2 w-20"
-                                    >
-                                        <p class="text-xs text-gray-500 mb-1">
-                                            コード
-                                        </p>
-                                        <input
-                                            v-model="inputField.inputCode"
-                                            class="border border-gray-300 rounded w-full py-1 px-2 text-sm"
-                                            type="text"
-                                            placeholder="code00"
-                                        />
-                                    </div>
-
-                                    <!-- limit -->
-                                    <div
-                                        v-if="
-                                            !(
-                                                inputField.inputType ===
-                                                    'checkbox' ||
-                                                inputField.inputType ===
-                                                    'radio' ||
-                                                inputField.inputType ===
-                                                    'select' ||
-                                                inputField.inputType ===
-                                                    'headline' ||
-                                                inputField.inputType ===
-                                                    'paragraph' ||
-                                                inputField.inputType === 'hr'
-                                            )
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
                                         "
-                                        class="w-16 mb-2"
-                                    >
-                                        <p class="text-xs text-gray-500 mb-1">
-                                            文字数制限
-                                        </p>
-                                        <input
-                                            v-model="inputField.inputLimit"
-                                            class="border border-gray-300 rounded w-28 py-1 px-2 text-sm"
-                                            type="number"
-                                            placeholder="100"
-                                        />
-                                    </div>
-
-                                    <!-- required -->
-                                    <div
-                                        v-if="
-                                            !(
-                                                inputField.inputType ===
-                                                    'paragraph' ||
-                                                inputField.inputType ===
-                                                    'headline' ||
-                                                inputField.inputType === 'hr'
-                                            )
-                                        "
-                                        class="mb-2 shrink-0"
-                                    >
-                                        <p class="text-xs text-gray-500 mb-1">
-                                            必須
-                                        </p>
-                                        <input
-                                            v-model="inputField.isRequired"
-                                            class="w-4 h-4 border-gray-400 rounded"
-                                            type="checkbox"
-                                            name="required"
-                                            value="必須"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </Transition>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- preview -->
-            <div class="flex-1 mx-auto bg-white">
-                <!-- title -->
-                <div
-                    class="text-gray-500 p-4 border-b border-gray-300 bg-white"
-                >
-                    <h3 class="font-bold text-xl">プレビュー</h3>
-                </div>
-
-                <!-- list -->
-                <div class="px-8">
-                    <div class="max-w-2xl mx-auto py-8">
-                        <ul>
-                            <li
-                                v-for="inputField in inputFields"
-                                :key="inputField.id"
-                                class="mb-8"
-                            >
-                                <div class="flex gap-2 items-center">
-                                    <!-- title -->
-                                    <h4
-                                        v-if="
-                                            !(
-                                                inputField.inputType ===
-                                                    'headline' ||
-                                                inputField.inputType ===
-                                                    'paragraph' ||
-                                                inputField.inputType === 'hr'
-                                            )
-                                        "
-                                        class="font-bold text-lg"
-                                    >
-                                        {{ inputField.inputTitle }}
-                                    </h4>
-
-                                    <!-- required -->
-                                    <p
-                                        v-if="inputField.isRequired"
-                                        class="bg-red-500 text-white text-xs inline-flex items-center justify-center py-0.5 px-2 rounded-full"
-                                    >
-                                        必須
-                                    </p>
-                                </div>
-
-                                <!-- headline -->
-                                <h1
-                                    v-if="inputField.inputType === 'headline'"
-                                    class="text-xl font-bold mb-2"
-                                >
-                                    {{ inputField.inputTitle }}
-                                </h1>
-
-                                <!-- paragraph -->
-                                <p
-                                    v-if="inputField.inputType === 'paragraph'"
-                                    class="mb-2"
-                                >
-                                    {{ inputField.inputTitle }}
-                                </p>
-
-                                <div class="flex justify-between mb-2">
-                                    <!-- label -->
-                                    <div
-                                        v-if="!(inputField.inputType === 'hr')"
-                                    >
-                                        <p class="text-sm text-gray-400">
-                                            {{ inputField.inputLabel }}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <!-- input type -->
-                                <div>
-                                    <!-- input -->
-                                    <input
                                         v-if="inputField.inputType === 'text'"
-                                        v-model="inputField.inputContent"
-                                        class="w-full border rounded border-gray-300 p-2 mb-1"
-                                        type="text"
-                                        value=""
-                                    />
-
-                                    <!-- textare -->
-                                    <textarea
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>テキスト（1行）</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
                                         v-if="
                                             inputField.inputType === 'textarea'
                                         "
-                                        type="textarea"
-                                        v-model="inputField.inputContent"
-                                        class="w-full border rounded border-gray-300 p-2 h-32"
-                                    ></textarea>
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>テキストエリア（標準）</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
+                                        v-if="
+                                            inputField.inputType ===
+                                            'textarea_rtf'
+                                        "
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>テキストエリア（RTF）</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
+                                        v-if="
+                                            inputField.inputType === 'checkbox'
+                                        "
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>チェックリスト</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
+                                        v-if="inputField.inputType === 'radio'"
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>ラジオボタン</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
+                                        v-if="inputField.inputType === 'select'"
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>セレクトリスト</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
+                                        v-if="
+                                            inputField.inputType === 'headline'
+                                        "
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>見出し</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
+                                        v-if="
+                                            inputField.inputType === 'paragraph'
+                                        "
+                                        class="font-bold cursor-pointer flex gap-2 items-center"
+                                    >
+                                        <p>段落</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                    <div
+                                        v-if="inputField.inputType === 'hr'"
+                                        class="font-bold flex gap-1 items-center"
+                                    >
+                                        <p>罫線</p>
+                                        <span
+                                            class="w-4 text-center text-xs text-gray-300 ml-auto"
+                                            >{{ inputField.id }}</span
+                                        >
+                                    </div>
+                                </div>
 
-                                    <!-- textare_rtf -->
-                                    <!-- tiny MCEへ置き換える -->
-                                    <!-- <textarea
+                                <!-- controller -->
+                                <div
+                                    v-if="inputField.isShow"
+                                    class="ml-auto flex gap-2 items-center"
+                                >
+                                    <button
+                                        @click="upField(inputField.id)"
+                                        type="button"
+                                        class="text-sm"
+                                    >
+                                        <i class="at-arrow-up-circle"></i>
+                                    </button>
+                                    <button
+                                        @click="downField(inputField.id)"
+                                        type="button"
+                                        class="text-sm"
+                                    >
+                                        <i class="at-arrow-down-circle"></i>
+                                    </button>
+                                    <button
+                                        @click="deleteField(inputField.id)"
+                                        type="button"
+                                        class="text-red-500 text-sm"
+                                    >
+                                        <i class="at-xmark-circle"></i>
+                                    </button>
+                                    <button
+                                        @click="
+                                            inputField.isOpen =
+                                                !inputField.isOpen
+                                        "
+                                        type="button"
+                                        class="text-gray-500 text-sm"
+                                    >
+                                        <!-- {{ inputField.isOpen ? '閉じる' : '開く' }} -->
+                                        <i class="at-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- detail -->
+                            <Transition>
+                                <div
+                                    v-if="inputField.isOpen"
+                                    id="detail"
+                                    class="p-4"
+                                >
+                                    <!-- title -->
+                                    <div
+                                        v-if="!(inputField.inputType === 'hr')"
+                                        class="mb-2"
+                                    >
+                                        <p class="text-xs text-gray-500 mb-1">
+                                            タイトル
+                                        </p>
+                                        <input
+                                            v-model="inputField.inputTitle"
+                                            class="border border-gray-300 rounded w-full py-1 px-2 text-sm"
+                                            type="text"
+                                            placeholder="タイトル"
+                                        />
+                                    </div>
+
+                                    <!-- sub label -->
+                                    <div
+                                        v-if="!(inputField.inputType === 'hr')"
+                                        class="mb-2"
+                                    >
+                                        <p class="text-xs text-gray-500 mb-1">
+                                            サブラベル
+                                        </p>
+                                        <input
+                                            v-model="inputField.inputLabel"
+                                            class="border border-gray-300 rounded w-full py-1 px-2 text-sm"
+                                            type="text"
+                                            value=""
+                                            placeholder="サブラベルが入ります"
+                                        />
+                                    </div>
+
+                                    <!-- checkbox -->
+                                    <div
+                                        v-if="
+                                            inputField.inputType === 'checkbox'
+                                        "
+                                        class="mb-2"
+                                    >
+                                        <div>
+                                            <p
+                                                class="text-xs text-gray-500 mb-1"
+                                            >
+                                                チェックリスト（1行で1つ）
+                                            </p>
+                                            <textarea
+                                                v-model="
+                                                    inputField.inputContent
+                                                "
+                                                @input="
+                                                    convertCheckbox(
+                                                        inputField.id
+                                                    )
+                                                "
+                                                class="w-full border rounded border-gray-300 text-sm px-2 py-1"
+                                                name=""
+                                                id=""
+                                                cols="10"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- radio -->
+                                    <div
+                                        v-if="inputField.inputType === 'radio'"
+                                        class="mb-2"
+                                    >
+                                        <div>
+                                            <p
+                                                class="text-xs text-gray-500 mb-1"
+                                            >
+                                                ラジオボタン（1行で1つ）
+                                            </p>
+                                            <textarea
+                                                v-model="
+                                                    inputField.inputContent
+                                                "
+                                                @input="
+                                                    convertRadioButton(
+                                                        inputField.id
+                                                    )
+                                                "
+                                                class="w-full border rounded border-gray-300 text-sm px-2 py-1"
+                                                name=""
+                                                id=""
+                                                cols="10"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- checkbox -->
+                                    <div
+                                        v-if="inputField.inputType === 'select'"
+                                        class="mb-2"
+                                    >
+                                        <div>
+                                            <p
+                                                class="text-xs text-gray-500 mb-1"
+                                            >
+                                                セレクトリスト（1行で1つ）
+                                            </p>
+                                            <textarea
+                                                v-model="
+                                                    inputField.inputContent
+                                                "
+                                                @input="
+                                                    convertSelectList(
+                                                        inputField.id
+                                                    )
+                                                "
+                                                class="w-full border rounded border-gray-300 text-sm px-2 py-1"
+                                                name=""
+                                                id=""
+                                                cols="10"
+                                            ></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- code / limit / required -->
+                                    <div class="flex gap-2">
+                                        <!-- code -->
+                                        <div
+                                            v-if="
+                                                !(inputField.inputType === 'hr')
+                                            "
+                                            class="mb-2 w-20"
+                                        >
+                                            <p
+                                                class="text-xs text-gray-500 mb-1"
+                                            >
+                                                コード
+                                            </p>
+                                            <input
+                                                v-model="inputField.inputCode"
+                                                class="border border-gray-300 rounded w-full py-1 px-2 text-sm"
+                                                type="text"
+                                                placeholder="code00"
+                                            />
+                                        </div>
+
+                                        <!-- limit -->
+                                        <div
+                                            v-if="
+                                                !(
+                                                    inputField.inputType ===
+                                                        'checkbox' ||
+                                                    inputField.inputType ===
+                                                        'radio' ||
+                                                    inputField.inputType ===
+                                                        'select' ||
+                                                    inputField.inputType ===
+                                                        'headline' ||
+                                                    inputField.inputType ===
+                                                        'paragraph' ||
+                                                    inputField.inputType ===
+                                                        'hr'
+                                                )
+                                            "
+                                            class="w-16 mb-2"
+                                        >
+                                            <p
+                                                class="text-xs text-gray-500 mb-1"
+                                            >
+                                                文字数制限
+                                            </p>
+                                            <input
+                                                v-model="inputField.inputLimit"
+                                                class="border border-gray-300 rounded w-28 py-1 px-2 text-sm"
+                                                type="number"
+                                                placeholder="100"
+                                            />
+                                        </div>
+
+                                        <!-- required -->
+                                        <div
+                                            v-if="
+                                                !(
+                                                    inputField.inputType ===
+                                                        'paragraph' ||
+                                                    inputField.inputType ===
+                                                        'headline' ||
+                                                    inputField.inputType ===
+                                                        'hr'
+                                                )
+                                            "
+                                            class="mb-2 shrink-0"
+                                        >
+                                            <p
+                                                class="text-xs text-gray-500 mb-1"
+                                            >
+                                                必須
+                                            </p>
+                                            <input
+                                                v-model="inputField.isRequired"
+                                                class="w-4 h-4 border-gray-400 rounded"
+                                                type="checkbox"
+                                                name="required"
+                                                value="必須"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </Transition>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- preview -->
+                <div class="flex-1 mx-auto bg-white w-full">
+                    <!-- title -->
+                    <div
+                        class="text-gray-500 p-4 border-b border-gray-300 bg-white"
+                    >
+                        <h3 class="font-bold text-xl">プレビュー</h3>
+                    </div>
+
+                    <!-- list -->
+                    <div class="px-8">
+                        <div class="max-w-2xl mx-auto py-8">
+                            <ul>
+                                <li
+                                    v-for="inputField in inputFields"
+                                    :key="inputField.id"
+                                    class="mb-8"
+                                >
+                                    <div class="flex gap-2 items-center">
+                                        <!-- title -->
+                                        <h4
+                                            v-if="
+                                                !(
+                                                    inputField.inputType ===
+                                                        'headline' ||
+                                                    inputField.inputType ===
+                                                        'paragraph' ||
+                                                    inputField.inputType ===
+                                                        'hr'
+                                                )
+                                            "
+                                            class="font-bold text-lg"
+                                        >
+                                            {{ inputField.inputTitle }}
+                                        </h4>
+
+                                        <!-- required -->
+                                        <p
+                                            v-if="inputField.isRequired"
+                                            class="bg-red-500 text-white text-xs inline-flex items-center justify-center py-0.5 px-2 rounded-full"
+                                        >
+                                            必須
+                                        </p>
+                                    </div>
+
+                                    <!-- headline -->
+                                    <h1
+                                        v-if="
+                                            inputField.inputType === 'headline'
+                                        "
+                                        class="text-xl font-bold mb-2"
+                                    >
+                                        {{ inputField.inputTitle }}
+                                    </h1>
+
+                                    <!-- paragraph -->
+                                    <p
+                                        v-if="
+                                            inputField.inputType === 'paragraph'
+                                        "
+                                        class="mb-2"
+                                    >
+                                        {{ inputField.inputTitle }}
+                                    </p>
+
+                                    <div class="flex justify-between mb-2">
+                                        <!-- label -->
+                                        <div
+                                            v-if="
+                                                !(inputField.inputType === 'hr')
+                                            "
+                                        >
+                                            <p class="text-sm text-gray-400">
+                                                {{ inputField.inputLabel }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <!-- input type -->
+                                    <div>
+                                        <!-- input -->
+                                        <input
+                                            v-if="
+                                                inputField.inputType === 'text'
+                                            "
+                                            v-model="inputField.inputContent"
+                                            class="w-full border rounded border-gray-300 p-2 mb-1"
+                                            type="text"
+                                            value=""
+                                        />
+
+                                        <!-- textare -->
+                                        <textarea
+                                            v-if="
+                                                inputField.inputType ===
+                                                'textarea'
+                                            "
+                                            type="textarea"
+                                            v-model="inputField.inputContent"
+                                            class="w-full border rounded border-gray-300 p-2 h-32"
+                                        ></textarea>
+
+                                        <!-- textare_rtf -->
+                                        <!-- tiny MCEへ置き換える -->
+                                        <!-- <textarea
                                     v-if="
                                         inputField.inputType === 'textarea_rtf'
                                     "
@@ -901,121 +891,113 @@ const sendData = async () => {
                                     v-model="inputField.inputContent"
                                     class="w-full border rounded border-gray-300 p-2 h-32"
                                 ></textarea> -->
-                                    <Editor
-                                        v-if="
-                                            inputField.inputType ===
-                                            'textarea_rtf'
-                                        "
-                                        v-model="inputField.inputContent"
-                                        api-key="9vs0qfvaptabc555wnnfa7azwz22jq0pykxs1j8x8t1pcb0i"
-                                        :init="{
-                                            plugins:
-                                                'lists link code help wordcount',
-                                            menubar: 'none',
-                                        }"
-                                    />
+                                        <Editor
+                                            v-if="
+                                                inputField.inputType ===
+                                                'textarea_rtf'
+                                            "
+                                            v-model="inputField.inputContent"
+                                            api-key="9vs0qfvaptabc555wnnfa7azwz22jq0pykxs1j8x8t1pcb0i"
+                                            :init="{
+                                                plugins:
+                                                    'lists link code help wordcount',
+                                                menubar: 'none',
+                                            }"
+                                        />
 
-                                    <!-- checkbox -->
-                                    <div
-                                        v-if="
-                                            inputField.inputType === 'checkbox'
-                                        "
-                                    >
-                                        <div v-if="inputField.inputContent">
-                                            <div
-                                                v-for="(
-                                                    value, index
-                                                ) in inputField.checkContent"
-                                                :key="index"
-                                                class="flex flex-wrap items-center gap-1 mb-1"
-                                            >
-                                                <input
-                                                    v-bind:name="
-                                                        'check-' + inputField.id
-                                                    "
-                                                    type="checkbox"
-                                                    v-bind:id="
-                                                        inputField.id +
-                                                        '-' +
-                                                        index
-                                                    "
-                                                />
-                                                <label
-                                                    v-bind:for="
-                                                        inputField.id +
-                                                        '-' +
-                                                        index
-                                                    "
-                                                    class="text-sm"
-                                                    >{{ value }}</label
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- radio -->
-                                    <div
-                                        v-if="inputField.inputType === 'radio'"
-                                    >
-                                        <div v-if="inputField.inputContent">
-                                            <div
-                                                v-for="(
-                                                    value, index
-                                                ) in inputField.radioContent"
-                                                :key="index"
-                                                class="flex flex-wrap items-center gap-1 mb-1"
-                                            >
-                                                <input
-                                                    v-bind:name="
-                                                        'radio-' + inputField.id
-                                                    "
-                                                    type="radio"
-                                                    v-bind:id="
-                                                        inputField.id +
-                                                        '-' +
-                                                        index
-                                                    "
-                                                />
-                                                <label
-                                                    v-bind:for="
-                                                        inputField.id +
-                                                        '-' +
-                                                        index
-                                                    "
-                                                    class="text-sm"
-                                                    >{{ value }}</label
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- select -->
-                                    <div
-                                        v-if="inputField.inputType === 'select'"
-                                    >
-                                        <div v-if="inputField.inputContent">
-                                            <select
-                                                v-bind:name="
-                                                    'select-' + inputField.id
-                                                "
-                                                class="w-auto border rounded border-gray-300 px-2 py-1 text-sm flex flex-wrap items-center gap-1 mb-1"
-                                            >
-                                                <option
-                                                    v-bind:for="
-                                                        inputField.id +
-                                                        '-' +
-                                                        index
-                                                    "
-                                                    value="selecte"
-                                                    class="text-sm"
-                                                >
-                                                    選択してください
-                                                </option>
-                                                <template
+                                        <!-- checkbox -->
+                                        <div
+                                            v-if="
+                                                inputField.inputType ===
+                                                'checkbox'
+                                            "
+                                        >
+                                            <div v-if="inputField.inputContent">
+                                                <div
                                                     v-for="(
                                                         value, index
-                                                    ) in inputField.selectContent"
+                                                    ) in inputField.checkContent"
                                                     :key="index"
+                                                    class="flex flex-wrap items-center gap-1 mb-1"
+                                                >
+                                                    <input
+                                                        v-bind:name="
+                                                            'check-' +
+                                                            inputField.id
+                                                        "
+                                                        type="checkbox"
+                                                        v-bind:id="
+                                                            inputField.id +
+                                                            '-' +
+                                                            index
+                                                        "
+                                                    />
+                                                    <label
+                                                        v-bind:for="
+                                                            inputField.id +
+                                                            '-' +
+                                                            index
+                                                        "
+                                                        class="text-sm"
+                                                        >{{ value }}</label
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- radio -->
+                                        <div
+                                            v-if="
+                                                inputField.inputType === 'radio'
+                                            "
+                                        >
+                                            <div v-if="inputField.inputContent">
+                                                <div
+                                                    v-for="(
+                                                        value, index
+                                                    ) in inputField.radioContent"
+                                                    :key="index"
+                                                    class="flex flex-wrap items-center gap-1 mb-1"
+                                                >
+                                                    <input
+                                                        v-bind:name="
+                                                            'radio-' +
+                                                            inputField.id
+                                                        "
+                                                        type="radio"
+                                                        v-bind:id="
+                                                            inputField.id +
+                                                            '-' +
+                                                            index
+                                                        "
+                                                    />
+                                                    <label
+                                                        v-bind:for="
+                                                            inputField.id +
+                                                            '-' +
+                                                            index
+                                                        "
+                                                        class="text-sm"
+                                                        >{{ value }}</label
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- select -->
+                                        <div
+                                            v-if="
+                                                inputField.inputType ===
+                                                'select'
+                                            "
+                                        >
+                                            <div v-if="inputField.inputContent">
+                                                <select
+                                                    v-bind:name="
+                                                        'select-' +
+                                                        inputField.id
+                                                    "
+                                                    class="w-auto border rounded border-gray-300 px-2 py-1 text-sm flex flex-wrap items-center gap-1 mb-1"
                                                 >
                                                     <option
                                                         v-bind:for="
@@ -1023,85 +1005,118 @@ const sendData = async () => {
                                                             '-' +
                                                             index
                                                         "
-                                                        v-bind:value="value"
+                                                        value="selecte"
                                                         class="text-sm"
                                                     >
-                                                        {{ value }}
+                                                        選択してください
                                                     </option>
-                                                </template>
-                                            </select>
+                                                    <template
+                                                        v-for="(
+                                                            value, index
+                                                        ) in inputField.selectContent"
+                                                        :key="index"
+                                                    >
+                                                        <option
+                                                            v-bind:for="
+                                                                inputField.id +
+                                                                '-' +
+                                                                index
+                                                            "
+                                                            v-bind:value="value"
+                                                            class="text-sm"
+                                                        >
+                                                            {{ value }}
+                                                        </option>
+                                                    </template>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- hr -->
+                                        <hr
+                                            v-if="inputField.inputType === 'hr'"
+                                            class="mb-8 mt-4 border-gray-400"
+                                        />
+                                    </div>
+
+                                    <!-- limit / code -->
+                                    <div class="flex">
+                                        <!-- limit -->
+                                        <div
+                                            v-if="
+                                                inputField.inputType ===
+                                                    'text' ||
+                                                inputField.inputType ===
+                                                    'textarea' ||
+                                                inputField.inputType ===
+                                                    'textarea_rtf'
+                                            "
+                                        >
+                                            <p
+                                                v-if="
+                                                    !inputField.inputLimit == 0
+                                                "
+                                                class="text-xs text-gray-900"
+                                            >
+                                                {{
+                                                    inputField.inputContent
+                                                        .length
+                                                }}
+                                                /
+                                                {{
+                                                    inputField.inputLimit
+                                                }}&nbsp;文字
+                                            </p>
+                                        </div>
+                                        <!-- code -->
+                                        <div
+                                            v-if="
+                                                !(inputField.inputType === 'hr')
+                                            "
+                                            class="flex justify-end text-xs text-gray-300 ml-auto"
+                                        >
+                                            <p
+                                                v-text="inputField.inputCode"
+                                            ></p>
                                         </div>
                                     </div>
-
-                                    <!-- hr -->
-                                    <hr
-                                        v-if="inputField.inputType === 'hr'"
-                                        class="mb-8 mt-4 border-gray-400"
-                                    />
-                                </div>
-
-                                <!-- limit / code -->
-                                <div class="flex">
-                                    <!-- limit -->
-                                    <div
-                                        v-if="
-                                            inputField.inputType === 'text' ||
-                                            inputField.inputType ===
-                                                'textarea' ||
-                                            inputField.inputType ===
-                                                'textarea_rtf'
-                                        "
-                                    >
-                                        <p
-                                            v-if="!inputField.inputLimit == 0"
-                                            class="text-xs text-gray-900"
-                                        >
-                                            {{ inputField.inputContent.length }}
-                                            /
-                                            {{
-                                                inputField.inputLimit
-                                            }}&nbsp;文字
-                                        </p>
-                                    </div>
-                                    <!-- code -->
-                                    <div
-                                        v-if="!(inputField.inputType === 'hr')"
-                                        class="flex justify-end text-xs text-gray-300 ml-auto"
-                                    >
-                                        <p v-text="inputField.inputCode"></p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- debug -->
-            <div
-                v-if="debugFlg"
-                class="w-80 p-4 border-l border-gray-300 break-all"
-                style="font-size: 9px"
-            >
-                <p style="white-space: pre-wrap">
-                    {{ inputFields }}
-                </p>
+                <!-- debug -->
+                <div
+                    v-if="debugFlg"
+                    class="w-80 p-4 border-l border-gray-300 break-all"
+                    style="font-size: 9px"
+                >
+                    <p style="white-space: pre-wrap">
+                        {{ inputFields }}
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- ボトム -->
-    <div class="fixed bottom-0 w-full border-t border-gray-300 bg-white">
-        <div class="max-w-7xl mx-auto flex justify-end py-4 px-8">
-            <form @submit.prevent="sendData">
-                <input
-                    type="hidden"
-                    v-model="inputFields"
-                    placeholder="Enter name"
-                />
-                <input type="hidden" name="form_id" :value="formAttribute.id" />
-                <button type="submit">更新する</button>
-            </form>
+        <!-- ボトム -->
+        <div class="bottom-0 z-50 w-full border-t border-gray-300 bg-white">
+            <div class="max-w-7xl mx-auto flex justify-end py-4 px-8">
+                <form @submit.prevent="sendData">
+                    <input
+                        type="hidden"
+                        name="inputFields"
+                        v-model="inputFields"
+                        placeholder="Enter name"
+                    />
+                    <input
+                        type="hidden"
+                        name="form_id"
+                        :value="formAttribute.id"
+                    />
+                    <button type="submit">更新する</button>
+                </form>
+            </div>
         </div>
     </div>
 </template>

@@ -75,10 +75,13 @@ Route::middleware('auth')->group(function () {
     // 複製
     Route::post('forms/duplicate/{id}', [FormController::class, 'duplicate'])->name('forms.duplicate');
 
+
+
     // 入力項目エディター
     Route::get('forms/inputs/{form_id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');
-
-    Route::post('/forms/inputs/submit/{id}', [FormController::class, 'submit']);
+    // 入力項目受取（上手く動かない）
+    // Route::post('/forms/inputs/submit/{id}', [FormController::class, 'submit'])->name('forms.submit');
+    Route::get('/forms/inputs/submit/{id}', [FormController::class, 'submit'])->name('forms.submit');
 });
 
 // userpage (UUID)

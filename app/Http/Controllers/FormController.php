@@ -205,9 +205,11 @@ class FormController extends Controller
         return view('inputs.edit', compact('form', 'input'));
     }
 
-    public function submit($id, Request $request)
+    public function submit(Request $request)
     {
+        // echo 'accessed'
+        dd($request);
         // 受け取ったデータを処理
-        return response()->json(['message' => 'Data submitted successfully']);
+        // return response()->json(['message' => 'Data submitted successfully']);
     }
 }
