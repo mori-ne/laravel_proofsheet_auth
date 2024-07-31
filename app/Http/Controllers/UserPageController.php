@@ -20,6 +20,11 @@ class UserPageController extends Controller
         return view('userpage.index', compact('project'));
     }
 
+    public function show()
+    {
+        return view('userpage.show');
+    }
+
     public function edit($uuid, string $id)
     {
     }
