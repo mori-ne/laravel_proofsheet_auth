@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -12,9 +13,9 @@ Route::get('/', function () {
 });
 
 // dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 // profile
 Route::middleware('auth')->group(function () {
@@ -81,7 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('forms/inputs/{form_id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');
     // 入力項目受取（上手く動かない）
     // Route::post('/forms/inputs/submit/{id}', [FormController::class, 'submit'])->name('forms.submit');
-    Route::get('/forms/inputs/submit/{id}', [FormController::class, 'submit'])->name('forms.submit');
+    // Route::get('/forms/inputs/submit/{id}', [FormController::class, 'submit'])->name('forms.submit');
 });
 
 // userpage (UUID)

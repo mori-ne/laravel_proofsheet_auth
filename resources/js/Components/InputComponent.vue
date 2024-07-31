@@ -272,31 +272,33 @@ const sendData = async () => {
 
                 <!-- プロジェクト・フォーム -->
                 <div class="flex gap-4 pt-2">
+                    <!-- project name -->
                     <div class="flex flex-row items-center">
                         <p class="text-sm text-gray-400">プロジェクト名：</p>
                         <h2 class="text-sm font-bold text-gray-900">
                             {{ formAttribute.project.project_name }}
                         </h2>
                     </div>
+                    <!-- form name -->
                     <div class="flex flex-row items-center">
                         <p class="text-sm text-gray-400">フォーム名：</p>
                         <h2 class="text-sm font-bold text-gray-900">
                             {{ formAttribute.form_name }}
                         </h2>
                     </div>
+                    <!-- デバッグモード -->
+                    <div class="mb-2 ml-auto flex justify-end space-x-2">
+                        <input
+                            v-model="debugFlg"
+                            name="debugSwitch"
+                            type="checkbox"
+                            class="ml-auto mr-2 h-4 w-4 rounded-sm border border-gray-300"
+                        />
+                        <label for="debugSwitch" class="text-xs"> デバッグモード </label>
+                    </div>
                 </div>
             </div>
 
-            <!-- デバッグモード -->
-            <div class="mb-2 ml-auto flex justify-end space-x-2">
-                <input
-                    v-model="debugFlg"
-                    name="debugSwitch"
-                    type="checkbox"
-                    class="ml-auto mr-2 h-4 w-4 rounded-sm border border-gray-300"
-                />
-                <label for="debugSwitch" class="text-xs"> デバッグモード </label>
-            </div>
             <div
                 class="mx-auto mb-14 flex h-full w-full flex-row overflow-hidden rounded-lg border border-gray-300 bg-white"
             >
@@ -802,7 +804,11 @@ class="w-full border rounded border-gray-300 p-2 h-32"
                 </div>
 
                 <!-- debug -->
-                <div v-if="debugFlg" class="w-80 break-all border-l border-gray-300 p-4" style="font-size: 9px">
+                <div
+                    v-if="debugFlg"
+                    class="w-80 overflow-y-scroll break-all border-l border-gray-300 p-4"
+                    style="font-size: 9px"
+                >
                     <p style="white-space: pre-wrap">
                         {{ inputFields }}
                     </p>
