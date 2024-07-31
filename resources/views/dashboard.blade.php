@@ -52,18 +52,16 @@
                             </div>
                         @endif
 
-                        <div class="w-1/4 rounded-md border bg-white p-8">
+                        <div class="flex-1 rounded-md border bg-white p-8">
                             <p class="mb-2 text-sm text-gray-400">総プロジェクト数</p>
                             <p class="text-4xl">
                                 {{ $projects->count() }}
                             </p>
                         </div>
 
-                        <div class="w-1/4 rounded-md border bg-white p-8">
+                        <div class="flex-1 rounded-md border bg-white p-8">
                             <p class="mb-2 text-sm text-gray-400">総フォーム数</p>
-                            <p class="text-4xl">
-                                {{--  --}}
-                            </p>
+                            <p class="text-4xl">{{ $forms->count() }}</p>
                         </div>
 
                         <div class="w-full rounded-md border bg-white p-8">

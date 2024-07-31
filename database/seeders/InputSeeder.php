@@ -14,10 +14,10 @@ class InputSeeder extends Seeder
     public function run(): void
     {
         // JSONファイルのパス
-        $jsonPath = database_path('sample.json');
+        $jsonPath = database_path('json/sample.json');
         $json = File::get($jsonPath);
 
-        $jsonPath2 = database_path('sample2.json');
+        $jsonPath2 = database_path('json/sample2.json');
         $json2 = File::get($jsonPath2);
 
         // 時間取得のクラス
@@ -41,7 +41,25 @@ class InputSeeder extends Seeder
                 "inputs" => null,
                 "created_at" => $now,
                 "updated_at" => $now,
-            ]
+            ],
+            [
+                "form_id" => 4,
+                "inputs" => $json,
+                "created_at" => $now,
+                "updated_at" => $now,
+            ],
+            [
+                "form_id" => 5,
+                "inputs" => $json2,
+                "created_at" => $now,
+                "updated_at" => $now,
+            ],
+            [
+                "form_id" => 6,
+                "inputs" => null,
+                "created_at" => $now,
+                "updated_at" => $now,
+            ],
         ];
         DB::table('input_json')->insert($inputs);
     }
