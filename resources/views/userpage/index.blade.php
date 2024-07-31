@@ -13,6 +13,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
     <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -26,7 +27,7 @@
 
             <div class="border-b border-gray-300 bg-white px-8 py-4">
                 <div class="mx-auto max-w-6xl">
-                    <h1 class="text-2xl font-bold">{{ $project->project_name }}</h1>
+                    <h1 class="text-xl font-bold">{{ $project->project_name }}</h1>
                 </div>
             </div>
 
@@ -64,7 +65,7 @@
                     </div>
 
                     {{-- new user --}}
-                    <div class="rounded border border-gray-300 bg-white p-6">
+                    <div class="mb-4 rounded border border-gray-300 bg-white p-6">
                         <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
                             初めてのかたはこちらから
                         </h3>
@@ -72,12 +73,27 @@
                             <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">新規登録</button>
                         </div>
                     </div>
+
+                    {{-- new user --}}
+                    <div class="rounded border border-gray-300 bg-white p-6">
+                        <h3 class="mb-2 border-b border-gray-400 pb-1 text-lg font-bold">
+                            Proofsheetからのお知らせ
+                        </h3>
+                        <div class="mb-2">
+                            <ul class="list-disc">
+                                <li class="ml-4 text-sm text-gray-500">
+                                    2024年8月31日 2:00〜4:00にシステムメンテナンスを行います。<br>
+                                    それに伴い、上記の時間帯でのサービスを停止させていただきます。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div>
                 <p class="py-2 text-center text-sm text-gray-400">
-                    Powered by Proofsheet
+                    Created by morine
                 </p>
             </div>
         </div>

@@ -13,6 +13,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css">
     <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}">
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -77,7 +78,7 @@
 
             <div>
                 <p class="py-2 text-center text-sm text-gray-400">
-                    Powered by Proofsheet
+                    Created by morine
                 </p>
             </div>
         </div>
