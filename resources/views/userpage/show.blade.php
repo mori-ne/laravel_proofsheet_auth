@@ -26,14 +26,14 @@
 
             <div class="border-b border-gray-300 bg-white px-8 py-4">
                 <div class="mx-auto max-w-6xl">
-                    <h1 class="text-2xl font-bold">{{ $project->project_name }}</h1>
+                    <h1 class="text-2xl font-bold">#</h1>
                 </div>
             </div>
 
             <div class="mx-auto flex max-w-6xl flex-row justify-center gap-4 py-8">
                 <div class="w-full">
                     <div class="documentstyle h-full rounded border border-gray-300 bg-white p-6">
-                        {!! $project->project_message !!}
+                        #
                     </div>
                 </div>
                 <div class="w-96 shrink-0">
@@ -43,7 +43,7 @@
                         <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
                             登録済の方はこちらから
                         </h3>
-                        <form action="{{ route('userpage.show', $project->uuid) }}" method="GET">
+                        <form action="#">
                             <div class="mb-8">
                                 <div class="mb-4">
                                     <label class="mb-1 block text-sm" for="email">メールアドレス</label>
