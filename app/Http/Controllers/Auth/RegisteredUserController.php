@@ -35,15 +35,15 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $Admin = Admin::create([
+        $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        event(new Registered($admin));
 
-        Auth::login($user);
+        Auth::login($admin);
 
         return redirect(route('dashboard', absolute: false));
     }

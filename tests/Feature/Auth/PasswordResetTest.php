@@ -23,22 +23,22 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
-        $user = Admin::factory()->create();
+        $admin = Admin::factory()->create();
 
-        $this->post('/forgot-password', ['email' => $user->email]);
+        $this->post('/forgot-password', ['email' => $admin->email]);
 
-        Notification::assertSentTo($user, ResetPassword::class);
+        Notification::assertSentTo($admin, ResetPassword::class);
     }
 
     public function test_reset_password_screen_can_be_rendered(): void
     {
         Notification::fake();
 
-        $user = Admin::factory()->create();
+        $admin = Admin::factory()->create();
 
-        $this->post('/forgot-password', ['email' => $user->email]);
+        $this->post('/forgot-password', ['email' => $admin->email]);
 
-        Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
+        Notification::assertSentTo($admin, ResetPassword::class, function ($notification) {
             $response = $this->get('/reset-password/' . $notification->token);
 
             $response->assertStatus(200);
@@ -51,14 +51,14 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
-        $user = Admin::factory()->create();
+        $admin = Admin::factory()->create();
 
-        $this->post('/forgot-password', ['email' => $user->email]);
+        $this->post('/forgot-password', ['email' => $admin->email]);
 
-        Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
+        Notification::assertSentTo($admin, ResetPassword::class, function ($notification) use ($admin) {
             $response = $this->post('/reset-password', [
                 'token' => $notification->token,
-                'email' => $user->email,
+                'email' => $admin->email,
                 'password' => 'password',
                 'password_confirmation' => 'password',
             ]);
