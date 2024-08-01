@@ -11,7 +11,7 @@ class PostUser extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $table = 'postusers';
+    protected $table = 'postuser';
 
     /**
      * The attributes that are mass assignable.

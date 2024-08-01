@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         PostUser::factory()->create([
             'name' => 'Test User',
-            'email' => 'rootuser@rootuser.jp',
+            'email' => 'postuser@postuser.jp',
         ]);
 
         $this->call([
