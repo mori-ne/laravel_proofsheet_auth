@@ -44,15 +44,16 @@
                         <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
                             登録済の方はこちらから
                         </h3>
-                        <form action="{{ route('userpage.show', $project->uuid) }}" method="GET">
+                        <form action="{{ route('userpage.login', $project->uuid) }}" method="POST">
+                            @csrf
                             <div class="mb-8">
                                 <div class="mb-4">
                                     <label class="mb-1 block text-sm" for="email">メールアドレス</label>
-                                    <input class="w-full rounded border border-gray-300" type="text" value="" placeholder="メールアドレス">
+                                    <input name="email" class="w-full rounded border border-gray-300" type="text" value="" placeholder="メールアドレス">
                                 </div>
                                 <div class="mb-4">
                                     <label class="mb-1 block text-sm" for="password">パスワード</label>
-                                    <input class="w-full rounded border border-gray-300" type="password" value="" placeholder="パスワード">
+                                    <input name="password" class="w-full rounded border border-gray-300" type="password" value="" placeholder="パスワード">
                                 </div>
                             </div>
                             <div class="mb-4">

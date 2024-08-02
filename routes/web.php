@@ -13,19 +13,19 @@ Route::get('/', function () {
 });
 
 // dashboard
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth:web', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 // profile
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // projects（そのうちresourceで書き直す）
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('projects/search', [ProjectController::class, 'search'])->name('projects.search');
     Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // forms（そのうちresourceで書き直す）
-Route::middleware('auth')->group(function () {
+Route::middleware('auth:web')->group(function () {
     Route::get('forms', [FormController::class, 'index'])->name('forms.index');
     Route::get('forms/search', [FormController::class, 'search'])->name('forms.search');
     Route::get('forms/create', [FormController::class, 'create'])->name('forms.create');
@@ -60,8 +60,6 @@ Route::middleware('auth')->group(function () {
     // Route::get('/forms/inputs/submit/{id}', [FormController::class, 'submit'])->name('forms.submit');
 });
 
-// userpage (UUID)
-Route::get('userpage/{uuid}', [UserPageController::class, 'index'])->name('userpage.index');
-Route::get('userpage/{uuid}/forms', [UserPageController::class, 'show'])->name('userpage.show');
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/userpage.php';
