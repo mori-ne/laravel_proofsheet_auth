@@ -224,7 +224,7 @@
                             {{-- url --}}
                             <div class="flex items-center">
                                 <p class="text-sm text-gray-500">公開URL：</p>
-                                <a class="text-sm text-gray-700" href="{{ url('/') . '/userpage' }}/{{ $project->uuid }}" target="_blank">{{ url('/') . '/userpage' }}/{{ $project->uuid }}</a>
+                                <a class="text-sm text-gray-700" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">{{ route('postuser.index', ['uuid' => $project->uuid]) }}</a>
                             </div>
                             {{-- id --}}
                             <div class="ml-auto flex items-center">

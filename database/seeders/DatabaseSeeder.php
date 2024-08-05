@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         PostUser::factory()->create([
-            'name' => 'Test User',
+            'name' => 'Post User',
             'email' => 'postuser@postuser.jp',
+            'uuid' => '00000000-0000-0000-0000-000000000000'
         ]);
 
         $this->call([

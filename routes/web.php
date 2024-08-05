@@ -4,7 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\UserPageController;
+use App\Http\Controllers\PostUserController;
 use Illuminate\Support\Facades\Route;
 
 // index
@@ -62,4 +62,4 @@ Route::middleware('auth:web')->group(function () {
 
 
 require __DIR__ . '/auth.php';
-require __DIR__ . '/userpage.php';
+require __DIR__ . '/postuser.php';

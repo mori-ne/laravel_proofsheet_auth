@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'UserPage') }}</title>
+    <title>{{ config('app.name', 'postuser') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -38,23 +38,29 @@
                     </div>
                 </div>
                 <div class="w-96 shrink-0">
-
+                    @error('login')
+                        <p class="text-sm text-red-500">※エラーです。</p>
+                    @enderror
                     {{-- registerd user --}}
                     <div class="mb-4 rounded border border-gray-300 bg-white p-6">
                         <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
                             登録済の方はこちらから
                         </h3>
-                        <form action="{{ route('userpage.login', $project->uuid) }}" method="POST">
+                        <form action="{{ route('postuser.login', ['uuid' => $project->uuid]) }}" method="POST">
                             @csrf
                             <div class="mb-8">
+                                {{-- email --}}
                                 <div class="mb-4">
                                     <label class="mb-1 block text-sm" for="email">メールアドレス</label>
                                     <input name="email" class="w-full rounded border border-gray-300" type="text" value="" placeholder="メールアドレス">
                                 </div>
+                                {{-- password --}}
                                 <div class="mb-4">
                                     <label class="mb-1 block text-sm" for="password">パスワード</label>
                                     <input name="password" class="w-full rounded border border-gray-300" type="password" value="" placeholder="パスワード">
                                 </div>
+                                {{-- uuid --}}
+                                <input type="hidden" name="uuid" value="{{ $project->uuid }}">
                             </div>
                             <div class="mb-4">
                                 <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">ログイン</button>

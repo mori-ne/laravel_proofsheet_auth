@@ -153,8 +153,9 @@
                 {{-- public url --}}
                 <div class="">
                     <p class="text-sm text-gray-400">公開URL（URLは変更できません）</p>
-                    <a class="text-md text-blue-700 underline" href="{{ url('/') . '/userpage' }}/{{ $project->uuid }}" target="_blank">
-                        {{ url('/') . '/userpage' }}/{{ $project->uuid }}
+                    {{-- <a class="text-md text-blue-700 underline" href="{{ url('/') . '/postuser' }}/{{ $project->uuid }}" target="_blank"> --}}
+                    <a class="text-md text-blue-700 underline" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">
+                        {{ route('postuser.index', ['uuid' => $project->uuid]) }}
                     </a>
                 </div>
             </div>
