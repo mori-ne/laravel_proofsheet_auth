@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -12,10 +12,10 @@ class ProfileTest extends TestCase
 
     public function test_profile_page_is_displayed(): void
     {
-        $admin = Admin::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this
-            ->actingAs($admin)
+            ->actingAs($user)
             ->get('/profile');
 
         $response->assertOk();
@@ -23,10 +23,10 @@ class ProfileTest extends TestCase
 
     public function test_profile_information_can_be_updated(): void
     {
-        $admin = Admin::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this
-            ->actingAs($admin)
+            ->actingAs($user)
             ->patch('/profile', [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
@@ -36,37 +36,37 @@ class ProfileTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect('/profile');
 
-        $admin->refresh();
+        $user->refresh();
 
-        $this->assertSame('Test User', $admin->name);
-        $this->assertSame('test@example.com', $admin->email);
-        $this->assertNull($admin->email_verified_at);
+        $this->assertSame('Test User', $user->name);
+        $this->assertSame('test@example.com', $user->email);
+        $this->assertNull($user->email_verified_at);
     }
 
     public function test_email_verification_status_is_unchanged_when_the_email_address_is_unchanged(): void
     {
-        $admin = Admin::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this
-            ->actingAs($admin)
+            ->actingAs($user)
             ->patch('/profile', [
                 'name' => 'Test User',
-                'email' => $admin->email,
+                'email' => $user->email,
             ]);
 
         $response
             ->assertSessionHasNoErrors()
             ->assertRedirect('/profile');
 
-        $this->assertNotNull($admin->refresh()->email_verified_at);
+        $this->assertNotNull($user->refresh()->email_verified_at);
     }
 
     public function test_user_can_delete_their_account(): void
     {
-        $admin = Admin::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this
-            ->actingAs($admin)
+            ->actingAs($user)
             ->delete('/profile', [
                 'password' => 'password',
             ]);
@@ -76,15 +76,15 @@ class ProfileTest extends TestCase
             ->assertRedirect('/');
 
         $this->assertGuest();
-        $this->assertNull($admin->fresh());
+        $this->assertNull($user->fresh());
     }
 
     public function test_correct_password_must_be_provided_to_delete_account(): void
     {
-        $admin = Admin::factory()->create();
+        $user = User::factory()->create();
 
         $response = $this
-            ->actingAs($admin)
+            ->actingAs($user)
             ->from('/profile')
             ->delete('/profile', [
                 'password' => 'wrong-password',
@@ -94,6 +94,6 @@ class ProfileTest extends TestCase
             ->assertSessionHasErrorsIn('userDeletion', 'password')
             ->assertRedirect('/profile');
 
-        $this->assertNotNull($admin->fresh());
+        $this->assertNotNull($user->fresh());
     }
 }

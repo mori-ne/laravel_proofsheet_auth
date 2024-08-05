@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         return view('profile.edit', [
-            'admin' => $request->user(),
+            'user' => $request->user(),
         ]);
     }
 
@@ -46,11 +46,11 @@ class ProfileController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $admin = $request->user();
+        $user = $request->user();
 
         Auth::logout();
 
-        $admin->delete();
+        $user->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
