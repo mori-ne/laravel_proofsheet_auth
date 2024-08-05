@@ -33,7 +33,7 @@ class PostUserController extends Controller
         // 認証試行
         if (Auth::guard('postuser')->attempt($credentials)) {
             return redirect()->route('postuser.dashboard', ['uuid' => $request->uuid])->with([
-                'login_msg' => 'ログインしました。',
+                'status' => 'ログインしました。',
             ]);
         }
 
@@ -53,6 +53,6 @@ class PostUserController extends Controller
         if (Auth::check()) {
             Auth::logout();
         }
-        return redirect()->route('postuser.index', ['uuid' => $uuid])->with(['logout_msg' => 'ログアウトしました']);
+        return redirect()->route('postuser.index', ['uuid' => $uuid])->with(['status' => 'ログアウトしました']);
     }
 }
