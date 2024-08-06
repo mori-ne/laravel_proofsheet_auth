@@ -18,14 +18,14 @@ Route::middleware(['auth:web', 'verified'])->group(function () {
 });
 
 // profile
-Route::middleware('auth:web')->group(function () {
+Route::middleware('auth:web', 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // projects（そのうちresourceで書き直す）
-Route::middleware('auth:web')->group(function () {
+Route::middleware('auth:web', 'verified')->group(function () {
     Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('projects/search', [ProjectController::class, 'search'])->name('projects.search');
     Route::get('projects/create', [ProjectController::class, 'create'])->name('projects.create');
@@ -40,7 +40,7 @@ Route::middleware('auth:web')->group(function () {
 });
 
 // forms（そのうちresourceで書き直す）
-Route::middleware('auth:web')->group(function () {
+Route::middleware('auth:web', 'verified')->group(function () {
     Route::get('forms', [FormController::class, 'index'])->name('forms.index');
     Route::get('forms/search', [FormController::class, 'search'])->name('forms.search');
     Route::get('forms/create', [FormController::class, 'create'])->name('forms.create');
@@ -51,7 +51,6 @@ Route::middleware('auth:web')->group(function () {
     Route::delete('forms/{id}', [FormController::class, 'destroy'])->name('forms.destroy');
     Route::post('forms/{project_id}', [FormController::class, 'destroyAll'])->name('forms.destroyAll');
     Route::post('forms/duplicate/{id}', [FormController::class, 'duplicate'])->name('forms.duplicate');
-
 
     // 入力項目エディター
     Route::get('forms/inputs/{form_id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');

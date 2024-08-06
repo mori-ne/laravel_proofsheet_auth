@@ -25,6 +25,12 @@ class DatabaseSeeder extends Seeder
             'uuid' => '00000000-0000-0000-0000-000000000000'
         ]);
 
+        PostUser::factory()->create([
+            'name' => 'Post User2',
+            'email' => 'postuser2@postuser.jp',
+            'uuid' => '00000000-0000-0000-0000-000000000001'
+        ]);
+
         $this->call([
             ProjectSeeder::class,
             FormSeeder::class,

@@ -22,11 +22,11 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('postuser_password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
+        // Schema::create('postuser_password_reset_tokens', function (Blueprint $table) {
+        //     $table->string('email')->primary();
+        //     $table->string('token');
+        //     $table->timestamp('created_at')->nullable();
+        // });
 
         // Schema::create('postuser_sessions', function (Blueprint $table) {
         //     $table->string('id')->primary();
@@ -44,7 +44,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('postuser');
-        Schema::dropIfExists('postuser_password_reset_tokens');
+        // Schema::dropIfExists('postuser_password_reset_tokens');
         // Schema::dropIfExists('postuser_sessions');
     }
 };

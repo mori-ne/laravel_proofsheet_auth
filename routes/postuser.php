@@ -17,17 +17,12 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 // postuser (UUID)
-Route::get('/postuser/{uuid}', [PostUserController::class, 'index'])->name('postuser.index');
-Route::post('/postuser/{uuid}/login', [PostUserController::class, 'login'])->name('postuser.login');
-Route::post('/postuser/{uuid}/logout', [PostUserController::class, 'logout'])->name('postuser.logout');
+Route::group(['prefix' => 'postuser'], function () {
+    Route::get('{uuid}', [PostUserController::class, 'index'])->name('postuser.index');
+    Route::post('{uuid}/login', [PostUserController::class, 'login'])->name('postuser.login');
 
-Route::middleware('auth:postuser')->group(function () {
-    Route::get('/postuser/{uuid}/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
+    Route::middleware('auth:postuser')->group(function () {
+        Route::get('{uuid}/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
+        Route::post('{uuid}/logout', [PostUserController::class, 'destroy'])->name('postuser.logout');
+    });
 });
-
-// 管理ログイン後のみアクセス可
-// Route::middleware('auth:posuser')->group(function () {
-//     Route::get('/postuser/{uuid}/dashboard', function () {
-//         return view('postuser/{uuid}');
-//     })->name('postuser.index');
-// });

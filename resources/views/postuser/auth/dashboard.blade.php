@@ -46,7 +46,8 @@
                         <div>
                             <a class="text-sm" href="">アカウント管理</a>
                         </div>
-                        <form action="{{ route('postuser.logout', ['uuid' => $project->uuid]) }}" method="POST">
+                        {{-- <form action="{{ route('postuser.logout', ['uuid' => $project->uuid]) }}" method="POST"> --}}
+                        <form action="#" method="POST">
                             @csrf
                             <button class="text-sm text-red-500" type="submit">ログアウト</button>
                         </form>
@@ -107,5 +108,3 @@
 </body>
 
 </html>
-
-{{ dd($project->forms) }}
