@@ -8,9 +8,10 @@ use App\Http\Controllers\PostUserController;
 use Illuminate\Support\Facades\Route;
 
 // index
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
 
 // dashboard
 Route::middleware(['auth:web', 'verified'])->group(function () {

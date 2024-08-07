@@ -9,6 +9,12 @@ use App\Models\Form;
 
 class DashboardController extends Controller
 {
+
+    public function welcome()
+    {
+        return view('welcome');
+    }
+
     public function index()
     {
         // すべてのプロジェクト

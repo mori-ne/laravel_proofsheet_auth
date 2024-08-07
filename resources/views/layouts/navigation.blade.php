@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex shrink-0 items-center text-xl font-extrabold">
                     <a href="{{ route('dashboard') }}">
-                        <p class="h-20 w-20 fill-current text-gray-500">Proofsheet</p>
+                        <p>Proofsheet</p>
                     </a>
                 </div>
             </div>
