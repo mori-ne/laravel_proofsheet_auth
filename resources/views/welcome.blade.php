@@ -30,7 +30,7 @@
                     @if (Route::has('login'))
                         <nav class="-mx-3 flex flex-1 justify-center gap-4">
                             @auth
-                                <a href="{{ url('/dashboard') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-gray-700 ring-1 ring-transparent transition hover:text-gray-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                <a href="{{ route('dashboard') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-gray-700 ring-1 ring-transparent transition hover:text-gray-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                     管理画面へ
                                 </a>
                             @else

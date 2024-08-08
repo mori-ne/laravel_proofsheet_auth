@@ -24,10 +24,8 @@ use Illuminate\Support\Facades\Route;
 //         Route::get('{uuid}/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
 //     });
 // });
-Route::prefix('{uuid}')->group(function () {
-    // top
+Route::prefix('postuser/{uuid}')->group(function () {
     Route::get('/', [PostUserController::class, 'index'])->name('postuser.index');
-    // login
     Route::post('/login', [PostUserController::class, 'login'])->name('postuser.login');
 
     Route::middleware('auth:postuser')->group(function () {

@@ -16,6 +16,9 @@ class PostUserController extends Controller
     // ログインページ
     public function index($uuid)
     {
+        if (Auth::guard('postuser')->user()) {
+            return redirect()->route('postuser.dashboard', $uuid);
+        }
         Log::info($uuid);
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
 
@@ -56,7 +59,11 @@ class PostUserController extends Controller
 
     public function dashboard($uuid)
     {
-        $postuseruuid = Auth::user('postuser')->uuid;
+        if (Auth::guard('postuser')->user()) {
+            return redirect('postuser.dashboard', $uuid);
+        }
+        Log::info(Auth::guard('postuser')->user());
+        $postuseruuid = Auth::guard('postuser')->user()->uuid;
         if ($uuid !== $postuseruuid) {
             abort(404, 'フォームが見つかりません');
         }
