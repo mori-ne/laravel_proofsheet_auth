@@ -70,9 +70,8 @@
                 <div class="mt-4 flex items-center justify-center">
                     @if (Route::has('password.request'))
                         <p class="rounded-md text-xs text-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                            パスワードを忘れてしまった方は
                             <a class="underline" href="{{ route('password.request') }}">
-                                こちら
+                                パスワードを忘れてしまった方
                             </a>
                         </p>
                     @endif

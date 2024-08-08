@@ -30,6 +30,7 @@
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
+                <h2 class="mb-6 text-center text-lg font-bold leading-snug text-gray-700">新規登録</h2>
                 <!-- Name -->
                 <div>
                     <x-input-label for="name" :value="__('Name')" />
@@ -73,7 +74,7 @@
 
         <div class="mt-6">
             <a class="text-xs text-gray-600 underline" href="{{ route('login') }}">
-                既に登録済みの方
+                既に登録済みの方（ログイン）
             </a>
         </div>
 

@@ -16,9 +16,9 @@ class PostUserController extends Controller
     // ログインページ
     public function index($uuid)
     {
-        if (Auth::guard('postuser')->user()) {
-            return redirect()->route('postuser.dashboard', $uuid);
-        }
+        // if (Auth::guard('postuser')->user()) {
+        //     return redirect()->route('postuser.dashboard', $uuid);
+        // }
         Log::info($uuid);
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
 
@@ -47,21 +47,21 @@ class PostUserController extends Controller
         $credentials['uuid'] = $uuid;
 
         if ($request->authenticate($credentials)) {
+            // 必須パラメータ uuid を追加
             return redirect()->route('postuser.dashboard', ['uuid' => $uuid])->with([
                 'status' => 'ログインしました。',
             ]);
         }
 
+        // 認証に失敗した場合の処理も追加しておくと良いかも
         return back()->withErrors([
-            'login' => ['ログインに失敗しました'],
+            'credentials' => ['認証に失敗しました。'],
         ]);
     }
 
+
     public function dashboard($uuid)
     {
-        if (Auth::guard('postuser')->user()) {
-            return redirect('postuser.dashboard', $uuid);
-        }
         Log::info(Auth::guard('postuser')->user());
         $postuseruuid = Auth::guard('postuser')->user()->uuid;
         if ($uuid !== $postuseruuid) {
@@ -78,5 +78,11 @@ class PostUserController extends Controller
             Auth::logout();
         }
         return redirect()->route('postuser.index', ['uuid' => $uuid])->with(['status' => 'ログアウトしました']);
+    }
+
+    public function register($uuid)
+    {
+        $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
+        return view('postuser.registar', ['uuid' => $uuid, 'project' => $project]);
     }
 }
