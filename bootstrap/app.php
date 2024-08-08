@@ -14,16 +14,14 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // $middleware->redirectGuestsTo(function (Request $request) {
-        // $uuid = $request->route('uuid'); // ルートパラメータからuuidを取得
-        // return $request->is('{uuid}*') ? route('postuser.index', ['uuid' => $uuid]) : route('postuser.index');
+
+        //     $uuid = $request->uuid;
+        //     if ($request->routeIs('postuser.{uuid}.*')) {
+        //         return route('postuser.login');
+        //     }
+
+        //     return route('login');
         // });
-
-
-        //MiddlewareのRedirectIfAuthenticatedに書いてたもの
-        // if (Auth::guard('postuser')->check()) {
-        //     return route('postuser.dashboard');
-        // }
-        // return route('postuser.index');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

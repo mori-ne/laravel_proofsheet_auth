@@ -44,13 +44,17 @@
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
-                <div class="mt-4 flex items-center justify-end">
-                    <x-primary-button>
-                        {{ __('Email Password Reset Link') }}
-                    </x-primary-button>
-                </div>
+                <button type='submit'
+                    class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-gray-800 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900'>
+                    パスワードリセットメールを送信
+                </button>
             </form>
         </div>
+        <p class="mt-6 flex justify-center text-xs text-gray-600">
+            <a class="underline" href="javascript:history.back()">
+                前のページへ戻る
+            </a>
+        </p>
     </div>
 </body>
 
