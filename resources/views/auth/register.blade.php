@@ -18,13 +18,15 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-        <div>
-            <a class="text-3xl font-bold" href="{{ route('welcome') }}">
-                <p>Proofsheet</p>
+
+        {{-- title --}}
+        <div class="mb-12">
+            <a href="{{ route('welcome') }}">
+                <h1 class="text-center text-3xl font-bold text-gray-600">Proofsheet</h1>
             </a>
         </div>
 
-        <div class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+        <div class="w-96 overflow-hidden rounded-md border border-gray-200 bg-white p-10">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -60,17 +62,21 @@
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
 
-                <div class="mt-4 flex items-center justify-end">
-                    <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ route('login') }}">
-                        {{ __('Already registered?') }}
-                    </a>
-
-                    <x-primary-button class="ms-4">
-                        {{ __('Register') }}
-                    </x-primary-button>
+                <div class="mt-8 flex items-center justify-end">
+                    <button type='submit'
+                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-gray-800 px-4 py-2 text-sm font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900'>
+                        新規登録
+                    </button>
                 </div>
             </form>
         </div>
+
+        <div class="mt-6">
+            <a class="text-xs text-gray-600 underline" href="{{ route('login') }}">
+                既に登録済みの方
+            </a>
+        </div>
+
     </div>
 </body>
 

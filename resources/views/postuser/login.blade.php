@@ -59,7 +59,7 @@
                         <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
                             登録済の方はこちらから
                         </h3>
-                        <form action="{{ url('postuser/' . $uuid . '/login') }}" method="POST">
+                        <form action="{{ route('postuser.login', $uuid) }}" method="POST">
                             @csrf
                             <div class="mb-8">
                                 {{-- email --}}

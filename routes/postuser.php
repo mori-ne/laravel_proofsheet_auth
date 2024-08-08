@@ -17,12 +17,18 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 // postuser (UUID)
-Route::group(['prefix' => 'postuser'], function () {
-    Route::get('{uuid}', [PostUserController::class, 'index'])->name('postuser.index');
-    Route::post('{uuid}/login', [PostUserController::class, 'login'])->name('postuser.login');
-
+// Route::prefix('postuser')->group(function () {
+//     Route::middleware('auth:postuser')->group(function () {
+//         Route::get('{uuid}', [PostUserController::class, 'index'])->name('postuser.index');
+//         Route::post('{uuid}/login', [PostUserController::class, 'login'])->name('postuser.login');
+//         Route::get('{uuid}/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
+//     });
+// });
+Route::prefix('{uuid}')->group(function () {
     Route::middleware('auth:postuser')->group(function () {
-        Route::get('{uuid}/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
+        Route::get('/', [PostUserController::class, 'index'])->name('postuser.index');
+        Route::post('/login', [PostUserController::class, 'login'])->name('postuser.login');
+        Route::get('/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
         Route::post('{uuid}/logout', [PostUserController::class, 'destroy'])->name('postuser.logout');
     });
 });

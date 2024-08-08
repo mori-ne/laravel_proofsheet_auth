@@ -15,7 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->redirectGuestsTo(function (Request $request) {
             $uuid = $request->route('uuid'); // ルートパラメータからuuidを取得
-            return $request->is('postuser*') ? route('postuser.index', ['uuid' => $uuid]) : route('index');
+            return $request->is('{uuid}*') ? route('postuser.index', ['uuid' => $uuid]) : route('postuser.index');
         });
 
         //MiddlewareのRedirectIfAuthenticatedに書いてたもの

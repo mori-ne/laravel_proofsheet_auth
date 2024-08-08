@@ -18,13 +18,15 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
-        <div>
-            <a class="text-3xl font-bold" href="{{ route('welcome') }}">
-                <p>Proofsheet</p>
+
+        {{-- title --}}
+        <div class="mb-12">
+            <a href="{{ route('welcome') }}">
+                <h1 class="text-center text-3xl font-bold text-gray-600">Proofsheet</h1>
             </a>
         </div>
 
-        <div class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+        <div class="w-96 overflow-hidden rounded-md border border-gray-200 bg-white p-10">
             <div class="mb-4 text-sm text-gray-600">
                 {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
             </div>
