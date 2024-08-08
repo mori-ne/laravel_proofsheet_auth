@@ -13,10 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->redirectGuestsTo(function (Request $request) {
-            $uuid = $request->route('uuid'); // ルートパラメータからuuidを取得
-            return $request->is('{uuid}*') ? route('postuser.index', ['uuid' => $uuid]) : route('postuser.index');
-        });
+        // $middleware->redirectGuestsTo(function (Request $request) {
+        // $uuid = $request->route('uuid'); // ルートパラメータからuuidを取得
+        // return $request->is('{uuid}*') ? route('postuser.index', ['uuid' => $uuid]) : route('postuser.index');
+        // });
+
 
         //MiddlewareのRedirectIfAuthenticatedに書いてたもの
         // if (Auth::guard('postuser')->check()) {

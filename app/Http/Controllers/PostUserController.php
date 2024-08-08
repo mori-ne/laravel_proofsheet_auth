@@ -9,12 +9,14 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\PostuserLoginRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class PostUserController extends Controller
 {
     // ログインページ
     public function index($uuid)
     {
+        Log::info($uuid);
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
 
         // statusが非公開なら404ページへ
@@ -28,9 +30,9 @@ class PostUserController extends Controller
 
     public function login($uuid, PostUserLoginRequest $request): RedirectResponse
     {
-        // URLのuuidがpost_usersテーブルに存在するか確認
         $postUser = PostUser::where('uuid', $uuid)->first();
 
+        // URLのuuidがpost_usersテーブルに存在するか確認
         if (!$postUser) {
             return back()->withErrors([
                 'uuid' => ['無効なUUIDです。'],
