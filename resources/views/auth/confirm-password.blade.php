@@ -24,7 +24,7 @@
             </a>
         </div>
 
-        <div class="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md sm:max-w-md sm:rounded-lg">
+        <div class="mt-6 w-full overflow-hidden bg-white px-6 py-4 sm:max-w-md sm:rounded-lg">
             <div class="mb-4 text-sm text-gray-600">
                 {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
             </div>
