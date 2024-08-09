@@ -14,6 +14,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Middleware\PostUserRedirect;
 use Illuminate\Support\Facades\Route;
 
 // postuser (UUID)
@@ -24,12 +25,14 @@ use Illuminate\Support\Facades\Route;
 //         Route::get('{uuid}/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
 //     });
 // });
-Route::prefix('postuser/{uuid}')->group(function () {
+Route::prefix('/postuser/{uuid}')->group(function () {
     Route::get('/', [PostUserController::class, 'index'])->name('postuser.index');
     Route::post('/login', [PostUserController::class, 'login'])->name('postuser.login');
     Route::post('/logout', [PostUserController::class, 'logout'])->name('postuser.logout');
 
-    Route::middleware('auth:postuser')->group(function () {
-        Route::get('/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
+    Route::middleware([PostUserRedirect::class])->group(function () {
+        Route::middleware('auth:postuser')->group(function () {
+            Route::get('/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
+        });
     });
 });

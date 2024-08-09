@@ -13,15 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // $middleware->redirectGuestsTo(function (Request $request) {
-
-        //     $uuid = $request->uuid;
-        //     if ($request->routeIs('postuser.{uuid}.*')) {
-        //         return route('postuser.login');
-        //     }
-
-        //     return route('login');
-        // });
+        $middleware->append([
+            \App\Http\Middleware\PostUserRedirect::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

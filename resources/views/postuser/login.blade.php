@@ -59,7 +59,7 @@
                         <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
                             登録済の方はこちらから
                         </h3>
-                        <form action="{{ route('postuser.login') }}" method="POST">
+                        <form action="{{ route('postuser.login', ['uuid' => $project->uuid]) }}" method="POST">
                             @csrf
                             <div class="mb-8">
                                 {{-- email --}}
@@ -73,7 +73,6 @@
                                     <input name="password" class="w-full rounded border border-gray-300" type="password" value="" placeholder="パスワード">
                                 </div>
                                 {{-- uuid --}}
-                                <input type="hidden" name="uuid" value="{{ $project->uuid }}">
                             </div>
                             <div class="mb-4">
                                 <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">ログイン</button>
