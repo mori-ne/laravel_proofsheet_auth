@@ -5,7 +5,7 @@
     <div class="flex gap-4">
 
         {{-- content --}}
-        <div class="documentstyle h-full rounded border border-gray-300 bg-white p-6">
+        <div class="documentstyle w-full rounded border border-gray-300 bg-white p-6">
             {!! $project->project_message !!}
         </div>
 

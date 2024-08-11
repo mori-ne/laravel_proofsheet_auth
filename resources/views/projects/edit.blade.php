@@ -10,7 +10,7 @@
             </div>
 
             {{-- back --}}
-            <div class="mb-4 border-neutral-300">
+            <div class="mb-4 border-gray-300">
                 <div class="flex items-center gap-1">
                     <i class="at-arrow-left-circle"></i>
                     <a href="javascript:history.back()">戻る</a>
@@ -35,7 +35,7 @@
                 {{-- 公開設定・公開期限 --}}
                 <div class="mb-8">
                     <h4 class="text-md mb-2 font-bold text-gray-500">公開情報</h4>
-                    <div class="rounded-md border border-neutral-300 bg-white p-8">
+                    <div class="rounded-md border border-gray-300 bg-white p-8">
                         <div class="flex flex-row items-center gap-2">
                             {{-- 公開設定 --}}
                             <div class="mr-4">
@@ -64,7 +64,7 @@
                 {{-- プロジェクト名・プロジェクトの説明 --}}
                 <div class="mb-8">
                     <h4 class="text-md mb-2 font-bold text-gray-500">プロジェクト概要</h4>
-                    <div class="rounded-md border border-neutral-300 bg-white p-8">
+                    <div class="rounded-md border border-gray-300 bg-white p-8">
                         {{-- プロジェクト名 --}}
                         <div class="mb-6">
                             <div class="mb-2">
@@ -76,7 +76,7 @@
                                 </span>
                             </div>
                             <input name="project_name" type="text" placeholder="プロジェクト名を記入してください" value="{{ old('project_name', $project->project_name) }}"
-                                class="text-md ring-offset-background flex h-10 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                                class="text-md ring-offset-background flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
                             @error('project_name')
                                 <div class="mt-2 text-red-600">{{ $message }}</div>
                             @enderror
@@ -88,7 +88,7 @@
                                 <label class="text-md font-bold">プロジェクトの説明</label>
                             </div>
                             <textarea id="projectinstance" name="project_description" type="text" placeholder="プロジェクトの説明を記入してください"
-                                class="flex h-48 min-h-[80px] w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_description', $project->project_description) }}</textarea>
+                                class="flex h-48 min-h-[80px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_description', $project->project_description) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                 {{-- プロジェクトの期間情報・プロジェクトの内容情報 --}}
                 <div class="mb-8">
                     <h4 class="text-md mb-2 font-bold text-gray-500">プロジェクト情報</h4>
-                    <div class="rounded-md border border-neutral-300 bg-white p-8">
+                    <div class="rounded-md border border-gray-300 bg-white p-8">
 
                         {{-- 内容情報 --}}
                         <div class="mb-6">
@@ -104,33 +104,33 @@
                                 <label class="text-md font-bold">内容情報</label>
                             </div>
                             <textarea id="projectinstance" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください"
-                                class="flex h-48 min-h-[80px] w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_message', $project->project_message) }}</textarea>
+                                class="flex h-48 min-h-[80px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('project_message', $project->project_message) }}</textarea>
                         </div>
                     </div>
                 </div>
 
                 {{-- 返信メールの件名・本文 --}}
                 <h4 class="text-md mb-2 font-bold text-gray-500">返信メール情報</h4>
-                <div class="rounded-md border border-neutral-300 bg-white p-8">
+                <div class="rounded-md border border-gray-300 bg-white p-8">
                     <div>
                         <div class="mb-6">
                             <div class="mb-2">
                                 <label class="text-md font-bold">返信メールの件名</label>
                             </div>
                             <input name="mail_subject" type="text" placeholder="メールの件名を記入してください" value="{{ old('mail_subject', $project->mail_subject) }}"
-                                class="text-md ring-offset-background flex h-10 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                                class="text-md ring-offset-background flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
                         </div>
                         <div class="mb-6">
                             <div class="mb-2">
                                 <label class="text-md font-bold">返信メールの本文</label>
                             </div>
                             <textarea id="projectinstance" name="mail_content" type="text" placeholder="メールの返信内容を記入してください"
-                                class="flex h-48 min-h-[80px] w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{!! old('mail_content', $project->mail_content) !!}</textarea>
+                                class="flex h-48 min-h-[80px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{!! old('mail_content', $project->mail_content) !!}</textarea>
                         </div>
                     </div>
                 </div>
 
-                <div class="rounded-md border border-neutral-300 bg-white p-8">
+                <div class="rounded-md border border-gray-300 bg-white p-8">
                     <button type="submit"
                         class="focus:shadow-outline mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-950 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">更新する</button>
                 </div>
