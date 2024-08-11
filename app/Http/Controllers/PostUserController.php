@@ -79,4 +79,10 @@ class PostUserController extends Controller
         }
         return redirect()->route('postuser.index', ['uuid' => $uuid])->with(['status' => 'ログアウトしました']);
     }
+
+    public function register($uuid)
+    {
+        $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
+        return view('postuser.registar', ['uuid' => $uuid, 'project' => $project]);
+    }
 }

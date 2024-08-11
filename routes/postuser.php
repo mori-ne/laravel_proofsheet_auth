@@ -27,12 +27,12 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::prefix('/postuser/{uuid}')->group(function () {
     Route::get('/', [PostUserController::class, 'index'])->name('postuser.index');
-    Route::post('/login', [PostUserController::class, 'login'])->name('postuser.login');
-    Route::post('/logout', [PostUserController::class, 'logout'])->name('postuser.logout');
+    Route::post('login', [PostUserController::class, 'login'])->name('postuser.login');
+    Route::post('logout', [PostUserController::class, 'logout'])->name('postuser.logout');
+    Route::get('register', [PostUserController::class, 'register'])->name('postuser.register');
 
-    Route::middleware([PostUserRedirect::class])->group(function () {
-        Route::middleware('auth:postuser')->group(function () {
-            Route::get('/dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
-        });
+    // auth:postuser
+    Route::middleware('auth:postuser')->group(function () {
+        Route::get('dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
     });
 });
