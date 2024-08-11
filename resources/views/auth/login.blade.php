@@ -17,7 +17,7 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
+    <div class="flex min-h-screen flex-col items-center bg-gray-50 pt-6 sm:justify-center sm:pt-0">
 
         {{-- title --}}
         <div class="mb-12">
@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        <div class="w-96 overflow-hidden rounded-md border border-gray-200 bg-white p-10">
+        <div class="w-96 overflow-hidden rounded-md border border-gray-300 bg-white p-10">
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+// use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PostUser;
-use Illuminate\Http\Request;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\PostuserLoginRequest;
@@ -16,9 +16,6 @@ class PostUserController extends Controller
     // ログインページ
     public function index($uuid)
     {
-        // if (Auth::guard('postuser')->user()) {
-        //     return redirect()->route('postuser.dashboard', $uuid);
-        // }
         Log::info($uuid);
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
 
@@ -63,6 +60,7 @@ class PostUserController extends Controller
     public function dashboard($uuid)
     {
         Log::info(Auth::guard('postuser')->user());
+        Log::info($uuid);
         $postuseruuid = Auth::guard('postuser')->user()->uuid;
         if ($uuid !== $postuseruuid) {
             abort(404, 'フォームが見つかりません');

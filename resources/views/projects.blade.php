@@ -28,11 +28,11 @@
                     <form action="{{ route('projects.search') }}" method="GET" class="flex gap-2">
                         {{-- input --}}
                         <input name="search" type="text" placeholder="プロジェクトを検索" value="{{ request('search') }}"
-                            class="ring-offset-background flex h-10 w-80 rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm placeholder:text-gray-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                            class="ring-offset-background flex h-10 w-80 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-500 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
 
                         {{-- sort --}}
                         <select name="sort"
-                            class="focus:shadow-outline inline-flex w-48 items-center justify-center rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
+                            class="focus:shadow-outline inline-flex w-48 items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
                             <option value="desc" {{ request('sort', 'desc') == 'desc' ? 'selected' : '' }}>
                                 更新日（新しい順）
                             </option>
@@ -49,7 +49,7 @@
 
                         {{-- submit --}}
                         <button type="submit"
-                            class="focus:shadow-outline inline-flex items-center justify-center rounded-md border border-neutral-300 bg-white px-4 py-2 text-sm font-medium tracking-wide text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
+                            class="focus:shadow-outline inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium tracking-wide text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
                             検索
                         </button>
                     </form>
@@ -123,7 +123,7 @@
                                         class="at-dots-vertical"></i></button>
 
                                 <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-44 -translate-x-1/2" x-cloak>
-                                    <div class="rounded-md border border-neutral-200/70 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                                    <div class="rounded-md border border-gray-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
                                         <a href="{{ route('projects.show', ['id' => $project->id]) }}" @click="menuBarOpen=false"
                                             class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
                                             <span>プロジェクトの詳細</span>

@@ -11,7 +11,7 @@
             </div>
 
             {{-- back --}}
-            <div class="mb-4 border-neutral-300">
+            <div class="mb-4 border-gray-300">
                 <div class="flex items-center gap-1">
                     <i class="at-arrow-left-circle"></i>
                     <a href="javascript:history.back()">戻る</a>
@@ -33,7 +33,7 @@
                 @method('PUT')
                 @csrf
 
-                <div class="mb-3 rounded-md border border-neutral-300 bg-white p-8">
+                <div class="mb-3 rounded-md border border-gray-300 bg-white p-8">
 
 
                     {{-- select project --}}
@@ -60,7 +60,7 @@
                             </span>
                         </div>
                         <input name="form_name" type="text" placeholder="フォーム名を記入してください" value="{{ old('form_name', $form->form_name) }}"
-                            class="text-md ring-offset-background flex h-10 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                            class="text-md ring-offset-background flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
                         @error('form_name')
                             <div class="mt-2 text-red-600">{{ $message }}</div>
                         @enderror
@@ -72,13 +72,13 @@
                             <label class="text-lg font-bold" for="form_description">フォームの説明</label>
                         </div>
                         <textarea id="projectinstance" name="form_description" type="text" placeholder="フォームの説明を記入してください"
-                            class="flex h-48 min-h-[80px] w-full rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('form_description', $form->form_description) }}</textarea>
+                            class="flex h-48 min-h-[80px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('form_description', $form->form_description) }}</textarea>
                     </div>
                 </div>
 
 
                 {{-- submit --}}
-                <div class="mb-3 rounded-md border border-neutral-300 bg-white p-8">
+                <div class="mb-3 rounded-md border border-gray-300 bg-white p-8">
                     <button type="submit"
                         class="focus:shadow-outline mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-950 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">フォームを更新する</button>
                 </div>

@@ -17,7 +17,7 @@
             </div>
 
             {{-- breadcrumb --}}
-            <div class="mb-4 border-neutral-300">
+            <div class="mb-4 border-gray-300">
                 <div class="flex items-center gap-1">
                     <i class="at-arrow-left-circle"></i>
                     <a href="javascript:history.back()">戻る</a>
@@ -25,7 +25,7 @@
             </div>
 
             {{-- content --}}
-            <div class="mb-3 rounded-md border border-neutral-300 bg-white p-8">
+            <div class="mb-3 rounded-md border border-gray-300 bg-white p-8">
 
                 <div class="mb-6">
                     <div class="mb-2">

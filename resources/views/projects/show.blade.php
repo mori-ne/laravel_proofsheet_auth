@@ -16,7 +16,7 @@
             </div>
 
             {{-- back --}}
-            <div class="mb-4 border-neutral-300">
+            <div class="mb-4 border-gray-300">
                 <div class="flex items-center gap-1">
                     <i class="at-arrow-left-circle"></i>
                     <a href="javascript:history.back()">戻る</a>
@@ -86,7 +86,7 @@
                             class="at-dots-vertical"></i></button>
 
                     <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-44 -translate-x-1/2" x-cloak>
-                        <div class="rounded-md border border-neutral-200/70 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                        <div class="rounded-md border border-gray-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
 
                             {{-- edit --}}
                             <a href="{{ route('projects.edit', $project->id) }}" @click="menuBarOpen=false"
@@ -237,7 +237,7 @@
                                                         class="at-dots-vertical"></i></button>
                                                 <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-48 -translate-x-1/2"
                                                     x-cloak>
-                                                    <div class="rounded-md border border-neutral-200/70 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                                                    <div class="rounded-md border border-gray-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
                                                         <a href="{{ route('forms.show', $form->id) }}" @click="menuBarOpen=false"
                                                             class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
                                                             <span>フォームの詳細</span>
@@ -384,7 +384,7 @@
                         {{-- mail --}}
                         <div class="mb-8">
                             <h4 class="text-md mb-2 font-bold text-gray-500">返信メール情報</h4>
-                            <div class="rounded-md border border-neutral-300 bg-white p-8">
+                            <div class="rounded-md border border-gray-300 bg-white p-8">
                                 <div>
                                     <div class="mb-8">
                                         <p class="mb-2 text-sm text-gray-400">メール件名</p>
@@ -415,7 +415,7 @@
                         {{-- users --}}
                         <div class="mb-2">
                             <h4 class="text-md mb-2 font-bold text-gray-500">ユーザー情報</h4>
-                            <div class="rounded-md border border-neutral-300 bg-white p-8">
+                            <div class="rounded-md border border-gray-300 bg-white p-8">
                                 <p>アカウント登録した人の情報をテーブルで表示する</p>
                             </div>
                         </div>
@@ -425,7 +425,7 @@
                         {{-- description --}}
                         <div class="mb-8">
                             <h4 class="text-md mb-2 font-bold text-gray-500">プロジェクトの説明（ユーザーページに表示されます）</h4>
-                            <div class="mb-8 rounded-md border border-neutral-300 bg-white p-8">
+                            <div class="mb-8 rounded-md border border-gray-300 bg-white p-8">
 
                                 {{-- project message --}}
                                 <div class="mb-8">

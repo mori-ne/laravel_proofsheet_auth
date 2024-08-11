@@ -25,12 +25,39 @@
 <body class="font-sans antialiased">
     <div id="app">
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-50">
 
             <div class="border-b border-gray-300 bg-white px-8 py-4">
-                <div class="mx-auto max-w-6xl">
-                    <h1 class="text-xl font-bold">{{ $project->project_name }}</h1>
+
+                {{-- flex --}}
+                <div class="mx-auto flex max-w-6xl flex-row justify-between">
+                    <h1 class="text-xl font-bold text-gray-800">
+                        <a href="{{ route('postuser.index', $uuid) }}">
+                            {{ $project->project_name }}
+                        </a>
+                    </h1>
+
+                    @if (Auth::user())
+                        <div class="ml-auto flex max-w-6xl flex-row">
+                            {{-- account --}}
+                            <div class="ml-auto flex flex-row items-center gap-4">
+                                <p class="flex flex-row items-center gap-1">
+                                    <span class="text-md font-bold">{{ Auth::guard('postuser')->user()->name }}</span>
+                                    <span class="text-xs text-gray-400">さん</span>
+                                </p>
+                                <div>
+                                    <a class="text-sm" href="">アカウント管理</a>
+                                </div>
+                                {{-- <form action="{{ route('postuser.logout', ['uuid' => $project->uuid]) }}" method="POST"> --}}
+                                <form action="{{ route('postuser.logout', $project->uuid) }}" method="POST">
+                                    @csrf
+                                    <button class="text-sm text-red-500" type="submit">ログアウト</button>
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                 </div>
+
             </div>
 
             {{-- flash message --}}

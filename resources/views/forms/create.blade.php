@@ -17,7 +17,7 @@
             </div>
 
             {{-- breadcrumb --}}
-            <div class="mx-auto mb-4 border-neutral-300">
+            <div class="mx-auto mb-4 border-gray-300">
                 <div class="flex items-center gap-1">
                     <i class="at-arrow-left-circle"></i>
                     <a href="javascript:history.back()">戻る</a>
@@ -25,7 +25,7 @@
             </div>
 
             {{-- content --}}
-            <div class="mx-auto mb-3 rounded-md border border-neutral-300 bg-white p-8">
+            <div class="mx-auto mb-3 rounded-md border border-gray-300 bg-white p-8">
 
                 <form action="{{ route('forms.store') }}" method="POST">
                     @csrf
@@ -59,7 +59,7 @@
                             </span>
                         </div>
                         <input name="form_name" type="text" placeholder="フォーム名を記入してください"
-                            class="text-md ring-offset-background flex h-10 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                            class="text-md ring-offset-background flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             value="{{ old('form_name') }}" />
                     </div>
 
@@ -68,7 +68,7 @@
                             <label class="text-lg font-bold">フォームの説明</label>
                         </div>
                         <textarea name="form_description" type="text" placeholder="フォームの説明を記入してください"
-                            class="text-md flex h-48 min-h-[80px] w-full rounded-md border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('form_description') }}</textarea>
+                            class="text-md flex h-48 min-h-[80px] w-full rounded-md border border-gray-300 bg-white px-3 py-2 placeholder:text-neutral-400 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('form_description') }}</textarea>
                     </div>
 
                     <hr class="my-8">

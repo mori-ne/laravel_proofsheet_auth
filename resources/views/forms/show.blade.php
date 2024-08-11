@@ -16,7 +16,7 @@
             </div>
 
             {{-- back --}}
-            <div class="mb-4 border-neutral-300">
+            <div class="mb-4 border-gray-300">
                 <div class="flex items-center gap-1">
                     <i class="at-arrow-left-circle"></i>
                     <a href="javascript:history.back()">戻る</a>
@@ -67,7 +67,7 @@
                                 class="at-dots-vertical"></i></button>
 
                         <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-44 -translate-x-1/2" x-cloak>
-                            <div class="rounded-md border border-neutral-200/70 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                            <div class="rounded-md border border-gray-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
 
                                 {{-- edit --}}
                                 <a a href="{{ route('forms.edit', $form->id) }}" @click="menuBarOpen=false"
@@ -127,7 +127,7 @@
             </div>
 
             {{-- input details --}}
-            <div class="mb-3 rounded-md border border-neutral-300 bg-white p-8">
+            <div class="mb-3 rounded-md border border-gray-300 bg-white p-8">
                 入力項目が入る予定
             </div>
 
