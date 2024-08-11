@@ -1,5 +1,5 @@
 @extends('postuser.layouts.master')
-@section('title', 'ログイン | ' . $project->project_name)
+@section('title', $project->project_name)
 @section('content')
 
     <div class="flex gap-4">
@@ -15,46 +15,62 @@
                 <p class="text-sm text-red-500">※エラーです。</p>
             @enderror
 
-            {{-- registerd --}}
-            <div class="mb-4 rounded border border-gray-300 bg-white p-6">
-                <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
-                    登録済の方はこちらから
-                </h3>
-                <form action="{{ route('postuser.login', ['uuid' => $project->uuid]) }}" method="POST">
-                    @csrf
-                    <div class="mb-8">
-                        {{-- email --}}
-                        <div class="mb-4">
-                            <label class="mb-1 block text-sm" for="email">メールアドレス</label>
-                            <input name="email" class="w-full rounded border border-gray-300" type="text" value="" placeholder="メールアドレス">
-                        </div>
-                        {{-- password --}}
-                        <div class="mb-4">
-                            <label class="mb-1 block text-sm" for="password">パスワード</label>
-                            <input name="password" class="w-full rounded border border-gray-300" type="password" value="" placeholder="パスワード">
-                        </div>
-                        {{-- uuid --}}
-                    </div>
+            @if (Auth::guard('postuser')->check())
+                {{-- to dashboard --}}
+                <div class="mb-4 rounded border border-gray-300 bg-white p-6">
+                    <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
+                        ログイン中です
+                    </h3>
                     <div class="mb-4">
-                        <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">ログイン</button>
+                        <form action="{{ route('postuser.dashboard', $project->uuid) }}" method="GET">
+                            <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">管理画面へ</button>
+                        </form>
                     </div>
-                    <p class="text-center text-sm text-orange-700">
-                        <a class="underline" href="#">※パスワードをお忘れの方</a>
-                    </p>
-                </form>
-            </div>
+                </div>
+            @endif
 
-            {{-- newuser --}}
-            <div class="mb-4 rounded border border-gray-300 bg-white p-6">
-                <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
-                    初めてのかたはこちらから
-                </h3>
-                <div class="mb-4">
-                    <form action="{{ route('postuser.register', $project->uuid) }}" method="GET">
-                        <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">新規登録</button>
+            @if (!Auth::guard('postuser')->check())
+                {{-- registerd --}}
+                <div class="mb-4 rounded border border-gray-300 bg-white p-6">
+                    <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
+                        登録済の方はこちらから
+                    </h3>
+                    <form action="{{ route('postuser.login', ['uuid' => $project->uuid]) }}" method="POST">
+                        @csrf
+                        <div class="mb-8">
+                            {{-- email --}}
+                            <div class="mb-4">
+                                <label class="mb-1 block text-sm" for="email">メールアドレス</label>
+                                <input name="email" class="w-full rounded border border-gray-300" type="text" value="" placeholder="メールアドレス">
+                            </div>
+                            {{-- password --}}
+                            <div class="mb-4">
+                                <label class="mb-1 block text-sm" for="password">パスワード</label>
+                                <input name="password" class="w-full rounded border border-gray-300" type="password" value="" placeholder="パスワード">
+                            </div>
+                            {{-- uuid --}}
+                        </div>
+                        <div class="mb-4">
+                            <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">ログイン</button>
+                        </div>
+                        <p class="text-center text-sm text-orange-700">
+                            <a class="underline" href="#">※パスワードをお忘れの方</a>
+                        </p>
                     </form>
                 </div>
-            </div>
+
+                {{-- newuser --}}
+                <div class="mb-4 rounded border border-gray-300 bg-white p-6">
+                    <h3 class="mb-6 border-l-4 border-orange-500 bg-gray-100 px-2 py-1 text-lg font-bold">
+                        初めてのかたはこちらから
+                    </h3>
+                    <div class="mb-4">
+                        <form action="{{ route('postuser.signup', $project->uuid) }}" method="GET">
+                            <button class="w-full rounded bg-orange-500 py-2 font-bold text-white" type="submit">新規登録</button>
+                        </form>
+                    </div>
+                </div>
+            @endif
 
             {{-- information --}}
             <div class="rounded border border-gray-300 bg-white p-6">
