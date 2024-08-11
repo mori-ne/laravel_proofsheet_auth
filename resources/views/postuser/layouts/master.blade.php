@@ -37,7 +37,7 @@
                         </a>
                     </h1>
 
-                    @if (Auth::user())
+                    @if (Auth::guard('postuser')->check())
                         <div class="ml-auto flex max-w-6xl flex-row">
                             {{-- account --}}
                             <div class="ml-auto flex flex-row items-center gap-4">
@@ -63,7 +63,7 @@
             {{-- flash message --}}
             @if (session('status'))
                 <div class="mx-auto flex max-w-6xl flex-col justify-center gap-4 pt-8">
-                    <div class="[&>svg]:text-foreground relative w-full rounded-lg border border-transparent bg-green-50 p-4 text-green-600 [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4">
+                    <div class="[&>svg]:text-foreground relative w-full rounded-lg border border-green-300 border-transparent bg-green-50 p-4 text-green-600 [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4">
                         <svg class="h-5 w-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>

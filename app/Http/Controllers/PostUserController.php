@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PostUser;
+use App\Models\PrePostUser;
+use Illuminate\Support\Facades\DB;
 use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\PostuserLoginRequest;
+use App\Http\Requests\VerifyMailSignupRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class PostUserController extends Controller
 {
@@ -70,17 +74,57 @@ class PostUserController extends Controller
         return view('postuser.auth.dashboard', ['uuid' => $uuid, 'project' => $project]);
     }
 
-    public function logout($uuid)
+    public function logout($uuid, Request $request)
     {
-        if (Auth::check()) {
-            Auth::logout();
-        }
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('postuser.index', ['uuid' => $uuid])->with(['status' => 'ログアウトしました']);
     }
 
-    public function register($uuid)
+    public function signup($uuid)
     {
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
-        return view('postuser.registar', ['uuid' => $uuid, 'project' => $project]);
+        return view('postuser.signup', ['uuid' => $uuid, 'project' => $project]);
+    }
+
+    public function verifyMailSignup($uuid, VerifyMailSignupRequest $request)
+    {
+        // 指定されたメールアドレスとUUIDが既に登録されているかを確認
+        $emailExists = PostUser::where('email', $request->email)
+            ->where('uuid', $uuid)
+            ->exists();
+
+        // すでに登録されている
+        if ($emailExists) {
+            return redirect()->route('postuser.signup', $uuid)->with(['error' => '※送信したメールアドレスはすでに登録されています']);
+        }
+
+        // すでに認証メールが送信されている
+        $sended = PrePostUser::where('email', $request->email)->where('uuid', $uuid)->exists();
+        if ($sended) {
+            // 前のトークン付きテーブルを削除
+            PrePostUser::where('email', $request->email)->where('uuid', $uuid)->delete();
+        }
+
+        // トークン生成
+        $token = Str::random(16);
+
+        // 登録
+        DB::table('pre_postuser')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'uuid' => $uuid,
+            'date' => now(),
+        ]);
+
+        // メール送信
+
+
+        // プロジェクト情報を取得
+        $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
+
+        // sendcomplete ビューを表示
+        return view('postuser.sendcomplete', ['uuid' => $uuid, 'project' => $project, 'email' => $request->email]);
     }
 }

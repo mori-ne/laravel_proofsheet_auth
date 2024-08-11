@@ -1,5 +1,5 @@
 @extends('postuser.layouts.master')
-@section('title', 'ログイン | ' . $project->project_name)
+@section('title', 'ダッシュボード | ' . $project->project_name)
 @section('content')
 
 

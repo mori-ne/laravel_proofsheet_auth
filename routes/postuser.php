@@ -29,8 +29,9 @@ Route::prefix('/postuser/{uuid}')->group(function () {
     Route::get('/', [PostUserController::class, 'index'])->name('postuser.index');
     Route::post('login', [PostUserController::class, 'login'])->name('postuser.login');
     Route::post('logout', [PostUserController::class, 'logout'])->name('postuser.logout');
-    Route::get('register', [PostUserController::class, 'register'])->name('postuser.register');
+    Route::get('signup', [PostUserController::class, 'signup'])->name('postuser.signup');
 
+    Route::post('signup/send', [PostUserController::class, 'verifyMailSignup'])->name('postuser.verifymailsignup');
     // auth:postuser
     Route::middleware('auth:postuser')->group(function () {
         Route::get('dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
