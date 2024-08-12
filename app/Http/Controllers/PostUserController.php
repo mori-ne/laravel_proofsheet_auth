@@ -14,10 +14,11 @@ use App\Http\Requests\VerifyMailSignupRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PrePostUserTokenMail;
 
 class PostUserController extends Controller
 {
-    // ログインページ
     public function index($uuid)
     {
         Log::info($uuid);
@@ -60,7 +61,6 @@ class PostUserController extends Controller
         ]);
     }
 
-
     public function dashboard($uuid)
     {
         Log::info(Auth::guard('postuser')->user());
@@ -90,6 +90,8 @@ class PostUserController extends Controller
 
     public function verifyMailSignup($uuid, VerifyMailSignupRequest $request)
     {
+        // getでリクエストが来た場合、404エラーを返す
+
         // 指定されたメールアドレスとUUIDが既に登録されているかを確認
         $emailExists = PostUser::where('email', $request->email)
             ->where('uuid', $uuid)
@@ -118,13 +120,33 @@ class PostUserController extends Controller
             'date' => now(),
         ]);
 
-        // メール送信
-
-
         // プロジェクト情報を取得
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
 
+        // メール送信
+        Mail::to($request->email)->send(new PrePostUserTokenMail($request->email, $uuid, $token, $project->project_name));
+
         // sendcomplete ビューを表示
         return view('postuser.sendcomplete', ['uuid' => $uuid, 'project' => $project, 'email' => $request->email]);
+    }
+
+    // uuidとtokenの検証
+    public function verifiedMailSignup($uuid, $token)
+    {
+        $verified = PrePostUser::where('token', $token)->where('uuid', $uuid)->first();
+        // prepostuserと合致しない
+        if ($verified == null) {
+            Log::info('トークン:' . $token . 'が間違っています');
+            return abort(404, 'トークン合致エラー');
+        }
+
+        $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
+        return view('postuser.register', ['email' => $verified->email, 'project' => $project, 'uuid' => $uuid]);
+    }
+
+    // 登録処理
+    public function register($uuid, Request $request)
+    {
+        dd($request, $uuid);
     }
 }
