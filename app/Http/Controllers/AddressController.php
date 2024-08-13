@@ -9,6 +9,7 @@ class AddressController extends Controller
 {
     public function getAddress($zipcode)
     {
+        // dd($zipcode);
         // ZipCloud APIにリクエストを送信
         $response = Http::get('https://zipcloud.ibsnet.co.jp/api/search', [
             'zipcode' => $zipcode
