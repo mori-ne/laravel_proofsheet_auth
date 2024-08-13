@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PrePostUserTokenMail;
+use App\Http\Requests\PostUserRegisterRequest;
 
 class PostUserController extends Controller
 {
@@ -32,6 +33,7 @@ class PostUserController extends Controller
 
         return view('postuser.login', ['uuid' => $uuid, 'project' => $project]);
     }
+
 
     public function login($uuid, PostUserLoginRequest $request): RedirectResponse
     {
@@ -61,6 +63,7 @@ class PostUserController extends Controller
         ]);
     }
 
+
     public function dashboard($uuid)
     {
         Log::info(Auth::guard('postuser')->user());
@@ -74,6 +77,7 @@ class PostUserController extends Controller
         return view('postuser.auth.dashboard', ['uuid' => $uuid, 'project' => $project]);
     }
 
+
     public function logout($uuid, Request $request)
     {
         Auth::logout();
@@ -82,11 +86,13 @@ class PostUserController extends Controller
         return redirect()->route('postuser.index', ['uuid' => $uuid])->with(['status' => 'ログアウトしました']);
     }
 
+
     public function signup($uuid)
     {
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
         return view('postuser.signup', ['uuid' => $uuid, 'project' => $project]);
     }
+
 
     public function verifyMailSignup($uuid, VerifyMailSignupRequest $request)
     {
@@ -130,6 +136,7 @@ class PostUserController extends Controller
         return view('postuser.sendcomplete', ['uuid' => $uuid, 'project' => $project, 'email' => $request->email]);
     }
 
+
     // uuidとtokenの検証
     public function verifiedMailSignup($uuid, $token)
     {
@@ -144,8 +151,9 @@ class PostUserController extends Controller
         return view('postuser.register', ['email' => $verified->email, 'project' => $project, 'uuid' => $uuid]);
     }
 
+
     // 登録処理
-    public function register($uuid, Request $request)
+    public function register($uuid, PostUserRegisterRequest $request)
     {
         dd($request, $uuid);
     }
