@@ -19,9 +19,15 @@ class PostUser extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
-        'password',
+        'affiliate',
+        'zipcode',
+        'address_country',
+        'address_city',
+        'address_etc',
+        'uuid',
     ];
 
     /**

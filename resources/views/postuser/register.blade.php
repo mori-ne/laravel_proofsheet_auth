@@ -10,68 +10,67 @@
         </div>
 
         <div class="rounded border border-gray-300 bg-white p-10">
-            {{-- <form action="{{ route('postuser.register', $uuid) }}" method="POST"> --}}
-            {{-- <form action="#" method="POST"> --}}
-            {{-- @method('PUT') --}}
-            @csrf
+            <form action="{{ route('postuser.register', $uuid) }}" method="POST">
+                @method('PUT')
+                @csrf
 
-            <div class="mb-12">
-                <!-- Email Address -->
-                <div class="mb-8">
-                    <label class='mb-2 block text-sm font-medium text-gray-700'>メールアドレス</label>
-                    <input name="email" type="email" class='w-full rounded border-0 border-gray-300 bg-gray-100 text-gray-500' value="{{ $email }}" readonly>
-                </div>
+                <div class="mb-12 flex flex-col gap-12">
 
-                {{-- name --}}
-                <div class="mb-8 flex flex-row gap-2">
-                    <div class="flex flex-1 flex-col gap-2">
-                        <label class='block text-sm font-medium text-gray-700'>お名前（姓）<span class="pl-1 text-red-500">*</span></label>
-                        <input name="name_first" type="text" class='w-full rounded border-gray-300 text-gray-700' value="{{ old('name_first') }}">
+                    <!-- Email Address -->
+                    <div>
+                        <label class='mb-1.5 block text-sm text-gray-600'>メールアドレス</label>
+                        <input name="email" type="email" class='w-full rounded border-0 border-gray-300 bg-gray-100 py-1.5 text-gray-500' value="{{ $email }}" readonly>
                     </div>
-                    <div class="flex flex-1 flex-col gap-2">
-                        <label class='block text-sm font-medium text-gray-700'>お名前（名）<span class="pl-1 text-red-500">*</span></label>
-                        <input name="name_last" type="text" class='w-full rounded border-gray-300 text-gray-700' value="{{ old('name_last') }}">
+
+                    {{-- name --}}
+                    <div>
+                        <h6 class="mb-3 font-bold">氏名情報</h6>
+                        <div class="flex flex-row gap-2">
+                            <div>
+                                <label class='mb-1.5 block text-sm text-gray-600'>お名前（姓）<span class="pl-1 text-red-500">*</span></label>
+                                <input name="name_first" type="text" class='w-full rounded border-gray-300 py-1.5 text-gray-600' value="{{ old('name_first') }}">
+                            </div>
+                            <div>
+                                <label class='mb-1.5 block text-sm text-gray-600'>お名前（名）<span class="pl-1 text-red-500">*</span></label>
+                                <input name="name_last" type="text" class='w-full rounded border-gray-300 py-1.5 text-gray-600' value="{{ old('name_last') }}">
+                            </div>
+                        </div>
                     </div>
+
+                    {{-- 所属 --}}
+                    <div>
+                        <div class="mb-2">
+                            <h6 class="mb-3 font-bold">所属情報</h6>
+                            <label class='mb-1.5 block text-sm text-gray-600'>所属施設名<span class="pl-1 text-red-500">*</span></label>
+                            <input name="affiliate" type="text" class='w-full rounded border-gray-300 py-1.5 text-gray-600' value="{{ old('affiliate') }}">
+                        </div>
+                        <div class="mb-2">
+                            <postal-code-lookup></postal-code-lookup>
+                        </div>
+                    </div>
+
+
                 </div>
 
-                <hr class="mb-8">
 
-                {{-- 所属 --}}
+                {{-- password --}}
+                <div class="mb-3">
+                    <label class='mb-2 block text-sm font-medium text-gray-600'>パスワード<span class="pl-1 text-red-500">*</span></label>
+                    <input name="password" type="password" class='w-full rounded border-gray-300 text-gray-600' value="{{ old('password') }}">
+                </div>
+
+                {{-- retype password --}}
                 <div class="mb-8">
-                    <label class='mb-2 block text-sm font-medium text-gray-700'>所属</label>
-                    <input name="affiliate" type="text" class='w-full rounded border-gray-300 text-gray-700' value="{{ old('affiliate') }}">
+                    <label class='mb-2 block text-sm font-medium text-gray-600'>パスワード（再入力）<span class="pl-1 text-red-500">*</span></label>
+                    <input name="retypepassword" type="password" class='w-full rounded border-gray-300 text-gray-600' value="{{ old('retypepassword') }}">
                 </div>
 
-                {{-- 所属先住所 --}}
-                <div class="mb-8">
-                    <postal-code-lookup></postal-code-lookup>
+                <div class="mt-6 flex items-center justify-center gap-6">
+                    <button type="submit" class="min-w-48 flex items-center justify-center rounded-md bg-gray-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900">新規登録する</button>
                 </div>
 
-            </div>
+            </form>
 
-            <hr class="mb-8">
-
-            {{-- password --}}
-            <div class="mb-3">
-                <label class='mb-2 block text-sm font-medium text-gray-700'>パスワード<span class="pl-1 text-red-500">*</span></label>
-                <input name="password" type="password" class='w-full rounded border-gray-300 text-gray-700' value="{{ old('password') }}">
-            </div>
-
-            {{-- retype password --}}
-            <div class="mb-8">
-                <label class='mb-2 block text-sm font-medium text-gray-700'>パスワード（再入力）<span class="pl-1 text-red-500">*</span></label>
-                <input name="retypepassword" type="password" class='w-full rounded border-gray-300 text-gray-700' value="{{ old('retypepassword') }}">
-            </div>
         </div>
-
-        <div class="mt-6 flex items-center justify-center gap-6">
-            <button type="button" class="min-w-48 flex items-center justify-center rounded-md bg-gray-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900">新規登録する</button>
-        </div>
-
-        {{-- </form> --}}
-
-
     </div>
-    </div>
-
 @endsection

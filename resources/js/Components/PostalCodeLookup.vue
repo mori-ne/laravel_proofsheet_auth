@@ -34,43 +34,50 @@ const getAddress = async () => {
 </script>
 
 <template>
-    <label class="mb-2 block text-sm font-medium text-gray-700"
-        >所属先住所<span class="pl-1 text-red-500">*</span></label
-    >
-
     <div class="mb-2">
-        <label class="mb-1 block text-xs font-medium text-gray-400">郵便番号</label>
+        <label class="mb-2 block text-sm font-medium text-gray-700">所属先住所</label>
         <div class="flex flex-row gap-2">
             <input
-                class="w-1/4 rounded border border-gray-300"
                 type="text"
+                name="zipcode"
+                class="rounded border border-gray-300 py-1.5"
                 v-model="zipcode"
                 placeholder="郵便番号を入力"
             />
-            <button class="rounded border border-gray-300 px-3 py-2" @click="getAddress">住所を取得</button>
+            <input
+                type="button"
+                class="rounded bg-gray-700 px-3 py-1.5 text-sm text-white"
+                @click="getAddress"
+                value="住所を取得"
+            />
         </div>
     </div>
 
-    <div class="mb-8">
-        <div class="flex flex-row gap-2">
-            <div class="mb-2 w-1/4">
-                <label class="mb-1 block text-xs font-medium text-gray-400">都道府県</label>
-                <input class="w-full rounded border border-gray-300" type="text" :value="address1" />
-            </div>
-            <div class="mb-2 w-3/4">
-                <label class="mb-1 block text-xs font-medium text-gray-400">市町村</label>
-                <input
-                    class="w-full rounded border border-gray-300"
-                    name="affiliate_city"
-                    type="text"
-                    :value="address2"
-                />
-            </div>
+    <div class="flex flex-row gap-2">
+        <div class="mb-2 w-1/2">
+            <label class="mb-1 block text-xs font-medium text-gray-400">都道府県</label>
+            <input
+                name="address_country"
+                class="w-full rounded border-0 border-gray-300 bg-gray-100 py-1.5 text-gray-500"
+                type="text"
+                :value="address1"
+                readonly
+            />
         </div>
-        <div class="mb-2">
-            <label class="mb-1 block text-xs font-medium text-gray-400">番地、その他</label>
-            <input class="w-full rounded border border-gray-300" name="affiliate_etc" type="text" />
+        <div class="mb-2 w-1/2">
+            <label class="mb-1 block text-xs font-medium text-gray-400">市町村</label>
+            <input
+                name="address_city"
+                class="w-full rounded border-0 border-gray-300 bg-gray-100 py-1.5 text-gray-500"
+                type="text"
+                :value="address2"
+            />
         </div>
-        <p v-if="address" class="text-sm text-red-500">※住所を取得できませんでした</p>
     </div>
+
+    <div class="mb-2">
+        <label class="mb-1 block text-xs font-medium text-gray-400">番地（部屋番号等）</label>
+        <input name="address_etc" class="w-full rounded border border-gray-300 py-1.5" type="text" />
+    </div>
+    <p v-if="address" class="text-sm text-red-500">※住所を取得できませんでした</p>
 </template>

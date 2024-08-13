@@ -20,13 +20,25 @@ class DatabaseSeeder extends Seeder
         ]);
 
         PostUser::factory()->create([
-            'name' => 'Post User',
+            'first_name' => 'Post',
+            'last_name' => 'User',
+            'affiliate' => '有限会社福琉印刷',
+            'zipcode' => '9000012',
+            'address_country' => '沖縄県',
+            'address_city' => '那覇市泊',
+            'address_etc' => '2-18-9 福琉印刷ビル',
             'email' => 'postuser@postuser.jp',
             'uuid' => '00000000-0000-0000-0000-000000000000'
         ]);
 
         PostUser::factory()->create([
-            'name' => 'Post User',
+            'first_name' => 'Post',
+            'last_name' => 'User',
+            'affiliate' => '有限会社福琉印刷',
+            'zipcode' => '9000012',
+            'address_country' => '沖縄県',
+            'address_city' => '那覇市泊',
+            'address_etc' => '2-18-9 福琉印刷ビル',
             'email' => 'postuser@postuser.jp',
             'uuid' => '00000000-0000-0000-0000-000000000001'
         ]);
