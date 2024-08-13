@@ -105,7 +105,7 @@ class PostUserController extends Controller
 
         // すでに登録されている
         if ($emailExists) {
-            return redirect()->route('postuser.signup', $uuid)->with(['error' => '※送信したメールアドレスはすでに登録されています']);
+            return redirect()->route('postuser.signup', $uuid)->with(['error' => '※入力したメールアドレスはすでに登録されています']);
         }
 
         // すでに認証メールが送信されている
