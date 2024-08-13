@@ -33,7 +33,7 @@ class PrePostUserTokenMail extends Mailable
     {
         return new Envelope(
             from: new Address('postmaster@proofsheet.jp', 'Proofsheet管理者'),
-            subject: 'メールアドレスの確認 | ' . $this->project_name,
+            subject: 'メールアドレスの仮登録通知 | ' . $this->project_name,
         );
     }
 
@@ -48,6 +48,7 @@ class PrePostUserTokenMail extends Mailable
                 'email' => $this->email,
                 'uuid' => $this->uuid,
                 'token' => $this->token,
+                'project_name' => $this->project_name,
             ],
         );
     }

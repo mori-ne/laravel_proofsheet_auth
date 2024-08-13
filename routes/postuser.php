@@ -16,6 +16,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Middleware\PostUserRedirect;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AddressController;
 
 // postuser (UUID)
 // Route::prefix('postuser')->group(function () {
