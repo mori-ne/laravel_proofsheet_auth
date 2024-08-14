@@ -24,22 +24,32 @@ class PostUserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => ['required', 'string', 'max:50'],
-            'last_name' => ['required', 'string', 'max:50'],
-            'affiliate' => ['string', 'max:255'],
-            'zipcode' => ['integer', 'max:7'],
-            'address_country' => ['string', 'max:10'],
-            'address_city' => ['string'],
-            'address_etc' => ['string'],
-            'uuid' => ['string', 'max:36'],
+            'first_name' => 'required|string|max:20',
+            'last_name' => 'required|string|max:20',
+            'affiliate' => 'required|string|max:255',
+            'zipcode' => 'integer|size:7',
+            'address_country' => 'string|max:10',
+            'address_city' => 'string',
+            'address_etc' => 'string',
+            'uuid' => 'string|max:36',
+            'password' => 'required|string|min:8|max:50|confirmed',
+            'password_confirmation' => 'required|string|max:50'
         ];
     }
 
     public function messages()
     {
         return [
-            'first_name.required' => 'お名前（姓）は必須項目です。',
-            'last_name.required' => 'お名前（名）は必須項目です。',
+            'first_name.required' => '※お名前（姓）は必須項目です',
+            'first_name.max' => '※最大20文字までです',
+            'last_name.required' => '※お名前（名）は必須項目です',
+            'last_name.max' => '※最大20文字までです',
+            'affiliate.required' => '※所属施設名は必須項目です',
+            'zipcode.integer' => '※郵便番号は数字で入力してください',
+            'zipcode.size' => '※郵便番号は7文字で入力してください',
+            'password.min' => '※パスワードは8文字以上50文字以内で入力してください',
+            'password.max' => '※パスワードは8文字以上50文字以内で入力してください',
+            'password.confirmed' => '※パスワードが一致しません'
         ];
     }
 }

@@ -58,7 +58,7 @@ const getAddress = async () => {
             <label class="mb-2 block text-sm font-medium text-gray-700">都道府県</label>
             <input
                 name="address_country"
-                class="w-full rounded border-0 border-gray-300 bg-gray-100 py-1.5 text-gray-500"
+                class="w-full rounded border-0 border-gray-300 bg-gray-100 py-2 text-gray-500"
                 type="text"
                 :value="address1"
                 readonly
@@ -68,14 +68,14 @@ const getAddress = async () => {
             <label class="mb-2 block text-sm font-medium text-gray-700">市町村</label>
             <input
                 name="address_city"
-                class="w-full rounded border-0 border-gray-300 bg-gray-100 py-1.5 text-gray-500"
+                class="w-full rounded border-0 border-gray-300 bg-gray-100 py-2 text-gray-500"
                 type="text"
                 :value="address2"
             />
         </div>
     </div>
 
-    <div class="mb-2">
+    <div>
         <label class="mb-2 block text-sm font-medium text-gray-700">番地（部屋番号等）</label>
         <input name="address_etc" class="w-full rounded border border-gray-300 py-1.5" type="text" />
     </div>
