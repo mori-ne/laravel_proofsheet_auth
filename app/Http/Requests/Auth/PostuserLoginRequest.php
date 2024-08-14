@@ -29,8 +29,16 @@ class PostUserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => '※メールアドレスを記入してください',
+            'password.required' => '※パスワードを記入してください',
         ];
     }
 

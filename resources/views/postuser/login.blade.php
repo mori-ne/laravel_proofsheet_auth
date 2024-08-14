@@ -42,11 +42,17 @@
                             <div class="mb-4">
                                 <label class="mb-1 block text-sm" for="email">メールアドレス</label>
                                 <input name="email" class="w-full rounded border border-gray-300" type="text" value="" placeholder="メールアドレス">
+                                @if ($errors->has('email'))
+                                    <p class="error mt-2 text-xs text-red-500">{{ $errors->first('email') }}</p>
+                                @endif
                             </div>
                             {{-- password --}}
                             <div class="mb-4">
                                 <label class="mb-1 block text-sm" for="password">パスワード</label>
                                 <input name="password" class="w-full rounded border border-gray-300" type="password" value="" placeholder="パスワード">
+                                @if ($errors->has('password'))
+                                    <p class="error mt-2 text-xs text-red-500">{{ $errors->first('password') }}</p>
+                                @endif
                             </div>
                             {{-- uuid --}}
                         </div>

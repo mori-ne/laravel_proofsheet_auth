@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PrePostUserTokenMail;
 use App\Http\Requests\PostUserRegisterRequest;
+use App\Mail\PostUserRegisterCompliteMail;
 use Illuminate\Support\Facades\Hash;
 
 class PostUserController extends Controller
@@ -197,6 +198,11 @@ class PostUserController extends Controller
             // 新規登録されたユーザーでpostuserガードを使用してログイン (セッション発行)
             Auth::guard('postuser')->login($user);
             Log::info('ユーザーのログイン完了');
+
+            // メール送信
+            $project = Project::where('uuid', $uuid)->firstOrFail();
+            Mail::to($request->email)->send(new PostUserRegisterCompliteMail($request->email, $uuid, $project->project_name));
+            Log::info('メール送信完了');
         } catch (\Exception $e) {
             Log::error('エラー発生: ' . $e->getMessage());
             DB::rollBack();

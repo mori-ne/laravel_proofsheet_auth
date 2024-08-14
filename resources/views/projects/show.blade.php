@@ -416,7 +416,39 @@
                         <div class="mb-2">
                             <h4 class="text-md mb-2 font-bold text-gray-500">ユーザー情報</h4>
                             <div class="rounded-md border border-gray-300 bg-white p-8">
-                                <p>アカウント登録した人の情報をテーブルで表示する</p>
+                                @isset($postusers)
+                                    <p>アカウントは有りませんでした</p>
+                                @endisset
+                                @foreach ($postusers as $postuser)
+                                    <div class="flex flex-row flex-nowrap gap-2">
+                                        <div>
+                                            <p class="text-sm text-gray-400">氏名：</p>
+                                            <p>{{ $postuser->first_name }}{{ $postuser->last_name }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-400">所属先：</p>
+                                            <p>{{ $postuser->affiliate }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-400">住所：</p>
+                                            〒{{ $postuser->zipcode }}
+                                            {{ $postuser->address_coutry }}
+                                            {{ $postuser->address_city }}
+                                            @if ($postuser->address_etc)
+                                                {{ $postuser->address_etc }}
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-400">メールアドレス：</p>
+                                            <p>{{ $postuser->email }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-gray-400">パスワード</p>
+                                            {{-- ハッシュデコードして●で表示する --}}
+                                            <p>{{ Str::length($postuser->password) }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

@@ -2,12 +2,11 @@
     ※本メールは自動配信メールです。<br>
     <br>
     {{ $project_name }}にご登録いただき、ありがとうございます。<br>
-    本会員登録を完了するには下記URLからメールを認証してください。<br>
-    有効期限は24時間です。24時間以内に登録を完了してください。
+    会員登録が完了しました。<br>
+    会員情報の変更等は管理画面から行えます。<br>
     <br>
-    <br>
-    <a href="{{ route('postuser.verifiedmailsignup', ['uuid' => $uuid, 'token' => $token]) }}">
-        {{ route('postuser.verifiedmailsignup', ['uuid' => $uuid, 'token' => $token]) }}
+    <a href="{{ route('postuser.dashboard', $uuid) }}">
+        {{ route('postuser.dashboard', $uuid) }}
     </a>
     <br>
     <br>

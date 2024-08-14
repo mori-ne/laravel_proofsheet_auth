@@ -30,7 +30,7 @@ class PostUserRegisterRequest extends FormRequest
             'zipcode' => 'integer|digits:7',
             'address_country' => 'string|max:10',
             'address_city' => 'string',
-            'address_etc' => 'string',
+            'address_etc' => 'string|nullable',
             'uuid' => 'string|max:36',
             'password' => 'required|alpha-num|min:8|max:50|confirmed',
             'password_confirmation' => 'required|string|max:50',
