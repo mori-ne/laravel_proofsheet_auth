@@ -27,13 +27,14 @@ class PostUserRegisterRequest extends FormRequest
             'first_name' => 'required|string|max:20',
             'last_name' => 'required|string|max:20',
             'affiliate' => 'required|string|max:255',
-            'zipcode' => 'integer|size:7',
+            'zipcode' => 'integer|digits:7',
             'address_country' => 'string|max:10',
             'address_city' => 'string',
             'address_etc' => 'string',
             'uuid' => 'string|max:36',
-            'password' => 'required|string|min:8|max:50|confirmed',
-            'password_confirmation' => 'required|string|max:50'
+            'password' => 'required|alpha-num|min:8|max:50|confirmed',
+            'password_confirmation' => 'required|string|max:50',
+            'email' => 'string|lowercase|max:100',
         ];
     }
 
@@ -46,7 +47,8 @@ class PostUserRegisterRequest extends FormRequest
             'last_name.max' => '※最大20文字までです',
             'affiliate.required' => '※所属施設名は必須項目です',
             'zipcode.integer' => '※郵便番号は数字で入力してください',
-            'zipcode.size' => '※郵便番号は7文字で入力してください',
+            'zipcode.digits' => '※郵便番号は7文字で入力してください',
+            'password.alpha-num' => '※パスワードは英数字のみで入力してください',
             'password.min' => '※パスワードは8文字以上50文字以内で入力してください',
             'password.max' => '※パスワードは8文字以上50文字以内で入力してください',
             'password.confirmed' => '※パスワードが一致しません'

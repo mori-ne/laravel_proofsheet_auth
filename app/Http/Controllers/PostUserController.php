@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PrePostUserTokenMail;
 use App\Http\Requests\PostUserRegisterRequest;
+use Illuminate\Support\Facades\Hash;
 
 class PostUserController extends Controller
 {
@@ -152,9 +153,58 @@ class PostUserController extends Controller
     }
 
 
-    // 登録処理
-    public function register($uuid, PostUserRegisterRequest $request)
+    public function store($uuid, PostUserRegisterRequest $request)
     {
-        dd($request, $uuid);
+        $validated = $request->validated();
+        // dd($validated, $request);
+
+        // トランザクション処理
+        DB::beginTransaction();
+
+        try {
+            Log::info('ユーザー作成開始');
+
+            // 新しいユーザーを作成
+            $user = PostUser::create([
+                'first_name' => $validated['first_name'],
+                'last_name' => $validated['last_name'],
+                'affiliate' => $validated['affiliate'],
+                'zipcode' => $validated['zipcode'],
+                'address_country' => $validated['address_country'],
+                'address_city' => $validated['address_city'],
+                'address_etc' => $validated['address_etc'],
+                'password' => Hash::make($validated['password']),
+                'uuid' => $uuid,
+                'email' => $validated['email'],
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            Log::info('ユーザー作成完了');
+
+            // PrePostUserの削除
+            $prepostuser = PrePostUser::where('email', $validated['email'])->first();
+            if ($prepostuser) {
+                PrePostUser::destroy($prepostuser->id);
+                Log::info('PrePostUser削除完了');
+            }
+
+            // トランザクションのコミット
+            DB::commit();
+            Log::info('トランザクションコミット完了');
+
+            // 新規登録されたユーザーでpostuserガードを使用してログイン (セッション発行)
+            Auth::guard('postuser')->login($user);
+            Log::info('ユーザーのログイン完了');
+        } catch (\Exception $e) {
+            Log::error('エラー発生: ' . $e->getMessage());
+            DB::rollBack();
+
+            return redirect()->back()->withErrors(['error' => 'ユーザー登録に失敗しました。もう一度お試しください。']);
+        }
+
+        // 成功した場合のリダイレクト
+        return redirect()->route('postuser.dashboard', $uuid)->with('status', '新規登録が完了しました！');
     }
 }

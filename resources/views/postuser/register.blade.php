@@ -10,7 +10,7 @@
         </div>
 
         <div class="rounded border border-gray-300 bg-white p-10">
-            <form action="{{ route('postuser.register', $uuid) }}" method="POST">
+            <form action="{{ route('postuser.store', $uuid) }}" method="POST">
                 @method('PUT')
                 @csrf
 
@@ -18,8 +18,8 @@
 
                     <!-- Email Address -->
                     <div>
-                        <label class='mb-1.5 block text-sm font-bold text-gray-700'>メールアドレス</label>
-                        <input name="email" type="email" class='w-full rounded border-0 border-gray-300 bg-gray-100 py-1.5 text-gray-500' value="{{ $email }}" readonly>
+                        <h6 class="mb-3 font-bold">メールアドレス</h6>
+                        <input name="email" type="email" class='w-full rounded border-0 border-gray-300 bg-gray-100 py-2 text-gray-500' value="{{ $email }}" readonly>
                     </div>
 
                     {{-- name --}}

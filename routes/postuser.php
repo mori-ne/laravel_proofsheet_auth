@@ -37,7 +37,7 @@ Route::prefix('/postuser/{uuid}')->group(function () {
     });
     Route::post('signup/send', [PostUserController::class, 'verifyMailSignup'])->name('postuser.verifymailsignup');
     Route::get('verify/{token}', [PostUserController::class, 'verifiedMailSignup'])->name('postuser.verifiedmailsignup');
-    Route::put('register', [PostUserController::class, 'register'])->name('postuser.register');
+    Route::put('store', [PostUserController::class, 'store'])->name('postuser.store');
 
     // auth:postuser
     Route::middleware('auth:postuser')->group(function () {
