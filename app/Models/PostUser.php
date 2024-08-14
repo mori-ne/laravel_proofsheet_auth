@@ -22,6 +22,7 @@ class PostUser extends Authenticatable implements MustVerifyEmail
         'first_name',
         'last_name',
         'email',
+        'email_verified_at',
         'affiliate',
         'password',
         'zipcode',
