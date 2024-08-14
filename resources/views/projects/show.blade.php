@@ -416,84 +416,95 @@
                         <div class="mb-2">
                             <h4 class="text-md mb-2 font-bold text-gray-500">ユーザー情報</h4>
                             <div class="rounded-md border border-gray-300 bg-white p-8">
-                                @isset($postusers)
+                                {{-- @isset($postusers)
                                     <p>アカウントは有りませんでした</p>
-                                @endisset
-                                @foreach ($postusers as $postuser)
-                                    <div class="flex flex-row flex-nowrap gap-2">
-                                        <div>
-                                            <p class="text-sm text-gray-400">氏名：</p>
-                                            <p>{{ $postuser->first_name }}{{ $postuser->last_name }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm text-gray-400">所属先：</p>
-                                            <p>{{ $postuser->affiliate }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm text-gray-400">住所：</p>
-                                            〒{{ $postuser->zipcode }}
-                                            {{ $postuser->address_coutry }}
-                                            {{ $postuser->address_city }}
-                                            @if ($postuser->address_etc)
-                                                {{ $postuser->address_etc }}
-                                            @endif
-                                        </div>
-                                        <div>
-                                            <p class="text-sm text-gray-400">メールアドレス：</p>
-                                            <p>{{ $postuser->email }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm text-gray-400">パスワード</p>
-                                            {{-- ハッシュデコードして●で表示する --}}
-                                            <p>{{ Str::length($postuser->password) }}</p>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                @endisset --}}
+                                <table class="w-full">
+                                    <tr class="broder-gray-300 border-b">
+                                        <th class="pb-1 pr-6">
+                                            <p class="text-left text-xs font-bold text-gray-400">氏名</p>
+                                        </th>
+                                        <th class="pb-1 pr-6">
+                                            <p class="text-left text-xs font-bold text-gray-400">所属先</p>
+                                        </th>
+                                        <th class="pb-1 pr-6">
+                                            <p class="text-left text-xs font-bold text-gray-400">住所</p>
+                                        </th>
+                                        <th class="pb-1 pr-6">
+                                            <p class="text-left text-xs font-bold text-gray-400">メールアドレス</p>
+                                        </th>
+                                    </tr>
+                                    @foreach ($postusers as $postuser)
+                                        <tr class="broder-gray-300 border-b">
+                                            <td class="py-2 pr-6">
+                                                <p>{{ $postuser->first_name }}{{ $postuser->last_name }}</p>
+                                            </td>
+                                            <td class="py-2 pr-6">
+                                                <p>{{ $postuser->affiliate }}</p>
+                                            </td>
+                                            <td class="py-2 pr-6">
+                                                〒{{ $postuser->zipcode }}{{ $postuser->address_coutry }}
+                                                {{ $postuser->address_city }}
+                                                @if ($postuser->address_etc)
+                                                    {{ $postuser->address_etc }}
+                                                @endif
+                                            </td>
+                                            <td class="py-2 pl-3">
+                                                <p>{{ $postuser->email }}</p>
+                                            </td>
+                                        </tr>
                             </div>
+                            <div>
+                            </div>
+                            @endforeach
+                            </table>
                         </div>
                     </div>
 
-                    <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="relative" x-cloak>
-                        {{-- description --}}
-                        <div class="mb-8">
-                            <h4 class="text-md mb-2 font-bold text-gray-500">プロジェクトの説明（ユーザーページに表示されます）</h4>
-                            <div class="mb-8 rounded-md border border-gray-300 bg-white p-8">
+                </div>
 
-                                {{-- project message --}}
-                                <div class="mb-8">
-                                    <p class="mb-2 text-sm text-gray-400">内容情報</p>
-                                    <div class="documentstyle">{!! $project->project_message !!}</div>
-                                </div>
+                <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="relative" x-cloak>
+                    {{-- description --}}
+                    <div class="mb-8">
+                        <h4 class="text-md mb-2 font-bold text-gray-500">プロジェクトの説明（ユーザーページに表示されます）</h4>
+                        <div class="mb-8 rounded-md border border-gray-300 bg-white p-8">
+
+                            {{-- project message --}}
+                            <div class="mb-8">
+                                <p class="mb-2 text-sm text-gray-400">内容情報</p>
+                                <div class="documentstyle">{!! $project->project_message !!}</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            {{-- created / modified --}}
-            <div>
-                <span class="pr-4 text-xs text-gray-400">
-                    プロジェクト作成日：
-                    @if (!$project->created_at)
-                        <span class="text-gray-700">無し</span>
-                    @else
-                        <span class="text-gray-700">
-                            {{ $project->created_at }}
-                        </span>
-                    @endif
-                </span>
-                <span class="pr-4 text-xs text-gray-400">
-                    プロジェクト更新日：
-                    @if (!$project->updated_at)
-                        <span class="text-gray-700">無し</span>
-                    @else
-                        <span class="text-gray-700">
-                            {{ $project->updated_at }}
-                        </span>
-                    @endif
-                </span>
-            </div>
+        {{-- created / modified --}}
+        <div>
+            <span class="pr-4 text-xs text-gray-400">
+                プロジェクト作成日：
+                @if (!$project->created_at)
+                    <span class="text-gray-700">無し</span>
+                @else
+                    <span class="text-gray-700">
+                        {{ $project->created_at }}
+                    </span>
+                @endif
+            </span>
+            <span class="pr-4 text-xs text-gray-400">
+                プロジェクト更新日：
+                @if (!$project->updated_at)
+                    <span class="text-gray-700">無し</span>
+                @else
+                    <span class="text-gray-700">
+                        {{ $project->updated_at }}
+                    </span>
+                @endif
+            </span>
+        </div>
 
+        </div>
         </div>
     </main>
 @endsection
