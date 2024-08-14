@@ -44,7 +44,7 @@ class ProjectController extends Controller
         }
 
         $projects = $query->with('forms')->get();
-        return view('/projects', compact('projects'));
+        return view('/projects', ['projects' => $projects]);
     }
 
     // 検索

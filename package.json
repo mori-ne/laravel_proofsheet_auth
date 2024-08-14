@@ -20,6 +20,6 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "@tinymce/tinymce-vue": "^5.1.1"
+        "@tinymce/tinymce-vue": "^6.0.1"
     }
 }

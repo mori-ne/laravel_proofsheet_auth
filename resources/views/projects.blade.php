@@ -76,15 +76,18 @@
                 <div class="mb-3 rounded-md border border-gray-300 bg-white">
 
                     {{-- publish / project name / dropdown menu / published_at / form count / created_at --}}
-                    <div class="px-8 py-4">
-                        {{-- publish / project name / dropdown menu --}}
-                        <div class="mb-2 flex items-center justify-start gap-2">
+                    <div class="">
+
+                        {{-- publish / form count / published_at / dropdown menu --}}
+
+                        {{-- publish --}}
+                        <div class="flex items-center justify-start gap-2 border-b border-gray-300 px-6 py-3">
                             @if ($project->status)
                                 {{-- 公開中 --}}
                                 <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="relative flex items-center rounded-full bg-green-600 py-1 pl-2 pr-2.5 text-xs font-semibold text-white">
-                                        <svg class="relative h-3.5 w-3.5 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <button type="submit" class="relative flex items-center rounded-full bg-green-600 py-1.5 pl-2 pr-2.5 text-xs font-semibold text-white">
+                                        <svg class="relative h-5 w-5 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                             <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
                                                 clip-rule="evenodd" />
                                         </svg>
@@ -95,8 +98,8 @@
                                 {{-- 非公開 --}}
                                 <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="relative flex items-center rounded-full bg-gray-300 py-1 pl-2 pr-2.5 text-xs font-semibold text-white">
-                                        <svg class="relative h-3.5 w-3.5 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <button type="submit" class="relative flex items-center rounded-full bg-gray-300 py-1.5 pl-2 pr-2.5 text-xs font-semibold text-white">
+                                        <svg class="relative h-5 w-5 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
                                                 clip-rule="evenodd" />
@@ -108,15 +111,52 @@
                                 </form>
                             @endif
 
-                            {{-- project name --}}
-                            <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
-                                <a href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
-                            </h5>
+                            {{-- form count --}}
+                            <div class="flex items-center gap-1 rounded-full bg-gray-400 py-2 pl-2 pr-0.5 text-white">
+                                <p class="flex h-4 w-4 items-center justify-center rounded-full bg-white text-xs font-bold text-gray-400">
+                                    {{ $project->forms->count() }}
+                                </p>
+                                <p class="pr-2 text-xs text-white">フォーム数</p>
+                            </div>
+
+                            <div class="flex flex-col">
+                                {{-- published_at --}}
+                                <div class="flex items-center">
+                                    <p class="pr-2 text-sm text-gray-500">公開期限</p>
+                                    <p class="text-sm font-bold text-neutral-900">
+                                        @if ($project->is_deadline)
+                                            {{ $project->is_deadline }}
+                                        @else
+                                            設定なし
+                                        @endif
+                                    </p>
+                                </div>
+
+                                <div class="flex items-center gap-4">
+                                    {{-- created_at --}}
+                                    <div class="flex items-center">
+                                        <p class="text-xs text-gray-300">作成日：</p>
+                                        <p class="text-xs text-gray-300">{{ $project->created_at }}</p>
+                                    </div>
+                                    {{-- updated_at --}}
+                                    <div class="flex items-center">
+                                        <p class="text-xs text-gray-300">更新日：</p>
+                                        <p class="text-xs text-gray-300">{{ $project->updated_at }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- id --}}
+                            <div class="ml-auto flex items-center">
+                                <p class="text-md ml-auto w-fit pr-1 font-bold text-gray-400">
+                                    {{ $project->id }}
+                                </p>
+                            </div>
 
                             {{-- dropdown menu --}}
                             <div x-data="{
                                 dropdownOpen: false
-                            }" class="relative ml-auto">
+                            }" class="relative">
 
                                 <button @click="dropdownOpen=true"
                                     class="inline-flex h-6 items-center justify-center rounded-md bg-white px-2 text-sm font-medium transition-colors hover:bg-neutral-100 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"><i
@@ -185,55 +225,38 @@
                             </div>
                         </div>
 
-                        {{-- published_at / form count / created_at --}}
-                        <div class="flex items-center gap-4">
-                            {{-- form count --}}
-                            <div class="flex items-center">
-                                <p class="text-sm text-gray-500">フォーム数：</p>
-                                <p class="flex h-4 w-4 items-center justify-center rounded-full bg-gray-400 text-xs font-bold text-white">
-                                    {{ $project->forms->count() }}
-                                </p>
+                        <div class="px-6 pb-6 pt-6">
+                            {{-- project name --}}
+                            <h5 class="mb-1 text-xl font-bold leading-none tracking-tight text-gray-700">
+                                <a href="{{ route('projects.show', $project->id) }}">{{ $project->project_name }}</a>
+                            </h5>
+
+                            {{-- published_at / form count / created_at --}}
+                            <div class="flex items-center gap-4">
+                                {{-- url --}}
+                                <div class="flex items-center">
+                                    {{-- <p class="text-sm text-gray-500">公開URL：</p> --}}
+                                    <a class="text-md text-gray-600 hover:underline" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">{{ route('postuser.index', ['uuid' => $project->uuid]) }}</a>
+                                </div>
                             </div>
-                            {{-- published_at --}}
-                            <div class="flex items-center">
-                                <p class="text-sm text-gray-500">公開期限：</p>
-                                <p class="text-sm text-neutral-900">
-                                    @if ($project->is_deadline)
-                                        {{ $project->is_deadline }}
-                                    @else
-                                        設定なし
-                                    @endif
-                                </p>
-                            </div>
-                            {{-- created_at --}}
-                            <div class="flex items-center">
-                                <p class="text-sm text-gray-500">作成日：</p>
-                                <p class="text-sm text-neutral-900">{{ $project->created_at }}</p>
-                            </div>
-                            {{-- updated_at --}}
-                            <div class="flex items-center">
-                                <p class="text-sm text-gray-500">更新日：</p>
-                                <p class="text-sm text-neutral-900">{{ $project->updated_at }}</p>
-                            </div>
+                        </div>
+
+                        <div class="rounded-bl rounded-br bg-gray-100 px-6 py-2">
+                            @foreach ($project->forms as $key => $form)
+                                <div class="flex flex-row border-t border-gray-300 py-1 first:border-t-0">
+                                    <p class="pr-3 text-gray-400">
+                                        {{ $key + 1 }}
+                                    </p>
+                                    <a href="{{ route('forms.show', $form->id) }}">
+                                        {{ $form->form_name }}
+                                    </a>
+                                    {{-- {{ $form->form_description }} --}}
+                                </div>
+                            @endforeach
                         </div>
                     </div>
 
-                    {{-- url / id --}}
-                    <div class="rounded-b-md bg-gray-100 py-2 pl-8 pr-8">
-                        <div class="flex items-center">
-                            {{-- url --}}
-                            <div class="flex items-center">
-                                <p class="text-sm text-gray-500">公開URL：</p>
-                                <a class="text-sm text-gray-700" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">{{ route('postuser.index', ['uuid' => $project->uuid]) }}</a>
-                            </div>
-                            {{-- id --}}
-                            <div class="ml-auto flex items-center">
-                                <p class="text-md ml-auto w-fit pr-1 font-bold text-gray-400">
-                                    {{ $project->id }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             @endforeach
 
