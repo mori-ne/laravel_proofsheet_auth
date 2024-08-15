@@ -1,4 +1,4 @@
-<aside class="h-svh flex w-64 shrink-0 flex-col overflow-y-scroll border-r border-neutral-300 bg-white px-3 py-6">
+<aside class="h-svh flex w-64 shrink-0 flex-col overflow-y-scroll border-0 border-neutral-300 bg-white px-3 py-6 shadow-md shadow-gray-200">
 
     <!-- Logo -->
     <div class="mb-8 ml-4 flex shrink-0 items-center text-xl font-extrabold">

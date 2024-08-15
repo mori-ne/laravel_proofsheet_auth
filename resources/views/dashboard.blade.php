@@ -23,7 +23,7 @@
                     </div>
                 @endif
 
-                <div class="flex-1 rounded-md border border-gray-300 bg-white px-8 py-6">
+                <div class="flex-1 rounded-md border-0 border-gray-300 bg-white px-8 py-6 shadow-md shadow-gray-200">
                     <p class="mb-4 text-sm text-gray-400">総プロジェクト数</p>
                     <p class="text-5xl">
                         {{ $projects->count() }}
@@ -31,7 +31,7 @@
                     </p>
                 </div>
 
-                <div class="flex-1 rounded-md border border-gray-300 bg-white px-8 py-6">
+                <div class="flex-1 rounded-md border-0 border-gray-300 bg-white px-8 py-6 shadow-md shadow-gray-200">
                     <p class="mb-4 text-sm text-gray-400">総フォーム数</p>
                     <p class="text-5xl">
                         {{ $forms->count() }}
@@ -39,7 +39,7 @@
                     </p>
                 </div>
 
-                <div class="w-full rounded-md border border-gray-300 bg-white px-8 py-6">
+                <div class="w-full rounded-md border-0 border-gray-300 bg-white px-8 py-6 shadow-md shadow-gray-200">
                     <p class="mb-4 text-sm text-gray-400">最近更新されたプロジェクト</p>
                     @foreach ($recentProjects as $recentProject)
                         <div class="mb-2 flex flex-row items-center gap-4 border-b pb-2 last:mb-0 last:border-b-0 last:pb-0">

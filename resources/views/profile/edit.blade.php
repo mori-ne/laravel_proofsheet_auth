@@ -11,7 +11,7 @@
             </div>
 
             <div class="mx-auto max-w-7xl">
-                <div class="mb-6 rounded-md border border-gray-300 bg-white p-8">
+                <div class="mb-6 rounded-md border-0 border-gray-300 bg-white p-8 shadow-lg shadow-gray-200">
                     <div class="w-full">
                         <section>
                             <header>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-md border border-gray-300 bg-white p-8">
+                <div class="mb-6 rounded-md border-0 border-gray-300 bg-white p-8 shadow-lg shadow-gray-200">
                     <div class="w-full">
                         <section>
                             <header>
@@ -121,7 +121,7 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-md border border-gray-300 bg-white p-8">
+                <div class="mb-6 rounded-md border-0 border-gray-300 bg-white p-8 shadow-lg shadow-gray-200">
                     <div class="w-full">
                         <section class="space-y-6">
                             <header>

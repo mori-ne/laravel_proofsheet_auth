@@ -14,10 +14,8 @@ const getAddress = async () => {
     console.log(zipcode.value);
 
     try {
-        const path = 'http://localhost:8888/laravel_proofsheet_auth/public/';
-        const response = await axios.get(
-            `http://localhost:8888/laravel_proofsheet_auth/public` + `/api/address/${zipcode.value}`,
-        );
+        const path = __PROJECT_ROOT__;
+        const response = await axios.get(path + `/api/address/${zipcode.value}`);
         console.log(response);
 
         const data = response.data.results[0];
@@ -46,8 +44,8 @@ const getAddress = async () => {
             />
             <input
                 type="button"
-                class="rounded bg-gray-700 px-3 py-1.5 text-sm text-white"
-                @click="getAddress"
+                class="rounded bg-black px-3 py-1.5 text-sm text-white"
+                v-on:click="getAddress"
                 value="住所を取得"
             />
         </div>
