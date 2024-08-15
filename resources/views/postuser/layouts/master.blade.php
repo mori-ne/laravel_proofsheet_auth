@@ -25,13 +25,13 @@
 <body class="font-sans antialiased">
     <div id="app">
 
-        <div class="min-h-screen bg-gray-50">
+        <div class="min-h-screen bg-neutral-50">
 
-            <div class="border-b border-gray-300 bg-white px-8 py-4">
+            <div class="border-b border-neutral-300 bg-white px-8 py-4">
 
                 {{-- flex --}}
                 <div class="mx-auto flex max-w-6xl flex-row justify-between">
-                    <h1 class="text-xl font-bold text-gray-800">
+                    <h1 class="text-xl font-bold text-neutral-800">
                         <a href="{{ route('postuser.index', $uuid) }}">
                             {{ $project->project_name }}
                         </a>
@@ -43,7 +43,7 @@
                             <div class="ml-auto flex flex-row items-center gap-4">
                                 <p class="flex flex-row items-center gap-1">
                                     <span class="text-md font-bold">{{ Auth::guard('postuser')->user()->first_name }}{{ Auth::guard('postuser')->user()->last_name }}</span>
-                                    <span class="text-xs text-gray-400">さん</span>
+                                    <span class="text-xs text-neutral-400">さん</span>
                                 </p>
                                 <div>
                                     <a class="text-sm" href="">アカウント管理</a>

@@ -256,17 +256,17 @@ const sendData = async () => {
 </script>
 
 <template>
-    <div class="relative h-svh w-full bg-gray-100">
+    <div class="relative h-svh w-full bg-neutral-100">
         <div class="mx-auto flex h-full max-w-7xl flex-col p-8">
             <!-- <pre v-text="formAttribute" class="text-xs"></pre> -->
             <!-- <pre v-text="inputFields" class="text-xs"></pre> -->
 
             <!-- top -->
             <div class="mb-4">
-                <div class="flex gap-4 border-b border-gray-300 pb-2">
-                    <p class="text-lg font-bold text-gray-900">入力項目編集画面</p>
+                <div class="flex gap-4 border-b border-neutral-300 pb-2">
+                    <p class="text-lg font-bold text-neutral-900">入力項目編集画面</p>
                     <!--
-                        <button @click="doCloseWindow" class="text-sm text-red-600 bg-white px-2 rounded-md hover:bg-gray-500 ml-auto" > <i class="at-xmark-circle"></i> 閉じる </button>
+                        <button @click="doCloseWindow" class="text-sm text-red-600 bg-white px-2 rounded-md hover:bg-neutral-500 ml-auto" > <i class="at-xmark-circle"></i> 閉じる </button>
                     -->
                 </div>
 
@@ -274,15 +274,15 @@ const sendData = async () => {
                 <div class="flex gap-4 pt-2">
                     <!-- project name -->
                     <div class="flex flex-row items-center">
-                        <p class="text-sm text-gray-400">プロジェクト名：</p>
-                        <h2 class="text-sm font-bold text-gray-900">
+                        <p class="text-sm text-neutral-400">プロジェクト名：</p>
+                        <h2 class="text-sm font-bold text-neutral-900">
                             {{ formAttribute.project.project_name }}
                         </h2>
                     </div>
                     <!-- form name -->
                     <div class="flex flex-row items-center">
-                        <p class="text-sm text-gray-400">フォーム名：</p>
-                        <h2 class="text-sm font-bold text-gray-900">
+                        <p class="text-sm text-neutral-400">フォーム名：</p>
+                        <h2 class="text-sm font-bold text-neutral-900">
                             {{ formAttribute.form_name }}
                         </h2>
                     </div>
@@ -292,7 +292,7 @@ const sendData = async () => {
                             v-model="debugFlg"
                             name="debugSwitch"
                             type="checkbox"
-                            class="ml-auto mr-2 h-4 w-4 rounded-sm border border-gray-300"
+                            class="ml-auto mr-2 h-4 w-4 rounded-sm border border-neutral-300"
                         />
                         <label for="debugSwitch" class="text-xs"> デバッグモード </label>
                     </div>
@@ -300,20 +300,20 @@ const sendData = async () => {
             </div>
 
             <div
-                class="mx-auto mb-14 flex h-full w-full flex-row overflow-hidden rounded-lg border border-gray-300 bg-white"
+                class="mx-auto mb-14 flex h-full w-full flex-row overflow-hidden rounded-lg border border-neutral-300 bg-white"
             >
                 <!-- セット項目 -->
-                <div class="flex w-80 flex-shrink-0 flex-col border-r border-gray-300 bg-white">
+                <div class="flex w-80 flex-shrink-0 flex-col border-r border-neutral-300 bg-white">
                     <!-- title -->
-                    <div class="shrink-0 border-b border-gray-300 bg-white p-4 text-gray-500">
+                    <div class="shrink-0 border-b border-neutral-300 bg-white p-4 text-neutral-500">
                         <h3 class="text-xl font-bold">セット項目</h3>
                     </div>
 
                     <!-- select field -->
-                    <div class="shrink-0 border-b border-gray-300 bg-white p-4">
+                    <div class="shrink-0 border-b border-neutral-300 bg-white p-4">
                         <select
                             v-model="selectedFieldType"
-                            class="mb-2 w-full rounded border border-gray-300 px-2 py-1"
+                            class="mb-2 w-full rounded border border-neutral-300 px-2 py-1"
                             name=""
                             id=""
                         >
@@ -328,12 +328,12 @@ const sendData = async () => {
                             <option value="hr">罫線</option>
                         </select>
                         <div class="flex justify-end gap-3">
-                            <button @click="toggleAll" type="button" class="text-xs text-gray-500">
+                            <button @click="toggleAll" type="button" class="text-xs text-neutral-500">
                                 すべて開く / すべて閉じる
                             </button>
                             <button
                                 @click="addField"
-                                class="rounded bg-gray-700 px-2 py-1 text-xs text-white"
+                                class="rounded bg-neutral-600 px-2 py-1 text-xs text-white"
                                 type="button"
                             >
                                 フィールドを追加
@@ -346,13 +346,13 @@ const sendData = async () => {
                         <li
                             :class="{
                                 'sticky top-0 bg-white': inputField.isOpen,
-                                'relative w-full border-b border-gray-300': true,
+                                'relative w-full border-b border-neutral-300': true,
                             }"
                             v-for="inputField in inputFields"
                             :key="inputField.id"
                             v-on:mouseover="showController(inputField.id)"
                             v-on:mouseleave="hideController(inputField.id)"
-                            class="w-full border-b border-gray-300"
+                            class="w-full border-b border-neutral-300"
                         >
                             <div class="flex flex-row items-center justify-between gap-2 bg-white p-4">
                                 <!-- input field title -->
@@ -363,7 +363,7 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>テキスト（1行）</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -373,7 +373,7 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>テキストエリア（標準）</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -383,7 +383,7 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>テキストエリア（RTF）</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -393,7 +393,7 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>チェックリスト</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -403,7 +403,7 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>ラジオボタン</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -413,7 +413,7 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>セレクトリスト</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -423,7 +423,7 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>見出し</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -433,13 +433,13 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <p>段落</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
                                     <div v-if="inputField.inputType === 'hr'" class="flex items-center gap-1 font-bold">
                                         <p>罫線</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-gray-300">{{
+                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
                                         }}</span>
                                     </div>
@@ -463,7 +463,7 @@ const sendData = async () => {
                                     <button
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         type="button"
-                                        class="text-sm text-gray-500"
+                                        class="text-sm text-neutral-500"
                                     >
                                         <!-- {{ inputField.isOpen ? '閉じる' : '開く' }} -->
                                         <i class="at-info-circle"></i>
@@ -476,10 +476,10 @@ const sendData = async () => {
                                 <div v-if="inputField.isOpen" id="detail" class="p-4">
                                     <!-- title -->
                                     <div v-if="!(inputField.inputType === 'hr')" class="mb-2">
-                                        <p class="mb-1 text-xs text-gray-500">タイトル</p>
+                                        <p class="mb-1 text-xs text-neutral-500">タイトル</p>
                                         <input
                                             v-model="inputField.inputTitle"
-                                            class="w-full rounded border border-gray-300 px-2 py-1 text-sm"
+                                            class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
                                             type="text"
                                             placeholder="タイトル"
                                         />
@@ -487,10 +487,10 @@ const sendData = async () => {
 
                                     <!-- sub label -->
                                     <div v-if="!(inputField.inputType === 'hr')" class="mb-2">
-                                        <p class="mb-1 text-xs text-gray-500">サブラベル</p>
+                                        <p class="mb-1 text-xs text-neutral-500">サブラベル</p>
                                         <input
                                             v-model="inputField.inputLabel"
-                                            class="w-full rounded border border-gray-300 px-2 py-1 text-sm"
+                                            class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
                                             type="text"
                                             value=""
                                             placeholder="サブラベルが入ります"
@@ -500,11 +500,11 @@ const sendData = async () => {
                                     <!-- checkbox -->
                                     <div v-if="inputField.inputType === 'checkbox'" class="mb-2">
                                         <div>
-                                            <p class="mb-1 text-xs text-gray-500">チェックリスト（1行で1つ）</p>
+                                            <p class="mb-1 text-xs text-neutral-500">チェックリスト（1行で1つ）</p>
                                             <textarea
                                                 v-model="inputField.inputContent"
                                                 @input="convertCheckbox(inputField.id)"
-                                                class="w-full rounded border border-gray-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
                                                 name=""
                                                 id=""
                                                 cols="10"
@@ -515,11 +515,11 @@ const sendData = async () => {
                                     <!-- radio -->
                                     <div v-if="inputField.inputType === 'radio'" class="mb-2">
                                         <div>
-                                            <p class="mb-1 text-xs text-gray-500">ラジオボタン（1行で1つ）</p>
+                                            <p class="mb-1 text-xs text-neutral-500">ラジオボタン（1行で1つ）</p>
                                             <textarea
                                                 v-model="inputField.inputContent"
                                                 @input="convertRadioButton(inputField.id)"
-                                                class="w-full rounded border border-gray-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
                                                 name=""
                                                 id=""
                                                 cols="10"
@@ -530,11 +530,11 @@ const sendData = async () => {
                                     <!-- checkbox -->
                                     <div v-if="inputField.inputType === 'select'" class="mb-2">
                                         <div>
-                                            <p class="mb-1 text-xs text-gray-500">セレクトリスト（1行で1つ）</p>
+                                            <p class="mb-1 text-xs text-neutral-500">セレクトリスト（1行で1つ）</p>
                                             <textarea
                                                 v-model="inputField.inputContent"
                                                 @input="convertSelectList(inputField.id)"
-                                                class="w-full rounded border border-gray-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
                                                 name=""
                                                 id=""
                                                 cols="10"
@@ -546,10 +546,10 @@ const sendData = async () => {
                                     <div class="flex gap-2">
                                         <!-- code -->
                                         <div v-if="!(inputField.inputType === 'hr')" class="mb-2 w-20">
-                                            <p class="mb-1 text-xs text-gray-500">コード</p>
+                                            <p class="mb-1 text-xs text-neutral-500">コード</p>
                                             <input
                                                 v-model="inputField.inputCode"
-                                                class="w-full rounded border border-gray-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
                                                 type="text"
                                                 placeholder="code00"
                                             />
@@ -569,10 +569,10 @@ const sendData = async () => {
                                             "
                                             class="mb-2 w-16"
                                         >
-                                            <p class="mb-1 text-xs text-gray-500">文字数制限</p>
+                                            <p class="mb-1 text-xs text-neutral-500">文字数制限</p>
                                             <input
                                                 v-model="inputField.inputLimit"
-                                                class="w-28 rounded border border-gray-300 px-2 py-1 text-sm"
+                                                class="w-28 rounded border border-neutral-300 px-2 py-1 text-sm"
                                                 type="number"
                                                 placeholder="100"
                                             />
@@ -589,10 +589,10 @@ const sendData = async () => {
                                             "
                                             class="mb-2 shrink-0"
                                         >
-                                            <p class="mb-1 text-xs text-gray-500">必須</p>
+                                            <p class="mb-1 text-xs text-neutral-500">必須</p>
                                             <input
                                                 v-model="inputField.isRequired"
-                                                class="h-4 w-4 rounded border-gray-400"
+                                                class="h-4 w-4 rounded border-neutral-400"
                                                 type="checkbox"
                                                 name="required"
                                                 value="必須"
@@ -608,7 +608,7 @@ const sendData = async () => {
                 <!-- preview -->
                 <div class="mx-auto flex w-full flex-1 flex-col bg-white">
                     <!-- title -->
-                    <div class="shrink-0 border-b border-gray-300 bg-white p-4 text-gray-500">
+                    <div class="shrink-0 border-b border-neutral-300 bg-white p-4 text-neutral-500">
                         <h3 class="text-xl font-bold">プレビュー</h3>
                     </div>
 
@@ -654,7 +654,7 @@ const sendData = async () => {
                                     <div class="mb-2 flex justify-between">
                                         <!-- label -->
                                         <div v-if="!(inputField.inputType === 'hr')">
-                                            <p class="text-sm text-gray-400">
+                                            <p class="text-sm text-neutral-400">
                                                 {{ inputField.inputLabel }}
                                             </p>
                                         </div>
@@ -666,7 +666,7 @@ const sendData = async () => {
                                         <input
                                             v-if="inputField.inputType === 'text'"
                                             v-model="inputField.inputContent"
-                                            class="mb-1 w-full rounded border border-gray-300 p-2"
+                                            class="mb-1 w-full rounded border border-neutral-300 p-2"
                                             type="text"
                                             value=""
                                         />
@@ -676,7 +676,7 @@ const sendData = async () => {
                                             v-if="inputField.inputType === 'textarea'"
                                             type="textarea"
                                             v-model="inputField.inputContent"
-                                            class="h-32 w-full rounded border border-gray-300 p-2"
+                                            class="h-32 w-full rounded border border-neutral-300 p-2"
                                         ></textarea>
 
                                         <!-- textare_rtf -->
@@ -687,7 +687,7 @@ inputField.inputType === 'textarea_rtf'
 "
 type="textarea"
 v-model="inputField.inputContent"
-class="w-full border rounded border-gray-300 p-2 h-32"
+class="w-full border rounded border-neutral-300 p-2 h-32"
 ></textarea> -->
                                         <Editor
                                             v-if="inputField.inputType === 'textarea_rtf'"
@@ -744,7 +744,7 @@ class="w-full border rounded border-gray-300 p-2 h-32"
                                             <div v-if="inputField.inputContent">
                                                 <select
                                                     v-bind:name="'select-' + inputField.id"
-                                                    class="mb-1 flex w-auto flex-wrap items-center gap-1 rounded border border-gray-300 px-2 py-1 text-sm"
+                                                    class="mb-1 flex w-auto flex-wrap items-center gap-1 rounded border border-neutral-300 px-2 py-1 text-sm"
                                                 >
                                                     <option
                                                         v-bind:for="inputField.id + '-' + index"
@@ -770,7 +770,7 @@ class="w-full border rounded border-gray-300 p-2 h-32"
                                         </div>
 
                                         <!-- hr -->
-                                        <hr v-if="inputField.inputType === 'hr'" class="mb-8 mt-4 border-gray-400" />
+                                        <hr v-if="inputField.inputType === 'hr'" class="mb-8 mt-4 border-neutral-400" />
                                     </div>
 
                                     <!-- limit / code -->
@@ -783,7 +783,7 @@ class="w-full border rounded border-gray-300 p-2 h-32"
                                                 inputField.inputType === 'textarea_rtf'
                                             "
                                         >
-                                            <p v-if="!inputField.inputLimit == 0" class="text-xs text-gray-900">
+                                            <p v-if="!inputField.inputLimit == 0" class="text-xs text-neutral-900">
                                                 {{ inputField.inputContent.length }}
                                                 /
                                                 {{ inputField.inputLimit }}&nbsp;文字
@@ -792,7 +792,7 @@ class="w-full border rounded border-gray-300 p-2 h-32"
                                         <!-- code -->
                                         <div
                                             v-if="!(inputField.inputType === 'hr')"
-                                            class="ml-auto flex justify-end text-xs text-gray-300"
+                                            class="ml-auto flex justify-end text-xs text-neutral-300"
                                         >
                                             <p v-text="inputField.inputCode"></p>
                                         </div>
@@ -806,7 +806,7 @@ class="w-full border rounded border-gray-300 p-2 h-32"
                 <!-- debug -->
                 <div
                     v-if="debugFlg"
-                    class="w-80 overflow-y-scroll break-all border-l border-gray-300 p-4"
+                    class="w-80 overflow-y-scroll break-all border-l border-neutral-300 p-4"
                     style="font-size: 9px"
                 >
                     <p style="white-space: pre-wrap">
@@ -817,7 +817,7 @@ class="w-full border rounded border-gray-300 p-2 h-32"
         </div>
 
         <!-- ボトム -->
-        <div class="bottom-0 left-0 z-50 w-full border-t border-gray-300 bg-white">
+        <div class="bottom-0 left-0 z-50 w-full border-t border-neutral-300 bg-white">
             <div class="mx-auto flex max-w-7xl justify-end px-8 py-4">
                 <form @submit.prevent="sendData">
                     <input type="hidden" name="inputFields" v-model="inputFields" placeholder="Enter name" />

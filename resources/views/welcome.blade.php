@@ -16,30 +16,30 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="bg-gray-100">
+    <div class="bg-neutral-100">
         <div class="relative flex min-h-screen flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <main class="mt-6">
 
                     <div class="mb-12">
                         <a href="{{ route('welcome') }}">
-                            <h1 class="text-center text-3xl font-bold text-gray-600">Proofsheet</h1>
+                            <h1 class="text-center text-3xl font-bold text-neutral-600">Proofsheet</h1>
                         </a>
                     </div>
 
                     @if (Route::has('login'))
                         <nav class="-mx-3 flex flex-1 justify-center gap-4">
                             @auth
-                                <a href="{{ route('dashboard') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-gray-700 ring-1 ring-transparent transition hover:text-gray-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                <a href="{{ route('dashboard') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-neutral-700 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                     管理画面へ
                                 </a>
                             @else
-                                <a href="{{ route('login') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-gray-700 ring-1 ring-transparent transition hover:text-gray-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                <a href="{{ route('login') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-neutral-700 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                     ログイン
                                 </a>
 
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-gray-700 ring-1 ring-transparent transition hover:text-gray-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                    <a href="{{ route('register') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-neutral-700 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                         新規登録
                                     </a>
                                 @endif
@@ -48,7 +48,7 @@
                     @endif
                 </main>
 
-                <footer class="py-16 text-center text-sm text-gray-700">
+                <footer class="py-16 text-center text-sm text-neutral-700">
                     Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                 </footer>
             </div>

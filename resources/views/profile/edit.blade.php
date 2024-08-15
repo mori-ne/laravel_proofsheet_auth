@@ -6,20 +6,20 @@
 
             {{-- title --}}
             <div class="mb-8">
-                <h4 class="text-lg font-bold">ユーザー管理</h4>
-                {{-- <p class="text-gray-500 text-sm">プロジェクトの一覧がここに表示されます</p> --}}
+                <h4 class="text-lg font-bold text-neutral-600">ユーザー管理</h4>
+                {{-- <p class="text-neutral-500 text-sm">プロジェクトの一覧がここに表示されます</p> --}}
             </div>
 
             <div class="mx-auto max-w-7xl">
-                <div class="mb-6 rounded-md border-0 border-gray-300 bg-white p-8 shadow-lg shadow-gray-200">
+                <div class="mb-6 rounded-md border-0 border-neutral-300 bg-white p-8 shadow-lg shadow-neutral-200">
                     <div class="w-full">
                         <section>
                             <header>
-                                <h2 class="text-lg font-medium text-gray-900">
+                                <h2 class="text-lg font-medium text-neutral-900">
                                     {{ __('Profile Information') }}
                                 </h2>
 
-                                <p class="mt-1 text-sm text-gray-600">
+                                <p class="mt-1 text-sm text-neutral-600">
                                     {{ __("Update your account's profile information and email address.") }}
                                 </p>
                             </header>
@@ -45,10 +45,10 @@
 
                                     @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                                         <div>
-                                            <p class="mt-2 text-sm text-gray-800">
+                                            <p class="mt-2 text-sm text-neutral-800">
                                                 {{ __('Your email address is unverified.') }}
 
-                                                <button form="send-verification" class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                                                <button form="send-verification" class="rounded-md text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                                     {{ __('Click here to re-send the verification email.') }}
                                                 </button>
                                             </p>
@@ -66,7 +66,7 @@
                                     <x-primary-button>{{ __('Save') }}</x-primary-button>
 
                                     @if (session('status') === 'profile-updated')
-                                        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600">{{ __('Saved.') }}</p>
+                                        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-neutral-600">{{ __('Saved.') }}</p>
                                     @endif
                                 </div>
                             </form>
@@ -74,15 +74,15 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-md border-0 border-gray-300 bg-white p-8 shadow-lg shadow-gray-200">
+                <div class="mb-6 rounded-md border-0 border-neutral-300 bg-white p-8 shadow-lg shadow-neutral-200">
                     <div class="w-full">
                         <section>
                             <header>
-                                <h2 class="text-lg font-medium text-gray-900">
+                                <h2 class="text-lg font-medium text-neutral-900">
                                     {{ __('Update Password') }}
                                 </h2>
 
-                                <p class="mt-1 text-sm text-gray-600">
+                                <p class="mt-1 text-sm text-neutral-600">
                                     {{ __('Ensure your account is using a long, random password to stay secure.') }}
                                 </p>
                             </header>
@@ -113,7 +113,7 @@
                                     <x-primary-button>{{ __('Save') }}</x-primary-button>
 
                                     @if (session('status') === 'password-updated')
-                                        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600">{{ __('Saved.') }}</p>
+                                        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-neutral-600">{{ __('Saved.') }}</p>
                                     @endif
                                 </div>
                             </form>
@@ -121,15 +121,15 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-md border-0 border-gray-300 bg-white p-8 shadow-lg shadow-gray-200">
+                <div class="mb-6 rounded-md border-0 border-neutral-300 bg-white p-8 shadow-lg shadow-neutral-200">
                     <div class="w-full">
                         <section class="space-y-6">
                             <header>
-                                <h2 class="text-lg font-medium text-gray-900">
+                                <h2 class="text-lg font-medium text-neutral-900">
                                     {{ __('Delete Account') }}
                                 </h2>
 
-                                <p class="mt-1 text-sm text-gray-600">
+                                <p class="mt-1 text-sm text-neutral-600">
                                     {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
                                 </p>
                             </header>
@@ -141,11 +141,11 @@
                                     @csrf
                                     @method('delete')
 
-                                    <h2 class="text-lg font-medium text-gray-900">
+                                    <h2 class="text-lg font-medium text-neutral-900">
                                         {{ __('Are you sure you want to delete your account?') }}
                                     </h2>
 
-                                    <p class="mt-1 text-sm text-gray-600">
+                                    <p class="mt-1 text-sm text-neutral-600">
                                         {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
                                     </p>
 
