@@ -22,7 +22,7 @@
 
     {{-- 管理項目 --}}
     <div class="mb-8">
-        <h3 class="mb-2 ml-4 text-sm font-bold">管理項目</h3>
+        <h3 class="mb-2 ml-4 text-sm font-bold">管理・作成項目</h3>
         <ul>
             <li class="rounded-md bg-white px-4 py-1.5 transition hover:bg-gray-100">
                 <div class="flex items-center gap-3">
@@ -30,25 +30,6 @@
                     <a class="block text-gray-500" href="{{ route('projects.index') }}">プロジェクト管理</a>
                 </div>
             </li>
-            <li class="rounded-md bg-white px-4 py-1.5 transition hover:bg-gray-100">
-                <div class="flex items-center gap-3">
-                    <i class="at-plus-clipboard-bold"></i>
-                    <a class="block text-gray-500" href="{{ route('forms.index') }}">フォーム管理</a>
-                </div>
-            </li>
-            <li class="pointer-events-none rounded-md bg-white px-4 py-1.5 transition">
-                <div class="flex items-center gap-3">
-                    <i class="at-envelope-bold text-gray-300"></i>
-                    <a class="block text-gray-300" href="#">メール管理</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    {{-- 作成項目 --}}
-    <div class="mb-8">
-        <h3 class="mb-2 ml-4 text-sm font-bold">作成項目</h3>
-        <ul>
             <li class="rounded-md bg-white px-4 py-1.5 transition hover:bg-gray-100">
                 <div class="flex items-center gap-3">
                     <i class="at-plus-circle"></i> <a class="block text-gray-500" href="{{ route('projects.create') }}">プロジェクト作成</a>
@@ -59,12 +40,18 @@
                     <i class="at-plus-circle"></i> <a class="block text-gray-500" href="{{ route('forms.create') }}">フォーム作成</a>
                 </div>
             </li>
+            {{-- <li class="rounded-md bg-white px-4 py-1.5 transition hover:bg-gray-100">
+                <div class="flex items-center gap-3">
+                    <i class="at-plus-clipboard-bold"></i>
+                    <a class="block text-gray-500" href="{{ route('forms.index') }}">フォーム管理</a>
+                </div>
+            </li> --}}
         </ul>
     </div>
 
     {{-- 投稿者項目 --}}
     <div class="mb-8">
-        <h3 class="mb-2 ml-4 text-sm font-bold">投稿者項目</h3>
+        <h3 class="mb-2 ml-4 text-sm font-bold text-gray-300">投稿者項目</h3>
         <ul>
             <li class="pointer-events-none rounded-md bg-white px-4 py-1.5 transition">
                 <div class="flex items-center gap-3">
@@ -76,6 +63,12 @@
                 <div class="flex items-center gap-3">
                     <i class="at-account-bold text-gray-300"></i>
                     <a class="block text-gray-300" href="#">アカウント管理</a>
+                </div>
+            </li>
+            <li class="pointer-events-none rounded-md bg-white px-4 py-1.5 transition">
+                <div class="flex items-center gap-3">
+                    <i class="at-envelope-bold text-gray-300"></i>
+                    <a class="block text-gray-300" href="#">メール管理</a>
                 </div>
             </li>
         </ul>
