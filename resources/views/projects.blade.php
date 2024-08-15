@@ -246,7 +246,7 @@
                     </div>
 
                     {{-- publish --}}
-                    <div class="flex items-center justify-start gap-2 border-b border-gray-300 px-6 pb-4 pt-2">
+                    <div class="flex items-center justify-start gap-2 border-0 border-gray-300 px-6 pb-4 pt-2">
                         @if ($project->status)
                             {{-- 公開中 --}}
                             <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
