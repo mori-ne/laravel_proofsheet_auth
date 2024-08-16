@@ -256,57 +256,63 @@ const sendData = async () => {
 </script>
 
 <template>
-    <div class="relative h-svh w-full bg-neutral-100">
-        <div class="mx-auto flex h-full max-w-7xl flex-col p-8">
-            <!-- <pre v-text="formAttribute" class="text-xs"></pre> -->
-            <!-- <pre v-text="inputFields" class="text-xs"></pre> -->
-
-            <!-- top -->
-            <div class="mb-4">
-                <div class="flex gap-4 border-b border-neutral-300 pb-2">
-                    <p class="text-lg font-bold text-neutral-900">入力項目編集画面</p>
-                    <!--
-                        <button @click="doCloseWindow" class="text-sm text-red-600 bg-white px-2 rounded-md hover:bg-neutral-500 ml-auto" > <i class="at-xmark-circle"></i> 閉じる </button>
-                    -->
+    <div class="relative h-svh w-full">
+        <!-- top -->
+        <div class="bg-neutral-500 p-4">
+            <div class="flex items-center gap-4">
+                <div class="mr-4 text-lg font-bold text-white">
+                    <p>入力項目編集画面</p>
                 </div>
 
-                <!-- プロジェクト・フォーム -->
-                <div class="flex gap-4 pt-2">
-                    <!-- project name -->
-                    <div class="flex flex-row items-center">
-                        <p class="text-sm text-neutral-400">プロジェクト名：</p>
-                        <h2 class="text-sm font-bold text-neutral-900">
-                            {{ formAttribute.project.project_name }}
-                        </h2>
-                    </div>
-                    <!-- form name -->
-                    <div class="flex flex-row items-center">
-                        <p class="text-sm text-neutral-400">フォーム名：</p>
-                        <h2 class="text-sm font-bold text-neutral-900">
-                            {{ formAttribute.form_name }}
-                        </h2>
-                    </div>
-                    <!-- デバッグモード -->
-                    <div class="mb-2 ml-auto flex justify-end space-x-2">
-                        <input
-                            v-model="debugFlg"
-                            name="debugSwitch"
-                            type="checkbox"
-                            class="ml-auto mr-2 h-4 w-4 rounded-sm border border-neutral-300"
-                        />
-                        <label for="debugSwitch" class="text-xs"> デバッグモード </label>
-                    </div>
+                <!-- project name -->
+                <div class="mr-4 flex flex-row items-center">
+                    <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">
+                        プロジェクト名
+                    </p>
+                    <h2 class="text-md font-bold text-white">
+                        {{ formAttribute.project.project_name }}
+                    </h2>
+                </div>
+
+                <!-- form name -->
+                <div class="flex flex-row items-center">
+                    <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">フォーム名</p>
+                    <h2 class="text-md font-bold text-white">
+                        {{ formAttribute.form_name }}
+                    </h2>
+                </div>
+
+                <!-- デバッグモード -->
+                <div class="ml-auto">
+                    <input
+                        v-model="debugFlg"
+                        name="debugSwitch"
+                        type="checkbox"
+                        class="h-4 w-4 rounded-sm border border-neutral-300"
+                    />
+                    <label for="debugSwitch" class="clear-start pl-1 text-sm text-white">Debug</label>
+                </div>
+
+                <!-- ボトム -->
+                <div>
+                    <form @submit.prevent="sendData">
+                        <input type="hidden" name="inputFields" v-model="inputFields" placeholder="Enter name" />
+                        <input type="hidden" name="form_id" :value="formAttribute.id" />
+                        <button class="text-md rounded bg-neutral-800 px-3 py-1 font-bold text-white" type="submit">
+                            更新する
+                        </button>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <div
-                class="mx-auto mb-14 flex h-full w-full flex-row overflow-hidden rounded-lg border border-neutral-300 bg-white"
-            >
+        <div class="mx-auto flex h-full max-w-full flex-col">
+            <div class="mx-auto mb-14 flex h-full w-full flex-row overflow-hidden rounded-md bg-white">
                 <!-- セット項目 -->
                 <div class="flex w-80 flex-shrink-0 flex-col border-r border-neutral-300 bg-white">
                     <!-- title -->
-                    <div class="shrink-0 border-b border-neutral-300 bg-white p-4 text-neutral-500">
-                        <h3 class="text-xl font-bold">セット項目</h3>
+                    <div class="shrink-0 border-b border-neutral-300 bg-white px-4 py-2 text-neutral-500">
+                        <h3 class="text-lg font-bold">セット項目</h3>
                     </div>
 
                     <!-- select field -->
@@ -354,7 +360,7 @@ const sendData = async () => {
                             v-on:mouseleave="hideController(inputField.id)"
                             class="w-full border-b border-neutral-300"
                         >
-                            <div class="flex flex-row items-center justify-between gap-2 bg-white p-4">
+                            <div class="flex flex-row items-start justify-between gap-2 bg-white px-4 py-3">
                                 <!-- input field title -->
                                 <div class="w-full">
                                     <div
@@ -362,80 +368,83 @@ const sendData = async () => {
                                         v-if="inputField.inputType === 'text'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>テキスト（1行）</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
+                                        <div class="flex flex-col">
+                                            <h6>テキスト（1行）</h6>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
+                                        <!-- <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
-                                        }}</span>
+                                        }}</span> -->
                                     </div>
                                     <div
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         v-if="inputField.inputType === 'textarea'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>テキストエリア（標準）</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
-                                            inputField.id
-                                        }}</span>
+                                        <div>
+                                            <h6>テキストエリア（標準）</h6>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
                                     </div>
                                     <div
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         v-if="inputField.inputType === 'textarea_rtf'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>テキストエリア（RTF）</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
-                                            inputField.id
-                                        }}</span>
+                                        <div>
+                                            <h6>テキストエリア（RTF）</h6>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
                                     </div>
                                     <div
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         v-if="inputField.inputType === 'checkbox'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>チェックリスト</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
-                                            inputField.id
-                                        }}</span>
+                                        <div>
+                                            <h6>チェックリスト</h6>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
                                     </div>
                                     <div
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         v-if="inputField.inputType === 'radio'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>ラジオボタン</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
-                                            inputField.id
-                                        }}</span>
+                                        <div>
+                                            <p>ラジオボタン</p>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
                                     </div>
                                     <div
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         v-if="inputField.inputType === 'select'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>セレクトリスト</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
-                                            inputField.id
-                                        }}</span>
+                                        <div>
+                                            <p>セレクトリスト</p>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
                                     </div>
                                     <div
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         v-if="inputField.inputType === 'headline'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>見出し</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
-                                            inputField.id
-                                        }}</span>
+                                        <div>
+                                            <p>見出し</p>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
                                     </div>
                                     <div
                                         @click="inputField.isOpen = !inputField.isOpen"
                                         v-if="inputField.inputType === 'paragraph'"
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
-                                        <p>段落</p>
-                                        <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
-                                            inputField.id
-                                        }}</span>
+                                        <div>
+                                            <p>段落</p>
+                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                        </div>
                                     </div>
                                     <div v-if="inputField.inputType === 'hr'" class="flex items-center gap-1 font-bold">
                                         <p>罫線</p>
@@ -479,7 +488,7 @@ const sendData = async () => {
                                         <p class="mb-1 text-xs text-neutral-500">タイトル</p>
                                         <input
                                             v-model="inputField.inputTitle"
-                                            class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
+                                            class="w-full rounded border border-neutral-300 px-2 py-1 text-sm placeholder:text-gray-200"
                                             type="text"
                                             placeholder="タイトル"
                                         />
@@ -608,15 +617,24 @@ const sendData = async () => {
                 <!-- preview -->
                 <div class="mx-auto flex w-full flex-1 flex-col bg-white">
                     <!-- title -->
-                    <div class="shrink-0 border-b border-neutral-300 bg-white p-4 text-neutral-500">
-                        <h3 class="text-xl font-bold">プレビュー</h3>
-                    </div>
+                    <!-- <div class="shrink-0 border-b border-neutral-300 bg-white p-4 text-neutral-500">
+                        <h3 class="text-lg font-bold">プレビュー</h3>
+                    </div> -->
 
                     <!-- list -->
                     <div class="h-full overflow-y-scroll px-8">
                         <div class="mx-auto max-w-2xl py-8">
+                            <div class="mb-12 border-b-2 border-neutral-700">
+                                <h1 class="mb-4 text-2xl font-bold">
+                                    {{ formAttribute.project.project_name }}
+                                </h1>
+                                <div class="mb-4 bg-neutral-100 p-8">
+                                    <p class="text-sm text-neutral-500" v-html="formAttribute.form_description"></p>
+                                </div>
+                            </div>
+
                             <ul>
-                                <li v-for="inputField in inputFields" :key="inputField.id" class="mb-8">
+                                <li v-for="inputField in inputFields" :key="inputField.id" class="mb-6">
                                     <div class="flex items-center gap-2">
                                         <!-- title -->
                                         <h4
@@ -666,7 +684,7 @@ const sendData = async () => {
                                         <input
                                             v-if="inputField.inputType === 'text'"
                                             v-model="inputField.inputContent"
-                                            class="mb-1 w-full rounded border border-neutral-300 p-2"
+                                            class="mb-1 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200"
                                             type="text"
                                             value=""
                                         />
@@ -676,7 +694,7 @@ const sendData = async () => {
                                             v-if="inputField.inputType === 'textarea'"
                                             type="textarea"
                                             v-model="inputField.inputContent"
-                                            class="h-32 w-full rounded border border-neutral-300 p-2"
+                                            class="h-32 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200"
                                         ></textarea>
 
                                         <!-- textare_rtf -->
@@ -813,17 +831,6 @@ class="w-full border rounded border-neutral-300 p-2 h-32"
                         {{ inputFields }}
                     </p>
                 </div>
-            </div>
-        </div>
-
-        <!-- ボトム -->
-        <div class="bottom-0 left-0 z-50 w-full border-t border-neutral-300 bg-white">
-            <div class="mx-auto flex max-w-7xl justify-end px-8 py-4">
-                <form @submit.prevent="sendData">
-                    <input type="hidden" name="inputFields" v-model="inputFields" placeholder="Enter name" />
-                    <input type="hidden" name="form_id" :value="formAttribute.id" />
-                    <button type="submit">更新する</button>
-                </form>
             </div>
         </div>
     </div>

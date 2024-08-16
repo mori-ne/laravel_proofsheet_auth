@@ -186,6 +186,7 @@
                                 {{-- {{ $form->form_description }} --}}
                                 <div class="ml-auto flex flex-row gap-1">
                                     {{-- dropdown menu --}}
+                                    <a href="{{ route('forms.inputEdit', $form->id) }}" target="_blank" class="flex items-center justify-center rounded px-2 py-1 text-sm hover:bg-neutral-200">入力項目エディターを開く</a>
                                     <a class="flex items-center justify-center rounded px-2 py-1 text-sm hover:bg-neutral-200" href="{{ route('forms.show', $form->id) }}" @click="menuBarOpen=false"
                                         class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
                                         <span>詳細</span>
@@ -201,7 +202,7 @@
                                         </button>
                                     </form>
                                     <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" class="relative z-50 h-auto w-auto">
-                                        <button @click="modalOpen=true" class="flex items-center justify-center rounded px-2 py-1 text-sm text-red-500 hover:bg-neutral-200">削除</button>
+                                        <button @click="modalOpen=true" class="flex items-center justify-center rounded px-2 py-1 text-sm text-red-500 hover:bg-red-100 hover:text-red-500">削除</button>
                                         <template x-teleport="body">
                                             <div x-show="modalOpen" class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-cloak>
                                                 <div x-show="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100"

@@ -1,6 +1,8 @@
+@charset 'UTF-8';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
     min-height: 100vh;
 }
@@ -10,5 +12,5 @@ body {
 }
 
 .mce-content-body {
-    background-color: rgb(245, 245, 245);
-} /*# sourceMappingURL=app.css.map */
+    background-color: rgb(245 245 245);
+}
