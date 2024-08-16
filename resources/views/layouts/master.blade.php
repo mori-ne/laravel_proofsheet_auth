@@ -14,6 +14,8 @@
     <link rel="preconnect" href="https://fonts.bunny.net" />
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/@vectopus/atlas-icons/style.css" />
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
+
     <link rel="stylesheet" href="{{ asset('css/documentstyle.css') }}" />
 
     <!-- Scripts -->
@@ -35,7 +37,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-neutral-50">
         <div class="flex min-h-screen flex-row items-stretch">
             {{-- sidebar --}}
             @include('layouts.sidebar')

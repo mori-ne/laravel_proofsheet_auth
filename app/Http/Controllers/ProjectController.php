@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Form;
 use App\Models\Input;
+use App\Models\PostUser;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -43,7 +44,7 @@ class ProjectController extends Controller
         }
 
         $projects = $query->with('forms')->get();
-        return view('/projects', compact('projects'));
+        return view('/projects', ['projects' => $projects]);
     }
 
     // 検索
@@ -127,7 +128,9 @@ class ProjectController extends Controller
             return redirect('projects');
         }
 
-        return view('projects.show', compact('project'));
+        $postusers = PostUser::where('uuid', $project->uuid)->get();
+        // dd($postusers);
+        return view('projects.show', ['project' => $project, 'postusers' => $postusers]);
     }
 
     // 更新

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
     plugins: [
@@ -14,5 +14,8 @@ export default defineConfig({
         alias: {
             vue: 'vue/dist/vue.esm-bundler.js',
         },
+    },
+    define: {
+        __PROJECT_ROOT__: JSON.stringify('/laravel_proofsheet_auth/public'),
     },
 });

@@ -3,7 +3,7 @@
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
         <x-slot name="header">
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
+            <h2 class="text-xl font-semibold leading-tight text-neutral-800">
                 {{ __('Dashboard') }}
             </h2>
         </x-slot>
@@ -12,8 +12,8 @@
         <div class="mx-auto max-w-5xl p-6">
 
             <div class="mb-8">
-                <h4 class="text-lg font-bold">プロジェクトを新規作成</h4>
-                <p class="text-sm text-gray-500"></p>
+                <h4 class="text-lg font-bold text-neutral-600">プロジェクトを新規作成</h4>
+                <p class="text-sm text-neutral-500"></p>
             </div>
 
             {{-- breadcrumb --}}
@@ -62,7 +62,7 @@
                     <div class="mb-6">
                         <div class="mb-2">
                             <label class="text-lg font-bold" for="#">公開期限</label>
-                            <input name="is_deadline" class="ml-4 rounded-md border-gray-300" type="datetime-local" value="{{ old('is_deadline') }}">
+                            <input name="is_deadline" class="ml-4 rounded-md border-neutral-300" type="datetime-local" value="{{ old('is_deadline') }}">
                         </div>
                     </div>
 
@@ -103,7 +103,7 @@
 
                     <div class="mt-8">
                         <button type="submit"
-                            class="focus:shadow-outline mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-950 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">新規作成する</button>
+                            class="focus:shadow-outline mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-600 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">新規作成する</button>
                     </div>
                 </form>
             </div>

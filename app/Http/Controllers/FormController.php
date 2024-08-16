@@ -80,7 +80,7 @@ class FormController extends Controller
             // コミット
             DB::commit();
 
-            return redirect()->route('forms.index')->with('status', 'フォームを新規作成しました');
+            return redirect()->route('forms.show', $form->id)->with('status', 'フォームを新規作成しました');
         } catch (\Exception $e) {
             // ロールバック
             DB::rollBack();

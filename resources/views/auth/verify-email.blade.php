@@ -16,46 +16,48 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            <a class="text-3xl font-bold" href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+<body class="font-sans text-neutral-900 antialiased">
+    <div class="flex min-h-screen flex-col items-center bg-neutral-50 pt-6 sm:justify-center sm:pt-0">
+        {{-- title --}}
+        <div class="mb-12">
+            <a href="{{ route('welcome') }}">
+                <h1 class="text-center text-3xl font-bold text-neutral-600">Proofsheet</h1>
             </a>
         </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <div class="mb-4 text-sm text-gray-600">
-                {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+        <div class="w-96 overflow-hidden rounded-md border-0 bg-white p-10 shadow-lg shadow-neutral-200">
+            <h2 class="mb-6 text-center text-lg font-bold leading-snug text-neutral-700">メール認証</h2>
+
+            <div class="mb-4 text-sm text-neutral-600">
+                メールアドレス確認のリンクを送付しました。<br>
+                記載されたURLをクリックして認証してください。
             </div>
 
             @if (session('status') == 'verification-link-sent')
-                <div class="mb-4 font-medium text-sm text-green-600">
+                <div class="mb-4 text-sm font-medium text-green-600">
                     {{ __('A new verification link has been sent to the email address you provided during registration.') }}
                 </div>
             @endif
 
-            <div class="mt-4 flex items-center justify-between">
+            <div class="mt-4">
                 <form method="POST" action="{{ route('verification.send') }}">
                     @csrf
 
-                    <div>
-                        <x-primary-button>
-                            {{ __('Resend Verification Email') }}
-                        </x-primary-button>
-                    </div>
-                </form>
-
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <button type="submit"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        {{ __('Log Out') }}
+                    <button type='submit'
+                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>
+                        確認メールを再送信する
                     </button>
                 </form>
+
             </div>
         </div>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <button type="submit" class="mt-6 rounded-md text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
+                {{ __('Log Out') }}
+            </button>
+        </form>
     </div>
 </body>
 

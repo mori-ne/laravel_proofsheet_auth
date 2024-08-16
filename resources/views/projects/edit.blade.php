@@ -5,8 +5,8 @@
 
         <div class="mx-auto max-w-5xl p-6">
             <div class="mb-8">
-                <h4 class="text-lg font-bold">プロジェクトの編集</h4>
-                {{-- <p class="text-gray-500 text-sm"></p> --}}
+                <h4 class="text-lg font-bold text-neutral-600">プロジェクトの編集</h4>
+                {{-- <p class="text-neutral-500 text-sm"></p> --}}
             </div>
 
             {{-- back --}}
@@ -34,13 +34,13 @@
 
                 {{-- 公開設定・公開期限 --}}
                 <div class="mb-8">
-                    <h4 class="text-md mb-2 font-bold text-gray-500">公開情報</h4>
+                    <h4 class="text-md mb-2 font-bold text-neutral-500">公開情報</h4>
                     <div class="rounded-md border border-neutral-300 bg-white p-8">
                         <div class="flex flex-row items-center gap-2">
                             {{-- 公開設定 --}}
                             <div class="mr-4">
                                 <label class="text-md font-bold">公開設定</label>
-                                <select name="status" class="ml-4 rounded-md border-gray-300">
+                                <select name="status" class="ml-4 rounded-md border-neutral-300">
                                     @if ($project->status)
                                         <option value="1" selected>公開中</option>
                                         <option value="0">非公開</option>
@@ -54,7 +54,7 @@
                             {{-- 公開期限 --}}
                             <div class="mr-4">
                                 <label class="text-md font-bold">公開期限</label>
-                                <input name="is_deadline" class="ml-4 rounded-md border-gray-300" type="datetime-local" value="{{ old('is_deadline', $project->is_deadline) }}">
+                                <input name="is_deadline" class="ml-4 rounded-md border-neutral-300" type="datetime-local" value="{{ old('is_deadline', $project->is_deadline) }}">
                             </div>
 
                         </div>
@@ -63,7 +63,7 @@
 
                 {{-- プロジェクト名・プロジェクトの説明 --}}
                 <div class="mb-8">
-                    <h4 class="text-md mb-2 font-bold text-gray-500">プロジェクト概要</h4>
+                    <h4 class="text-md mb-2 font-bold text-neutral-500">プロジェクト概要</h4>
                     <div class="rounded-md border border-neutral-300 bg-white p-8">
                         {{-- プロジェクト名 --}}
                         <div class="mb-6">
@@ -95,7 +95,7 @@
 
                 {{-- プロジェクトの期間情報・プロジェクトの内容情報 --}}
                 <div class="mb-8">
-                    <h4 class="text-md mb-2 font-bold text-gray-500">プロジェクト情報</h4>
+                    <h4 class="text-md mb-2 font-bold text-neutral-500">プロジェクト情報</h4>
                     <div class="rounded-md border border-neutral-300 bg-white p-8">
 
                         {{-- 内容情報 --}}
@@ -110,7 +110,7 @@
                 </div>
 
                 {{-- 返信メールの件名・本文 --}}
-                <h4 class="text-md mb-2 font-bold text-gray-500">返信メール情報</h4>
+                <h4 class="text-md mb-2 font-bold text-neutral-500">返信メール情報</h4>
                 <div class="rounded-md border border-neutral-300 bg-white p-8">
                     <div>
                         <div class="mb-6">
@@ -132,27 +132,27 @@
 
                 <div class="rounded-md border border-neutral-300 bg-white p-8">
                     <button type="submit"
-                        class="focus:shadow-outline mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-950 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">更新する</button>
+                        class="focus:shadow-outline mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-600 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">更新する</button>
                 </div>
             </form>
 
             <div>
-                <span class="pr-4 text-xs text-gray-400">
+                <span class="pr-4 text-xs text-neutral-400">
                     プロジェクト作成日：
                     @if (!$project->created_at)
-                        <span class="text-gray-700">無し</span>
+                        <span class="text-neutral-700">無し</span>
                     @else
-                        <span class="text-gray-700">
+                        <span class="text-neutral-700">
                             {{ $project->created_at }}
                         </span>
                     @endif
                 </span>
-                <span class="pr-4 text-xs text-gray-400">
+                <span class="pr-4 text-xs text-neutral-400">
                     プロジェクト更新日：
                     @if (!$project->updated_at)
-                        <span class="text-gray-700">無し</span>
+                        <span class="text-neutral-700">無し</span>
                     @else
-                        <span class="text-gray-700">
+                        <span class="text-neutral-700">
                             {{ $project->updated_at }}
                         </span>
                     @endif

@@ -16,16 +16,18 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <div>
-            <a class="text-3xl font-bold" href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+<body class="font-sans text-neutral-900 antialiased">
+    <div class="flex min-h-screen flex-col items-center bg-neutral-50 pt-6 sm:justify-center sm:pt-0">
+
+        {{-- title --}}
+        <div class="mb-12">
+            <a href="{{ route('welcome') }}">
+                <h1 class="text-center text-3xl font-bold text-neutral-600">Proofsheet</h1>
             </a>
         </div>
 
-        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-            <div class="mb-4 text-sm text-gray-600">
+        <div class="w-96 overflow-hidden rounded-md border-0 bg-white p-10 shadow-lg shadow-neutral-200">
+            <div class="mb-4 text-sm text-neutral-600">
                 {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
             </div>
 
@@ -38,18 +40,21 @@
                 <!-- Email Address -->
                 <div>
                     <x-input-label for="email" :value="__('Email')" />
-                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email"
-                        :value="old('email')" required autofocus />
+                    <x-text-input id="email" class="mb-6 mt-1 block w-full" type="email" name="email" :value="old('email')" required autofocus />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
-                    <x-primary-button>
-                        {{ __('Email Password Reset Link') }}
-                    </x-primary-button>
-                </div>
+                <button type='submit'
+                    class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>
+                    パスワードリセットメールを送信
+                </button>
             </form>
         </div>
+        <p class="mt-6 flex justify-center text-xs text-neutral-600">
+            <a class="underline" href="javascript:history.back()">
+                前のページへ戻る
+            </a>
+        </p>
     </div>
 </body>
 

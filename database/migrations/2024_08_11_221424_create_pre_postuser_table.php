@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('postusers', function (Blueprint $table) {
+        Schema::create('pre_postuser', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string('token', '255');
+            $table->string('email', '128');
+            $table->uuid('uuid');
+            $table->dateTime('date');
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('postusers');
+        Schema::dropIfExists('pre_postuser');
     }
 };
