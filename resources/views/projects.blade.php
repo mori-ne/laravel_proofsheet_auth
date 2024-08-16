@@ -27,7 +27,7 @@
                 <div>
                     <form action="{{ route('projects.search') }}" method="GET" class="flex gap-2">
                         {{-- input --}}
-                        <input name="search" type="text" placeholder="プロジェクトを検索" value="{{ request('search') }}" class="flex h-10 w-80 rounded-md border-0 bg-neutral-100 px-3 py-2 text-sm transition-all placeholder:text-neutral-400 hover:bg-neutral-200" />
+                        <input name="search" type="text" placeholder="プロジェクトを検索" value="{{ request('search') }}" class="flex h-10 w-80 rounded-md border-0 bg-neutral-100 px-3 py-2 text-sm transition-all placeholder:text-neutral-400 hover:bg-neutral-200 focus:ring-neutral-400" />
 
                         {{-- sort --}}
                         <select name="sort"
@@ -333,6 +333,7 @@
         @foreach ($projects as $key => $project)
             document.getElementById('toggleButton{{ $key }}').addEventListener('click', function() {
                 const forms = document.getElementById('forms{{ $key }}');
+
                 if (forms.style.display === 'block') {
                     forms.style.display = 'none';
                 } else {

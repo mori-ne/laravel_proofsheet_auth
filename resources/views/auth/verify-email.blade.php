@@ -25,7 +25,7 @@
             </a>
         </div>
 
-        <div class="w-96 overflow-hidden rounded-md border border-neutral-300 bg-white p-10">
+        <div class="w-96 overflow-hidden rounded-md border-0 bg-white p-10 shadow-lg shadow-neutral-200">
             <h2 class="mb-6 text-center text-lg font-bold leading-snug text-neutral-700">メール認証</h2>
 
             <div class="mb-4 text-sm text-neutral-600">
@@ -44,7 +44,7 @@
                     @csrf
 
                     <button type='submit'
-                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-neutral-900'>
+                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>
                         確認メールを再送信する
                     </button>
                 </form>
@@ -54,7 +54,7 @@
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <button type="submit" class="mt-6 rounded-md text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <button type="submit" class="mt-6 rounded-md text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
                 {{ __('Log Out') }}
             </button>
         </form>

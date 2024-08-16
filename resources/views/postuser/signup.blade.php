@@ -35,7 +35,7 @@
                     </a>
 
                     {{-- send mail --}}
-                    <button type='submit' class='min-w-48 flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-neutral-900'>メールアドレスを送信
+                    <button type='submit' class='min-w-48 flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>メールアドレスを送信
                     </button>
                 </div>
             </form>

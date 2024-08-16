@@ -221,7 +221,7 @@
                                 {{-- detail --}}
                                 <div>
                                     @foreach ($project->forms as $form)
-                                        <div class="mb-3 flex flex-col rounded-md border-0 bg-white px-8 py-4 shadow-md shadow-neutral-200">
+                                        <div class="mb-3 flex flex-col rounded-md border-0 px-8">
 
                                             {{-- col --}}
                                             <div class="mb-2 flex items-center justify-start gap-2 border-b border-neutral-300 pb-2">
@@ -394,7 +394,7 @@
                             {{-- mail --}}
                             <div class="mb-8">
                                 <h4 class="text-md mb-2 font-bold text-neutral-500">返信メール情報</h4>
-                                <div class="rounded-md border-0 bg-white p-8 shadow-md shadow-neutral-200">
+                                <div class="rounded-md border-0 p-8">
                                     <div>
                                         <div class="mb-8">
                                             <p class="mb-2 text-sm text-neutral-400">メール件名</p>
@@ -425,7 +425,7 @@
                             {{-- users --}}
                             <div class="mb-2">
                                 <h4 class="text-md mb-2 font-bold text-neutral-500">ユーザー情報</h4>
-                                <div class="rounded-md border-0 bg-white p-8 shadow-md shadow-neutral-200">
+                                <div class="rounded-md border-0 p-8">
                                     {{-- @isset($postusers)
                                     <p>アカウントは有りませんでした</p>
                                 @endisset --}}
@@ -477,7 +477,7 @@
                         {{-- description --}}
                         <div class="mb-8">
                             <h4 class="text-md mb-2 font-bold text-neutral-500">プロジェクトの説明（ユーザーページに表示されます）</h4>
-                            <div class="mb-8 rounded-md border-0 bg-white p-8 shadow-md shadow-neutral-200">
+                            <div class="mb-8 rounded-md border-0 bg-white p-8">
 
                                 {{-- project message --}}
                                 <div class="mb-8">

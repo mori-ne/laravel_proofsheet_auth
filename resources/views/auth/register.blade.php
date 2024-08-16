@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        <div class="w-96 overflow-hidden rounded-md border border-neutral-300 bg-white p-10">
+        <div class="w-96 overflow-hidden rounded-md border-0 bg-white p-10 shadow-lg shadow-neutral-200">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
@@ -65,7 +65,7 @@
 
                 <div class="mt-8 flex items-center justify-end">
                     <button type='submit'
-                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-neutral-900'>
+                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>
                         新規登録
                     </button>
                 </div>

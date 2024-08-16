@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        <div class="w-96 overflow-hidden rounded-md border border-neutral-300 bg-white p-10">
+        <div class="w-96 overflow-hidden rounded-md border-0 bg-white p-10 shadow-lg shadow-neutral-200">
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -53,7 +53,7 @@
                 <!-- Remember Me -->
                 <div class="mt-4 block">
                     <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded border-neutral-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                        <input id="remember_me" type="checkbox" class="rounded border-neutral-300 text-neutral-600 shadow-sm focus:ring-neutral-500" name="remember">
                         <span class="ms-2 text-sm text-neutral-600">ログイン情報を記憶する</span>
                     </label>
                 </div>
@@ -61,7 +61,7 @@
                 {{-- login btn --}}
                 <div class="mt-16">
                     <button type='submit'
-                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-neutral-900'>
+                        class='mt-4 flex w-full items-center justify-center rounded border border-transparent bg-neutral-800 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-150 ease-in-out hover:bg-neutral-600 focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>
                         ログインする
                     </button>
                 </div>
@@ -69,7 +69,7 @@
                 {{-- forget password --}}
                 <div class="mt-4 flex items-center justify-center">
                     @if (Route::has('password.request'))
-                        <p class="rounded-md text-xs text-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        <p class="rounded-md text-xs text-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
                             <a class="underline" href="{{ route('password.request') }}">
                                 パスワードを忘れてしまった方
                             </a>

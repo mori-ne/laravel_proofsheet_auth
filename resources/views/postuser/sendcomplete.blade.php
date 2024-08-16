@@ -22,7 +22,7 @@
             <form action="{{ route('postuser.verifymailsignup', $uuid) }}" method="POST">
                 @csrf
                 <input type="hidden" name="email" value="{{ $email }}">
-                <button type='submit' class='mx-auto flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-neutral-900'>認証メールを再送信
+                <button type='submit' class='mx-auto flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>認証メールを再送信
                 </button>
             </form>
         </div>
