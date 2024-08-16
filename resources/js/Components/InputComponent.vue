@@ -309,7 +309,7 @@ const sendData = async () => {
         <div class="mx-auto flex h-full max-w-full flex-col">
             <div class="mx-auto mb-14 flex h-full w-full flex-row overflow-hidden rounded-md bg-white">
                 <!-- セット項目 -->
-                <div class="flex w-80 flex-shrink-0 flex-col border-r border-neutral-300 bg-white">
+                <div class="flex w-80 flex-shrink-0 flex-col border-r border-gray-300 bg-white">
                     <!-- title -->
                     <div class="shrink-0 border-b border-neutral-300 bg-white px-4 py-2 text-neutral-500">
                         <h3 class="text-lg font-bold">セット項目</h3>
@@ -369,8 +369,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div class="flex flex-col">
-                                            <h6>テキスト（1行）</h6>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <h6 v-text="inputField.inputTitle"></h6>
+                                            <p class="text-xs text-neutral-400">テキスト（1行）</p>
                                         </div>
                                         <!-- <span class="ml-auto w-4 text-center text-xs text-neutral-300">{{
                                             inputField.id
@@ -382,8 +382,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div>
-                                            <h6>テキストエリア（標準）</h6>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <h6 v-text="inputField.inputTitle"></h6>
+                                            <p class="text-xs text-neutral-400">テキストエリア（標準）</p>
                                         </div>
                                     </div>
                                     <div
@@ -392,8 +392,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div>
-                                            <h6>テキストエリア（RTF）</h6>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <h6 v-text="inputField.inputTitle"></h6>
+                                            <p class="text-xs text-neutral-400">テキストエリア（RTF）</p>
                                         </div>
                                     </div>
                                     <div
@@ -402,8 +402,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div>
-                                            <h6>チェックリスト</h6>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <h6 v-text="inputField.inputTitle"></h6>
+                                            <p class="text-xs text-neutral-400">チェックリスト</p>
                                         </div>
                                     </div>
                                     <div
@@ -412,8 +412,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div>
-                                            <p>ラジオボタン</p>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <p v-text="inputField.inputTitle"></p>
+                                            <p class="text-xs text-neutral-400">ラジオボタン</p>
                                         </div>
                                     </div>
                                     <div
@@ -422,8 +422,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div>
-                                            <p>セレクトリスト</p>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <p v-text="inputField.inputTitle"></p>
+                                            <p class="text-xs text-neutral-400">セレクトリスト</p>
                                         </div>
                                     </div>
                                     <div
@@ -432,8 +432,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div>
-                                            <p>見出し</p>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <p v-text="inputField.inputTitle"></p>
+                                            <p class="text-xs text-neutral-400">見出し</p>
                                         </div>
                                     </div>
                                     <div
@@ -442,8 +442,8 @@ const sendData = async () => {
                                         class="flex cursor-pointer items-center gap-2 font-bold"
                                     >
                                         <div>
-                                            <p>段落</p>
-                                            <p class="text-xs text-neutral-400" v-text="inputField.inputTitle"></p>
+                                            <p v-text="inputField.inputTitle"></p>
+                                            <p class="text-xs text-neutral-400">段落</p>
                                         </div>
                                     </div>
                                     <div v-if="inputField.inputType === 'hr'" class="flex items-center gap-1 font-bold">
@@ -622,8 +622,8 @@ const sendData = async () => {
                     </div> -->
 
                     <!-- list -->
-                    <div class="h-full overflow-y-scroll px-8">
-                        <div class="mx-auto max-w-2xl py-8">
+                    <div class="h-full overflow-y-scroll border-l px-8">
+                        <div class="mx-auto max-w-2xl py-16">
                             <div class="mb-12 border-b-2 border-neutral-700">
                                 <h1 class="mb-4 text-2xl font-bold">
                                     {{ formAttribute.project.project_name }}
