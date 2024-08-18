@@ -19,6 +19,7 @@ use App\Mail\PrePostUserTokenMail;
 use App\Http\Requests\PostUserRegisterRequest;
 use App\Mail\PostUserRegisterCompliteMail;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Input;
 
 class PostUserController extends Controller
 {
@@ -76,6 +77,12 @@ class PostUserController extends Controller
         }
 
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
+
+        // statusが非公開なら404ページへ
+        if (!$project->status) {
+            abort(404, 'フォームが見つかりません');
+        }
+
         return view('postuser.auth.dashboard', ['uuid' => $uuid, 'project' => $project]);
     }
 
@@ -212,5 +219,16 @@ class PostUserController extends Controller
 
         // 成功した場合のリダイレクト
         return redirect()->route('postuser.dashboard', $uuid)->with('status', '新規登録が完了しました！');
+    }
+
+    public function create($uuid, $id)
+    {
+        $input = Input::with('form.project')->where('form_id', $id)->first();
+        dd($uuid, $id, $input->inputs);
+    }
+
+    public function edit($uuid, $id)
+    {
+        dd($uuid, $id);
     }
 }

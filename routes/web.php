@@ -54,7 +54,7 @@ Route::prefix('admin')->group(function () {
 
         // inputs
         Route::get('forms/inputs/{form_id}', [FormController::class, 'inputEdit'])->name('forms.inputEdit');
-        Route::post('forms/inputs/{form_id}/store', [FormController::class, 'inputStore'])->name('forms.store');
+        Route::post('forms/inputs/{form_id}/store', [FormController::class, 'inputStore'])->name('forms.inputStore');
     });
 });
 

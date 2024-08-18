@@ -14,7 +14,7 @@ class Input extends Model
 
     // ホワイトリスト
     protected $fillable = [
-        'json',
+        'inputs',
         'form_id',
     ];
 

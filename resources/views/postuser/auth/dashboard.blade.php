@@ -13,7 +13,7 @@
             <p>■ To change your password, please click the “Change Password” below.</p>
             <p>■ How to use this page (only in Japanese)</p>
         </div>
-        <div class="h-full rounded-md border border-neutral-300 bg-white p-6">
+        <div class="h-full rounded-md border-0 bg-white p-6 shadow-md shadow-neutral-100">
             @foreach ($project->forms as $form)
                 <div class="mb-4 flex flex-row gap-4 border-b border-neutral-300 pb-3 last:mb-0 last:border-0 last:pb-0">
                     {{-- 1 --}}
@@ -25,8 +25,8 @@
                     </div>
                     {{-- 3 --}}
                     <div class="ml-auto flex flex-row gap-2">
-                        <button class="h-8 rounded-md border px-2 py-1" type="submit">投稿する</button>
-                        <button class="h-8 rounded-md border px-2 py-1" type="submit">編集する</button>
+                        <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1">投稿する</a>
+                        <a href="{{ route('postuser.edit', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1">編集する</a>
                         <button class="h-8 rounded-md border px-2 py-1" type="submit">削除</button>
                     </div>
                 </div>

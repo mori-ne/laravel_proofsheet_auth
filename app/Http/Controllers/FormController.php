@@ -207,10 +207,24 @@ class FormController extends Controller
 
     public function inputStore(Request $request)
     {
-        // 登録処理
-        // ::::
+        // バリデーション
+        $request->validate([
+            'form_id' => 'required|integer|exists:forms,id',
+        ]);
 
-        // Axiosにレスポンスする値（どうする？）
-        return $request;
+        // Inputモデルを使用して、フォームに関連する最初の入力を取得
+        $input = Input::with('form')->where('form_id', $request->form_id)->first();
+
+        // データベースを更新
+        $input->update([
+            'inputs' => $request->inputFields,
+            'updated_at' => now(),
+        ]);
+
+        // 更新されたデータを返す
+        return response()->json([
+            'message' => 'Input successfully updated.',
+            'data' => $input,
+        ], 200);
     }
 }

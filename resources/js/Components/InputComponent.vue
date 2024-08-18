@@ -56,7 +56,7 @@ if (!inputFields.value) {
     inputFields.value.push(newField);
 }
 
-console.log(inputFields.value);
+// console.log(inputFields.value);
 
 // リアクティブ配列
 // const inputFields = ref([]);
@@ -252,7 +252,7 @@ const submitForm = () => {
         })
         .then((response) => {
             console.log(response.data);
-            window.alert('更新しました。');
+            window.alert('保存しました。');
         })
         .catch((error) => {
             console.error(error);

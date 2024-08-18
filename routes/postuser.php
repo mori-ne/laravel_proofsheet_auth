@@ -42,5 +42,8 @@ Route::prefix('/postuser/{uuid}')->group(function () {
     // auth:postuser
     Route::middleware('auth:postuser')->group(function () {
         Route::get('dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
+
+        Route::get('forms/create/{id}', [PostUserController::class, 'create'])->name('postuser.create');
+        Route::get('forms/edit/{id}', [PostUserController::class, 'edit'])->name('postuser.edit');
     });
 });
