@@ -256,67 +256,65 @@ const sendData = async () => {
 </script>
 
 <template>
-    <div class="relative h-svh w-full">
+    <div class="relative flex h-svh w-full flex-col items-stretch">
         <!-- top -->
-        <div class="bg-neutral-500 p-4">
-            <div class="flex items-center gap-4">
-                <div class="mr-4 text-lg font-bold text-white">
-                    <p>入力項目編集画面</p>
-                </div>
+        <div class="flex h-10 items-center gap-4 bg-neutral-500 px-4">
+            <!-- title -->
+            <div class="mr-3">
+                <p class="font-bold text-white">入力項目編集画面</p>
+            </div>
 
-                <!-- project name -->
-                <div class="mr-4 flex flex-row items-center">
-                    <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">
-                        プロジェクト名
-                    </p>
-                    <h2 class="text-md font-bold text-white">
-                        {{ formAttribute.project.project_name }}
-                    </h2>
-                </div>
+            <!-- project name -->
+            <div class="mr-3 flex flex-row items-center">
+                <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">プロジェクト名</p>
+                <h2 class="text-md font-bold text-white">
+                    {{ formAttribute.project.project_name }}
+                </h2>
+            </div>
 
-                <!-- form name -->
-                <div class="flex flex-row items-center">
-                    <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">フォーム名</p>
-                    <h2 class="text-md font-bold text-white">
-                        {{ formAttribute.form_name }}
-                    </h2>
-                </div>
+            <!-- form name -->
+            <div class="flex flex-row items-center">
+                <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">フォーム名</p>
+                <h2 class="text-md font-bold text-white">
+                    {{ formAttribute.form_name }}
+                </h2>
+            </div>
 
-                <!-- デバッグモード -->
-                <div class="ml-auto">
-                    <input
-                        v-model="debugFlg"
-                        name="debugSwitch"
-                        type="checkbox"
-                        class="h-4 w-4 rounded-sm border border-neutral-300"
-                    />
-                    <label for="debugSwitch" class="clear-start pl-1 text-sm text-white">Debug</label>
-                </div>
+            <!-- デバッグモード -->
+            <div class="ml-auto">
+                <input
+                    v-model="debugFlg"
+                    name="debugSwitch"
+                    type="checkbox"
+                    class="h-4 w-4 rounded-sm border border-neutral-300"
+                />
+                <label for="debugSwitch" class="clear-start pl-1 text-sm text-white">Debug</label>
+            </div>
 
-                <!-- ボトム -->
-                <div>
-                    <form @submit.prevent="sendData">
-                        <input type="hidden" name="inputFields" v-model="inputFields" placeholder="Enter name" />
-                        <input type="hidden" name="form_id" :value="formAttribute.id" />
-                        <button class="text-md rounded bg-neutral-800 px-3 py-1 font-bold text-white" type="submit">
-                            更新する
-                        </button>
-                    </form>
-                </div>
+            <!-- ボトム -->
+            <div>
+                <form @submit.prevent="sendData">
+                    <input type="hidden" name="inputFields" v-model="inputFields" placeholder="Enter name" />
+                    <input type="hidden" name="form_id" :value="formAttribute.id" />
+                    <button class="text-md rounded bg-neutral-800 px-3 py-1 font-bold text-white" type="submit">
+                        更新する
+                    </button>
+                </form>
             </div>
         </div>
 
-        <div class="mx-auto flex h-full max-w-full flex-col">
-            <div class="mx-auto mb-14 flex h-full w-full flex-row overflow-hidden rounded-md bg-white">
-                <!-- セット項目 -->
-                <div class="flex w-80 flex-shrink-0 flex-col border-r border-gray-300 bg-white">
+        <!-- contents -->
+        <div class="h-[calc(100% - 32px)] mx-auto flex w-full flex-col overflow-hidden">
+            <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded-md bg-white">
+                <!-- set -->
+                <div class="relative flex w-96 flex-shrink-0 flex-col overflow-y-scroll bg-neutral-100">
                     <!-- title -->
                     <div class="shrink-0 border-b border-neutral-300 bg-white px-4 py-2 text-neutral-500">
                         <h3 class="text-lg font-bold">セット項目</h3>
                     </div>
 
                     <!-- select field -->
-                    <div class="shrink-0 border-b border-neutral-300 bg-white p-4">
+                    <div class="relative z-10 shrink-0 border-b border-neutral-300 bg-white p-4 shadow-neutral-300">
                         <select
                             v-model="selectedFieldType"
                             class="mb-2 w-full rounded border border-neutral-300 px-2 py-1"
@@ -348,7 +346,7 @@ const sendData = async () => {
                     </div>
 
                     <!-- input field -->
-                    <ul class="h-full overflow-y-scroll">
+                    <ul class="relative h-full overflow-y-scroll">
                         <li
                             :class="{
                                 'sticky top-0 bg-white': inputField.isOpen,
@@ -360,7 +358,9 @@ const sendData = async () => {
                             v-on:mouseleave="hideController(inputField.id)"
                             class="w-full border-b border-neutral-300"
                         >
-                            <div class="flex flex-row items-start justify-between gap-2 bg-white px-4 py-3">
+                            <div
+                                class="flex flex-row items-start justify-between gap-2 bg-white px-4 py-3 hover:bg-neutral-100"
+                            >
                                 <!-- input field title -->
                                 <div class="w-full">
                                     <div
@@ -697,16 +697,6 @@ const sendData = async () => {
                                             class="h-32 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200"
                                         ></textarea>
 
-                                        <!-- textare_rtf -->
-                                        <!-- tiny MCEへ置き換える -->
-                                        <!-- <textarea
-v-if="
-inputField.inputType === 'textarea_rtf'
-"
-type="textarea"
-v-model="inputField.inputContent"
-class="w-full border rounded border-neutral-300 p-2 h-32"
-></textarea> -->
                                         <Editor
                                             v-if="inputField.inputType === 'textarea_rtf'"
                                             v-model="inputField.inputContent"
@@ -824,7 +814,7 @@ class="w-full border rounded border-neutral-300 p-2 h-32"
                 <!-- debug -->
                 <div
                     v-if="debugFlg"
-                    class="w-80 overflow-y-scroll break-all border-l border-neutral-300 p-4"
+                    class="w-80 overflow-y-scroll break-all border-0 bg-neutral-100 p-4"
                     style="font-size: 9px"
                 >
                     <p style="white-space: pre-wrap">
