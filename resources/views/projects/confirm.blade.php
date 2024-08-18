@@ -16,16 +16,8 @@
                 <p class="text-sm text-neutral-500"></p>
             </div>
 
-            {{-- breadcrumb --}}
-            <div class="mb-4 border-neutral-300">
-                <div class="flex items-center gap-1">
-                    <i class="at-arrow-left-circle"></i>
-                    <a href="javascript:history.back()">戻る</a>
-                </div>
-            </div>
-
             {{-- content --}}
-            <div class="mb-3 rounded-md border border-neutral-300 bg-white p-8">
+            <div class="mb-3 rounded-md border-0 bg-white p-8 shadow-lg shadow-neutral-200">
 
                 <div class="mb-6">
                     <div class="mb-2">

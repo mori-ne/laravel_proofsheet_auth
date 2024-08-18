@@ -32,13 +32,13 @@ const getAddress = async () => {
 </script>
 
 <template>
-    <div class="mb-2">
+    <div class="mb-4">
         <label class="mb-2 block text-sm font-medium text-neutral-700">所属先住所</label>
         <div class="flex flex-row gap-2">
             <input
                 type="text"
                 name="zipcode"
-                class="rounded border border-neutral-300 py-1.5"
+                class="rounded border-0 bg-neutral-100 py-1.5"
                 v-model="zipcode"
                 placeholder="郵便番号を入力"
             />
@@ -51,8 +51,8 @@ const getAddress = async () => {
         </div>
     </div>
 
-    <div class="flex flex-row gap-2">
-        <div class="mb-2 w-1/2">
+    <div class="mb-4 flex flex-row gap-2">
+        <div class="w-1/2">
             <label class="mb-2 block text-sm font-medium text-neutral-700">都道府県</label>
             <input
                 name="address_country"
@@ -62,7 +62,7 @@ const getAddress = async () => {
                 readonly
             />
         </div>
-        <div class="mb-2 w-1/2">
+        <div class="w-1/2">
             <label class="mb-2 block text-sm font-medium text-neutral-700">市町村</label>
             <input
                 name="address_city"
@@ -75,7 +75,7 @@ const getAddress = async () => {
 
     <div>
         <label class="mb-2 block text-sm font-medium text-neutral-700">番地（部屋番号等）</label>
-        <input name="address_etc" class="w-full rounded border border-neutral-300 py-1.5" type="text" />
+        <input name="address_etc" class="w-full rounded border-0 bg-neutral-100 py-1.5" type="text" />
     </div>
     <p v-if="address" class="text-sm text-red-500">※住所を取得できませんでした</p>
 </template>

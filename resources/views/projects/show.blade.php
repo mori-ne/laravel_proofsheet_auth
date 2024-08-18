@@ -152,7 +152,8 @@
                         <p class="text-neutral-400">公開期限</p>
                         <p class="text-lg font-bold">
                             @if ($project->is_deadline)
-                                {{ $project->is_deadline }}
+                                {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y年m月d日 H時i分') }}
+                                {{-- {{ $project->is_deadline }} --}}
                             @else
                                 設定なし
                             @endif
@@ -238,31 +239,17 @@
                                                 {{-- col --}}
                                                 <div class="flex flex-col items-start justify-start">
 
-                                                    {{-- project_name --}}
-                                                    <div class="flex gap-4">
-                                                        <p class="text-xs text-neutral-400">
-                                                            {{ $project->project_name }}
-                                                        </p>
-
-                                                        <p class="text-xs text-neutral-400">
-                                                            入力項目：
-                                                            <span class="text-neutral-600">
-                                                                @if ($form->input)
-                                                                    入力済
-                                                                @else
-                                                                    無し
-                                                                @endif
-                                                            </span>
-                                                        </p>
-                                                    </div>
-
                                                     {{-- created --}}
                                                     <div class="flex gap-4">
-                                                        <p class="text-xs text-neutral-400">
-                                                            作成日：{{ $form->created_at }}
+                                                        <p class="text-xs text-neutral-500">
+                                                            作成日：
+                                                            {{ \Carbon\Carbon::parse($form->created_at)->format('Y年m月d日') }}
+                                                            {{-- {{ $form->created_at }} --}}
                                                         </p>
-                                                        <p class="text-xs text-neutral-400">
-                                                            更新日：{{ $form->updated_at }}
+                                                        <p class="text-xs text-neutral-500">
+                                                            更新日：
+                                                            {{ \Carbon\Carbon::parse($form->updated_at)->format('Y年m月d日') }}
+                                                            {{-- {{ $form->updated_at }} --}}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -497,23 +484,25 @@
 
         {{-- created / modified --}}
         <div>
-            <span class="pr-4 text-xs text-neutral-400">
+            <span class="pr-4 text-xs text-neutral-500">
                 プロジェクト作成日：
                 @if (!$project->created_at)
                     <span class="text-neutral-700">無し</span>
                 @else
                     <span class="text-neutral-700">
-                        {{ $project->created_at }}
+                        {{ \Carbon\Carbon::parse($project->created_at)->format('Y年m月d日') }}
+                        {{-- {{ $project->created_at }} --}}
                     </span>
                 @endif
             </span>
-            <span class="pr-4 text-xs text-neutral-400">
+            <span class="pr-4 text-xs text-neutral-500">
                 プロジェクト更新日：
                 @if (!$project->updated_at)
                     <span class="text-neutral-700">無し</span>
                 @else
                     <span class="text-neutral-700">
-                        {{ $project->updated_at }}
+                        {{ \Carbon\Carbon::parse($project->updated_at)->format('Y年m月d日') }}
+                        {{-- {{ $project->updated_at }} --}}
                     </span>
                 @endif
             </span>

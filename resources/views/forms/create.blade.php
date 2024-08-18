@@ -16,16 +16,8 @@
                 <p class="text-sm text-neutral-500"></p>
             </div>
 
-            {{-- breadcrumb --}}
-            <div class="mx-auto mb-4 border-neutral-300">
-                <div class="flex items-center gap-1">
-                    <i class="at-arrow-left-circle"></i>
-                    <a href="javascript:history.back()">戻る</a>
-                </div>
-            </div>
-
             {{-- content --}}
-            <div class="mx-auto mb-3 rounded-md border border-neutral-300 bg-white p-8">
+            <div class="mx-auto mb-3 rounded-md border-0 bg-white p-8 shadow-lg shadow-neutral-200">
 
                 <form action="{{ route('forms.store') }}" method="POST">
                     @csrf
@@ -40,7 +32,7 @@
                             <p class="text-xs text-neutral-500">作成するプロジェクトを選択してください</p>
                         </div>
 
-                        <select name="project_id" id="selectProject" class="text-md block w-full rounded-md border-neutral-300 px-4 py-2 pe-9 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50">
+                        <select name="project_id" id="selectProject" class="text-md block w-full rounded-md border-0 px-4 py-2 shadow-sm shadow-neutral-300">
                             @foreach ($projects as $project)
                                 <option value="{{ $project->id }}" @if (request()->input('project') == $project->id) selected @endif>
                                     {{ $project->project_name }}
@@ -58,17 +50,14 @@
                                 <span>必須</span>
                             </span>
                         </div>
-                        <input name="form_name" type="text" placeholder="フォーム名を記入してください"
-                            class="text-md ring-offset-background flex h-10 w-full rounded-md border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            value="{{ old('form_name') }}" />
+                        <input name="form_name" type="text" placeholder="フォーム名を記入してください" class="text-md ring-offset-background flex h-10 w-full rounded-md border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-400" value="{{ old('form_name') }}" />
                     </div>
 
                     <div class="mb-6">
                         <div class="mb-2">
                             <label class="text-lg font-bold">フォームの説明</label>
                         </div>
-                        <textarea name="form_description" type="text" placeholder="フォームの説明を記入してください"
-                            class="text-md flex h-48 min-h-[80px] w-full rounded-md border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-400 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">{{ old('form_description') }}</textarea>
+                        <textarea name="form_description" type="text" placeholder="フォームの説明を記入してください" class="text-md flex h-48 min-h-[80px] w-full rounded-md border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-400">{{ old('form_description') }}</textarea>
                     </div>
 
                     <hr class="my-8">

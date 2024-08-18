@@ -5,7 +5,7 @@
     <div class="flex gap-4">
 
         {{-- content --}}
-        <div class="documentstyle w-full rounded border border-neutral-300 bg-white p-6">
+        <div class="documentstyle w-full rounded bg-white p-6 shadow-lg shadow-neutral-200">
             {!! $project->project_message !!}
         </div>
 
@@ -17,7 +17,7 @@
 
             @if (Auth::guard('postuser')->check())
                 {{-- to dashboard --}}
-                <div class="mb-4 rounded border border-neutral-300 bg-white p-6">
+                <div class="mb-4 rounded bg-white p-6 shadow-lg shadow-neutral-200">
                     <h3 class="mb-6 border-l-4 border-orange-500 bg-neutral-100 px-2 py-1 text-lg font-bold">
                         ログイン中です
                     </h3>
@@ -31,7 +31,7 @@
 
             @if (!Auth::guard('postuser')->check())
                 {{-- registerd --}}
-                <div class="mb-4 rounded border border-neutral-300 bg-white p-6">
+                <div class="mb-4 rounded bg-white p-6 shadow-lg shadow-neutral-200">
                     <h3 class="mb-6 border-l-4 border-orange-500 bg-neutral-100 px-2 py-1 text-lg font-bold">
                         登録済の方はこちらから
                     </h3>
@@ -41,7 +41,7 @@
                             {{-- email --}}
                             <div class="mb-4">
                                 <label class="mb-1 block text-sm" for="email">メールアドレス</label>
-                                <input name="email" class="w-full rounded border border-neutral-300" type="text" value="" placeholder="メールアドレス">
+                                <input name="email" class="w-full rounded border-0 bg-neutral-100" type="text" value="" placeholder="メールアドレス">
                                 @if ($errors->has('email'))
                                     <p class="error mt-2 text-xs text-red-500">{{ $errors->first('email') }}</p>
                                 @endif
@@ -49,7 +49,7 @@
                             {{-- password --}}
                             <div class="mb-4">
                                 <label class="mb-1 block text-sm" for="password">パスワード</label>
-                                <input name="password" class="w-full rounded border border-neutral-300" type="password" value="" placeholder="パスワード">
+                                <input name="password" class="w-full rounded border-0 bg-neutral-100" type="password" value="" placeholder="パスワード">
                                 @if ($errors->has('password'))
                                     <p class="error mt-2 text-xs text-red-500">{{ $errors->first('password') }}</p>
                                 @endif
@@ -66,7 +66,7 @@
                 </div>
 
                 {{-- newuser --}}
-                <div class="mb-4 rounded border border-neutral-300 bg-white p-6">
+                <div class="roundedshadow-neutral-200 mb-4 bg-white p-6 shadow-lg">
                     <h3 class="mb-6 border-l-4 border-orange-500 bg-neutral-100 px-2 py-1 text-lg font-bold">
                         初めてのかたはこちらから
                     </h3>
@@ -79,7 +79,7 @@
             @endif
 
             {{-- information --}}
-            <div class="rounded border border-neutral-300 bg-white p-6">
+            <div class="roundedshadow-neutral-200 bg-white p-6 shadow-lg">
                 <h3 class="text-md mb-2 border-b border-neutral-400 pb-1 font-bold">
                     {{ $project->project_name }}からのお知らせ
                 </h3>

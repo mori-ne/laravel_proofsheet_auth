@@ -290,7 +290,8 @@
                                 <p class="pr-2 text-sm text-neutral-500">公開期限</p>
                                 <p class="text-sm font-bold text-neutral-900">
                                     @if ($project->is_deadline)
-                                        {{ $project->is_deadline }}
+                                        {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y年m月d日 H時i分') }}
+                                        {{-- {{ $project->is_deadline }} --}}
                                     @else
                                         設定なし
                                     @endif
@@ -300,13 +301,19 @@
                             <div class="flex items-center gap-4">
                                 {{-- created_at --}}
                                 <div class="flex items-center">
-                                    <p class="text-xs text-neutral-300">作成日：</p>
-                                    <p class="text-xs text-neutral-300">{{ $project->created_at }}</p>
+                                    <p class="text-xs text-neutral-400">作成日：</p>
+                                    <p class="text-xs text-neutral-400">
+                                        {{ \Carbon\Carbon::parse($project->created_at)->format('Y年m月d日') }}
+                                        {{-- {{ $project->created_at }} --}}
+                                    </p>
                                 </div>
                                 {{-- updated_at --}}
                                 <div class="flex items-center">
-                                    <p class="text-xs text-neutral-300">更新日：</p>
-                                    <p class="text-xs text-neutral-300">{{ $project->updated_at }}</p>
+                                    <p class="text-xs text-neutral-400">更新日：</p>
+                                    <p class="text-xs text-neutral-400">
+                                        {{ \Carbon\Carbon::parse($project->updated_at)->format('Y年m月d日') }}
+                                        {{-- {{ $project->updated_at }} --}}
+                                    </p>
                                 </div>
                             </div>
                         </div>

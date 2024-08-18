@@ -27,7 +27,7 @@
 
         <div class="min-h-screen bg-neutral-50">
 
-            <div class="border-b border-neutral-300 bg-white px-8 py-4">
+            <div class="bg-white px-8 py-4 shadow-md shadow-neutral-200">
 
                 {{-- flex --}}
                 <div class="mx-auto flex max-w-6xl flex-row justify-between">

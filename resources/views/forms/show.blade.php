@@ -15,14 +15,6 @@
                 {{-- <p class="text-neutral-500 text-sm">フォームの詳細画面です。確認、編集、削除ができます</p> --}}
             </div>
 
-            {{-- back --}}
-            <div class="mb-4 border-neutral-300">
-                <div class="flex items-center gap-1">
-                    <i class="at-arrow-left-circle"></i>
-                    <a href="javascript:history.back()">戻る</a>
-                </div>
-            </div>
-
             {{-- flash message --}}
             @if (session('status'))
                 <div class="[&>svg]:text-foreground relative mb-4 w-full rounded-lg border border-transparent bg-green-50 p-4 text-green-600 [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4">
@@ -127,7 +119,7 @@
             </div>
 
             {{-- input details --}}
-            <div class="mb-3 rounded-md border border-neutral-300 bg-white p-8">
+            <div class="mb-3 rounded-md border-0 bg-white p-8 shadow-lg shadow-neutral-200">
                 入力項目が入る予定
             </div>
 
@@ -139,7 +131,8 @@
                         <span class="text-neutral-700">無し</span>
                     @else
                         <span class="text-neutral-700">
-                            {{ $form->created_at }}
+                            {{ \Carbon\Carbon::parse($form->created_at)->format('Y年m月d日') }}
+                            {{-- {{ $form->created_at }} --}}
                         </span>
                     @endif
                 </span>
@@ -149,7 +142,8 @@
                         <span class="text-neutral-700">無し</span>
                     @else
                         <span class="text-neutral-700">
-                            {{ $form->updated_at }}
+                            {{ \Carbon\Carbon::parse($form->updated_at)->format('Y年m月d日') }}
+                            {{-- {{ $form->updated_at }} --}}
                         </span>
                     @endif
                 </span>

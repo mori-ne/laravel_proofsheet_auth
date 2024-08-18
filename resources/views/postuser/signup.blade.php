@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="mx-auto max-w-xl">
+    <div class="mx-auto max-w-2xl">
 
         <div class="mb-8">
             <h1 class="mb-4 text-lg font-bold">アカウント新規登録</h1>
@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="rounded border border-neutral-300 bg-white p-10">
+        <div class="rounded border-0 bg-white p-10 shadow-lg shadow-neutral-200">
             <form action="{{ route('postuser.verifymailsignup', $uuid) }}" method="POST">
                 @csrf
 
