@@ -22,6 +22,6 @@
 <body class="font-sans antialiased">
     <div id="app">
         {{-- vue component --}}
-        <input-component :form-attribute='@json($form)' :input-attribute='@json($input)'></input-component>
+        <input-component store-url="{{ route('forms.store', $form->input->form_id) }}" :form-attribute='@json($form)' :input-attribute='@json($input)'></input-component>
     </div>
 </body>

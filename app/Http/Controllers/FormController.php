@@ -202,14 +202,15 @@ class FormController extends Controller
     {
         $form = Form::with('project')->findOrFail($id);
         $input = Input::where('form_id', $id)->firstOrFail();
-        return view('inputs.edit', compact('form', 'input'));
+        return view('inputs.edit', ['form' => $form, 'input' => $input]);
     }
 
-    public function submit(Request $request)
+    public function inputStore(Request $request)
     {
-        // echo 'accessed'
-        dd($request);
-        // 受け取ったデータを処理
-        // return response()->json(['message' => 'Data submitted successfully']);
+        // 登録処理
+        // ::::
+
+        // Axiosにレスポンスする値（どうする？）
+        return $request;
     }
 }

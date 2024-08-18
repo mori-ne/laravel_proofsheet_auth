@@ -11,6 +11,8 @@ import axios from 'axios';
 const props = defineProps({
     formAttribute: Object,
     inputAttribute: Object,
+    storeUrl: String,
+    csrfToken: String,
 });
 
 const index = ref();
@@ -235,23 +237,26 @@ onUnmounted(() => {
     window.removeEventListener('beforeunload', handleBeforeUnload);
 });
 
-/***************************************************
- * 更新処理
- ***************************************************/
-const response = ref('');
-const sendData = async () => {
-    try {
-        const url = `/forms/inputs/submit/${formAttribute.value.id}`;
-        console.log('Sending request to:', url); // デバッグ用
-        const res = await axios.post(url, inputFields.value, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
+const submitForm = () => {
+    const path = __PROJECT_ROOT__;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    console.log(csrfToken);
+    console.log(JSON.stringify(inputFields.value));
+    console.log(formAttribute.value.id);
+    // inputFieldsをJSON形式に変換して送信;
+    axios
+        .post(path + '/admin/forms/inputs/' + formAttribute.value.id + '/store', {
+            _token: csrfToken,
+            inputFields: JSON.stringify(inputFields.value),
+            form_id: formAttribute.value.id,
+        })
+        .then((response) => {
+            console.log(response.data);
+            window.alert('更新しました。');
+        })
+        .catch((error) => {
+            console.error(error);
         });
-        response.value = res.data.message;
-    } catch (error) {
-        console.error('Error sending data:', error);
-    }
 };
 </script>
 
@@ -280,7 +285,7 @@ const sendData = async () => {
                 </h2>
             </div>
 
-            <!-- デバッグモード -->
+            <!-- debug -->
             <div class="ml-auto">
                 <input
                     v-model="debugFlg"
@@ -291,12 +296,13 @@ const sendData = async () => {
                 <label for="debugSwitch" class="clear-start pl-1 text-sm text-white">Debug</label>
             </div>
 
-            <!-- ボトム -->
+            <!-- store -->
             <div>
-                <form @submit.prevent="sendData">
+                <form @submit.prevent="submitForm">
+                    <input type="hidden" name="_token" :value="csrfToken" />
                     <input type="hidden" name="inputFields" v-model="inputFields" placeholder="Enter name" />
                     <input type="hidden" name="form_id" :value="formAttribute.id" />
-                    <button class="text-md rounded bg-neutral-800 px-3 py-1 font-bold text-white" type="submit">
+                    <button type="submit" class="text-md rounded bg-neutral-800 px-3 py-1 font-bold text-white">
                         更新する
                     </button>
                 </form>

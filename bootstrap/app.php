@@ -25,7 +25,4 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             return route('login');
         });
-    })
-    ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+    })->withExceptions(function (Exceptions $exceptions) {})->create();
