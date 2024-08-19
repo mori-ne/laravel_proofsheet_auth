@@ -74,12 +74,14 @@ const selectedFieldType = ref('text');
 const convertCheckbox = (id) => {
     // idから配列のindexを検索
     const index = inputFields.value.findIndex((field) => field.id === id);
-    inputFields.value[id].checkContent = inputFields.value[index].inputContent;
-    inputFields.value[id].checkContent = inputFields.value[id].checkContent
-        .split(/\r?\n/)
-        .map((item) => item.trim())
-        .filter((item) => item);
-    console.log(inputFields.value[id].checkContent);
+
+    if (index !== -1) {
+        inputFields.value[index].checkContent = inputFields.value[index].inputContent
+            .split(/\r?\n/)
+            .map((item) => item.trim())
+            .filter((item) => item);
+        console.log(inputFields.value[index].checkContent);
+    }
 };
 
 /***************************************************
@@ -89,12 +91,17 @@ const convertCheckbox = (id) => {
 const convertRadioButton = (id) => {
     // idから配列のindexを検索
     const index = inputFields.value.findIndex((field) => field.id === id);
-    inputFields.value[id].radioContent = inputFields.value[index].inputContent;
-    inputFields.value[id].radioContent = inputFields.value[id].radioContent
-        .split(/\r?\n/)
-        .map((item) => item.trim())
-        .filter((item) => item);
-    console.log(inputFields.value[id].radioContent);
+    if (index !== -1) {
+        let content = inputFields.value[index].inputContent;
+        inputFields.value[index].radioContent = content
+            .split(/\r?\n/)
+            .map((item) => item.trim())
+            .filter((item) => item);
+
+        console.log(inputFields.value[index].radioContent); // デバッグ用
+    } else {
+        console.error('IDが見つかりません');
+    }
 };
 
 /***************************************************
@@ -104,12 +111,19 @@ const convertRadioButton = (id) => {
 const convertSelectList = (id) => {
     // idから配列のindexを検索
     const index = inputFields.value.findIndex((field) => field.id === id);
-    inputFields.value[id].selectContent = inputFields.value[index].inputContent;
-    inputFields.value[id].selectContent = inputFields.value[id].selectContent
-        .split(/\r?\n/)
-        .map((item) => item.trim())
-        .filter((item) => item);
-    console.log(inputFields.value[id].selectContent);
+
+    // 該当するフィールドが見つかったか確認
+    if (index !== -1) {
+        inputFields.value[index].selectContent = inputFields.value[index].inputContent;
+        inputFields.value[index].selectContent = inputFields.value[index].selectContent
+            .split(/\r?\n/)
+            .map((item) => item.trim())
+            .filter((item) => item);
+
+        console.log(inputFields.value[index].selectContent);
+    } else {
+        console.error(`Field with id ${id} not found`);
+    }
 };
 
 /***************************************************
@@ -330,7 +344,7 @@ const submitForm = () => {
                             <option value="text">テキスト（1行）</option>
                             <option value="textarea">テキストエリア（標準）</option>
                             <option value="textarea_rtf">テキストエリア（RTF）</option>
-                            <option value="checkbox">チェックリスト</option>
+                            <option value="checkbox">チェックボタン</option>
                             <option value="radio">ラジオボタン</option>
                             <option value="select">セレクトリスト</option>
                             <option value="headline">見出し</option>
@@ -409,7 +423,7 @@ const submitForm = () => {
                                     >
                                         <div>
                                             <h6 v-text="inputField.inputTitle"></h6>
-                                            <p class="text-xs text-neutral-400">チェックリスト</p>
+                                            <p class="text-xs text-neutral-400">チェックボタン</p>
                                         </div>
                                     </div>
                                     <div
@@ -515,16 +529,20 @@ const submitForm = () => {
                                     <!-- checkbox -->
                                     <div v-if="inputField.inputType === 'checkbox'" class="mb-2">
                                         <div>
-                                            <p class="mb-1 text-xs text-neutral-500">チェックリスト（1行で1つ）</p>
+                                            <p class="mb-1 text-xs text-neutral-500">チェックボタン（1行で1つ）</p>
                                             <textarea
                                                 v-model="inputField.inputContent"
                                                 @input="convertCheckbox(inputField.id)"
                                                 class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
-                                                name=""
-                                                id=""
                                                 cols="10"
                                             ></textarea>
                                         </div>
+                                        <!-- チェックボックスのリストを表示 -->
+                                        <div
+                                            v-for="(item, index) in inputField.checkContent"
+                                            :key="index"
+                                            class="mb-1 flex items-center"
+                                        ></div>
                                     </div>
 
                                     <!-- radio -->
@@ -542,7 +560,7 @@ const submitForm = () => {
                                         </div>
                                     </div>
 
-                                    <!-- checkbox -->
+                                    <!-- select -->
                                     <div v-if="inputField.inputType === 'select'" class="mb-2">
                                         <div>
                                             <p class="mb-1 text-xs text-neutral-500">セレクトリスト（1行で1つ）</p>
@@ -746,9 +764,9 @@ const submitForm = () => {
                                                         type="radio"
                                                         v-bind:id="inputField.id + '-' + index"
                                                     />
-                                                    <label v-bind:for="inputField.id + '-' + index" class="text-sm">{{
-                                                        value
-                                                    }}</label>
+                                                    <label v-bind:for="inputField.id + '-' + index" class="text-sm">
+                                                        {{ value }}
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -758,7 +776,7 @@ const submitForm = () => {
                                             <div v-if="inputField.inputContent">
                                                 <select
                                                     v-bind:name="'select-' + inputField.id"
-                                                    class="mb-1 flex w-auto flex-wrap items-center gap-1 rounded border border-neutral-300 px-2 py-1 text-sm"
+                                                    class="mb-1 flex min-w-64 flex-wrap items-center gap-1 rounded border border-neutral-300 px-2 py-1 text-sm"
                                                 >
                                                     <option
                                                         v-bind:for="inputField.id + '-' + index"

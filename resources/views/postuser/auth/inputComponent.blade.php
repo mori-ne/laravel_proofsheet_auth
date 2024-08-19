@@ -1,5 +1,5 @@
 @extends('postuser.layouts.master')
-@section('title', 'ダッシュボード | ' . $inputs->form->project->project_name)
+@section('title', '投稿画面 | ' . $inputs->form->project->project_name)
 @section('content')
     <div class="w-full">
 
@@ -49,125 +49,230 @@
 
                                 {{-- inputComponent --}}
                                 @foreach ($inputComponents as $key => $inputComponent)
-                                    <div>{{ $inputComponent->id }}</div>
-                                    <div>{{ $inputComponent->inputType }}</div>
-                                    <div>{{ $inputComponent->inputCode }}</div>
-                                    <div>{{ $inputComponent->inputTitle }}</div>
-                                    <div>{{ $inputComponent->inputLabel }}</div>
-                                    <div>{{ $inputComponent->inputLimit }}</div>
-                                    {{-- <div>{{ $inputComponent->inputContent }} --}}
-                                    <div>{{ $inputComponent->checkContent }}</div>
-                                    {{-- <div>{{ $inputComponent->radioContent }} --}}
-                                    <div>{{ $inputComponent->selectContent }}</div>
-                                    <div>{{ $inputComponent->isRequired }}</div>
+                                    {{-- text --}}
+                                    @if ($inputComponent->inputType == 'text')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <h4 class="text-lg font-bold">{{ $inputComponent->inputTitle }}</h4>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                            <input class="mb-1 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200" type="text" value="#" />
+                                            {{-- common start --}}
+                                            @if ($inputComponent->inputLimit)
+                                                <p class="text-xs text-neutral-900">
+                                                    000 / {{ $inputComponent->inputLimit }}&nbsp;文字
+                                                </p>
+                                            @endif
+                                            {{-- common end --}}
+                                        </div>
+                                    @endif
+
+                                    {{-- textarea plaintext --}}
+                                    @if ($inputComponent->inputType == 'textarea')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <h4 class="text-lg font-bold">{{ $inputComponent->inputTitle }}</h4>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                            <textarea type="textarea" class="h-32 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200">#</textarea>
+                                            {{-- common start --}}
+                                            @if ($inputComponent->inputLimit)
+                                                <p class="text-xs text-neutral-900">
+                                                    000 / {{ $inputComponent->inputLimit }}&nbsp;文字
+                                                </p>
+                                            @endif
+                                            {{-- common end --}}
+                                        </div>
+                                    @endif
+
+                                    {{-- textarea richtext --}}
+                                    @if ($inputComponent->inputType == 'textarea_rtf')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <h4 class="text-lg font-bold">{{ $inputComponent->inputTitle }}</h4>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                            <textarea id="projectinstance" name="project_description" type="text" placeholder="プロジェクトの概要を記入してください" class="flex h-48 min-h-[80px] w-full rounded-md border-0 bg-neutral-100 px-3 py-2 text-sm placeholder:text-neutral-400">#</textarea>
+                                            {{-- common start --}}
+                                            @if ($inputComponent->inputLimit)
+                                                <p class="text-xs text-neutral-900">
+                                                    000 / {{ $inputComponent->inputLimit }}&nbsp;文字
+                                                </p>
+                                            @endif
+                                            {{-- common end --}}
+                                        </div>
+                                    @endif
+
+                                    {{-- radio --}}
+                                    @if ($inputComponent->inputType == 'radio')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <h4 class="text-lg font-bold">{{ $inputComponent->inputTitle }}</h4>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                            <div key="{{ $inputComponent->id }}" class="mb-1 flex flex-col items-start">
+                                                @for ($i = 0; $i < count($inputComponent->radioContent); $i++)
+                                                    <div>
+                                                        <input name="radio-{{ $inputComponent->id }}" type="radio" id="radio-{{ $inputComponent->id }}-{{ $i }}" />
+                                                        <label for="radio-{{ $inputComponent->id }}-{{ $i }}" class="text-sm">
+                                                            {{ $inputComponent->radioContent[$i] }}
+                                                        </label>
+                                                    </div>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    {{-- checkbox --}}
+                                    @if ($inputComponent->inputType == 'checkbox')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <h4 class="text-lg font-bold">{{ $inputComponent->inputTitle }}</h4>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                            <div key="{{ $inputComponent->id }}" class="mb-1 flex flex-col items-start">
+                                                @for ($i = 0; $i < count($inputComponent->checkContent); $i++)
+                                                    <div>
+                                                        <input name="check-{{ $inputComponent->id }}" type="checkbox" id="check-{{ $inputComponent->id }}-{{ $i }}" />
+                                                        <label for="check-{{ $inputComponent->id }}-{{ $i }}" class="text-sm">
+                                                            {{ $inputComponent->checkContent[$i] }}
+                                                        </label>
+                                                    </div>
+                                                @endfor
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    {{-- select list --}}
+                                    @if ($inputComponent->inputType == 'select')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <h4 class="text-lg font-bold">{{ $inputComponent->inputTitle }}</h4>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                            <div key="{{ $inputComponent->id }}" class="mb-1 flex flex-col items-start">
+                                                <select name="select-{{ $inputComponent->id }}" id="select-{{ $inputComponent->id }}" class="min-w-64 mb-1 flex flex-wrap items-center gap-1 rounded border border-neutral-300 px-2 py-1 text-sm">
+                                                    <option value="選択してください">選択してください…</option>
+                                                    @for ($i = 0; $i < count($inputComponent->selectContent); $i++)
+                                                        <option value="{{ $inputComponent->selectContent[$i] }}">{{ $inputComponent->selectContent[$i] }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    {{-- headline --}}
+                                    @if ($inputComponent->inputType == 'headline')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <h4 class="text-lg font-bold">{{ $inputComponent->inputTitle }}</h4>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                        </div>
+                                    @endif
+
+                                    {{-- paragraph --}}
+                                    @if ($inputComponent->inputType == 'paragraph')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <div class="flex flex-row items-center gap-2">
+                                                    <p class="text-md">{{ $inputComponent->inputTitle }}</p>
+                                                    @if ($inputComponent->isRequired == true)
+                                                        <p class="inline-flex h-5 items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">必須</p>
+                                                    @endif
+                                                </div>
+                                                <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
+                                            </div>
+                                            {{-- common end --}}
+                                        </div>
+                                    @endif
+
+                                    {{-- hr --}}
+                                    @if ($inputComponent->inputType == 'hr')
+                                        <div class="mb-8">
+                                            {{-- common start --}}
+                                            <div class="mb-3">
+                                                <hr class="mb-8 mt-4 border-neutral-400" />
+                                            </div>
+                                            {{-- common end --}}
+                                        </div>
+                                    @endif
                                 @endforeach
                                 {{-- {{ dd($inputComponents) }} --}}
 
-                                <ul>
-                                    <li class="mb-6">
-
-                                        {{-- common --}}
-                                        <div class="flex items-center gap-2">
-                                            <!-- title -->
-                                            <h4 class="text-lg font-bold">
-                                                タイトル
-                                            </h4>
-
-                                            <!-- required -->
-                                            <p class="inline-flex items-center justify-center rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">
-                                                必須
-                                            </p>
-                                        </div>
-
-                                        <!-- headline -->
-                                        <h1 class="mb-2 text-xl font-bold">
-                                            ヘッドライン
-                                        </h1>
-
-                                        <!-- paragraph -->
-                                        <p class="mb-2">
-                                            パラグラフ
-                                        </p>
-
-                                        <div class="mb-2 flex justify-between">
-                                            <!-- label -->
-                                            <div>
-                                                <p class="text-sm text-neutral-400">
-                                                    ラベル
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <!-- input type -->
-                                        <div>
-                                            <!-- input -->
-                                            <input class="mb-1 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200" type="text" value="" />
-
-                                            <!-- textare -->
-                                            <textarea type="textarea" class="h-32 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200"></textarea>
-
-
-                                            <!-- checkbox -->
-                                            <div>
-                                                <div>
-                                                    <div key="index" class="mb-1 flex flex-wrap items-center gap-1">
-                                                        <input name="'check-' + inputField.id" type="checkbox" id="inputField.id + '-' + index" />
-                                                        <label for="inputField.id + '-' + index" class="text-sm">value</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- radio -->
-                                            <div>
-                                                <div>
-                                                    <div key="index" class="mb-1 flex flex-wrap items-center gap-1">
-                                                        <input name="'radio-' + inputField.id" type="radio" id="inputField.id + '-' + index" />
-                                                        <label for="inputField.id + '-' + index" class="text-sm">value</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <!-- select -->
-                                            <div>
-                                                <div>
-                                                    <select name="'select-' + inputField.id" class="mb-1 flex w-auto flex-wrap items-center gap-1 rounded border border-neutral-300 px-2 py-1 text-sm">
-                                                        <option for="inputField.id + '-' + index" value="selecte" class="text-sm">
-                                                            選択してください
-                                                        </option>
-                                                        <template key="index">
-                                                            <option value="value" class="text-sm">
-                                                                value
-                                                            </option>
-                                                        </template>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- hr -->
-                                            <hr class="mb-8 mt-4 border-neutral-400" />
-                                        </div>
-
-                                        <!-- limit / code -->
-                                        <div class="flex">
-                                            <!-- limit -->
-                                            <div>
-                                                <p class="text-xs text-neutral-900">
-                                                    inputField . inputContent . length / inputField . inputLimit &nbsp;文字
-                                                </p>
-                                            </div>
-                                            <!-- code -->
-                                            <div class="ml-auto flex justify-end text-xs text-neutral-300">
-                                                <p>code</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </div>
+
+                            <!-- limit / code -->
+                            <div class="flex">
+                                <!-- limit -->
+                                <div>
+                                    <p class="text-xs text-neutral-900">
+                                        inputField . inputContent . length / inputField . inputLimit &nbsp;文字
+                                    </p>
+                                </div>
+                                <!-- code -->
+                                <div class="ml-auto flex justify-end text-xs text-neutral-300">
+                                    <p>code</p>
+                                </div>
+                            </div>
+                            </li>
+                            </ul>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
 @endsection

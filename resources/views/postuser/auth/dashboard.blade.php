@@ -25,9 +25,8 @@
                     </div>
                     {{-- 3 --}}
                     <div class="broder-neutral-400 ml-auto flex flex-1 flex-col gap-2 border-l pl-4">
-                        <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1 text-center transition-all hover:bg-neutral-100">投稿する</a>
+                        <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1 text-center transition-all hover:bg-neutral-100">投稿／編集する</a>
                         <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1 text-center transition-all hover:bg-neutral-100">プレビュー</a>
-                        <a href="{{ route('postuser.edit', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1 text-center transition-all hover:bg-neutral-100">編集する</a>
                         <button class="h-8 rounded-md border border-red-200 px-2 py-1 text-red-500 transition-all hover:bg-red-100" type="submit">削除</button>
                     </div>
                 </div>
