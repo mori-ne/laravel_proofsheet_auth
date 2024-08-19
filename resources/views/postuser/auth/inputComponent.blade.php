@@ -35,11 +35,8 @@
 
                         <!-- list -->
                         <div class="h-full px-8">
-                            <div class="mx-auto max-w-2xl py-16">
+                            <div class="mx-auto max-w-2xl py-10">
                                 <div class="mb-12 border-b-2 border-neutral-700">
-                                    <h1 class="mb-4 text-2xl font-bold">
-                                        {{ $inputs->form->project->project_name }}
-                                    </h1>
                                     <div class="mb-4 rounded bg-neutral-100 p-8">
                                         <div class="text-sm text-neutral-500">
                                             {!! $inputs->form->form_description !!}
