@@ -85,10 +85,8 @@
                 </div>
             @endif
 
-            <div class="mx-auto max-w-6xl flex-row justify-center">
-                {{-- content --}}
-                @yield('content')
-            </div>
+            {{-- content --}}
+            @yield('content')
 
         </div>
     </div>

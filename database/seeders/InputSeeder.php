@@ -51,18 +51,6 @@ class InputSeeder extends Seeder
                 "created_at" => $now,
                 "updated_at" => $now,
             ],
-            [
-                "form_id" => 5,
-                "inputs" => $json2,
-                "created_at" => $now,
-                "updated_at" => $now,
-            ],
-            [
-                "form_id" => 6,
-                "inputs" => null,
-                "created_at" => $now,
-                "updated_at" => $now,
-            ],
         ];
         DB::table('input_json')->insert($inputs);
     }

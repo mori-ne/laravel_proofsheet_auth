@@ -5,24 +5,26 @@
 
         <div class="relative flex w-full flex-col items-stretch">
             <!-- top -->
-            <div class="flex h-12 items-center gap-4 bg-neutral-500 px-4">
+            <div class="bg-neutral-500 px-4">
+                <div class="mx-auto flex h-12 max-w-6xl items-center gap-4">
 
-                <!-- form name -->
-                <div class="mr-3 flex flex-row items-center">
-                    <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">フォーム名</p>
-                    <h2 class="font-bold text-white">{{ $inputs->form->form_name }}</h2>
-                </div>
+                    <!-- form name -->
+                    <div class="mr-3 flex flex-row items-center">
+                        <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">フォーム名</p>
+                        <h2 class="font-bold text-white">{{ $inputs->form->form_name }}</h2>
+                    </div>
 
-                <!-- store -->
-                <div class="ml-auto">
-                    <form action="#">
-                        <input type="hidden" name="_token" value="csrfToken" />
-                        <input type="hidden" name="inputFields" placeholder="Enter name" />
-                        <input type="hidden" name="form_id" value="formAttribute.id" />
-                        <button type="submit" class="text-md rounded bg-neutral-800 px-3 py-1 font-bold text-white">
-                            更新する
-                        </button>
-                    </form>
+                    <!-- store -->
+                    <div class="ml-auto">
+                        <form action="#">
+                            <input type="hidden" name="_token" value="csrfToken" />
+                            <input type="hidden" name="inputFields" placeholder="Enter name" />
+                            <input type="hidden" name="form_id" value="formAttribute.id" />
+                            <button type="submit" class="text-md rounded bg-neutral-800 px-3 py-1 font-bold text-white">
+                                更新する
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -60,7 +62,7 @@
                                                 <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
                                             </div>
                                             {{-- common end --}}
-                                            <input class="mb-1 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200" type="text" value="#" />
+                                            <input class="mb-1 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200" type="text" value="" />
                                             {{-- common start --}}
                                             @if ($inputComponent->inputLimit)
                                                 <p class="text-xs text-neutral-900">
@@ -85,7 +87,7 @@
                                                 <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
                                             </div>
                                             {{-- common end --}}
-                                            <textarea type="textarea" class="h-32 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200">#</textarea>
+                                            <textarea type="textarea" class="h-32 w-full rounded border-0 bg-neutral-100 p-2 hover:bg-neutral-200"></textarea>
                                             {{-- common start --}}
                                             @if ($inputComponent->inputLimit)
                                                 <p class="text-xs text-neutral-900">
@@ -110,7 +112,7 @@
                                                 <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
                                             </div>
                                             {{-- common end --}}
-                                            <textarea id="projectinstance" name="project_description" type="text" placeholder="プロジェクトの概要を記入してください" class="flex h-48 min-h-[80px] w-full rounded-md border-0 bg-neutral-100 px-3 py-2 text-sm placeholder:text-neutral-400">#</textarea>
+                                            <textarea id="projectinstance" name="project_description" type="text" placeholder="プロジェクトの概要を記入してください" class="flex h-48 min-h-[80px] w-full rounded-md border-0 bg-neutral-100 px-3 py-2 text-sm placeholder:text-neutral-400"></textarea>
                                             {{-- common start --}}
                                             @if ($inputComponent->inputLimit)
                                                 <p class="text-xs text-neutral-900">
@@ -248,28 +250,10 @@
                                 {{-- {{ dd($inputComponents) }} --}}
 
                             </div>
-
-                            <!-- limit / code -->
-                            <div class="flex">
-                                <!-- limit -->
-                                <div>
-                                    <p class="text-xs text-neutral-900">
-                                        inputField . inputContent . length / inputField . inputLimit &nbsp;文字
-                                    </p>
-                                </div>
-                                <!-- code -->
-                                <div class="ml-auto flex justify-end text-xs text-neutral-300">
-                                    <p>code</p>
-                                </div>
-                            </div>
-                            </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
     </div>
 @endsection
