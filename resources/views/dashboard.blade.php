@@ -41,14 +41,18 @@
 
                 <div class="w-full rounded-md border-0 border-neutral-300 bg-white px-8 py-6 shadow-md shadow-neutral-200">
                     <p class="mb-4 text-sm text-neutral-400">最近更新されたプロジェクト</p>
-                    @foreach ($recentProjects as $recentProject)
-                        <div class="mb-2 flex flex-row items-center gap-4 border-b pb-2 last:mb-0 last:border-b-0 last:pb-0">
+                    @foreach ($recentProjects as $key => $recentProject)
+                        <div class="mb-2 flex flex-row items-start gap-4 border-b pb-2 last:mb-0 last:border-b-0 last:pb-0">
                             <p class="text-sm text-neutral-400">
-                                {{ $recentProject->updated_at }}
+                                {{ \Carbon\Carbon::parse($recentProject->updated_at)->format('Y年m月d日 H時i分') }}
+                                {{-- {{ $recentProject->updated_at }} --}}
                             </p>
-                            <a href="{{ route('projects.show', $recentProject->id) }}" class="text-lg font-bold hover:underline">
-                                {{ $recentProject->project_name }}
-                            </a>
+                            <div class="flex flex-col items-start">
+                                <a href="{{ route('projects.show', $recentProject->id) }}" class="text-lg font-bold hover:underline">
+                                    {{ $recentProject->project_name }}
+                                </a>
+                                <p class="text-center text-sm text-neutral-400">{{ $recentProject->project_description }}</p>
+                            </div>
                         </div>
                     @endforeach
                 </div>

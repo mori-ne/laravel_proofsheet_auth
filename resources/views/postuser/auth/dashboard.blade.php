@@ -14,20 +14,21 @@
             <p>■ How to use this page (only in Japanese)</p>
         </div>
         <div class="h-full rounded-md border-0 bg-white p-6 shadow-md shadow-neutral-100">
-            @foreach ($project->forms as $form)
+            @foreach ($project->forms as $key => $form)
                 <div class="mb-4 flex flex-row gap-4 border-b border-neutral-300 pb-3 last:mb-0 last:border-0 last:pb-0">
                     {{-- 1 --}}
-                    <p class="text-md text-neutral-400">{{ $form->id }}</p>
+                    <p class="text-md w-4 text-right text-neutral-400">{{ $key + 1 }}</p>
                     {{-- 2 --}}
-                    <div class="flex flex-col">
-                        <p class="text-lg font-bold">{{ $form->form_name }}</p>
-                        <p class="text-sm">{{ $form->form_description }}</p>
+                    <div class="flex w-3/4 flex-col gap-2">
+                        <p class="text-xl font-bold">{{ $form->form_name }}</p>
+                        <div class="h-32 w-full overflow-y-scroll text-sm text-neutral-400">{!! $form->form_description !!}</div>
                     </div>
                     {{-- 3 --}}
-                    <div class="ml-auto flex flex-row gap-2">
-                        <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1">投稿する</a>
-                        <a href="{{ route('postuser.edit', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1">編集する</a>
-                        <button class="h-8 rounded-md border px-2 py-1" type="submit">削除</button>
+                    <div class="broder-neutral-400 ml-auto flex flex-1 flex-col gap-2 border-l pl-4">
+                        <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1 text-center transition-all hover:bg-neutral-100">投稿する</a>
+                        <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1 text-center transition-all hover:bg-neutral-100">プレビュー</a>
+                        <a href="{{ route('postuser.edit', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-md border px-2 py-1 text-center transition-all hover:bg-neutral-100">編集する</a>
+                        <button class="h-8 rounded-md border border-red-200 px-2 py-1 text-red-500 transition-all hover:bg-red-100" type="submit">削除</button>
                     </div>
                 </div>
             @endforeach
