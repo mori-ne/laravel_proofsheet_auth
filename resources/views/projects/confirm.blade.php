@@ -13,7 +13,6 @@
 
             <div class="mb-8">
                 <h4 class="text-lg font-bold text-neutral-600">プロジェクト確認画面</h4>
-                <p class="text-sm text-neutral-500"></p>
             </div>
 
             {{-- content --}}
@@ -21,7 +20,7 @@
 
                 <div class="mb-6">
                     <div class="mb-2">
-                        <label class="text-lg font-bold" for="#">
+                        <label class="text-lg font-bold">
                             プロジェクト名
                         </label>
                         <span class="relative rounded-full bg-red-600 py-0.5 pl-2 pr-2.5 text-xs font-semibold text-white">
@@ -33,9 +32,9 @@
 
                 <div class="mb-6">
                     <div class="mb-2">
-                        <label class="text-lg font-bold" for="#">プロジェクトの概要</label>
+                        <label class="text-lg font-bold">プロジェクトの概要</label>
                     </div>
-                    <div class="rounded border p-3 text-sm">
+                    <div class="text-md rounded border p-4">
                         @if (!$project['project_description'])
                             <span class="text-neutral-400">なし</span>
                         @else
@@ -46,7 +45,7 @@
 
                 <div class="mb-6">
                     <div class="mb-2">
-                        <label class="text-lg font-bold" for="#">公開期限</label>
+                        <label class="text-lg font-bold">公開期限</label>
                     </div>
                     <div class="rounded border p-3">
                         @if (!$project['is_deadline'])
@@ -59,7 +58,7 @@
 
                 <div class="mb-6">
                     <div class="mb-2">
-                        <label class="text-lg font-bold" for="#">プロジェクトの説明</label>
+                        <label class="text-lg font-bold">プロジェクトの説明</label>
                     </div>
                     <div class="rounded border p-3">
                         @if (!$project['project_message'])
@@ -72,7 +71,7 @@
 
                 <div class="mb-6">
                     <div class="mb-2">
-                        <label class="text-lg font-bold" for="#">返信メールの件名</label>
+                        <label class="text-lg font-bold">返信メールの件名</label>
                     </div>
                     <div class="rounded border p-3">
                         @if (!$project['mail_subject'])
@@ -85,9 +84,9 @@
 
                 <div class="mb-6">
                     <div class="mb-2">
-                        <label class="text-lg font-bold" for="#">返信メールの本文</label>
+                        <label class="text-lg font-bold">返信メールの本文</label>
                     </div>
-                    <div class="rounded border p-3 text-sm">
+                    <div class="text-md rounded border p-3">
                         @if (!$project['mail_content'])
                             <span class="text-neutral-400">なし</span>
                         @else
@@ -108,7 +107,7 @@
                         <input type="hidden" name="mail_subject" value="{{ $project['mail_subject'] }}">
                         <input type="hidden" name="mail_content" value="{{ $project['mail_content'] }}">
                         <button type="submit"
-                            class="focus:shadow-outline mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-600 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">
+                            class="focus:shadow-outline text-md mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-600 px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">
                             新規作成する
                         </button>
                 </div>

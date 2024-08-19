@@ -8,6 +8,7 @@ use App\Models\Form;
 use App\Models\Input;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class FormController extends Controller
 {
@@ -55,26 +56,22 @@ class FormController extends Controller
 
     public function store(Request $request)
     {
-        $validator = $request->validate([
-            'project_id' => 'required|integer', // project_id も必須で整数であること
+        $validated = $request->validate([
+            'project_id' => 'required|integer',
             'form_name' => 'required|max:100',
-            'form_description' => 'nullable|max:255', // 空でも許容し、最大255文字まで
+            'form_description' => 'nullable',
         ]);
 
         // トランザクションの開始
         DB::beginTransaction();
 
         try {
-            // フォームを作成
-            $form = Form::create([
-                'project_id' => $request->project_id,
-                'form_name' => $request->form_name,
-                'form_description' => $request->form_description,
-            ]);
+            // フォームの作成
+            $form = Form::create($validated);
 
-            // inputを作成
+            // inputデータの処理
             $inputData = $request->input('input');
-            $inputData['form_id'] = $form->id; // form_idを追加
+            $inputData['form_id'] = $form->id; // フォームIDを追加
             Input::create($inputData);
 
             // コミット
@@ -82,8 +79,8 @@ class FormController extends Controller
 
             return redirect()->route('forms.show', $form->id)->with('status', 'フォームを新規作成しました');
         } catch (\Exception $e) {
-            // ロールバック
             DB::rollBack();
+            Log::error('フォーム作成エラー: ' . $e->getMessage());
             return redirect()->route('forms.create')->withErrors('フォームの作成に失敗しました。もう一度お試しください。');
         }
     }

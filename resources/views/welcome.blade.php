@@ -25,6 +25,7 @@
                         <a href="{{ route('welcome') }}">
                             <h1 class="text-center text-3xl font-bold text-neutral-600">Proofsheet</h1>
                         </a>
+                        <h2 class="mt-3 text-center text-neutral-500">管理者用ログインページ</h2>
                     </div>
 
                     @if (Route::has('login'))
