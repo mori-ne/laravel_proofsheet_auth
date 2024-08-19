@@ -333,6 +333,8 @@
                 </div>
             @endforeach
 
+            {{ $projects->links() }}
+
 
         </div>
     </main>
