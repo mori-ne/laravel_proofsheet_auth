@@ -20,13 +20,16 @@ class InputSeeder extends Seeder
         $jsonPath2 = database_path('json/sample2.json');
         $json2 = File::get($jsonPath2);
 
+        $jsonPath3 = database_path('json/sample3.json');
+        $json3 = File::get($jsonPath3);
+
         // 時間取得のクラス
         $now = Carbon::now('Asia/Tokyo');
 
         $inputs = [
             [
                 "form_id" => 1,
-                "inputs" => $json,
+                "inputs" => $json3,
                 "created_at" => $now,
                 "updated_at" => $now,
             ],

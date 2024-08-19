@@ -313,7 +313,7 @@ const submitForm = () => {
         <div class="h-[calc(100% - 32px)] mx-auto flex w-full flex-col overflow-hidden">
             <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded-md bg-white">
                 <!-- set -->
-                <div class="relative flex w-96 flex-shrink-0 flex-col overflow-y-scroll bg-neutral-100">
+                <div class="relative flex w-80 flex-shrink-0 flex-col overflow-y-scroll bg-neutral-100">
                     <!-- title -->
                     <div class="shrink-0 border-b border-neutral-300 bg-white px-4 py-2 text-neutral-500">
                         <h3 class="text-lg font-bold">セット項目</h3>

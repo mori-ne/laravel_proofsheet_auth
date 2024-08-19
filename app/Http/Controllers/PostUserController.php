@@ -223,9 +223,10 @@ class PostUserController extends Controller
 
     public function create($uuid, $id)
     {
-        $input = Input::with('form.project')->where('form_id', $id)->first();
+        $inputs = Input::with('form.project')->where('form_id', $id)->first();
+        $inputComponents = json_decode($inputs->inputs);
         // dd($uuid, $id, $input->inputs);
-        return view('postuser.auth.inputComponent', ['input' => $input, 'uuid' => $uuid, 'project' => $input->form->project]);
+        return view('postuser.auth.inputComponent', ['inputs' => $inputs, 'uuid' => $uuid, 'project' => $inputs->form->project, 'inputComponents' => $inputComponents]);
     }
 
     public function edit($uuid, $id)

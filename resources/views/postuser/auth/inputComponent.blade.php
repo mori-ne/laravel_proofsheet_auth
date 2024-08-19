@@ -1,5 +1,5 @@
 @extends('postuser.layouts.master')
-@section('title', 'ダッシュボード | ' . $input->form->project->project_name)
+@section('title', 'ダッシュボード | ' . $inputs->form->project->project_name)
 @section('content')
     <div class="w-full">
 
@@ -10,7 +10,7 @@
                 <!-- form name -->
                 <div class="mr-3 flex flex-row items-center">
                     <p class="mr-2 rounded bg-neutral-600 px-2 py-0.5 text-xs font-bold text-neutral-300">フォーム名</p>
-                    <h2 class="font-bold text-white">{{ $input->form->form_name }}</h2>
+                    <h2 class="font-bold text-white">{{ $inputs->form->form_name }}</h2>
                 </div>
 
                 <!-- store -->
@@ -38,17 +38,31 @@
                             <div class="mx-auto max-w-2xl py-16">
                                 <div class="mb-12 border-b-2 border-neutral-700">
                                     <h1 class="mb-4 text-2xl font-bold">
-                                        {{ $input->form->project->project_name }}
+                                        {{ $inputs->form->project->project_name }}
                                     </h1>
-                                    <div class="mb-4 bg-neutral-100 p-8">
+                                    <div class="mb-4 rounded bg-neutral-100 p-8">
                                         <div class="text-sm text-neutral-500">
-                                            {!! $input->form->form_description !!}
+                                            {!! $inputs->form->form_description !!}
                                         </div>
                                     </div>
                                 </div>
 
                                 {{-- inputComponent --}}
-                                {{ var_dump($input->inputs) }}
+                                @foreach ($inputComponents as $key => $inputComponent)
+                                    <div>{{ $inputComponent->id }}</div>
+                                    <div>{{ $inputComponent->inputType }}</div>
+                                    <div>{{ $inputComponent->inputCode }}</div>
+                                    <div>{{ $inputComponent->inputTitle }}</div>
+                                    <div>{{ $inputComponent->inputLabel }}</div>
+                                    <div>{{ $inputComponent->inputLimit }}</div>
+                                    {{-- <div>{{ $inputComponent->inputContent }} --}}
+                                    <div>{{ $inputComponent->checkContent }}</div>
+                                    {{-- <div>{{ $inputComponent->radioContent }} --}}
+                                    <div>{{ $inputComponent->selectContent }}</div>
+                                    <div>{{ $inputComponent->isRequired }}</div>
+                                @endforeach
+                                {{-- {{ dd($inputComponents) }} --}}
+
                                 <ul>
                                     <li class="mb-6">
 
