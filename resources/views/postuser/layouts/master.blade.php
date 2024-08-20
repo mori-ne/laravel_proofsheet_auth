@@ -59,7 +59,7 @@
                                     <span class="text-xs text-neutral-400">さん</span>
                                 </p>
                                 <div>
-                                    <a class="text-sm" href="">アカウント管理</a>
+                                    <a class="text-sm" href="{{ route('postuser.account', $project->uuid) }}">アカウント管理</a>
                                 </div>
                                 {{-- <form action="{{ route('postuser.logout', ['uuid' => $project->uuid]) }}" method="POST"> --}}
                                 <form action="{{ route('postuser.logout', $project->uuid) }}" method="POST">

@@ -33,6 +33,11 @@ class PostUserController extends Controller
             abort(404, 'フォームが見つかりません');
         }
 
+        // ログインしていたらdashboardへリダイレクト
+        if (Auth::guard('postuser')->check()) {
+            return redirect()->route('postuser.dashboard', ['uuid' => $uuid]);
+        }
+
 
         return view('postuser.login', ['uuid' => $uuid, 'project' => $project]);
     }
@@ -232,5 +237,11 @@ class PostUserController extends Controller
     public function edit($uuid, $id)
     {
         dd($uuid, $id);
+    }
+
+    public function account($uuid)
+    {
+        $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
+        return view('postuser.auth.account', ['uuid' => $uuid, 'project' => $project]);
     }
 }

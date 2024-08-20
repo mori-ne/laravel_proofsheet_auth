@@ -43,8 +43,12 @@ Route::prefix('/postuser/{uuid}')->group(function () {
     Route::middleware('auth:postuser')->group(function () {
         Route::get('dashboard', [PostUserController::class, 'dashboard'])->name('postuser.dashboard');
 
+        // form
         Route::get('forms/create/{id}', [PostUserController::class, 'create'])->name('postuser.create');
         Route::get('forms/edit/{id}', [PostUserController::class, 'edit'])->name('postuser.edit');
         Route::get('forms/preview/{id}', [PostUserController::class, 'preview'])->name('postuser.preview');
+
+        // account
+        Route::get('account', [PostUserController::class, 'account'])->name('postuser.account');
     });
 });
