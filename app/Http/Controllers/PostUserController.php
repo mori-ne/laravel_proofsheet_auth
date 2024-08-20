@@ -33,8 +33,8 @@ class PostUserController extends Controller
             abort(404, 'フォームが見つかりません');
         }
 
-        // ログインしていたらdashboardへリダイレクト
-        if (Auth::guard('postuser')->check()) {
+        // ログインしている、かつPostUserのDBのuuidとRequestのuuidが一致していたらリダイレクト
+        if (Auth::guard('postuser')->check() && Auth::guard('postuser')->user()->uuid == $uuid) {
             return redirect()->route('postuser.dashboard', ['uuid' => $uuid]);
         }
 
@@ -74,11 +74,14 @@ class PostUserController extends Controller
 
     public function dashboard($uuid)
     {
+        // log
         Log::info(Auth::guard('postuser')->user());
         Log::info($uuid);
+
         $postuseruuid = Auth::guard('postuser')->user()->uuid;
         if ($uuid !== $postuseruuid) {
-            abort(404, 'フォームが見つかりません');
+            return redirect()->route('postuser.index', ['uuid' => $uuid]);
+            // abort(404, 'フォームが見つかりません');
         }
 
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();

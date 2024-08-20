@@ -50,7 +50,7 @@
                         </a>
                     </h1>
 
-                    @if (Auth::guard('postuser')->check())
+                    @if (Auth::guard('postuser')->check() && Auth::guard('postuser')->user()->uuid == $project->uuid)
                         <div class="ml-auto flex max-w-6xl flex-row">
                             {{-- account --}}
                             <div class="ml-auto flex flex-row items-center gap-4">
