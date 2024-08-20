@@ -94,7 +94,7 @@ class PostUserController extends Controller
 
     public function logout($uuid, Request $request)
     {
-        Auth::logout();
+        Auth::guard('postuser')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('postuser.index', ['uuid' => $uuid])->with(['status' => 'ログアウトしました']);
