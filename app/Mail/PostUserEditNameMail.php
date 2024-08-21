@@ -10,19 +10,21 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class PostUserRegisterCompliteMail extends Mailable
+class PostUserEditNameMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $project_name;
     protected $email;
     protected $uuid;
-    protected $project_name;
 
-    public function __construct($email, $uuid, $project_name)
+
+
+    public function __construct($project_name,  $email, $uuid)
     {
-        $this->email = $email;
-        $this->uuid = $uuid;
         $this->project_name = $project_name;
+        $this->uuid = $uuid;
+        $this->email = $email;
     }
 
     /**
@@ -32,7 +34,7 @@ class PostUserRegisterCompliteMail extends Mailable
     {
         return new Envelope(
             from: new Address('postmaster@proofsheet.jp', 'Proofsheet管理者'),
-            subject: 'アカウント登録完了のお知らせ | ' . $this->project_name,
+            subject: 'アカウント情報、変更完了のお知らせ | ' . $this->project_name,
         );
     }
 

@@ -115,14 +115,18 @@
 
                 <hr class="mb-8">
 
-                <form action="{{ route('postuser.account.edit.delete', $uuid) }}" method="POST">
-                    @csrf
-                    @method('delete')
-                    {{-- delete --}}
-                    <div>
-                        <a href="#" class="text-sm text-red-500">アカウントを削除</a>
+                {{-- <form action="{{ route('postuser.account.edit.delete', $uuid) }}" method="POST"> --}}
+                @csrf
+                @method('delete')
+                {{-- delete --}}
+                <div x-data="{ open: false }">
+                    <button x-on:click="open = true" class="text-sm text-red-500">アカウントを削除</button>
+                    <div x-show="open">
+                        a
                     </div>
-                </form>
+                    {{-- <a href="{{ route('postuser.account.edit.delete', $uuid) }}" class="text-sm text-red-500">アカウントを削除</a> --}}
+                </div>
+                {{-- </form> --}}
             </div>
         </div>
     </div>

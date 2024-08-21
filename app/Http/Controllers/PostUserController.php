@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PrePostUserTokenMail;
 use App\Http\Requests\PostUserRegisterRequest;
 use App\Mail\PostUserRegisterCompliteMail;
+use App\Mail\PostUserEditNameMail;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Input;
 
@@ -266,23 +267,46 @@ class PostUserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $user->first_name = $validated['first_name'];
-        $user->last_name = $validated['last_name'];
-        $user->affiliate = $validated['affiliate'];
-        $user->zipcode = $validated['zipcode'];
-        $user->address_country = $validated['address_country'];
-        $user->address_city = $validated['address_city'];
-        $user->address_etc = $validated['address_etc'];
-        $user->save();
-        return redirect()->back()->with('status', '氏名・施設情報を更新しました');
+        // トランザクション処理
+        DB::beginTransaction();
 
-        // 更新処理
-        dd($request, $uuid,  $user);
+        try {
+            Log::info('ユーザー情報更新開始');
+
+            $user->first_name = $validated['first_name'];
+            $user->last_name = $validated['last_name'];
+            $user->affiliate = $validated['affiliate'];
+            $user->zipcode = $validated['zipcode'];
+            $user->address_country = $validated['address_country'];
+            $user->address_city = $validated['address_city'];
+            $user->address_etc = $validated['address_etc'];
+            $user->save();
+
+            // トランザクションのコミット
+            DB::commit();
+            Log::info('トランザクションコミット完了');
+
+
+            // メール送信
+            $project = Project::where('uuid', $uuid)->firstOrFail();
+            $email = Auth::guard('postuser')->user()->email;
+
+            Mail::to($email)->send(new PostUserEditNameMail($project->project_name, $email, $project->uuid));
+            Log::info('メール送信完了');
+
+            return redirect()->back()->with('status', '氏名・施設情報を更新しました');
+        } catch (\Exception $e) {
+            Log::error('エラー発生: ' . $e->getMessage());
+            DB::rollBack();
+
+            return redirect()->back()->withErrors(['error' => '更新に失敗しました。もう一度お試しください。']);
+        }
     }
+
 
     public function accountEditMail($uuid, Request $request)
     {
-        // 更新処理
+        // 生存しているメールかどうか認証させる
         dd($request, $uuid);
     }
 
