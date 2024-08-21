@@ -98,7 +98,7 @@
                     <div class="mb-12">
                         <h5 class="text-md mb-4 font-bold text-neutral-500">パスワード</h5>
                         <div class="mb-4">
-                            <label class="mb-1 block text-sm text-neutral-700" for="old_password">以前のパスワード</label>
+                            <label class="mb-1 block text-sm text-neutral-700" for="old_password">現在のパスワード</label>
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="old_password" value="">
                         </div>
                         <div class="mb-4">
@@ -106,9 +106,12 @@
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="new_password" value="">
                         </div>
                         <div class="mb-4">
-                            <label class="mb-1 block text-sm text-neutral-700" for="retype_password">新しいパスワード（再入力）</label>
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="retype_password" value="">
+                            <label class="mb-1 block text-sm text-neutral-700" for="retype_new_password">新しいパスワード（再入力）</label>
+                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="retype_new_password" value="">
                         </div>
+                        @if ($errors->has('error_password'))
+                            <p class="error my-2 text-xs text-red-500">{{ $errors->first('error_password') }}</p>
+                        @endif
                         <button class="flex items-center justify-center rounded bg-neutral-700 px-3 py-2 text-sm font-bold text-white" type="submit">パスワードを変更する</button>
                     </div>
                 </form>

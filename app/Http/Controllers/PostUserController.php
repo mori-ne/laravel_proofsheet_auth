@@ -230,6 +230,7 @@ class PostUserController extends Controller
         return redirect()->route('postuser.dashboard', $uuid)->with('status', '新規登録が完了しました！');
     }
 
+
     public function create($uuid, $id)
     {
         $inputs = Input::with('form.project')->where('form_id', $id)->first();
@@ -238,16 +239,19 @@ class PostUserController extends Controller
         return view('postuser.auth.inputComponent', ['inputs' => $inputs, 'uuid' => $uuid, 'project' => $inputs->form->project, 'inputComponents' => $inputComponents]);
     }
 
+
     public function edit($uuid, $id)
     {
         dd($uuid, $id);
     }
+
 
     public function account($uuid)
     {
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
         return view('postuser.auth.account', ['uuid' => $uuid, 'project' => $project]);
     }
+
 
     public function accountEditName($uuid, Request $request)
     {
@@ -310,11 +314,30 @@ class PostUserController extends Controller
         dd($request, $uuid);
     }
 
+
     public function accountEditPassword($uuid, Request $request)
     {
-        // 更新処理
-        dd($request, $uuid);
+        // バリデーションもする
+
+
+        $old_password = $request['old_password'];
+        $new_password = $request['new_password'];
+        $retype_new_password = $request['retype_new_password'];
+        $user = Auth::guard('postuser')->user();
+
+        if (!Hash::check($old_password, $user->password)) {
+            return redirect()->back()->withErrors(['error_password' => '現在のパスワードが間違っています。']);
+            Log::info('Authパスワードと入力されたパスワードの比較');
+        }
+
+        if ($new_password !== $retype_new_password) {
+            return redirect()->back()->withErrors(['error_password' => '新しいパスワードと再入力が一致していません。']);
+            Log::info('Authパスワードと入力されたパスワードの比較');
+        }
+
+        dd($old_password, $new_password, $retype_new_password);
     }
+
 
     public function accountEditDelete($uuid, Request $request)
     {
