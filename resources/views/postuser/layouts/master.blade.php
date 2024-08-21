@@ -36,59 +36,57 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div id="app">
 
-        <div class="min-h-screen bg-neutral-50">
+    <div class="min-h-screen bg-neutral-50">
 
-            <div class="bg-white px-8 py-4 shadow-md shadow-neutral-200">
+        <div class="bg-white px-8 py-4 shadow-md shadow-neutral-200">
 
-                {{-- flex --}}
-                <div class="mx-auto flex max-w-6xl flex-row justify-between">
-                    <h1 class="text-xl font-bold text-neutral-800">
-                        <a href="{{ route('postuser.index', $uuid) }}">
-                            {{ $project->project_name }}
-                        </a>
-                    </h1>
+            {{-- flex --}}
+            <div class="mx-auto flex max-w-6xl flex-row justify-between">
+                <h1 class="text-xl font-bold text-neutral-800">
+                    <a href="{{ route('postuser.index', $uuid) }}">
+                        {{ $project->project_name }}
+                    </a>
+                </h1>
 
-                    @if (Auth::guard('postuser')->check() && Auth::guard('postuser')->user()->uuid == $project->uuid)
-                        <div class="ml-auto flex max-w-6xl flex-row">
-                            {{-- account --}}
-                            <div class="ml-auto flex flex-row items-center gap-4">
-                                <p class="flex flex-row items-center gap-1">
-                                    <span class="text-md font-bold">{{ Auth::guard('postuser')->user()->first_name }}{{ Auth::guard('postuser')->user()->last_name }}</span>
-                                    <span class="text-xs text-neutral-400">さん</span>
-                                </p>
-                                <div>
-                                    <a class="text-sm" href="{{ route('postuser.account', $project->uuid) }}">アカウント管理</a>
-                                </div>
-                                {{-- <form action="{{ route('postuser.logout', ['uuid' => $project->uuid]) }}" method="POST"> --}}
-                                <form action="{{ route('postuser.logout', $project->uuid) }}" method="POST">
-                                    @csrf
-                                    <button class="text-sm text-red-500" type="submit">ログアウト</button>
-                                </form>
+                @if (Auth::guard('postuser')->check() && Auth::guard('postuser')->user()->uuid == $project->uuid)
+                    <div class="ml-auto flex max-w-6xl flex-row">
+                        {{-- account --}}
+                        <div class="ml-auto flex flex-row items-center gap-4">
+                            <p class="flex flex-row items-center gap-1">
+                                <span class="text-md font-bold">{{ Auth::guard('postuser')->user()->first_name }}{{ Auth::guard('postuser')->user()->last_name }}</span>
+                                <span class="text-xs text-neutral-400">さん</span>
+                            </p>
+                            <div>
+                                <a class="text-sm" href="{{ route('postuser.account', $project->uuid) }}">アカウント管理</a>
                             </div>
+                            {{-- <form action="{{ route('postuser.logout', ['uuid' => $project->uuid]) }}" method="POST"> --}}
+                            <form action="{{ route('postuser.logout', $project->uuid) }}" method="POST">
+                                @csrf
+                                <button class="text-sm text-red-500" type="submit">ログアウト</button>
+                            </form>
                         </div>
-                    @endif
-                </div>
-
+                    </div>
+                @endif
             </div>
 
-            {{-- flash message --}}
-            @if (session('status'))
-                <div class="mx-auto flex max-w-6xl flex-col justify-center gap-4 pt-8">
-                    <div class="[&>svg]:text-foreground relative w-full rounded-lg border border-green-300 border-transparent bg-green-50 p-4 text-green-600 [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4">
-                        <svg class="h-5 w-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <h5 class="mb-1 font-medium leading-none tracking-tight">{{ session('status') }}</h5>
-                    </div>
-                </div>
-            @endif
-
-            {{-- content --}}
-            @yield('content')
-
         </div>
+
+        {{-- flash message --}}
+        @if (session('status'))
+            <div class="mx-auto flex max-w-6xl flex-col justify-center gap-4 pt-8">
+                <div class="[&>svg]:text-foreground relative w-full rounded-lg border border-green-300 border-transparent bg-green-50 p-4 text-green-600 [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4">
+                    <svg class="h-5 w-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h5 class="mb-1 font-medium leading-none tracking-tight">{{ session('status') }}</h5>
+                </div>
+            </div>
+        @endif
+
+        {{-- content --}}
+        @yield('content')
+
     </div>
 </body>
 

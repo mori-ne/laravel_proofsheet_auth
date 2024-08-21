@@ -318,7 +318,33 @@ class PostUserController extends Controller
 
     public function accountEditDelete($uuid, Request $request)
     {
-        // 更新処理
-        dd($request, $uuid);
+        $user = PostUser::where('id', $request->id)->firstOrFail();
+        Log::info('ユーザー情報をidで取得');
+
+        DB::beginTransaction();
+        Log::info('トランザクション開始');
+
+
+        try {
+
+            $user->delete();
+            Log::info('ユーザーデータ削除');
+
+            Auth::guard('postuser')->logout();
+            Log::info('ログアウト');
+
+
+            DB::commit();
+            Log::info('トランザクションコミット完了');
+
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            Log::info('セッション削除');
+
+            return redirect()->route('postuser.index', ['uuid' => $uuid]);
+        } catch (\Exception $e) {
+            Log::error('エラー発生: ' . $e->getMessage());
+            DB::rollBack();
+        }
     }
 }
