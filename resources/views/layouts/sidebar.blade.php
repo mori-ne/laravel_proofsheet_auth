@@ -1,87 +1,122 @@
-<aside class="h-svh flex w-64 shrink-0 flex-col overflow-y-scroll border-0 border-neutral-300 bg-white px-3 py-6 shadow-md shadow-neutral-200">
+<aside class="h-svh relative z-50 flex w-60 shrink-0 flex-col overflow-y-scroll border-0 border-r border-neutral-200 bg-white">
 
     <!-- Logo -->
-    <div class="mb-8 ml-4 flex shrink-0 items-center text-xl font-extrabold">
-        <a href="{{ route('dashboard') }}">
+    <div class="mb-6 flex shrink-0 items-center px-8 py-4 text-xl font-extrabold">
+        <a href="{{ route('dashboard') }}" class="block w-full">
             <p class="block h-9 w-auto fill-current text-neutral-800">Proofsheet</p>
         </a>
     </div>
 
     {{-- mainmenu --}}
-    <div class="mb-8">
-        <h3 class="mb-2 ml-4 text-sm font-bold">メインメニュー</h3>
+    <div class="mb-6">
+        <h3 class="mb-2 ml-8 text-sm font-bold">メインメニュー</h3>
         <ul>
-            <li class="rounded-md bg-white px-4 py-1.5 transition-all hover:bg-neutral-200">
-                <div class="flex items-center gap-3">
-                    <i class="at-package-bold"></i>
-                    <a class="block text-neutral-500" href="{{ route('dashboard') }}">ダッシュボード</a>
-                </div>
+            <li>
+                <a class="block px-8 py-1.5 transition-all hover:bg-neutral-100" href="{{ route('dashboard') }}">
+                    <div class="flex items-center gap-2">
+                        <i class="at-package-bold"></i>
+                        <p class="text-neutral-500">
+                            ホーム
+                        </p>
+                    </div>
+                </a>
             </li>
         </ul>
     </div>
 
-    {{-- 管理項目 --}}
-    <div class="mb-8">
-        <h3 class="mb-2 ml-4 text-sm font-bold">管理・作成項目</h3>
+    {{-- manage --}}
+    <div class="mb-6">
+        <h3 class="mb-2 ml-8 text-sm font-bold">管理・作成項目</h3>
         <ul>
-            <li class="rounded-md bg-white px-4 py-1.5 transition-all hover:bg-neutral-200">
-                <div class="flex items-center gap-3">
-                    <i class="at-box-filing-bold"></i>
-                    <a class="block text-neutral-500" href="{{ route('projects.index') }}">プロジェクト管理</a>
-                </div>
+            <li>
+                <a class="block px-8 py-1.5 transition-all hover:bg-neutral-100" href="{{ route('projects.index') }}">
+                    <div class="flex items-center gap-2">
+                        <i class="at-box-filing-bold"></i>
+                        <p class="text-neutral-500">
+                            プロジェクト管理
+                        </p>
+                    </div>
+                </a>
             </li>
-            <li class="rounded-md bg-white px-4 py-1.5 transition-all hover:bg-neutral-200">
-                <div class="flex items-center gap-3">
-                    <i class="at-plus-circle"></i> <a class="block text-neutral-500" href="{{ route('projects.create') }}">プロジェクト作成</a>
-                </div>
+            <li>
+                <a class="block px-8 py-1.5 transition-all hover:bg-neutral-100" href="{{ route('projects.create') }}">
+                    <div class="flex items-center gap-2">
+                        <i class="at-plus-circle"></i>
+                        <p class="text-neutral-500">
+                            プロジェクト作成
+                        </p>
+                    </div>
+                </a>
             </li>
-            <li class="rounded-md bg-white px-4 py-1.5 transition-all hover:bg-neutral-200">
-                <div class="flex items-center gap-3">
-                    <i class="at-plus-circle"></i> <a class="block text-neutral-500" href="{{ route('forms.create') }}">フォーム作成</a>
-                </div>
+            <li>
+                <a class="block px-8 py-1.5 transition-all hover:bg-neutral-100" href="{{ route('forms.create') }}">
+                    <div class="flex items-center gap-2">
+                        <i class="at-plus-circle"></i>
+                        <p class="text-neutral-500">
+                            フォーム作成
+                        </p>
+                    </div>
+                </a>
             </li>
-            {{-- <li class="rounded-md bg-white px-4 py-1.5 transition-all hover:bg-neutral-200">
-                <div class="flex items-center gap-3">
+            {{-- <li class=" bg-white px-8 py-2  ">
+                <div class="flex items-center gap-2">
                     <i class="at-plus-clipboard-bold"></i>
-                    <a class="block text-neutral-500" href="{{ route('forms.index') }}">フォーム管理</a>
+                    <a class="block text-neutral-500 hover:bg-neutral-100 transition-all" href="{{ route('forms.index') }}">フォーム管理</a>
                 </div>
             </li> --}}
         </ul>
     </div>
 
-    {{-- 投稿者項目 --}}
-    <div class="mb-8">
-        <h3 class="mb-2 ml-4 text-sm font-bold text-neutral-300">投稿者項目</h3>
+    {{-- postuser --}}
+    <div class="mb-6">
+        <h3 class="mb-2 ml-8 text-sm font-bold">投稿者項目</h3>
         <ul>
-            <li class="pointer-events-none rounded-md bg-white px-4 py-1.5 transition-all">
-                <div class="flex items-center gap-3">
-                    <i class="at-list-bold text-neutral-300"></i>
-                    <a class="block text-neutral-300" href="#">投稿一覧</a>
-                </div>
+            <li>
+                <a class="block px-8 py-1.5 transition-all hover:bg-neutral-100" href="#">
+                    <div class="flex items-center gap-2">
+                        <i class="at-list-bold text-neutral-300"></i>
+                        <p class="text-neutral-200">
+                            投稿一覧
+                        </p>
+                    </div>
+                </a>
             </li>
-            <li class="pointer-events-none rounded-md bg-white px-4 py-1.5 transition-all">
-                <div class="flex items-center gap-3">
-                    <i class="at-account-bold text-neutral-300"></i>
-                    <a class="block text-neutral-300" href="#">アカウント管理</a>
-                </div>
+            <li>
+                <a class="block px-8 py-1.5 transition-all hover:bg-neutral-100" href="#">
+                    <div class="flex items-center gap-2">
+                        <i class="at-account-bold text-neutral-300"></i>
+                        <p class="text-neutral-200">
+                            アカウント管理
+                        </p>
+                    </div>
+                </a>
             </li>
-            <li class="pointer-events-none rounded-md bg-white px-4 py-1.5 transition-all">
-                <div class="flex items-center gap-3">
-                    <i class="at-envelope-bold text-neutral-300"></i>
-                    <a class="block text-neutral-300" href="#">メール管理</a>
-                </div>
+            <li>
+                <a class="block px-8 py-1.5 transition-all hover:bg-neutral-100" href="#">
+                    <div class="flex items-center gap-2">
+                        <i class="at-envelope-bold text-neutral-300"></i>
+                        <p class="text-neutral-200">
+                            メール管理
+                        </p>
+                    </div>
+                </a>
             </li>
         </ul>
     </div>
 
-    {{-- アカウント --}}
-    <nav class="mb-8 mt-auto">
+    {{-- account --}}
+    <nav class="mb-6 mt-auto">
         <div class="flex flex-col">
-            <p class="text-md mb-2 ml-4 font-bold">{{ Auth::user()->name }}&nbsp;<span class="text-sm font-normal">さん</span></p>
-            <a class="rounded-md px-4 py-1.5 text-sm text-neutral-500 transition-all hover:bg-neutral-100" href="{{ route('profile.edit') }}">アカウント</a>
+            {{-- name --}}
+            <h3 class="text-md mb-2 ml-8 font-bold">{{ Auth::user()->name }}&nbsp;<span class="text-sm font-normal">さん</span></h3>
+
+            {{-- edit --}}
+            <a class="px-8 py-2 text-sm text-neutral-500 transition-all hover:bg-neutral-100" href="{{ route('profile.edit') }}">アカウント</a>
+
+            {{-- logout --}}
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button class="block w-full rounded-md px-4 py-1.5 text-left text-sm text-red-500 transition-all hover:bg-red-100" type="submit">ログアウト</button>
+                <button class="block w-full px-8 py-2 text-left text-sm text-red-500 transition-all hover:bg-red-100" type="submit">ログアウト</button>
             </form>
         </div>
     </nav>

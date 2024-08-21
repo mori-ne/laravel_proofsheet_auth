@@ -27,7 +27,7 @@ class PostUserRegisterRequest extends FormRequest
             'first_name' => 'required|string|max:20',
             'last_name' => 'required|string|max:20',
             'affiliate' => 'required|string|max:255',
-            'zipcode' => 'integer|digits:7',
+            'zipcode' => 'required|string|size:7',
             'address_country' => 'string|max:10',
             'address_city' => 'string',
             'address_etc' => 'string|nullable',

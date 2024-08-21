@@ -1,6 +1,10 @@
 @extends('layouts.master')
 @section('title', 'プロジェクトの詳細')
 @section('content')
+    {{-- <div class="relative z-10 w-60 border-r border-neutral-200 bg-white px-8">
+        a
+    </div> --}}
+
     <main class="h-svh flex-1 overflow-y-scroll">
         <x-slot name="header">
             <h2 class="text-xl font-semibold leading-tight text-neutral-800">

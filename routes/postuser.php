@@ -50,5 +50,9 @@ Route::prefix('/postuser/{uuid}')->group(function () {
 
         // account
         Route::get('account', [PostUserController::class, 'account'])->name('postuser.account');
+        Route::put('account/edit/name', [PostUserController::class, 'accountEditName'])->name('postuser.account.edit.name');
+        Route::put('account/edit/email', [PostUserController::class, 'accountEditMail'])->name('postuser.account.edit.mail');
+        Route::put('account/edit/password', [PostUserController::class, 'accountEditPassword'])->name('postuser.account.edit.password');
+        Route::delete('account/edit/delete', [PostUserController::class, 'accountEditDelete'])->name('postuser.account.edit.delete');
     });
 });

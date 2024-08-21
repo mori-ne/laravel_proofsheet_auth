@@ -247,4 +247,54 @@ class PostUserController extends Controller
         $project = Project::with('forms')->where('uuid', $uuid)->firstOrFail();
         return view('postuser.auth.account', ['uuid' => $uuid, 'project' => $project]);
     }
+
+    public function accountEditName($uuid, Request $request)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:20',
+            'last_name' => 'required|string|max:20',
+            'affiliate' => 'required|string|max:255',
+            'zipcode' => 'required|string|size:7',
+            'address_country' => 'required|string|max:10',
+            'address_city' => 'required|string',
+            'address_etc' => 'nullable|string|nullable',
+        ]);
+
+        // 認証ユーザー情報を取得
+        $user = Auth::guard('postuser')->user();
+        if (!$user) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $user->first_name = $validated['first_name'];
+        $user->last_name = $validated['last_name'];
+        $user->affiliate = $validated['affiliate'];
+        $user->zipcode = $validated['zipcode'];
+        $user->address_country = $validated['address_country'];
+        $user->address_city = $validated['address_city'];
+        $user->address_etc = $validated['address_etc'];
+        $user->save();
+        return redirect()->back()->with('status', '氏名・施設情報を更新しました');
+
+        // 更新処理
+        dd($request, $uuid,  $user);
+    }
+
+    public function accountEditMail($uuid, Request $request)
+    {
+        // 更新処理
+        dd($request, $uuid);
+    }
+
+    public function accountEditPassword($uuid, Request $request)
+    {
+        // 更新処理
+        dd($request, $uuid);
+    }
+
+    public function accountEditDelete($uuid, Request $request)
+    {
+        // 更新処理
+        dd($request, $uuid);
+    }
 }

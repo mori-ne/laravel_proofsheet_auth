@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 body {
-    min-height: 100vh;
-}
-
-* {
-    /* outline: 1px solid #ccc; */
+  min-height: 100vh;
 }
 
 .mce-content-body {
-    background-color: rgb(245, 245, 245);
-} /*# sourceMappingURL=app.css.map */
+  background-color: rgb(245, 245, 245);
+}/*# sourceMappingURL=app.css.map */
