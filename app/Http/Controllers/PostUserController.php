@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\PostUser;
-use App\Models\PrePostUser;
-use Illuminate\Support\Facades\DB;
-use App\Models\Project;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\PostuserLoginRequest;
-use App\Http\Requests\VerifyMailSignupRequest;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\PrePostUserTokenMail;
 use App\Http\Requests\PostUserRegisterRequest;
+use App\Http\Requests\VerifyMailSignupRequest;
 use App\Mail\PostUserDeleteAccountMail;
-use App\Mail\PostUserRegisterCompliteMail;
 use App\Mail\PostUserEditNameMail;
 use App\Mail\PostUserEditPasswordMail;
-use Illuminate\Support\Facades\Hash;
+use App\Mail\PostUserRegisterCompliteMail;
+use App\Mail\PrePostUserTokenMail;
 use App\Models\Input;
+use App\Models\PostUser;
+use App\Models\PrePostUser;
+use App\Models\Project;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PostUserController extends Controller
 {
@@ -320,8 +320,34 @@ class PostUserController extends Controller
 
     public function accountEditMail($uuid, Request $request)
     {
-        // 生存しているメールかどうか認証させる
-        dd($request, $uuid);
+        $user = Auth::guard('postuser')->user();
+        $validated = $request->validate([
+            'email' => 'required|string|lowercase|max:255',
+        ], [
+            'email.required' => 'メールアドレスを入力してください',
+            'email.max' => '最大255文字までです',
+            'email.string' => '文字列で入力してください',
+            'email.lowercase' => '小文字で入力してください',
+        ]);
+        Log::info('リクエストバリデーション');
+
+        if ($validated['email'] == $user->email) {
+            return redirect()->back()->withErrors(['email' => 'メールアドレスが同じです']);
+        }
+        Log::info('現在のアドレスと同一か確認');
+
+        $user->email_verified_at = null;
+        $user->email = $validated['email'];
+        $user->save;
+        Log::info('email変更処理、mail_verified_atをnullへ');
+
+        // ログアウト、セッション削除
+        Auth::guard('postuser')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        Log::info('セッションログアウト');
+
+        return redirect()->route('postuser.verifiedmailedit', $uuid);
     }
 
 
@@ -342,20 +368,23 @@ class PostUserController extends Controller
 
         $user = Auth::guard('postuser')->user();
 
+        if (!$user) {
+            return redirect()->back()->withErrors(['user' => 'ユーザーが見つかりません。']);
+        }
+
         // ハッシュバリデーション
         if (!Hash::check($validated['old_password'], $user->password)) {
             return redirect()->back()->withErrors(['old_password' => '現在のパスワードが間違っています。']);
-            Log::info('Authパスワードと入力されたパスワードの比較');
         }
+        Log::info('Authパスワードと入力されたパスワードの比較');
 
         // ハッシュ化してパスワードへ保存
-        $user = Auth::guard('postuser')->user();
         $user->password = Hash::make($validated['retype_new_password']);
         $user->save();
 
         // メール送信
         $project = Project::where('uuid', $uuid)->firstOrFail();
-        $email = Auth::guard('postuser')->user()->email;
+        $email = $user->email;
         $name = $validated['first_name'] . " " . $validated['last_name'];
         Mail::to($email)->send(new PostUserEditPasswordMail($project->project_name, $email, $project->uuid, $name));
         Log::info('PostUserEditPasswordMail:メール送信完了');
@@ -379,6 +408,7 @@ class PostUserController extends Controller
             // メール送信
             $project = Project::where('uuid', $uuid)->firstOrFail();
             $user = Auth::guard('postuser')->user();
+
             $email = $user->email;
             $name = $user->first_name . " " . $user->last_name;
 

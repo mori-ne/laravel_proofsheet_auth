@@ -84,10 +84,12 @@
                     <div class="mb-12">
                         <h5 class="text-lg font-bold text-neutral-500">メールアドレス</h5>
                         <p class="mb-6 text-sm text-neutral-400">変更にはメールアドレスの再認証が必要です。<br>変更ボタンを押した後に届いたメールから再認証をお願いいたします</p>
-
                         <div class="mb-4">
                             {{-- <label class="mb-1 block text-sm text-neutral-700" for="first_name">メールアドレス</label> --}}
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="email" name="email" value="{{ Auth::guard('postuser')->user()->email }}">
+                            @if ($errors->has('email'))
+                                <p class="error mt-2 text-xs text-red-500">{{ $errors->first('email') }}</p>
+                            @endif
                         </div>
                         <button class="flex items-center justify-center rounded bg-neutral-700 px-3 py-2 text-sm font-bold text-white" type="submit">メールアドレスを変更する</button>
                     </div>
