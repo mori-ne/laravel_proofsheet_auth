@@ -19,6 +19,7 @@ use App\Mail\PrePostUserTokenMail;
 use App\Http\Requests\PostUserRegisterRequest;
 use App\Mail\PostUserRegisterCompliteMail;
 use App\Mail\PostUserEditNameMail;
+use App\Mail\PostUserEditPasswordMail;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Input;
 
@@ -271,6 +272,12 @@ class PostUserController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
+        if ($user instanceof PostUser) {
+            Log::info('$userはPostUserのインスタンス');
+        } else {
+            dd(get_class($user)); // $user のクラス名を出力
+        }
+
         // トランザクション処理
         DB::beginTransaction();
 
@@ -317,25 +324,44 @@ class PostUserController extends Controller
 
     public function accountEditPassword($uuid, Request $request)
     {
-        // バリデーションもする
+        // バリデーション
+        $validated = $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'retype_new_password' => 'required|same:new_password',
+        ], [
+            'old_password.required' => '現在のパスワードは必ず入力してください',
+            'new_password.required' => '新しいパスワードは必ず入力してください',
+            'retype_new_password.required' => '新しいパスワード（再入力）は必ず入力してください',
+            'retype_new_password.same' => '新しいパスワードと新しいパスワード（再入力）の値が異なります',
+        ]);
+        Log::info('Requestのバリデーション');
 
-
-        $old_password = $request['old_password'];
-        $new_password = $request['new_password'];
-        $retype_new_password = $request['retype_new_password'];
         $user = Auth::guard('postuser')->user();
 
-        if (!Hash::check($old_password, $user->password)) {
-            return redirect()->back()->withErrors(['error_password' => '現在のパスワードが間違っています。']);
+        // ハッシュバリデーション
+        if (!Hash::check($validated['old_password'], $user->password)) {
+            return redirect()->back()->withErrors(['old_password' => '現在のパスワードが間違っています。']);
             Log::info('Authパスワードと入力されたパスワードの比較');
         }
 
-        if ($new_password !== $retype_new_password) {
-            return redirect()->back()->withErrors(['error_password' => '新しいパスワードと再入力が一致していません。']);
-            Log::info('Authパスワードと入力されたパスワードの比較');
-        }
+        // ハッシュ化してパスワードへ保存
+        $user = Auth::guard('postuser')->user();
+        $user->password = Hash::make($validated['retype_new_password']);
+        $user->save();
 
-        dd($old_password, $new_password, $retype_new_password);
+        // メール送信
+        $project = Project::where('uuid', $uuid)->firstOrFail();
+        $email = Auth::guard('postuser')->user()->email;
+        Mail::to($email)->send(new PostUserEditPasswordMail($project->project_name, $email, $project->uuid));
+        Log::info('メール送信完了');
+
+        // ログアウト、セッション削除
+        Auth::guard('postuser')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('postuser.index', $uuid);
     }
 
 

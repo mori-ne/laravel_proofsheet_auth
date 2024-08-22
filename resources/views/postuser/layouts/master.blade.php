@@ -54,7 +54,8 @@
                         {{-- account --}}
                         <div class="ml-auto flex flex-row items-center gap-4">
                             <p class="flex flex-row items-center gap-1">
-                                <span class="text-md font-bold">{{ Auth::guard('postuser')->user()->first_name }}{{ Auth::guard('postuser')->user()->last_name }}</span>
+                                <span class="text-md pr-1 font-bold">{{ Auth::guard('postuser')->user()->first_name }}</span>
+                                <span class="text-md font-bold">{{ Auth::guard('postuser')->user()->last_name }}</span>
                                 <span class="text-xs text-neutral-400">さん</span>
                             </p>
                             <div>

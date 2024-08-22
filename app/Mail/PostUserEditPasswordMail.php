@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class PostUserEditNameMail extends Mailable
+class PostUserEditPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class PostUserEditNameMail extends Mailable
     {
         return new Envelope(
             from: new Address('postmaster@proofsheet.jp', 'Proofsheet管理者'),
-            subject: 'アカウント情報、変更完了のお知らせ | ' . $this->project_name,
+            subject: 'パスワード変更完了のお知らせ | ' . $this->project_name,
         );
     }
 
@@ -42,7 +42,7 @@ class PostUserEditNameMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'postuser.mail.account.editComplete',
+            view: 'postuser.mail.account.passwordComplete',
             with: [
                 'email' => $this->email,
                 'uuid' => $this->uuid,

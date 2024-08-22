@@ -11,7 +11,7 @@
                     @method('PUT')
                     {{-- name --}}
                     <div class="mb-12">
-                        <h5 class="text-md mb-4 font-bold text-neutral-500">氏名情報</h5>
+                        <h5 class="mb-4 text-lg font-bold text-neutral-500">氏名情報</h5>
                         <div class="flex flex-row gap-4">
                             <div class="w-full">
                                 <label class="mb-1 block text-sm text-neutral-700" for="first_name">お名前（姓）</label>
@@ -32,7 +32,7 @@
 
                     {{-- affiliate --}}
                     <div class="mb-12">
-                        <h5 class="text-md mb-4 font-bold text-neutral-500">所属情報</h5>
+                        <h5 class="mb-4 text-lg font-bold text-neutral-500">所属情報</h5>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="affiliate">ご所属</label>
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="affiliate" value="{{ Auth::guard('postuser')->user()->affiliate }}">
@@ -80,7 +80,7 @@
                     @method('PUT')
                     {{-- email --}}
                     <div class="mb-12">
-                        <h5 class="text-md mb-4 font-bold text-neutral-500">メールアドレス</h5>
+                        <h5 class="mb-4 text-lg font-bold text-neutral-500">メールアドレス</h5>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="first_name">メールアドレス</label>
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="email" name="email" value="{{ Auth::guard('postuser')->user()->email }}">
@@ -96,21 +96,28 @@
                     @method('PUT')
                     {{-- password --}}
                     <div class="mb-12">
-                        <h5 class="text-md mb-4 font-bold text-neutral-500">パスワード</h5>
+                        <h5 class="text-lg font-bold text-neutral-500">パスワード</h5>
+                        <p class="mb-6 text-sm text-neutral-400">パスワードの変更後は再ログインが必要になります</p>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="old_password">現在のパスワード</label>
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="old_password" value="">
+                            @if ($errors->has('old_password'))
+                                <p class="error mt-2 text-xs text-red-500">{{ $errors->first('old_password') }}</p>
+                            @endif
                         </div>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="new_password">新しいパスワード</label>
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="new_password" value="">
+                            @if ($errors->has('new_password'))
+                                <p class="error mt-2 text-xs text-red-500">{{ $errors->first('new_password') }}</p>
+                            @endif
                         </div>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="retype_new_password">新しいパスワード（再入力）</label>
                             <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="retype_new_password" value="">
                         </div>
-                        @if ($errors->has('error_password'))
-                            <p class="error my-2 text-xs text-red-500">{{ $errors->first('error_password') }}</p>
+                        @if ($errors->has('retype_new_password'))
+                            <p class="error my-2 text-xs text-red-500">{{ $errors->first('retype_new_password') }}</p>
                         @endif
                         <button class="flex items-center justify-center rounded bg-neutral-700 px-3 py-2 text-sm font-bold text-white" type="submit">パスワードを変更する</button>
                     </div>
