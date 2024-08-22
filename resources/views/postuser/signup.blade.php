@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="rounded border-0 bg-white p-10 shadow-lg shadow-neutral-200">
+        <div class="rounded border-0 bg-white p-10 shadow-md shadow-neutral-200">
             <form action="{{ route('postuser.verifymailsignup', $uuid) }}" method="POST">
                 @csrf
 
@@ -31,11 +31,11 @@
 
                 <div class="mt-6 flex items-center justify-center gap-6">
                     {{-- back to top --}}
-                    <a href="{{ route('postuser.index', $uuid) }}" class='min-w-48 flex items-center justify-center rounded-md bg-white px-4 py-2.5 text-sm font-bold text-neutral-800 transition-all hover:bg-neutral-100'>トップへ戻る
+                    <a href="{{ route('postuser.index', $uuid) }}" class='min-w-48 flex items-center justify-center rounded-sm bg-white px-4 py-2.5 text-sm font-bold text-neutral-800 transition-all hover:bg-neutral-100'>トップへ戻る
                     </a>
 
                     {{-- send mail --}}
-                    <button type='submit' class='min-w-48 flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>メールアドレスを送信
+                    <button type='submit' class='min-w-48 flex items-center justify-center rounded-sm bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900'>メールアドレスを送信
                     </button>
                 </div>
             </form>

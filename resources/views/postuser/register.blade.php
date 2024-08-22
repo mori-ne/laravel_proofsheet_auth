@@ -10,7 +10,7 @@
                 <h1 class="mb-4 text-lg font-bold">アカウント本登録</h1>
             </div>
 
-            <div class="rounded border-0 bg-white p-10 shadow-lg shadow-neutral-200">
+            <div class="rounded border-0 bg-white p-10 shadow-md shadow-neutral-200">
 
                 <form action="{{ route('postuser.store', $uuid) }}" method="POST">
                     @method('PUT')
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="mt-6 flex items-center justify-center gap-6">
-                        <button type="submit" class="min-w-48 flex items-center justify-center rounded-md bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900">新規登録する</button>
+                        <button type="submit" class="min-w-48 flex items-center justify-center rounded-sm bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900">新規登録する</button>
                     </div>
 
                 </form>

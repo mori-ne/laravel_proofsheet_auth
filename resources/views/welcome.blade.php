@@ -31,16 +31,16 @@
                     @if (Route::has('login'))
                         <nav class="-mx-3 flex flex-1 justify-center gap-4">
                             @auth
-                                <a href="{{ route('dashboard') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-neutral-700 shadow-md shadow-neutral-200 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                <a href="{{ route('dashboard') }}" class="min-w-60 rounded-sm bg-white px-3 py-2 text-center text-neutral-700 shadow-md shadow-neutral-200 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                     管理画面へ
                                 </a>
                             @else
-                                <a href="{{ route('login') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-neutral-700 shadow-md shadow-neutral-200 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                <a href="{{ route('login') }}" class="min-w-60 rounded-sm bg-white px-3 py-2 text-center text-neutral-700 shadow-md shadow-neutral-200 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                     ログイン
                                 </a>
 
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="min-w-60 rounded-md bg-white px-3 py-2 text-center text-neutral-700 shadow-md shadow-neutral-200 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
+                                    <a href="{{ route('register') }}" class="min-w-60 rounded-sm bg-white px-3 py-2 text-center text-neutral-700 shadow-md shadow-neutral-200 ring-1 ring-transparent transition hover:text-neutral-700/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                                         新規登録
                                     </a>
                                 @endif

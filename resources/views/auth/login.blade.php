@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        <div class="w-96 overflow-hidden rounded-md border-0 bg-white p-10 shadow-lg shadow-neutral-200">
+        <div class="w-96 overflow-hidden rounded-sm border-0 bg-white p-10 shadow-md shadow-neutral-200">
             <!-- Session Status -->
             <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -69,7 +69,7 @@
                 {{-- forget password --}}
                 <div class="mt-4 flex items-center justify-center">
                     @if (Route::has('password.request'))
-                        <p class="rounded-md text-xs text-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
+                        <p class="rounded-sm text-xs text-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
                             <a class="underline" href="{{ route('password.request') }}">
                                 パスワードを忘れてしまった方
                             </a>

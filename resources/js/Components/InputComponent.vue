@@ -325,7 +325,7 @@ const submitForm = () => {
 
         <!-- contents -->
         <div class="h-[calc(100% - 32px)] mx-auto flex w-full flex-col overflow-hidden">
-            <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded-md bg-white">
+            <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded-sm bg-white">
                 <!-- set -->
                 <div class="relative flex w-80 flex-shrink-0 flex-col overflow-y-scroll bg-neutral-100">
                     <!-- title -->

@@ -53,11 +53,12 @@
                     <div class="ml-auto flex max-w-6xl flex-row">
                         {{-- account --}}
                         <div class="ml-auto flex flex-row items-center gap-4">
-                            <p class="flex flex-row items-center gap-1">
-                                <span class="text-md pr-1 font-bold">{{ Auth::guard('postuser')->user()->first_name }}</span>
-                                <span class="text-md font-bold">{{ Auth::guard('postuser')->user()->last_name }}</span>
-                                <span class="text-xs text-neutral-400">さん</span>
-                            </p>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="mr-1 text-sm">
+                                    <i class="at-account"></i>
+                                </p>
+                                <span class="pr-1 text-sm">{{ Auth::guard('postuser')->user()->first_name }}{{ Auth::guard('postuser')->user()->last_name }}さん</span>
+                            </div>
                             <div>
                                 <a class="text-sm" href="{{ route('postuser.account', $project->uuid) }}">アカウント</a>
                             </div>
@@ -74,7 +75,6 @@
         </div>
 
         {{-- flash message --}}
-
         @if (session('status'))
             <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)">
                 <div class="fixed left-0 top-0 w-full border-b border-green-200 bg-green-100 p-4 text-green-600" x-show="show" x-transition:leave="transform ease-in duration-1000" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-10"

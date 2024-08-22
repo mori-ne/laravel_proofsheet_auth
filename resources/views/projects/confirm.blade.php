@@ -16,7 +16,7 @@
             </div>
 
             {{-- content --}}
-            <div class="mb-3 rounded-md border-0 bg-white p-8 shadow-lg shadow-neutral-200">
+            <div class="mb-3 rounded-sm border-0 bg-white p-8 shadow-md shadow-neutral-200">
 
                 <div class="mb-6">
                     <div class="mb-2">
@@ -107,7 +107,7 @@
                         <input type="hidden" name="mail_subject" value="{{ $project['mail_subject'] }}">
                         <input type="hidden" name="mail_content" value="{{ $project['mail_content'] }}">
                         <button type="submit"
-                            class="focus:shadow-outline text-md mx-auto flex w-96 items-center justify-center rounded-md bg-neutral-600 px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">
+                            class="focus:shadow-outline text-md mx-auto flex w-96 items-center justify-center rounded-sm bg-neutral-600 px-4 py-2 font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">
                             新規作成する
                         </button>
                 </div>

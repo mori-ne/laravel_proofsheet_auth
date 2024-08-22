@@ -19,10 +19,13 @@ class DashboardController extends Controller
     {
         // すべてのプロジェクト
         $projects = Project::with('forms.input')->get();
-        // 更新日順のプロジェクト（3件）
+        // 更新日順のプロジェクト
         $recentProjects = Project::orderBy('updated_at', 'desc')->limit(10)->get();
         // すべてのフォーム
         $forms = Form::all();
-        return view('dashboard', ['projects' => $projects, 'recentProjects' => $recentProjects, 'forms' => $forms]);
+        // 更新日時順のフォーム
+        $recentForms = Form::orderBy('updated_at', 'desc')->limit(10)->get();
+
+        return view('dashboard', ['projects' => $projects, 'recentProjects' => $recentProjects, 'forms' => $forms, 'recentForms' => $recentForms]);
     }
 }

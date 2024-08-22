@@ -15,16 +15,6 @@
                 {{-- <p class="text-neutral-500 text-sm">フォームの詳細画面です。確認、編集、削除ができます</p> --}}
             </div>
 
-            {{-- flash message --}}
-            @if (session('status'))
-                <div class="[&>svg]:text-foreground relative mb-4 w-full rounded-lg border border-transparent bg-green-50 p-4 text-green-600 [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4">
-                    <svg class="h-5 w-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <h5 class="mb-1 font-medium leading-none tracking-tight">{{ session('status') }}</h5>
-                </div>
-            @endif
-
             {{-- form name / form_description / controll --}}
             <div class="mb-8">
 
@@ -44,11 +34,11 @@
                         }" class="relative ml-auto">
 
                             <button @click="dropdownOpen=true"
-                                class="transition-colorsrounded-md inline-flex items-center justify-center px-4 py-2 text-lg font-medium hover:bg-neutral-100 focus:rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"><i
+                                class="inline-flex items-center justify-center rounded-sm px-4 py-2 text-lg font-medium transition-colors hover:bg-neutral-100 focus:rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"><i
                                     class="at-dots-vertical"></i></button>
 
                             <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-44 -translate-x-1/2" x-cloak>
-                                <div class="rounded-md border border-neutral-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                                <div class="rounded-sm border border-neutral-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
 
                                     {{-- edit --}}
                                     <a a href="{{ route('forms.edit', $form->id) }}" @click="menuBarOpen=false"
@@ -86,7 +76,7 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                class="focus:shadow-outline inline-flex items-center justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2">
+                                                                class="focus:shadow-outline inline-flex items-center justify-center rounded-sm bg-red-600 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2">
                                                                 削除
                                                             </button>
                                                         </form>
@@ -110,7 +100,7 @@
                     @if (!$form->form_description)
                         <span class="text-md text-neutral-400">なし</span>
                     @else
-                        <div class="w-full rounded-md bg-neutral-200 p-6 text-sm text-neutral-600">{!! $form->form_description !!}</div>
+                        <div class="w-full rounded-sm bg-neutral-200 p-6 text-sm text-neutral-600">{!! $form->form_description !!}</div>
                     @endif
                 </div>
 
@@ -124,7 +114,7 @@
             </div>
 
             {{-- input details --}}
-            <div class="mb-3 rounded-md border-0 bg-white p-8 shadow-lg shadow-neutral-200">
+            <div class="mb-3 rounded-sm border-0 bg-white p-8 shadow-md shadow-neutral-200">
                 <p class="text-xs">
                     {{ $form->input->inputs }}
                 </p>

@@ -7,7 +7,7 @@
         <div class="flex gap-4 py-10">
 
             {{-- content --}}
-            <div class="documentstyle w-full rounded bg-white p-6 shadow-lg shadow-neutral-200">
+            <div class="documentstyle w-full rounded bg-white p-6 shadow-md shadow-neutral-200">
                 {!! $project->project_message !!}
             </div>
 
@@ -18,7 +18,7 @@
                 @enderror
 
                 {{-- registerd --}}
-                <div class="mb-4 rounded bg-white p-6 shadow-lg shadow-neutral-200">
+                <div class="mb-4 rounded bg-white p-6 shadow-md shadow-neutral-200">
                     <h3 class="mb-6 border-l-4 border-orange-500 bg-neutral-100 px-2 py-1 text-lg font-bold">
                         登録済の方はこちらから
                     </h3>
@@ -53,7 +53,7 @@
                 </div>
 
                 {{-- newuser --}}
-                <div class="roundedshadow-neutral-200 mb-4 bg-white p-6 shadow-lg">
+                <div class="roundedshadow-neutral-200 mb-4 bg-white p-6 shadow-md">
                     <h3 class="mb-6 border-l-4 border-orange-500 bg-neutral-100 px-2 py-1 text-lg font-bold">
                         初めてのかたはこちらから
                     </h3>
@@ -65,7 +65,7 @@
                 </div>
 
                 {{-- information --}}
-                <div class="roundedshadow-neutral-200 bg-white p-6 shadow-lg">
+                <div class="roundedshadow-neutral-200 bg-white p-6 shadow-md">
                     <h3 class="text-md mb-2 border-b border-neutral-400 pb-1 font-bold">
                         {{ $project->project_name }}からのお知らせ
                     </h3>
