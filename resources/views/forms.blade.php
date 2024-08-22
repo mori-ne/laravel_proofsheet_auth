@@ -85,7 +85,7 @@
                                     <button @click="dropdownOpen=true"
                                         class="inline-flex h-6 items-center justify-center rounded-md bg-white px-2 text-sm font-medium transition-colors hover:bg-neutral-100 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"><i
                                             class="at-dots-vertical"></i></button>
-                                    <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-48 -translate-x-1/2" x-cloak>
+                                    <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="z-100 absolute left-1/2 top-0 mt-10 w-48 -translate-x-1/2" x-cloak>
                                         <div class="rounded-md border border-neutral-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
                                             <a href="{{ route('forms.show', $form->id) }}" @click="menuBarOpen=false"
                                                 class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">

@@ -17,12 +17,14 @@ class PostUserRegisterCompliteMail extends Mailable
     protected $email;
     protected $uuid;
     protected $project_name;
+    protected $name;
 
-    public function __construct($email, $uuid, $project_name)
+    public function __construct($email, $uuid, $project_name, $name)
     {
         $this->email = $email;
         $this->uuid = $uuid;
         $this->project_name = $project_name;
+        $this->name = $name;
     }
 
     /**
@@ -42,11 +44,12 @@ class PostUserRegisterCompliteMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'postuser.mail.account.complete',
+            view: 'postuser.mail.account.editComplete',
             with: [
                 'email' => $this->email,
                 'uuid' => $this->uuid,
                 'project_name' => $this->project_name,
+                'name' => $this->name,
             ],
         );
     }

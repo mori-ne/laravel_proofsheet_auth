@@ -10,31 +10,31 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
 
-class PrePostUserTokenMail extends Mailable
+class PostUserDeleteAccountMail extends Mailable
 {
-
     use Queueable, SerializesModels;
-
 
     protected $email;
     protected $uuid;
-    protected $token;
     protected $project_name;
     protected $name;
 
-    public function __construct($email, $uuid, $token, $project_name)
+    public function __construct($email, $uuid, $project_name, $name)
     {
         $this->email = $email;
         $this->uuid = $uuid;
-        $this->token = $token;
         $this->project_name = $project_name;
+        $this->name = $name;
     }
 
+    /**
+     * Get the message envelope.
+     */
     public function envelope(): Envelope
     {
         return new Envelope(
             from: new Address('postmaster@proofsheet.jp', 'Proofsheet管理者'),
-            subject: 'メールアドレスの仮登録通知 | ' . $this->project_name,
+            subject: 'アカウント削除のお知らせ | ' . $this->project_name,
         );
     }
 
@@ -44,12 +44,12 @@ class PrePostUserTokenMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'postuser.mail.verifymail',
+            view: 'postuser.mail.account.deleteComplete',
             with: [
                 'email' => $this->email,
                 'uuid' => $this->uuid,
-                'token' => $this->token,
                 'project_name' => $this->project_name,
+                'name' => $this->name,
             ],
         );
     }

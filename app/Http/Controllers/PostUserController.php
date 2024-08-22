@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PrePostUserTokenMail;
 use App\Http\Requests\PostUserRegisterRequest;
+use App\Mail\PostUserDeleteAccountMail;
 use App\Mail\PostUserRegisterCompliteMail;
 use App\Mail\PostUserEditNameMail;
 use App\Mail\PostUserEditPasswordMail;
@@ -218,10 +219,11 @@ class PostUserController extends Controller
 
             // メール送信
             $project = Project::where('uuid', $uuid)->firstOrFail();
-            Mail::to($request->email)->send(new PostUserRegisterCompliteMail($request->email, $uuid, $project->project_name));
-            Log::info('メール送信完了');
+            $name = $validated['first_name'] . " " . $validated['last_name'];
+            Mail::to($request->email)->send(new PostUserRegisterCompliteMail($request->email, $uuid, $project->project_name, $name));
+            Log::info('PostUserRegisterCompliteMail:メール送信完了');
         } catch (\Exception $e) {
-            Log::error('エラー発生: ' . $e->getMessage());
+            Log::error('PostUserRegisterCompliteMail:エラー発生: ' . $e->getMessage());
             DB::rollBack();
 
             return redirect()->back()->withErrors(['error' => 'ユーザー登録に失敗しました。もう一度お試しください。']);
@@ -302,8 +304,9 @@ class PostUserController extends Controller
             $project = Project::where('uuid', $uuid)->firstOrFail();
             $email = Auth::guard('postuser')->user()->email;
 
-            Mail::to($email)->send(new PostUserEditNameMail($project->project_name, $email, $project->uuid));
-            Log::info('メール送信完了');
+            $name = $validated['first_name'] . " " . $validated['last_name'];
+            Mail::to($email)->send(new PostUserEditNameMail($project->project_name, $email, $project->uuid, $name));
+            Log::info('PostUserEditNameMail:メール送信完了');
 
             return redirect()->back()->with('status', '氏名・施設情報を更新しました');
         } catch (\Exception $e) {
@@ -353,8 +356,9 @@ class PostUserController extends Controller
         // メール送信
         $project = Project::where('uuid', $uuid)->firstOrFail();
         $email = Auth::guard('postuser')->user()->email;
-        Mail::to($email)->send(new PostUserEditPasswordMail($project->project_name, $email, $project->uuid));
-        Log::info('メール送信完了');
+        $name = $validated['first_name'] . " " . $validated['last_name'];
+        Mail::to($email)->send(new PostUserEditPasswordMail($project->project_name, $email, $project->uuid, $name));
+        Log::info('PostUserEditPasswordMail:メール送信完了');
 
         // ログアウト、セッション削除
         Auth::guard('postuser')->logout();
@@ -367,21 +371,25 @@ class PostUserController extends Controller
 
     public function accountEditDelete($uuid, Request $request)
     {
-        $user = PostUser::where('id', $request->id)->firstOrFail();
-        Log::info('ユーザー情報をidで取得');
 
         DB::beginTransaction();
         Log::info('トランザクション開始');
 
-
         try {
+            // メール送信
+            $project = Project::where('uuid', $uuid)->firstOrFail();
+            $user = Auth::guard('postuser')->user();
+            $email = $user->email;
+            $name = $user->first_name . " " . $user->last_name;
+
+            Mail::to($email)->send(new PostUserDeleteAccountMail($email, $project->uuid, $project->project_name, $name));
+            Log::info('PostUserDeleteAccountMail:メール送信完了');
 
             $user->delete();
             Log::info('ユーザーデータ削除');
 
             Auth::guard('postuser')->logout();
             Log::info('ログアウト');
-
 
             DB::commit();
             Log::info('トランザクションコミット完了');

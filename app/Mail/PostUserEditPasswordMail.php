@@ -17,12 +17,14 @@ class PostUserEditPasswordMail extends Mailable
     protected $project_name;
     protected $email;
     protected $uuid;
+    protected $name;
 
-    public function __construct($project_name, $email, $uuid)
+    public function __construct($project_name, $email, $uuid, $name)
     {
         $this->project_name = $project_name;
         $this->uuid = $uuid;
         $this->email = $email;
+        $this->name = $name;
     }
 
     /**
@@ -47,6 +49,7 @@ class PostUserEditPasswordMail extends Mailable
                 'email' => $this->email,
                 'uuid' => $this->uuid,
                 'project_name' => $this->project_name,
+                'name' => $this->name,
             ],
         );
     }

@@ -39,11 +39,11 @@
 
     <div class="min-h-screen bg-neutral-50">
 
-        <div class="bg-white px-8 py-4 shadow-md shadow-neutral-200">
+        <div class="border-b border-neutral-200 bg-white px-8 py-2">
 
             {{-- flex --}}
             <div class="mx-auto flex max-w-6xl flex-row justify-between">
-                <h1 class="text-xl font-bold text-neutral-800">
+                <h1 class="text-lg font-bold text-neutral-800">
                     <a href="{{ route('postuser.index', $uuid) }}">
                         {{ $project->project_name }}
                     </a>
@@ -59,7 +59,7 @@
                                 <span class="text-xs text-neutral-400">さん</span>
                             </p>
                             <div>
-                                <a class="text-sm" href="{{ route('postuser.account', $project->uuid) }}">アカウント管理</a>
+                                <a class="text-sm" href="{{ route('postuser.account', $project->uuid) }}">アカウント</a>
                             </div>
                             {{-- <form action="{{ route('postuser.logout', ['uuid' => $project->uuid]) }}" method="POST"> --}}
                             <form action="{{ route('postuser.logout', $project->uuid) }}" method="POST">
@@ -74,13 +74,17 @@
         </div>
 
         {{-- flash message --}}
+
         @if (session('status'))
-            <div class="mx-auto flex max-w-6xl flex-col justify-center gap-4 pt-8">
-                <div class="[&>svg]:text-foreground relative w-full rounded-lg border border-green-300 border-transparent bg-green-50 p-4 text-green-600 [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4">
-                    <svg class="h-5 w-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <h5 class="mb-1 font-medium leading-none tracking-tight">{{ session('status') }}</h5>
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)">
+                <div class="fixed left-0 top-0 w-full border-b border-green-200 bg-green-100 p-4 text-green-600" x-show="show" x-transition:leave="transform ease-in duration-1000" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-10"
+                    style="transition: all 1s ease;">
+                    <div class="[&>svg]:text-foreground relative mx-auto max-w-6xl [&:has(svg)]:pl-4 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-0 [&>svg]:top-0">
+                        <svg class="h-5 w-5 -translate-y-0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h5 class="pl-2 leading-none tracking-tight">{{ session('status') }}</h5>
+                    </div>
                 </div>
             </div>
         @endif
