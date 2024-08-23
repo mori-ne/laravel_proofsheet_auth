@@ -239,7 +239,7 @@ class PostUserController extends Controller
         $inputs = Input::with('form.project')->where('form_id', $id)->first();
         $inputComponents = json_decode($inputs->inputs);
         // dd($uuid, $id, $input->inputs);
-        return view('postuser.auth.inputComponent', ['inputs' => $inputs, 'uuid' => $uuid, 'project' => $inputs->form->project, 'inputComponents' => $inputComponents]);
+        return view('postuser.auth.inputComponent', ['inputs' => $inputs, 'uuid' => $uuid, 'project' => $inputs->form->project, 'inputComponents' => $inputComponents,]);
     }
 
 
@@ -433,5 +433,11 @@ class PostUserController extends Controller
             Log::error('エラー発生: ' . $e->getMessage());
             DB::rollBack();
         }
+    }
+
+
+    public function post($uuid, $id, Request $request)
+    {
+        dd($request, $id, $uuid);
     }
 }

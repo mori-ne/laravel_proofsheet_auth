@@ -45,6 +45,7 @@ Route::prefix('/postuser/{uuid}')->group(function () {
 
         // form
         Route::get('forms/create/{id}', [PostUserController::class, 'create'])->name('postuser.create');
+        Route::put('forms/post/{id}', [PostUserController::class, 'post'])->name('postuser.post');
         Route::get('forms/edit/{id}', [PostUserController::class, 'edit'])->name('postuser.edit');
         Route::get('forms/preview/{id}', [PostUserController::class, 'preview'])->name('postuser.preview');
 
