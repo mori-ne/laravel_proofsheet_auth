@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="mt-6 flex items-center justify-center gap-6">
-                        <button type="submit" class="min-w-48 flex items-center justify-center rounded-sm bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900">新規登録する</button>
+                        <button type="submit" class="min-w-48 flex items-center justify-center rounded bg-neutral-800 px-4 py-2.5 text-sm font-bold text-white focus:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 active:bg-neutral-900">新規登録する</button>
                     </div>
 
                 </form>

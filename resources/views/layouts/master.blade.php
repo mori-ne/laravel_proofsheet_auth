@@ -39,6 +39,7 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-neutral-50">
         <div class="flex min-h-screen flex-row items-stretch">
+
             {{-- flash message --}}
             @if (session('status'))
                 <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)">
@@ -53,10 +54,10 @@
                     </div>
                 </div>
             @endif
-            {{-- sidebar --}}
-            @include('layouts.sidebar')
+
             {{-- content --}}
             @yield('content')
+
         </div>
     </div>
 </body>

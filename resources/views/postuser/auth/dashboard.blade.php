@@ -6,7 +6,7 @@
         <div class="w-full py-10">
 
             <h1 class="mb-4 border-b-2 border-neutral-400 pb-2 text-xl font-bold text-orange-500">マイページ</h1>
-            <div class="mb-6 rounded-sm bg-white p-4 text-sm text-neutral-500">
+            <div class="mb-6 rounded bg-white p-4 text-sm text-neutral-500">
                 <p>■ アカウントの変更はページ下部のマイアカウントの「アカウント編集」より操作できます。</p>
                 <p>■ パスワードの変更はページ下部のマイアカウントの「パスワード変更」より操作できます。</p>
                 <p>■ 機能説明はコチラ</p>
@@ -16,7 +16,7 @@
             </div>
 
             <h2 class="mb-4 border-b-2 border-neutral-400 pb-2 text-xl font-bold text-orange-500">投稿状況</h2>
-            <div class="h-full rounded-sm border-0 bg-white p-6 shadow-md shadow-neutral-100">
+            <div class="h-full rounded border-0 bg-white p-6 shadow-md shadow-neutral-100">
                 @foreach ($project->forms as $key => $form)
                     <div class="mb-4 flex flex-row gap-4 border-b border-neutral-200 pb-3 last:mb-0 last:border-0 last:pb-0">
                         {{-- 1 --}}
@@ -29,9 +29,9 @@
                         </div>
                         {{-- 3 --}}
                         <div class="broder-neutral-400 ml-auto flex flex-1 flex-col gap-2 border-l pl-4">
-                            <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-sm border border-orange-600 bg-orange-500 px-2 py-1 text-center font-bold text-white transition-all hover:bg-orange-600">投稿／編集する</a>
-                            <a href="{{ route('postuser.preview', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded-sm border border-neutral-200 px-2 py-1 text-center transition-all hover:bg-neutral-100">プレビュー</a>
-                            <button class="h-8 rounded-sm border border-red-200 px-2 py-1 text-red-500 transition-all hover:bg-red-100" type="submit">削除</button>
+                            <a href="{{ route('postuser.create', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded border border-orange-600 bg-orange-500 px-2 py-1 text-center font-bold text-white transition-all hover:bg-orange-600">投稿／編集する</a>
+                            <a href="{{ route('postuser.preview', ['uuid' => $form->project->uuid, 'id' => $form->id]) }}" class="h-8 rounded border border-neutral-200 px-2 py-1 text-center transition-all hover:bg-neutral-100">プレビュー</a>
+                            <button class="h-8 rounded border border-red-200 px-2 py-1 text-red-500 transition-all hover:bg-red-100" type="submit">削除</button>
                         </div>
                     </div>
                 @endforeach

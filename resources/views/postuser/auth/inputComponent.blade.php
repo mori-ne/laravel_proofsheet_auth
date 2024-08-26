@@ -22,7 +22,7 @@
                 @csrf
                 @method('put')
                 <div class="h-[calc(100% - 32px)] mx-auto flex w-full flex-col">
-                    <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded-sm bg-white">
+                    <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded bg-white">
 
                         <!-- preview -->
                         <div class="mx-auto flex w-full flex-1 flex-col bg-white">
@@ -104,7 +104,7 @@
                                                     <p class="text-sm text-neutral-400">{{ $inputComponent->inputLabel }}</p>
                                                 </div>
                                                 {{-- common end --}}
-                                                <textarea id="projectinstance" name="textarea_rtf-{{ $inputComponent->id }}" type="text" placeholder="プロジェクトの概要を記入してください" class="flex h-48 min-h-[80px] w-full rounded-sm border-0 bg-neutral-100 px-3 py-2 text-sm placeholder:text-neutral-400"></textarea>
+                                                <textarea id="projectinstance" name="textarea_rtf-{{ $inputComponent->id }}" type="text" placeholder="プロジェクトの概要を記入してください" class="flex h-48 min-h-[80px] w-full rounded border-0 bg-neutral-100 px-3 py-2 text-sm placeholder:text-neutral-400"></textarea>
                                                 {{-- common start --}}
                                                 @if ($inputComponent->inputLimit)
                                                     <p class="text-xs text-neutral-900">

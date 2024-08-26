@@ -11,7 +11,7 @@
             </div>
 
             <div class="mx-auto max-w-7xl">
-                <div class="mb-6 rounded-sm border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
+                <div class="mb-6 rounded border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
                     <div class="w-full">
                         <section>
                             <header>
@@ -48,7 +48,7 @@
                                             <p class="mt-2 text-sm text-neutral-800">
                                                 {{ __('Your email address is unverified.') }}
 
-                                                <button form="send-verification" class="rounded-sm text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
+                                                <button form="send-verification" class="rounded text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
                                                     {{ __('Click here to re-send the verification email.') }}
                                                 </button>
                                             </p>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-sm border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
+                <div class="mb-6 rounded border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
                     <div class="w-full">
                         <section>
                             <header>
@@ -121,7 +121,7 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-sm border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
+                <div class="mb-6 rounded border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
                     <div class="w-full">
                         <section class="space-y-6">
                             <header>

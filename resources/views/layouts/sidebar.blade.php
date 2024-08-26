@@ -1,11 +1,4 @@
-<aside class="h-svh relative z-40 flex w-60 shrink-0 flex-col overflow-y-scroll border-0 border-r border-neutral-200 bg-white">
-
-    <!-- Logo -->
-    <div class="mb-6 flex h-14 shrink-0 items-center justify-center px-8 py-4 text-xl font-extrabold">
-        <a href="{{ route('dashboard') }}" class="block w-full">
-            <p class="block w-auto fill-current text-neutral-800">Proofsheet</p>
-        </a>
-    </div>
+<aside class="h-svh relative z-40 flex w-60 shrink-0 flex-col overflow-y-scroll border-0 border-r border-neutral-200 bg-white pt-8">
 
     {{-- mainmenu --}}
     <div class="mb-6">

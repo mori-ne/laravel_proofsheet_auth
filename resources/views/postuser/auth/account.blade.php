@@ -3,7 +3,7 @@
 @section('content')
     <div class="mx-auto max-w-2xl flex-row justify-center">
         <div class="w-full py-10">
-            <div class="h-full rounded-sm border-0 bg-white p-8 shadow-md shadow-neutral-100">
+            <div class="h-full rounded border-0 bg-white p-8 shadow-md shadow-neutral-100">
                 <h4 class="mb-4 text-lg font-bold text-neutral-700">アカウント情報</h4>
 
                 <form action="{{ route('postuser.account.edit.name', $uuid) }}" method="POST">
@@ -136,7 +136,7 @@
 
                     <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" :class="{ 'z-40': modalOpen }" class="relative h-auto w-auto">
                         <button @click="modalOpen=true"
-                            class="hover:bg-neutral-10 inline-flex h-10 items-center justify-center rounded-sm border-0 bg-white px-4 py-2 text-sm font-medium text-red-500 transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50">アカウントを削除</button>
+                            class="hover:bg-neutral-10 inline-flex h-10 items-center justify-center rounded border-0 bg-white px-4 py-2 text-sm font-medium text-red-500 transition-colors focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50">アカウントを削除</button>
                         <template x-teleport="body">
                             <div x-show="modalOpen" class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-cloak>
                                 <div x-show="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
@@ -157,13 +157,13 @@
                                         <p class="text-sm text-red-500">※この操作は取り消せません。</p>
                                     </div>
                                     <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
-                                        <button @click="modalOpen=false" type="button" class="inline-flex h-10 items-center justify-center rounded-sm border px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-100 focus:ring-offset-2">キャンセル</button>
+                                        <button @click="modalOpen=false" type="button" class="inline-flex h-10 items-center justify-center rounded border px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-neutral-100 focus:ring-offset-2">キャンセル</button>
                                         <form action="{{ route('postuser.account.edit.delete', $uuid) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <input type="hidden" name="id" value="{{ Auth::guard('postuser')->user()->id }}">
                                             <button @click="modalOpen=false" type="submit"
-                                                class="inline-flex h-10 items-center justify-center rounded-sm border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2">アカウントを削除</button>
+                                                class="inline-flex h-10 items-center justify-center rounded border border-transparent bg-red-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2">アカウントを削除</button>
                                         </form>
                                     </div>
                                 </div>

@@ -25,7 +25,7 @@
             </a>
         </div>
 
-        <div class="w-96 overflow-hidden rounded-sm border-0 bg-white p-10 shadow-md shadow-neutral-200">
+        <div class="w-96 overflow-hidden rounded border-0 bg-white p-10 shadow-md shadow-neutral-200">
             <h2 class="mb-6 text-center text-lg font-bold leading-snug text-neutral-700">メール認証</h2>
 
             <div class="mb-4 text-sm text-neutral-600">
@@ -54,7 +54,7 @@
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <button type="submit" class="mt-6 rounded-sm text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
+            <button type="submit" class="mt-6 rounded text-sm text-neutral-600 underline hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2">
                 {{ __('Log Out') }}
             </button>
         </form>

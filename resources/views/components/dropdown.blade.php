@@ -15,8 +15,8 @@
 
 <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
     <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95" class="{{ $width }} {{ $alignmentClasses }} absolute z-50 mb-8 rounded-sm shadow-md" style="display: none;" @click="open = false">
-        <div class="{{ $contentClasses }} rounded-sm ring-1 ring-black ring-opacity-5">
+        x-transition:leave-end="opacity-0 scale-95" class="{{ $width }} {{ $alignmentClasses }} absolute z-50 mb-8 rounded shadow-md" style="display: none;" @click="open = false">
+        <div class="{{ $contentClasses }} rounded ring-1 ring-black ring-opacity-5">
             {{ $content }}
         </div>
     </div>

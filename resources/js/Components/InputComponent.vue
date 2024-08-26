@@ -305,7 +305,7 @@ const submitForm = () => {
                     v-model="debugFlg"
                     name="debugSwitch"
                     type="checkbox"
-                    class="h-4 w-4 rounded-sm border border-neutral-200"
+                    class="h-4 w-4 rounded border border-neutral-200"
                 />
                 <label for="debugSwitch" class="clear-start pl-1 text-sm text-white">Debug</label>
             </div>
@@ -325,7 +325,7 @@ const submitForm = () => {
 
         <!-- contents -->
         <div class="h-[calc(100% - 32px)] mx-auto flex w-full flex-col overflow-hidden">
-            <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded-sm bg-white">
+            <div class="mx-auto flex h-full w-full flex-row overflow-hidden rounded bg-white">
                 <!-- set -->
                 <div class="relative flex w-80 flex-shrink-0 flex-col overflow-y-scroll bg-neutral-100">
                     <!-- title -->
