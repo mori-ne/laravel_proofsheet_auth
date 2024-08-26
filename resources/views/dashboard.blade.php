@@ -2,19 +2,13 @@
 @section('title', 'ホーム')
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
-        <x-slot name="header">
-            <h2 class="text-xl font-semibold leading-tight text-neutral-800">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot>
 
-        <div class="mx-auto max-w-5xl p-6">
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">ホーム</h4>
+        </div>
 
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">ホーム</h4>
-                <p class="text-sm text-neutral-500"></p>
-            </div>
-
+        <div class="mx-auto max-w-7xl p-6">
             <div class="flex flex-col gap-3">
 
                 @if (!$projects)
@@ -23,25 +17,27 @@
                     </div>
                 @endif
 
-                <div class="flex flex-1 flex-row items-center gap-4 rounded-sm border border-neutral-200 bg-white px-8 py-4">
-                    <div class="flex flex-row items-center gap-1">
-                        <p class="text-2xl font-bold">{{ $projects->count() }}</p>
-                        <span class="text-neutral-400">件</span>
+                <div class="flex flex-row gap-4">
+                    <div class="flex flex-1 flex-row items-center gap-4 rounded-sm border border-neutral-200 bg-white px-8 py-4">
+                        <div class="flex flex-row items-center gap-1">
+                            <p class="text-2xl font-bold">{{ $projects->count() }}</p>
+                            <span class="text-neutral-400">件</span>
+                        </div>
+                        <p class="text-sm font-bold text-neutral-500">総プロジェクト数</p>
                     </div>
-                    <p class="text-sm font-bold text-neutral-500">総プロジェクト数</p>
-                </div>
 
-                <div class="flex flex-1 flex-row items-center gap-4 rounded-sm border border-neutral-200 bg-white px-8 py-4">
-                    <div class="flex flex-row items-center gap-1">
-                        <p class="text-2xl font-bold">{{ $forms->count() }}</p>
-                        <span class="text-neutral-400">件</span>
+                    <div class="flex flex-1 flex-row items-center gap-4 rounded-sm border border-neutral-200 bg-white px-8 py-4">
+                        <div class="flex flex-row items-center gap-1">
+                            <p class="text-2xl font-bold">{{ $forms->count() }}</p>
+                            <span class="text-neutral-400">件</span>
+                        </div>
+                        <p class="text-sm font-bold text-neutral-500">総フォーム数</p>
                     </div>
-                    <p class="text-sm font-bold text-neutral-500">総フォーム数</p>
                 </div>
 
                 <div class="w-full rounded-sm border border-neutral-200 bg-white px-8 py-6">
                     <p class="mb-4 text-sm font-bold text-neutral-500">最近更新されたプロジェクト</p>
-                    <div class="mb-2 flex flex-row gap-4 border-b-2 border-neutral-300 pb-1">
+                    <div class="mb-2 flex flex-row gap-4 border-b-2 border-neutral-200 pb-1">
                         <p class="w-44 text-xs font-bold text-neutral-400">更新時間</p>
                         <p class="text-xs font-bold text-neutral-500">プロジェクト名</p>
                     </div>
@@ -55,7 +51,11 @@
                                 <a href="{{ route('projects.show', $recentProject->id) }}" class="text-md font-bold hover:underline">
                                     {{ $recentProject->project_name }}
                                 </a>
-                                {{-- <p class="text-center text-sm text-neutral-400">{{ $recentProject->project_description }}</p> --}}
+                            </div>
+                            <div class="ml-auto flex flex-row items-center gap-4">
+                                <a class="text-sm text-neutral-600 hover:underline" href="{{ route('postuser.index', ['uuid' => $recentProject->uuid]) }}" target="_blank">投稿ページを表示</a>
+                                <a class="text-sm text-neutral-600 hover:underline" href="{{ route('projects.show', $recentProject->id) }}">詳細</a>
+                                <a class="text-sm text-neutral-600 hover:underline" href="{{ route('projects.edit', $recentProject->id) }}">編集</a>
                             </div>
                         </div>
                     @endforeach
@@ -63,7 +63,7 @@
 
                 <div class="w-full rounded-sm border border-neutral-200 bg-white px-8 py-6">
                     <p class="mb-4 text-sm font-bold text-neutral-500">最近更新されたフォーム</p>
-                    <div class="mb-2 flex flex-row gap-4 border-b-2 border-neutral-300 pb-1">
+                    <div class="mb-2 flex flex-row gap-4 border-b-2 border-neutral-200 pb-1">
                         <p class="w-44 text-xs font-bold text-neutral-400">更新時間</p>
                         <p class="text-xs font-bold text-neutral-500">フォーム名</p>
                     </div>
@@ -74,11 +74,15 @@
                                 {{-- {{ $recentForms->updated_at }} --}}
                             </p>
                             <div class="min-w-32 flex flex-row items-start">
-                                <a href="{{ route('projects.show', $recentForms->id) }}" class="text-md font-bold hover:underline">
+                                <a href="{{ route('forms.show', $recentForms->id) }}" class="text-md font-bold hover:underline">
                                     {{ $recentForms->form_name }}
                                 </a>
                             </div>
-                            <p class="ml-auto text-center text-xs text-neutral-400">{{ $recentForms->project->project_name }}</p>
+                            <p class="ml-auto text-center text-xs text-neutral-300">{{ $recentForms->project->project_name }}</p>
+                            <div class="flex flex-row items-center gap-4">
+                                <a class="text-sm text-neutral-600 hover:underline" href="{{ route('forms.show', $recentForms->id) }}">詳細</a>
+                                <a class="text-sm text-neutral-600 hover:underline" href="{{ route('forms.edit', $recentForms->id) }}">編集</a>
+                            </div>
                         </div>
                     @endforeach
                 </div>

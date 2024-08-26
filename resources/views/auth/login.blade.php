@@ -53,7 +53,7 @@
                 <!-- Remember Me -->
                 <div class="mt-4 block">
                     <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded border-neutral-300 text-neutral-600 shadow-sm focus:ring-neutral-500" name="remember">
+                        <input id="remember_me" type="checkbox" class="rounded border-neutral-200 text-neutral-600 shadow-sm focus:ring-neutral-500" name="remember">
                         <span class="ms-2 text-sm text-neutral-600">ログイン情報を記憶する</span>
                     </label>
                 </div>

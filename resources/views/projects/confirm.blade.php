@@ -2,18 +2,13 @@
 @section('title', 'プロジェクト確認画面')
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
-        <x-slot name="header">
-            <h2 class="text-xl font-semibold leading-tight text-neutral-800">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot>
 
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">プロジェクト確認画面</h4>
+        </div>
 
         <div class="mx-auto max-w-5xl p-6">
-
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">プロジェクト確認画面</h4>
-            </div>
 
             {{-- content --}}
             <div class="mb-3 rounded-sm border-0 bg-white p-8 shadow-md shadow-neutral-200">

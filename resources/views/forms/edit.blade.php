@@ -2,13 +2,13 @@
 @section('title', 'フォームを編集')
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
-        <div class="mx-auto max-w-5xl p-6">
 
-            {{-- title --}}
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">フォームを編集</h4>
-                <p class="text-sm text-neutral-500"></p>
-            </div>
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">フォームを編集</h4>
+        </div>
+
+        <div class="mx-auto max-w-5xl p-6">
 
             {{-- content --}}
             <form action="{{ route('forms.update', $form->id) }}" method="POST">
@@ -25,7 +25,7 @@
                                 <span>必須</span>
                             </span>
                         </div>
-                        <select name="project_id" id="project_id" class="rounded border border-neutral-300">
+                        <select name="project_id" id="project_id" class="rounded border border-neutral-200">
                             @foreach ($projects as $project)
                                 <option value="{{ $project->id }}" @if ($form->project_id === $project->id) selected @endif>
                                     {{ $project->project_name }}</option>
@@ -40,7 +40,7 @@
                                 <span>必須</span>
                             </span>
                         </div>
-                        <input name="form_name" type="text" placeholder="フォーム名を記入してください" value="{{ old('form_name', $form->form_name) }}" class="text-md ring-offset-background flex h-10 w-full rounded-sm border border-neutral-300 bg-white px-3 py-2 placeholder:text-neutral-500" />
+                        <input name="form_name" type="text" placeholder="フォーム名を記入してください" value="{{ old('form_name', $form->form_name) }}" class="text-md ring-offset-background flex h-10 w-full rounded-sm border border-neutral-200 bg-white px-3 py-2 placeholder:text-neutral-500" />
                         @error('form_name')
                             <div class="mt-2 text-red-600">{{ $message }}</div>
                         @enderror
@@ -51,7 +51,7 @@
                         <div class="mb-2">
                             <label class="text-lg font-bold" for="form_description">フォームの説明</label>
                         </div>
-                        <textarea id="projectinstance" name="form_description" type="text" placeholder="フォームの説明を記入してください" class="flex h-48 min-h-[80px] w-full rounded-sm border border-neutral-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-400">{{ old('form_description', $form->form_description) }}</textarea>
+                        <textarea id="projectinstance" name="form_description" type="text" placeholder="フォームの説明を記入してください" class="flex h-48 min-h-[80px] w-full rounded-sm border border-neutral-200 bg-white px-3 py-2 text-sm placeholder:text-neutral-400">{{ old('form_description', $form->form_description) }}</textarea>
                     </div>
                 </div>
 

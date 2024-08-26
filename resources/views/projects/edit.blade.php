@@ -3,11 +3,12 @@
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
 
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">プロジェクトの編集</h4>
+        </div>
+
         <div class="mx-auto max-w-5xl p-6">
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">プロジェクトの編集</h4>
-                {{-- <p class="text-neutral-500 text-sm"></p> --}}
-            </div>
 
             {{-- content --}}
             <form action="{{ route('projects.update', $project->id) }}" method="POST">

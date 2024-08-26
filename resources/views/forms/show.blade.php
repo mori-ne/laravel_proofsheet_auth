@@ -2,18 +2,13 @@
 @section('title', 'フォームの詳細')
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
-        <x-slot name="header">
-            <h2 class="text-xl font-semibold leading-tight text-neutral-800">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot>
+
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">フォームの詳細</h4>
+        </div>
 
         <div class="mx-auto max-w-5xl p-6">
-
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">フォームの詳細</h4>
-                {{-- <p class="text-neutral-500 text-sm">フォームの詳細画面です。確認、編集、削除ができます</p> --}}
-            </div>
 
             {{-- form name / form_description / controll --}}
             <div class="mb-8">
@@ -38,7 +33,7 @@
                                     class="at-dots-vertical"></i></button>
 
                             <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-44 -translate-x-1/2" x-cloak>
-                                <div class="rounded-sm border border-neutral-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                                <div class="rounded-sm border border-neutral-200 bg-white p-1 text-sm text-neutral-700 shadow-md">
 
                                     {{-- edit --}}
                                     <a a href="{{ route('forms.edit', $form->id) }}" @click="menuBarOpen=false"

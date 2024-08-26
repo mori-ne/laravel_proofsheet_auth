@@ -2,19 +2,13 @@
 @section('title', 'フォームを新規作成')
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
-        <x-slot name="header">
-            <h2 class="text-xl font-semibold leading-tight text-neutral-800">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot>
 
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">フォームを新規作成</h4>
+        </div>
 
-        <div class="mx-auto max-w-5xl p-6">
-
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">フォームを新規作成</h4>
-                <p class="text-sm text-neutral-500"></p>
-            </div>
+        <div class="mx-auto max-w-7xl p-6">
 
             {{-- content --}}
             <div class="mx-auto mb-3 rounded-sm border-0 bg-white p-8 shadow-md shadow-neutral-200">

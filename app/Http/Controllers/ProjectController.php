@@ -44,7 +44,7 @@ class ProjectController extends Controller
         }
 
         // ページネーション
-        $projects = $query->with('forms')->paginate(5);
+        $projects = $query->with('forms')->paginate(10);
         return view('/projects', ['projects' => $projects]);
     }
 
@@ -77,7 +77,7 @@ class ProjectController extends Controller
             $query->orderBy('id', 'asc');
         }
 
-        $projects = $query->with('forms')->paginate(5);
+        $projects = $query->with('forms')->paginate(10);
         return view('/projects', compact('projects'));
     }
 

@@ -2,18 +2,13 @@
 @section('title', 'フォーム管理')
 @section('content')
     <main class="h-svh flex-1 overflow-y-scroll">
-        <x-slot name="header">
-            <h2 class="text-xl font-semibold leading-tight text-neutral-800">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot>
+
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">フォーム管理</h4>
+        </div>
 
         <div class="mx-auto max-w-5xl p-6">
-            {{-- title --}}
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">フォーム管理</h4>
-                {{-- <p class="text-neutral-500 text-sm">フォームの一覧がここに表示されます</p> --}}
-            </div>
 
             {{-- search / new form --}}
             <div class="my-3 flex justify-between">
@@ -22,10 +17,10 @@
                     <form action="{{ route('forms.search') }}" method="GET" class="flex gap-2">
                         {{-- search --}}
                         <input name="search" type="text" placeholder="フォームを検索" value="{{ request('search') }}"
-                            class="ring-offset-background flex h-10 w-80 rounded-sm border border-neutral-300 bg-white px-3 py-2 text-sm placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                            class="ring-offset-background flex h-10 w-80 rounded-sm border border-neutral-200 bg-white px-3 py-2 text-sm placeholder:text-neutral-500 focus:border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
                         {{-- button --}}
                         <button type="submit"
-                            class="focus:shadow-outline inline-flex items-center justify-center rounded-sm border border-neutral-300 bg-white px-4 py-2 text-sm font-medium tracking-wide text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
+                            class="focus:shadow-outline inline-flex items-center justify-center rounded-sm border border-neutral-200 bg-white px-4 py-2 text-sm font-medium tracking-wide text-neutral-500 transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
                             検索
                         </button>
                     </form>
@@ -42,7 +37,7 @@
             <div class="mb-8">
                 {{-- if --}}
                 @if ($forms->isEmpty())
-                    <div class="w-full rounded-lg border-2 border-dashed border-neutral-300 px-32 py-16 text-center text-sm text-neutral-600">
+                    <div class="w-full rounded-lg border-2 border-dashed border-neutral-200 px-32 py-16 text-center text-sm text-neutral-600">
                         フォームは見つかりませんでした...
                     </div>
                 @endif
@@ -50,10 +45,10 @@
                 {{-- lists --}}
                 <div>
                     @foreach ($forms as $form)
-                        <div class="mb-3 flex flex-col rounded-sm border border-neutral-300 bg-white px-8 py-4">
+                        <div class="mb-3 flex flex-col rounded-sm border border-neutral-200 bg-white px-8 py-4">
 
                             {{-- form name / input method / dropdown menu --}}
-                            <div class="mb-2 flex items-center justify-start gap-2 border-b border-neutral-300 pb-2">
+                            <div class="mb-2 flex items-center justify-start gap-2 border-b border-neutral-200 pb-2">
 
                                 {{-- form_name --}}
                                 <h5 class="text-xl font-bold leading-none tracking-tight text-neutral-900">
@@ -62,8 +57,8 @@
 
                                 {{-- input method --}}
                                 <div class="ml-auto">
-                                    <a href="{{ route('forms.inputEdit', $form->id) }}" target="_blank" class="rounded border border-neutral-300 px-3 py-1 text-xs">入力項目エディターを開く</a>
-                                    <button class="rounded border border-neutral-300 px-3 py-1 text-xs">投稿一覧</button>
+                                    <a href="{{ route('forms.inputEdit', $form->id) }}" target="_blank" class="rounded border border-neutral-200 px-3 py-1 text-xs">入力項目エディターを開く</a>
+                                    <button class="rounded border border-neutral-200 px-3 py-1 text-xs">投稿一覧</button>
                                     <button class="rounded border bg-red-500 px-3 py-1 text-xs text-white">PDF一括DL</button>
                                 </div>
 
@@ -75,7 +70,7 @@
                                         class="inline-flex h-6 items-center justify-center rounded-sm bg-white px-2 text-sm font-medium transition-colors hover:bg-neutral-100 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"><i
                                             class="at-dots-vertical"></i></button>
                                     <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="z-100 absolute left-1/2 top-0 mt-10 w-48 -translate-x-1/2" x-cloak>
-                                        <div class="rounded-sm border border-neutral-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                                        <div class="rounded-sm border border-neutral-200 bg-white p-1 text-sm text-neutral-700 shadow-md">
                                             <a href="{{ route('forms.show', $form->id) }}" @click="menuBarOpen=false"
                                                 class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
                                                 <span>フォームの詳細</span>

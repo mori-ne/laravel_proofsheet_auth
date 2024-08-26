@@ -1,25 +1,16 @@
 @extends('layouts.master')
 @section('title', 'プロジェクトの詳細')
 @section('content')
-    {{-- <div class="relative z-10 w-60 border-r border-neutral-200 bg-white px-8">
-        a
-    </div> --}}
 
     <main class="h-svh flex-1 overflow-y-scroll">
-        <x-slot name="header">
-            <h2 class="text-xl font-semibold leading-tight text-neutral-800">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot>
 
-        <div class="mx-auto max-w-5xl p-6">
+        {{-- title --}}
+        <div class="flex h-14 items-center gap-4 bg-neutral-600 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">プロジェクトの詳細</h4>
+        </div>
 
-            {{-- title --}}
-            <div class="mb-8">
-                <h4 class="text-lg font-bold text-neutral-600">プロジェクトの詳細</h4>
-            </div>
-
-            <div class="mb-8 rounded bg-white p-8 shadow-md shadow-neutral-200">
+        <div class="mx-auto max-w-7xl p-6">
+            <div class="mb-6 rounded border border-neutral-200 bg-white p-8">
 
                 <div class="mb-6">
                     <div class="flex flex-row justify-between">
@@ -161,7 +152,7 @@
             </div>
 
 
-            <div class="mb-6 rounded bg-white p-6 shadow-md shadow-neutral-200">
+            <div class="mb-6 rounded border border-neutral-200 bg-white p-6">
                 <div x-data="{
                     tabSelected: 1,
                     tabId: $id('tabs'),
@@ -178,7 +169,7 @@
                     tabButtonActive(tabContent) { const tabId = tabContent.id.split('-').slice(-1); return this.tabSelected == tabId; }
                 }" x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);" class="relative w-full">
 
-                    <div x-ref="tabButtons" class="relative mb-8 inline-grid h-12 w-full select-none grid-cols-4 items-center justify-center rounded-lg bg-neutral-100 p-1 text-neutral-500">
+                    <div x-ref="tabButtons" class="relative mb-6 inline-grid h-12 w-full select-none grid-cols-4 items-center justify-center rounded-lg bg-neutral-100 p-1 text-neutral-500">
                         <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-neutral-200 text-neutral-700': tabButtonActive($el) }"
                             class="relative z-20 inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-sm px-3 text-sm font-medium transition-all">フォーム情報</button>
                         <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-neutral-200 text-neutral-700': tabButtonActive($el) }"
@@ -209,7 +200,7 @@
 
                                 {{-- if --}}
                                 @if ($project->forms->isEmpty())
-                                    <div class="w-full rounded-lg border-2 border-dashed border-neutral-300 px-32 py-16 text-center text-sm text-neutral-600">
+                                    <div class="w-full rounded-lg border-2 border-dashed border-neutral-200 px-32 py-16 text-center text-sm text-neutral-600">
                                         フォームは見つかりませんでした...
                                     </div>
                                 @endif
@@ -252,8 +243,8 @@
 
                                             {{-- input method --}}
                                             <div class="ml-auto">
-                                                <a href="{{ route('forms.inputEdit', $form->id) }}" target="_blank" class="rounded border border-neutral-300 px-3 py-1 text-xs" target="_blank">入力項目エディターを開く</a>
-                                                {{-- <button class="rounded border border-neutral-300 px-3 py-1 text-xs">投稿一覧</button> --}}
+                                                <a href="{{ route('forms.inputEdit', $form->id) }}" target="_blank" class="rounded border border-neutral-200 px-3 py-1 text-xs" target="_blank">入力項目エディターを開く</a>
+                                                {{-- <button class="rounded border border-neutral-200 px-3 py-1 text-xs">投稿一覧</button> --}}
                                                 {{-- <button class="rounded border bg-red-500 px-3 py-1 text-xs text-white">PDF一括DL</button> --}}
                                             </div>
 
@@ -266,7 +257,7 @@
                                                         class="at-dots-vertical"></i></button>
                                                 <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="z-100 absolute left-1/2 top-0 mt-10 w-48 -translate-x-1/2"
                                                     x-cloak>
-                                                    <div class="rounded-sm border border-neutral-300 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                                                    <div class="rounded-sm border border-neutral-200 bg-white p-1 text-sm text-neutral-700 shadow-md">
                                                         <a href="{{ route('forms.show', $form->id) }}" @click="menuBarOpen=false"
                                                             class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-200 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
                                                             <span>フォームの詳細</span>
@@ -415,7 +406,7 @@
                                     <p>アカウントは有りませんでした</p>
                                 @endisset --}}
                                     <table class="w-full">
-                                        <tr class="border-b border-neutral-300">
+                                        <tr class="border-b border-neutral-200">
                                             <th class="pb-1 pr-6">
                                                 <p class="text-left text-xs font-bold text-neutral-400">氏名</p>
                                             </th>
@@ -430,7 +421,7 @@
                                             </th>
                                         </tr>
                                         @foreach ($postusers as $postuser)
-                                            <tr class="border-b border-neutral-300">
+                                            <tr class="border-b border-neutral-200">
                                                 <td class="py-2 pr-6">
                                                     <p>{{ $postuser->first_name }}{{ $postuser->last_name }}</p>
                                                 </td>

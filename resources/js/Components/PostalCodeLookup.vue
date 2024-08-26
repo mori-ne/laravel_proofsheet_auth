@@ -56,7 +56,7 @@ const getAddress = async () => {
             <label class="mb-2 block text-sm font-medium text-neutral-700">都道府県</label>
             <input
                 name="address_country"
-                class="w-full rounded border-0 border-neutral-300 bg-neutral-100 py-2 text-neutral-500"
+                class="w-full rounded border-0 border-neutral-200 bg-neutral-100 py-2 text-neutral-500"
                 type="text"
                 :value="address1"
                 readonly
@@ -66,7 +66,7 @@ const getAddress = async () => {
             <label class="mb-2 block text-sm font-medium text-neutral-700">市町村</label>
             <input
                 name="address_city"
-                class="w-full rounded border-0 border-neutral-300 bg-neutral-100 py-2 text-neutral-500"
+                class="w-full rounded border-0 border-neutral-200 bg-neutral-100 py-2 text-neutral-500"
                 type="text"
                 :value="address2"
             />

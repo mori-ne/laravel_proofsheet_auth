@@ -305,7 +305,7 @@ const submitForm = () => {
                     v-model="debugFlg"
                     name="debugSwitch"
                     type="checkbox"
-                    class="h-4 w-4 rounded-sm border border-neutral-300"
+                    class="h-4 w-4 rounded-sm border border-neutral-200"
                 />
                 <label for="debugSwitch" class="clear-start pl-1 text-sm text-white">Debug</label>
             </div>
@@ -329,15 +329,15 @@ const submitForm = () => {
                 <!-- set -->
                 <div class="relative flex w-80 flex-shrink-0 flex-col overflow-y-scroll bg-neutral-100">
                     <!-- title -->
-                    <div class="shrink-0 border-b border-neutral-300 bg-white px-4 py-2 text-neutral-500">
+                    <div class="shrink-0 border-b border-neutral-200 bg-white px-4 py-2 text-neutral-500">
                         <h3 class="text-lg font-bold">セット項目</h3>
                     </div>
 
                     <!-- select field -->
-                    <div class="relative z-10 shrink-0 border-b border-neutral-300 bg-white p-4 shadow-neutral-300">
+                    <div class="relative z-10 shrink-0 border-b border-neutral-200 bg-white p-4 shadow-neutral-300">
                         <select
                             v-model="selectedFieldType"
-                            class="mb-2 w-full rounded border border-neutral-300 px-2 py-1"
+                            class="mb-2 w-full rounded border border-neutral-200 px-2 py-1"
                             name=""
                             id=""
                         >
@@ -370,13 +370,13 @@ const submitForm = () => {
                         <li
                             :class="{
                                 'sticky top-0 bg-white': inputField.isOpen,
-                                'relative w-full border-b border-neutral-300': true,
+                                'relative w-full border-b border-neutral-200': true,
                             }"
                             v-for="inputField in inputFields"
                             :key="inputField.id"
                             v-on:mouseover="showController(inputField.id)"
                             v-on:mouseleave="hideController(inputField.id)"
-                            class="w-full border-b border-neutral-300"
+                            class="w-full border-b border-neutral-200"
                         >
                             <div
                                 class="flex flex-row items-start justify-between gap-2 bg-white px-4 py-3 hover:bg-neutral-100"
@@ -508,7 +508,7 @@ const submitForm = () => {
                                         <p class="mb-1 text-xs text-neutral-500">タイトル</p>
                                         <input
                                             v-model="inputField.inputTitle"
-                                            class="w-full rounded border border-neutral-300 px-2 py-1 text-sm placeholder:text-gray-200"
+                                            class="w-full rounded border border-neutral-200 px-2 py-1 text-sm placeholder:text-gray-200"
                                             type="text"
                                             placeholder="タイトル"
                                         />
@@ -519,7 +519,7 @@ const submitForm = () => {
                                         <p class="mb-1 text-xs text-neutral-500">サブラベル</p>
                                         <input
                                             v-model="inputField.inputLabel"
-                                            class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
+                                            class="w-full rounded border border-neutral-200 px-2 py-1 text-sm"
                                             type="text"
                                             value=""
                                             placeholder="サブラベルが入ります"
@@ -533,7 +533,7 @@ const submitForm = () => {
                                             <textarea
                                                 v-model="inputField.inputContent"
                                                 @input="convertCheckbox(inputField.id)"
-                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-200 px-2 py-1 text-sm"
                                                 cols="10"
                                             ></textarea>
                                         </div>
@@ -552,7 +552,7 @@ const submitForm = () => {
                                             <textarea
                                                 v-model="inputField.inputContent"
                                                 @input="convertRadioButton(inputField.id)"
-                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-200 px-2 py-1 text-sm"
                                                 name=""
                                                 id=""
                                                 cols="10"
@@ -567,7 +567,7 @@ const submitForm = () => {
                                             <textarea
                                                 v-model="inputField.inputContent"
                                                 @input="convertSelectList(inputField.id)"
-                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-200 px-2 py-1 text-sm"
                                                 name=""
                                                 id=""
                                                 cols="10"
@@ -582,7 +582,7 @@ const submitForm = () => {
                                             <p class="mb-1 text-xs text-neutral-500">コード</p>
                                             <input
                                                 v-model="inputField.inputCode"
-                                                class="w-full rounded border border-neutral-300 px-2 py-1 text-sm"
+                                                class="w-full rounded border border-neutral-200 px-2 py-1 text-sm"
                                                 type="text"
                                                 placeholder="code00"
                                             />
@@ -605,7 +605,7 @@ const submitForm = () => {
                                             <p class="mb-1 text-xs text-neutral-500">文字数制限</p>
                                             <input
                                                 v-model="inputField.inputLimit"
-                                                class="w-28 rounded border border-neutral-300 px-2 py-1 text-sm"
+                                                class="w-28 rounded border border-neutral-200 px-2 py-1 text-sm"
                                                 type="number"
                                                 placeholder="100"
                                             />
@@ -641,7 +641,7 @@ const submitForm = () => {
                 <!-- preview -->
                 <div class="mx-auto flex w-full flex-1 flex-col bg-white">
                     <!-- title -->
-                    <!-- <div class="shrink-0 border-b border-neutral-300 bg-white p-4 text-neutral-500">
+                    <!-- <div class="shrink-0 border-b border-neutral-200 bg-white p-4 text-neutral-500">
                         <h3 class="text-lg font-bold">プレビュー</h3>
                     </div> -->
 
@@ -776,7 +776,7 @@ const submitForm = () => {
                                             <div v-if="inputField.inputContent">
                                                 <select
                                                     v-bind:name="'select-' + inputField.id"
-                                                    class="mb-1 flex min-w-64 flex-wrap items-center gap-1 rounded border border-neutral-300 px-2 py-1 text-sm"
+                                                    class="mb-1 flex min-w-64 flex-wrap items-center gap-1 rounded border border-neutral-200 px-2 py-1 text-sm"
                                                 >
                                                     <option
                                                         v-bind:for="inputField.id + '-' + index"

@@ -184,7 +184,7 @@
                                                 </div>
                                                 {{-- common end --}}
                                                 <div key="{{ $inputComponent->id }}" class="mb-1 flex flex-col items-start">
-                                                    <select name="select-{{ $inputComponent->id }}" id="select-{{ $inputComponent->id }}" class="min-w-64 mb-1 flex flex-wrap items-center gap-1 rounded border border-neutral-300 px-2 py-1 text-sm">
+                                                    <select name="select-{{ $inputComponent->id }}" id="select-{{ $inputComponent->id }}" class="min-w-64 mb-1 flex flex-wrap items-center gap-1 rounded border border-neutral-200 px-2 py-1 text-sm">
                                                         <option value="選択してください">選択してください…</option>
                                                         @for ($i = 0; $i < count($inputComponent->selectContent); $i++)
                                                             <option value="{{ $inputComponent->selectContent[$i] }}">{{ $inputComponent->selectContent[$i] }}</option>
