@@ -1,78 +1,86 @@
 @extends('layouts.master')
 @section('title', 'プロジェクト管理')
 @section('content')
-    <main class="h-svh flex-1 overflow-y-scroll">
 
-        {{-- top --}}
-        <div class="flex flex-row flex-nowrap bg-neutral-600 text-white">
-            <!-- Logo -->
-            <div class="flex w-60 shrink-0 shrink-0 items-center justify-center border-r border-neutral-500 px-8 text-xl font-extrabold">
-                <a href="{{ route('dashboard') }}" class="block w-full">
-                    <p class="block w-auto fill-current">Proofsheet</p>
-                </a>
-            </div>
-            {{-- info --}}
-            <div class="flex h-14 w-full items-center gap-4 px-6">
-                <h4 class="text-md shrink-0 font-bold text-white">プロジェクト管理</h4>
+    {{-- top --}}
+    <div class="flex flex-row flex-nowrap bg-neutral-600 text-white">
+        <!-- Logo -->
+        <div class="flex w-60 shrink-0 shrink-0 items-center justify-center border-r border-neutral-500 px-8 text-xl font-extrabold">
+            <a href="{{ route('dashboard') }}" class="block w-full">
+                <p class="block w-auto fill-current">Proofsheet</p>
+            </a>
+        </div>
+        {{-- info --}}
+        <div class="flex h-14 w-full items-center gap-4 px-6">
+            <h4 class="text-md shrink-0 font-bold text-white">プロジェクト管理</h4>
+            {{-- search --}}
+            <div class="flex w-full items-center justify-end gap-2">
                 {{-- search --}}
-                <div class="flex w-full items-center justify-end gap-2">
-                    {{-- search --}}
-                    <div>
-                        <form action="{{ route('projects.search') }}" method="GET" class="flex gap-2">
-                            {{-- input --}}
-                            <input name="search" type="text" placeholder="プロジェクトを検索…" value="{{ request('search') }}" class="flex h-9 w-80 rounded border-0 bg-neutral-400 px-3 py-2 text-sm transition-all placeholder:text-neutral-600 hover:bg-neutral-300 focus:bg-neutral-300" />
+                <div>
+                    <form action="{{ route('projects.search') }}" method="GET" class="flex gap-2">
+                        {{-- input --}}
+                        <input name="search" type="text" placeholder="プロジェクトを検索…" value="{{ request('search') }}" class="flex h-9 w-80 rounded border-0 bg-neutral-400 px-3 py-2 text-sm transition-all placeholder:text-neutral-600 hover:bg-neutral-300 focus:bg-neutral-300" />
 
-                            {{-- sort --}}
-                            <select name="sort" class="flex h-9 w-48 items-center justify-center rounded border-0 bg-white px-4 py-0 text-sm font-medium text-neutral-500 shadow-sm transition-colors duration-200">
-                                <option value="desc" {{ request('sort', 'desc') == 'desc' ? 'selected' : '' }}>
-                                    更新日（新しい順）
-                                </option>
-                                <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>
-                                    更新日（古い順）
-                                </option>
-                                <option value="iddesc" {{ request('sort') == 'iddesc' ? 'selected' : '' }}>
-                                    ID（大きい順）
-                                </option>
-                                <option value="idasc" {{ request('sort') == 'idasc' ? 'selected' : '' }}>
-                                    ID（小さい順）
-                                </option>
-                            </select>
+                        {{-- sort --}}
+                        <select name="sort" class="flex h-9 w-48 items-center justify-center rounded border-0 bg-white px-4 py-0 text-sm font-medium text-neutral-500 shadow-sm transition-colors duration-200">
+                            <option value="desc" {{ request('sort', 'desc') == 'desc' ? 'selected' : '' }}>
+                                更新日（新しい順）
+                            </option>
+                            <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>
+                                更新日（古い順）
+                            </option>
+                            <option value="iddesc" {{ request('sort') == 'iddesc' ? 'selected' : '' }}>
+                                ID（大きい順）
+                            </option>
+                            <option value="idasc" {{ request('sort') == 'idasc' ? 'selected' : '' }}>
+                                ID（小さい順）
+                            </option>
+                        </select>
 
-                            {{-- submit --}}
-                            <button type="submit"
-                                class="ml-auto flex h-9 items-center justify-center rounded border-0 bg-white px-4 py-2 text-sm font-medium tracking-wide text-neutral-500 shadow-sm transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
-                                検索
-                            </button>
-                        </form>
-                    </div>
+                        {{-- submit --}}
+                        <button type="submit"
+                            class="ml-auto flex h-9 items-center justify-center rounded border-0 bg-white px-4 py-2 text-sm font-medium tracking-wide text-neutral-500 shadow-sm transition-colors duration-200 hover:bg-neutral-100 hover:text-neutral-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white">
+                            検索
+                        </button>
+                    </form>
+                </div>
 
-                    {{-- new project --}}
-                    <div>
-                        <a href="{{ route('projects.create') }}" type="button"
-                            class="focus:shadow-outline inline-flex items-center justify-center rounded bg-neutral-800 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">
-                            プロジェクトを新規作成
-                        </a>
-                    </div>
+                {{-- new project --}}
+                <div>
+                    <a href="{{ route('projects.create') }}" type="button"
+                        class="focus:shadow-outline inline-flex items-center justify-center rounded bg-neutral-800 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2">
+                        プロジェクトを新規作成
+                    </a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="flex flex-row flex-nowrap">
-            {{-- sidebar --}}
-            @include('layouts.sidebar')
+    <div class="flex flex-row flex-nowrap">
+        {{-- sidebar --}}
+        @include('layouts.sidebar')
 
-            <div class="mx-auto w-full p-6">
+        <div class="mx-auto h-[calc(100svh_-_56px)] w-full overflow-y-scroll p-6">
 
-                {{-- if --}}
-                @if ($projects->isEmpty())
-                    <div class="w-full rounded-lg border-2 border-dashed border-neutral-300 px-32 py-16 text-center text-sm text-neutral-600">
-                        プロジェクトは見つかりませんでした...
-                    </div>
-                @endif
+            {{-- if --}}
+            @if ($projects->isEmpty())
+                <div class="w-full rounded-lg border-2 border-dashed border-neutral-300 px-32 py-16 text-center text-sm text-neutral-600">
+                    プロジェクトは見つかりませんでした...
+                </div>
+            @endif
 
-                {{-- lists --}}
-                <div class="rounded border border-neutral-200 bg-white p-6">
+            {{-- lists --}}
+            <div class="rounded border border-neutral-200 bg-white">
 
+                {{-- tab --}}
+                <div class="border-b border-neutral-200">
+                    <ul class="flex flex-row">
+                        <li><a class="block border-b-4 border-orange-400 border-white px-6 py-4 hover:border-orange-400 hover:bg-neutral-50" href="">公開中</a></li>
+                        <li><a class="block border-b-4 border-orange-400 border-white px-6 py-4 hover:border-orange-400 hover:bg-neutral-50" href="">非公開</a></li>
+                    </ul>
+                </div>
+
+                <div class="p-6">
                     {{-- table haeder --}}
                     <div class="mb-4 flex flex-row">
                         <p class="text-xs font-bold text-neutral-600">ID</p>
@@ -80,7 +88,7 @@
                         <p class="text-xs font-bold text-neutral-600">プロジェクト名</p>
                         <p class="text-xs font-bold text-neutral-600">コントロール</p>
                     </div>
-
+                    {{-- projects --}}
                     <ul>
                         @foreach ($projects as $key => $project)
                             <li class="last-child:border-0 last-child:mb-0 mb-5 border-b border-neutral-200">
@@ -112,8 +120,8 @@
                                                 {{-- 非公開 --}}
                                                 <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="relative flex items-center rounded-full bg-neutral-300 py-1.5 pl-2 pr-2.5 text-xs font-semibold text-white">
-                                                        <svg class="relative h-5 w-5 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                                    <button type="submit" class="relative flex items-center rounded-full bg-neutral-300 py-0.5 pl-1.5 pr-2 text-xs font-semibold text-white">
+                                                        <svg class="relative h-3 w-3 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                                             <path fill-rule="evenodd"
                                                                 d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
                                                                 clip-rule="evenodd" />
@@ -330,24 +338,25 @@
                     </ul>
                 </div>
 
-                {{ $projects->links() }}
-
             </div>
+
+            {{ $projects->links() }}
+
         </div>
+    </div>
 
 
-        <script>
-            @foreach ($projects as $key => $project)
-                document.getElementById('toggleButton{{ $key }}').addEventListener('click', function() {
-                    const forms = document.getElementById('forms{{ $key }}');
+    <script>
+        @foreach ($projects as $key => $project)
+            document.getElementById('toggleButton{{ $key }}').addEventListener('click', function() {
+                const forms = document.getElementById('forms{{ $key }}');
 
-                    if (forms.style.display === 'block') {
-                        forms.style.display = 'none';
-                    } else {
-                        forms.style.display = 'block';
-                    }
-                });
-            @endforeach
-        </script>
-    </main>
+                if (forms.style.display === 'block') {
+                    forms.style.display = 'none';
+                } else {
+                    forms.style.display = 'block';
+                }
+            });
+        @endforeach
+    </script>
 @endsection

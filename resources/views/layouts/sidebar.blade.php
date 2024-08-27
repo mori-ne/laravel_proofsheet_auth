@@ -1,4 +1,4 @@
-<aside class="h-svh relative z-40 flex w-60 shrink-0 flex-col overflow-y-scroll border-0 border-r border-neutral-200 bg-white pt-8">
+<aside class="relative z-40 flex h-[calc(100svh_-_56px)] w-60 shrink-0 flex-col overflow-y-scroll border-0 border-r border-neutral-200 bg-white pt-8">
 
     {{-- mainmenu --}}
     <div class="mb-6">
