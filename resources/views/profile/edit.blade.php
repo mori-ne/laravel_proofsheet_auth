@@ -8,9 +8,9 @@
         {{-- sidebar --}}
         @include('layouts.sidebar')
 
-        <div>
+        <div class="mx-auto h-[calc(100svh_-_56px)] w-full overflow-y-scroll p-6">
 
-            <div class="mb-6 rounded border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
+            <div class="mb-6 rounded border border-neutral-200 bg-white p-8">
                 <div class="w-full">
                     <section>
                         <header>
@@ -64,7 +64,7 @@
                             <div class="flex items-center gap-4">
                                 <x-primary-button>{{ __('Save') }}</x-primary-button>
 
-                                @if (session('status') === 'profile-updated')
+                                @if (session('status') === 'プロフィールを更新しました')
                                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-neutral-600">{{ __('Saved.') }}</p>
                                 @endif
                             </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="mb-6 rounded border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
+            <div class="mb-6 rounded border border-neutral-200 bg-white p-8">
                 <div class="w-full">
                     <section>
                         <header>
@@ -120,7 +120,7 @@
                 </div>
             </div>
 
-            <div class="mb-6 rounded border-0 border-neutral-200 bg-white p-8 shadow-md shadow-neutral-200">
+            <div class="mb-6 rounded border border-neutral-200 bg-white p-8">
                 <div class="w-full">
                     <section class="space-y-6">
                         <header>

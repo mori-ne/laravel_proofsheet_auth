@@ -10,6 +10,7 @@
                 <p class="block w-auto fill-current">Proofsheet</p>
             </a>
         </div>
+
         {{-- info --}}
         <div class="flex h-14 w-full items-center gap-4 px-6">
             <h4 class="text-md shrink-0 font-bold text-white">プロジェクト管理</h4>
@@ -62,21 +63,42 @@
 
         <div class="mx-auto h-[calc(100svh_-_56px)] w-full overflow-y-scroll p-6">
 
-            {{-- if --}}
-            @if ($projects->isEmpty())
-                <div class="w-full rounded-lg border-2 border-dashed border-neutral-300 px-32 py-16 text-center text-sm text-neutral-600">
-                    プロジェクトは見つかりませんでした...
-                </div>
-            @endif
-
             {{-- lists --}}
             <div class="rounded border border-neutral-200 bg-white">
 
                 {{-- tab --}}
                 <div class="border-b border-neutral-200">
                     <ul class="flex flex-row">
-                        <li><a class="block border-b-4 border-orange-400 border-white px-6 py-4 hover:border-orange-400 hover:bg-neutral-50" href="">公開中</a></li>
-                        <li><a class="block border-b-4 border-orange-400 border-white px-6 py-4 hover:border-orange-400 hover:bg-neutral-50" href="">非公開</a></li>
+                        <form action="{{ route('projects.search') }}" method="GET">
+                            <li>
+                                <input type="hidden" name="publish" value="all">
+                                @if (request()->input('publish') == 'all')
+                                    <button type="submit" class="block border-b-4 border-neutral-400 border-neutral-400 bg-neutral-50 px-6 pb-2 pt-3">すべて</button>
+                                @else
+                                    <button type="submit" class="block border-b-4 border-neutral-400 border-white px-6 pb-2 pt-3 hover:border-neutral-400 hover:bg-neutral-50">すべて</button>
+                                @endif
+                            </li>
+                        </form>
+                        <form action="{{ route('projects.search') }}" method="GET">
+                            <li>
+                                <input type="hidden" name="publish" value="public">
+                                @if (request()->input('publish') == 'public')
+                                    <button type="submit" class="block border-b-4 border-neutral-400 border-neutral-400 bg-neutral-50 px-6 pb-2 pt-3">公開中</button>
+                                @else
+                                    <button type="submit" class="block border-b-4 border-neutral-400 border-white px-6 pb-2 pt-3 hover:border-neutral-400 hover:bg-neutral-50">公開中</button>
+                                @endif
+                            </li>
+                        </form>
+                        <form action="{{ route('projects.search') }}" method="GET">
+                            <li>
+                                <input type="hidden" name="publish" value="private">
+                                @if (request()->input('publish') == 'private')
+                                    <button type="submit" class="block border-b-4 border-neutral-400 border-neutral-400 bg-neutral-50 px-6 pb-2 pt-3">非公開</button>
+                                @else
+                                    <button type="submit" class="block border-b-4 border-neutral-400 border-white px-6 pb-2 pt-3 hover:border-neutral-400 hover:bg-neutral-50">非公開</button>
+                                @endif
+                            </li>
+                        </form>
                     </ul>
                 </div>
 
@@ -88,10 +110,18 @@
                         <p class="text-xs font-bold text-neutral-600">プロジェクト名</p>
                         <p class="text-xs font-bold text-neutral-600">コントロール</p>
                     </div>
+
+                    {{-- if --}}
+                    @if ($projects->isEmpty())
+                        <div class="w-full rounded-lg border-2 border-dashed border-neutral-300 px-32 py-16 text-center text-sm text-neutral-600">
+                            プロジェクトは見つかりませんでした...
+                        </div>
+                    @endif
+
                     {{-- projects --}}
                     <ul>
                         @foreach ($projects as $key => $project)
-                            <li class="last-child:border-0 last-child:mb-0 mb-5 border-b border-neutral-200">
+                            <li class="mb-5">
 
                                 <div class="border-0 border-neutral-300 pb-4">
                                     <div class="flex flex-row items-start justify-between gap-2">

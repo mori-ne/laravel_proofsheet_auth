@@ -44,7 +44,7 @@ class ProjectController extends Controller
         }
 
         // ページネーション
-        $projects = $query->with('forms')->paginate(5);
+        $projects = $query->with('forms')->paginate(10);
         return view('/projects', ['projects' => $projects]);
     }
 
@@ -55,12 +55,20 @@ class ProjectController extends Controller
         $input = $request->input('search');
         // デフォルトの並び順
         $sort = $request->input('sort', 'desc');
+        // すべて・公開中・非公開
+        $publish = $request->input('publish');
         // クエリ発行
         $query = Project::query();
-
         // クエリがある場合、プロジェクトを検索
         if ($input) {
             $query->where('project_name', 'LIKE', '%' . $input . '%');
+        }
+
+        if ($publish === 'public') {
+            $query->where('status', 'LIKE', '%' . 1 . '%');
+        }
+        if ($publish === 'private') {
+            $query->where('status', 'LIKE', '%' . 0 . '%');
         }
 
         // 並び替え
@@ -77,7 +85,7 @@ class ProjectController extends Controller
             $query->orderBy('id', 'asc');
         }
 
-        $projects = $query->with('forms')->paginate(5);
+        $projects = $query->with('forms')->paginate(10);
         return view('/projects', compact('projects'));
     }
 

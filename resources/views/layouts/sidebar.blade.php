@@ -9,7 +9,7 @@
                     <div class="flex items-center gap-2">
                         <i class="at-package-bold"></i>
                         <p class="text-neutral-500">
-                            ホーム
+                            ダッシュボード
                         </p>
                     </div>
                 </a>
