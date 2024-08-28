@@ -42,7 +42,7 @@
                                 <label class="text-md font-bold">プロジェクトの説明</label>
                             </div>
                             {{-- projectinstance --}}
-                            <textarea id="" name="project_description" type="text" placeholder="プロジェクトの説明を記入してください" class="text-md flex h-32 min-h-[80px] w-full rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-400">{{ old('project_description', $project->project_description) }}</textarea>
+                            <textarea id="editor" name="project_description" type="text" placeholder="プロジェクトの説明を記入してください" class="">{{ old('project_description', $project->project_description) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                                 <label class="text-md font-bold">内容情報</label>
                             </div>
                             {{-- projectinstance --}}
-                            <textarea id="" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください" class="text-md flex h-64 min-h-[80px] w-full rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-400">{!! old('project_message', $project->project_message) !!}</textarea>
+                            <textarea id="editor2" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください" class="">{!! old('project_message', $project->project_message) !!}</textarea>
                         </div>
                     </div>
                 </div>
