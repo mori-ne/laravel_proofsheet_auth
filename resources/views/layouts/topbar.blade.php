@@ -2,7 +2,7 @@
 <div class="flex flex-row flex-nowrap bg-neutral-600 text-white">
 
     <!-- Logo -->
-    <div class="flex w-60 shrink-0 shrink-0 items-center justify-center border-r border-neutral-500 px-8 text-xl font-extrabold">
+    <div class="flex w-44 shrink-0 items-center border-r border-neutral-500 pl-4 text-lg font-extrabold">
         <a href="{{ route('dashboard') }}" class="block w-full">
             <p class="block w-auto fill-current">Proofsheet</p>
         </a>

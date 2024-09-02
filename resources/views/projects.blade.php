@@ -5,7 +5,7 @@
     {{-- top --}}
     <div class="flex flex-row flex-nowrap bg-neutral-600 text-white">
         <!-- Logo -->
-        <div class="flex w-60 shrink-0 shrink-0 items-center justify-center border-r border-neutral-500 px-8 text-xl font-extrabold">
+        <div class="flex w-48 shrink-0 items-center justify-center border-r border-neutral-500 px-8 text-xl font-extrabold">
             <a href="{{ route('dashboard') }}" class="block w-full">
                 <p class="block w-auto fill-current">Proofsheet</p>
             </a>
@@ -64,18 +64,23 @@
         <div class="mx-auto h-[calc(100svh_-_56px)] w-full overflow-y-scroll p-6">
 
             {{-- lists --}}
-            <div class="rounded border border-neutral-200 bg-white">
+            <div class="w-full rounded border border-neutral-200 bg-white">
+
+                {{-- title --}}
+                <div class="border-b border-neutral-200 px-4 py-4">
+                    <p class="text-sm font-bold text-neutral-500">プロジェクト一覧</p>
+                </div>
 
                 {{-- tab --}}
-                <div class="border-b border-neutral-200">
-                    <ul class="flex flex-row">
+                <div class="px-4 pt-6">
+                    <ul class="flex flex-row gap-2">
                         <form action="{{ route('projects.search') }}" method="GET">
                             <li>
                                 <input type="hidden" name="publish" value="all">
                                 @if (request()->input('publish') == 'all')
-                                    <button type="submit" class="block border-b-4 border-neutral-400 border-neutral-400 bg-neutral-50 px-6 pb-2 pt-3">すべて</button>
+                                    <button type="submit" class="rounded-full border border-orange-600 bg-orange-600 px-3 py-1 text-xs font-bold text-white transition-all">すべて</button>
                                 @else
-                                    <button type="submit" class="block border-b-4 border-neutral-400 border-white px-6 pb-2 pt-3 hover:border-neutral-400 hover:bg-neutral-50">すべて</button>
+                                    <button type="submit" class="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-bold text-neutral-600 transition-all hover:border-orange-600 hover:bg-orange-600 hover:text-white">すべて</button>
                                 @endif
                             </li>
                         </form>
@@ -83,9 +88,9 @@
                             <li>
                                 <input type="hidden" name="publish" value="public">
                                 @if (request()->input('publish') == 'public')
-                                    <button type="submit" class="block border-b-4 border-neutral-400 border-neutral-400 bg-neutral-50 px-6 pb-2 pt-3">公開中</button>
+                                    <button type="submit" class="rounded-full border border-green-600 bg-green-600 px-3 py-1 text-xs font-bold text-white transition-all">公開中</button>
                                 @else
-                                    <button type="submit" class="block border-b-4 border-neutral-400 border-white px-6 pb-2 pt-3 hover:border-neutral-400 hover:bg-neutral-50">公開中</button>
+                                    <button type="submit" class="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-bold text-neutral-600 transition-all hover:border-green-600 hover:bg-green-600 hover:text-white">公開中</button>
                                 @endif
                             </li>
                         </form>
@@ -93,127 +98,63 @@
                             <li>
                                 <input type="hidden" name="publish" value="private">
                                 @if (request()->input('publish') == 'private')
-                                    <button type="submit" class="block border-b-4 border-neutral-400 border-neutral-400 bg-neutral-50 px-6 pb-2 pt-3">非公開</button>
+                                    <button type="submit" class="rounded-full border border-neutral-600 bg-neutral-600 px-3 py-1 text-xs font-bold text-white transition-all">非公開</button>
                                 @else
-                                    <button type="submit" class="block border-b-4 border-neutral-400 border-white px-6 pb-2 pt-3 hover:border-neutral-400 hover:bg-neutral-50">非公開</button>
+                                    <button type="submit" class="rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-bold text-neutral-600 transition-all hover:border-neutral-600 hover:bg-neutral-600 hover:text-white">非公開</button>
                                 @endif
                             </li>
                         </form>
                     </ul>
                 </div>
 
+                {{-- table --}}
                 <div class="p-6">
-                    {{-- table haeder --}}
-                    <div class="mb-4 flex flex-row">
-                        <p class="text-xs font-bold text-neutral-600">ID</p>
-                        <p class="text-xs font-bold text-neutral-600">ステータス</p>
-                        <p class="text-xs font-bold text-neutral-600">プロジェクト名</p>
-                        <p class="text-xs font-bold text-neutral-600">コントロール</p>
-                    </div>
+                    <table width="100%">
+                        {{-- table haeder --}}
+                        <thead>
+                            <tr>
+                                <th class="border-b border-t border-neutral-200 py-2 pr-4 text-left text-xs font-bold text-neutral-600">No.</th>
+                                <th class="w-2/3 border-b border-t border-neutral-200 py-2 pr-4 text-left text-xs font-bold text-neutral-600">プロジェクト名</th>
+                                <th class="border-b border-t border-neutral-200 py-2 pr-4 text-left text-xs font-bold text-neutral-600">ステータス</th>
+                                <th class="border-b border-t border-neutral-200 py-2 pr-4 text-left text-xs font-bold text-neutral-600">公開期限</th>
+                            </tr>
+                        </thead>
 
-                    {{-- if --}}
-                    @if ($projects->isEmpty())
-                        <div class="w-full rounded-lg border-2 border-dashed border-neutral-300 px-32 py-16 text-center text-sm text-neutral-600">
-                            プロジェクトは見つかりませんでした...
-                        </div>
-                    @endif
+                        {{-- if --}}
+                        @if ($projects->isEmpty())
+                            <tr>
+                                <td class="w-full" colspan="3">
+                                    <p class="flex h-32 items-center justify-center rounded-lg border border-dashed border-neutral-300 text-center text-sm text-neutral-600">
+                                        プロジェクトは見つかりませんでした...
+                                    </p>
+                                </td>
+                                <td></td>
+                            </tr>
+                        @endif
 
-                    {{-- projects --}}
-                    <ul>
-                        @foreach ($projects as $key => $project)
-                            <li class="mb-5">
-
-                                <div class="border-0 border-neutral-300 pb-4">
-                                    <div class="flex flex-row items-start justify-between gap-2">
-
-                                        {{-- id --}}
-                                        <div class="text-md mt-0.5 font-bold text-neutral-400">
+                        <tbody>
+                            @foreach ($projects as $key => $project)
+                                <tr class="border-b border-neutral-200">
+                                    {{-- id --}}
+                                    <td class="pb-3 pr-4 pt-4">
+                                        <p class="text-md w-fit font-bold text-neutral-400">
                                             {{ $project->id }}
-                                        </div>
+                                        </p>
+                                    </td>
 
-                                        {{-- publish --}}
-                                        <div class="mt-1 flex items-center justify-start gap-2 border-0 border-neutral-300">
-                                            @if ($project->status)
-                                                {{-- 公開中 --}}
-                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="relative flex items-center rounded-full bg-green-600 py-0.5 pl-1.5 pr-2 text-xs font-semibold text-white">
-                                                        <svg class="relative h-3 w-3 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                                            <path fill-rule="evenodd"
-                                                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                        <span>公開中</span>
-                                                    </button>
-                                                </form>
-                                            @else
-                                                {{-- 非公開 --}}
-                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="relative flex items-center rounded-full bg-neutral-300 py-0.5 pl-1.5 pr-2 text-xs font-semibold text-white">
-                                                        <svg class="relative h-3 w-3 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                                            <path fill-rule="evenodd"
-                                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                        <span>
-                                                            非公開
-                                                        </span>
-                                                    </button>
-                                                </form>
-                                            @endif
-
-
-
-                                            {{-- <div class="ml-4 flex flex-col"> --}}
-                                            {{-- <div class="flex items-center gap-4"> --}}
-                                            {{-- created_at --}}
-                                            {{-- <div class="flex items-center"> --}}
-                                            {{-- <p class="text-xs text-neutral-400">作成日：</p> --}}
-                                            {{-- <p class="text-xs text-neutral-400"> --}}
-                                            {{-- {{ \Carbon\Carbon::parse($project->created_at)->format('Y年m月d日') }} --}}
-                                            {{-- {{ $project->created_at }} --}}
-                                            {{-- </p> --}}
-                                            {{-- </div> --}}
-                                            {{-- updated_at --}}
-                                            {{-- <div class="flex items-center"> --}}
-                                            {{-- <p class="text-xs text-neutral-400">更新日：</p> --}}
-                                            {{-- <p class="text-xs text-neutral-400"> --}}
-                                            {{-- {{ \Carbon\Carbon::parse($project->updated_at)->format('Y年m月d日') }} --}}
-                                            {{-- {{ $project->updated_at }} --}}
-                                            {{-- </p> --}}
-                                            {{-- </div> --}}
-                                            {{-- </div> --}}
-                                            {{-- </div> --}}
-                                        </div>
-
-                                        <div class="mt-1">
-                                            {{-- project name --}}
-                                            <h5 class="mb-1 shrink-0 text-xl font-bold leading-none tracking-tight text-neutral-700">
-                                                <a href="{{ route('projects.show', $project->id) }}" class="hover:underline">{{ $project->project_name }}</a>
-                                            </h5>
-                                            {{-- published_at --}}
-                                            <div class="flex items-center">
-                                                <p class="pr-2 text-sm text-neutral-500">公開期限</p>
-                                                <p class="text-sm text-neutral-900">
-                                                    @if ($project->is_deadline)
-                                                        {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y年m月d日 H時i分') }}
-                                                        {{-- {{ $project->is_deadline }} --}}
-                                                    @else
-                                                        設定なし
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-
-
+                                    {{-- project_name / controller --}}
+                                    <td class="pb-3 pr-4 pt-4">
+                                        {{-- project name --}}
+                                        <h5 class="mb-1 text-lg font-bold leading-none text-neutral-700">
+                                            <a href="{{ route('projects.show', $project->id) }}" class="hover:underline">{{ $project->project_name }}</a>
+                                        </h5>
 
                                         {{-- controller --}}
-                                        <div class="ml-auto flex flex-row gap-2">
+                                        <div class="ml-auto flex flex-row items-center gap-2">
                                             {{-- form toggle --}}
                                             <div class="flex flex-row gap-1 text-sm">
-                                                <button id="toggleButton{{ $key }}" class="flex flex-row items-center gap-2 rounded border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100" type="button">
-                                                    <p class="flex h-5 w-5 items-center justify-center rounded-full bg-orange-400 text-xs font-bold text-white">
+                                                <button id="toggleButton{{ $key }}" class="flex flex-row items-center gap-1 text-sm" type="button">
+                                                    <p class="flex h-4 w-4 items-center justify-center rounded-full bg-orange-400 text-xs font-bold text-white">
                                                         {{ $project->forms->count() }}
                                                     </p>
                                                     フォームを開く
@@ -221,32 +162,30 @@
                                             </div>
 
                                             {{-- url --}}
-                                            <div class="flex items-center">
-                                                {{-- <p class="text-sm text-neutral-500">公開URL：</p> --}}
-                                                <a class="flex h-8 items-center justify-center rounded border border-neutral-300 px-4 text-sm hover:bg-neutral-100" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">投稿ページを開く</a>
-                                            </div>
+                                            {{-- <p class="text-sm text-neutral-500">公開URL：</p> --}}
+                                            <a class="text-sm" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">投稿ページを開く</a>
 
                                             {{-- show --}}
-                                            <a href="{{ route('projects.show', ['id' => $project->id]) }}" @click="menuBarOpen=false" class="flex h-8 items-center justify-center rounded border border-neutral-300 px-4 text-sm hover:bg-neutral-100">
+                                            <a href="{{ route('projects.show', ['id' => $project->id]) }}" @click="menuBarOpen=false" class="text-sm">
                                                 <span>詳細</span>
                                             </a>
 
                                             {{-- edit --}}
-                                            <a href="{{ route('projects.edit', $project->id) }} @click=" menuBarOpen=false" class="flex h-8 items-center justify-center rounded border border-neutral-300 px-4 text-sm hover:bg-neutral-100">
+                                            <a href="{{ route('projects.edit', $project->id) }} @click=" menuBarOpen=false" class="text-sm">
                                                 <span>編集</span>
                                             </a>
 
                                             {{-- duplicate --}}
                                             <form action="{{ route('projects.duplicate', $project->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" @click="menuBarOpen=false" class="flex h-8 items-center justify-center rounded border border-neutral-300 px-4 text-sm hover:bg-neutral-100">
+                                                <button type="submit" @click="menuBarOpen=false" class="text-sm">
                                                     <span>複製</span>
                                                 </button>
                                             </form>
 
                                             {{-- delete --}}
                                             <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" class="relative z-50 h-auto w-auto">
-                                                <button @click="modalOpen=true" class="flex h-8 items-center justify-center rounded border border-red-200 px-4 text-sm text-red-500 hover:bg-red-100">削除</button>
+                                                <button @click="modalOpen=true" class="text-sm text-red-500">削除</button>
                                                 <template x-teleport="body">
                                                     <div x-show="modalOpen" class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-cloak>
                                                         <div x-show="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100"
@@ -286,22 +225,65 @@
                                                 </template>
                                             </div>
                                         </div>
-                                    </div>
+                                    </td>
 
+                                    {{-- publish --}}
+                                    <td class="pb-3 pr-4 pt-4">
+                                        <div class="mt-1 flex items-center justify-start gap-2 border-0 border-neutral-300">
+                                            @if ($project->status)
+                                                {{-- 公開中 --}}
+                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="relative flex items-center rounded-full bg-green-600 py-0.5 pl-1.5 pr-2 text-xs font-semibold text-white">
+                                                        <svg class="relative h-3 w-3 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        <span>公開中</span>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                {{-- 非公開 --}}
+                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="relative flex items-center rounded-full bg-neutral-300 py-0.5 pl-1.5 pr-2 text-xs font-semibold text-white">
+                                                        <svg class="relative h-3 w-3 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                                            <path fill-rule="evenodd"
+                                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                                                                clip-rule="evenodd" />
+                                                        </svg>
+                                                        <span>
+                                                            非公開
+                                                        </span>
+                                                    </button>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    </td>
 
-                                </div>
-
+                                    {{-- published_at --}}
+                                    <td class="pb-3 pr-4 pt-4">
+                                        <div class="flex items-center">
+                                            <p class="text-sm text-neutral-900">
+                                                @if ($project->is_deadline)
+                                                    {{ \Carbon\Carbon::parse($project->is_deadline)->format('Y年m月d日 H時i分') }}
+                                                    {{-- {{ $project->is_deadline }} --}}
+                                                @else
+                                                    設定なし
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
 
                                 {{-- forms --}}
-                                <div id="forms{{ $key }}" class="ml-20 hidden border-0 border-neutral-300 pb-4">
+                                <tr id="forms{{ $key }}" class="hidden">
                                     @foreach ($project->forms as $key => $form)
-                                        <div class="flex flex-row items-center rounded px-2 py-3 hover:bg-neutral-100">
-                                            <p class="text-md pr-3 text-neutral-400">
-                                                {{ $key + 1 }}
-                                            </p>
-                                            <a href="{{ route('forms.show', $form->id) }}" class="hover:underline">
-                                                {{ $form->form_name }}
-                                            </a>
+                                        <td colspan="4" class="flex w-full flex-row items-center rounded px-2 py-3 hover:bg-neutral-100">
+                                            <p class="text-md pr-3 text-neutral-400">{{ $key + 1 }}</p>
+                                            <a href="{{ route('forms.show', $form->id) }}" class="hover:underline">{{ $form->form_name }}</a>
+
                                             {{-- {{ $form->form_description }} --}}
                                             <div class="ml-auto flex flex-row gap-1">
                                                 {{-- dropdown menu --}}
@@ -360,12 +342,13 @@
                                                     </template>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </td>
                                     @endforeach
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
                 </div>
 
             </div>
