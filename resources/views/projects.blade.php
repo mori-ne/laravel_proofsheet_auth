@@ -5,7 +5,7 @@
     {{-- top --}}
     <div class="flex flex-row flex-nowrap bg-neutral-600 text-white">
         <!-- Logo -->
-        <div class="flex w-48 shrink-0 items-center justify-center border-r border-neutral-500 px-8 text-xl font-extrabold">
+        <div class="flex w-48 shrink-0 items-center justify-center border-r border-neutral-500 pl-4 text-xl font-extrabold">
             <a href="{{ route('dashboard') }}" class="block w-full">
                 <p class="block w-auto fill-current">Proofsheet</p>
             </a>
@@ -58,6 +58,7 @@
     </div>
 
     <div class="flex flex-row flex-nowrap">
+
         {{-- sidebar --}}
         @include('layouts.sidebar')
 
@@ -150,7 +151,7 @@
                                         </h5>
 
                                         {{-- controller --}}
-                                        <div class="ml-auto flex flex-row items-center gap-2">
+                                        <div class="ml-auto flex flex-row items-center gap-3">
                                             {{-- form toggle --}}
                                             <div class="flex flex-row gap-1 text-sm">
                                                 <button id="toggleButton{{ $key }}" class="flex flex-row items-center gap-1 text-sm" type="button">

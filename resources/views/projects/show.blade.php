@@ -2,90 +2,98 @@
 @section('title', 'プロジェクトの詳細')
 @section('content')
 
+    {{-- top --}}
     @include('layouts.topbar')
 
     <div class="flex flex-row flex-nowrap">
+
         {{-- sidebar --}}
         @include('layouts.sidebar')
 
-        <div class="flex flex-row">
-            {{-- <div class="w-60 shrink-0 border-r border-neutral-200 bg-white">
-            </div> --}}
+        <div class="mx-auto h-[calc(100svh_-_56px)] w-full overflow-y-scroll p-6">
 
+            {{-- project name / description --}}
+            <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
+                {{-- title --}}
+                <div class="border-b border-neutral-200 px-4 py-4">
+                    <p class="text-sm font-bold text-neutral-500">プロジェクトの名</p>
+                </div>
 
-            <div class="mx-auto h-[calc(100svh_-_56px)] w-full overflow-y-scroll p-6">
-                <div class="flex flex-row justify-between">
-                    {{-- project name / description --}}
-                    <div>
-                        <h5 class="mb-3 text-2xl font-bold leading-none text-neutral-900">
-                            {{ $project->project_name }}
-                        </h5>
-                        <h5 class="mb-2 text-lg leading-none text-neutral-500">
-                            <div class="text-md">{!! $project->project_description !!}</div>
-                        </h5>
-                    </div>
+                {{-- content --}}
+                <div class="px-4 pt-6">
+                    <div class="flex flex-row justify-between">
+                        {{-- project name --}}
+                        <div>
+                            <h5 class="mb-2 text-xl font-bold leading-none text-neutral-900">
+                                {{ $project->project_name }}
+                            </h5>
+                            <h5 class="text-md mb-6 leading-none text-neutral-400">
+                                <div class="text-md">{!! $project->project_description !!}</div>
+                            </h5>
+                        </div>
 
-                    {{-- controll --}}
-                    <div>
-                        <div class="mb-6">
-                            <div class="flex flex-row justify-between">
-                                {{-- dropdown menu --}}
-                                <div>
-                                    <div x-data="{
-                                        dropdownOpen: false
-                                    }" class="relative ml-auto">
+                        {{-- controll --}}
+                        <div>
+                            <div class="mb-6">
+                                <div class="flex flex-row justify-between">
+                                    {{-- dropdown menu --}}
+                                    <div>
+                                        <div x-data="{
+                                            dropdownOpen: false
+                                        }" class="relative ml-auto">
 
-                                        <button @click="dropdownOpen=true"
-                                            class="inline-flex items-center justify-center rounded px-4 py-2 text-lg font-medium transition-colors hover:bg-neutral-200 focus:rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"><i
-                                                class="at-dots-vertical"></i></button>
+                                            <button @click="dropdownOpen=true"
+                                                class="inline-flex items-center justify-center rounded px-4 py-2 text-lg font-medium transition-colors hover:bg-neutral-200 focus:rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 active:bg-white disabled:pointer-events-none disabled:opacity-50"><i
+                                                    class="at-dots-vertical"></i></button>
 
-                                        <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-44 -translate-x-1/2" x-cloak>
-                                            <div class="rounded border-0 bg-white p-1 text-sm text-neutral-700 shadow-md">
+                                            <div x-show="dropdownOpen" @click.away="dropdownOpen=false" x-transition:enter="ease-out duration-200" x-transition:enter-start="-translate-y-2" x-transition:enter-end="translate-y-0" class="absolute left-1/2 top-0 z-50 mt-10 w-44 -translate-x-1/2" x-cloak>
+                                                <div class="rounded border-0 bg-white p-1 text-sm text-neutral-700 shadow-md">
 
-                                                {{-- edit --}}
-                                                <a href="{{ route('projects.edit', $project->id) }}" @click="menuBarOpen=false"
-                                                    class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-200 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
-                                                    <span>プロジェクトを編集</span>
-                                                </a>
+                                                    {{-- edit --}}
+                                                    <a href="{{ route('projects.edit', $project->id) }}" @click="menuBarOpen=false"
+                                                        class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 outline-none hover:bg-neutral-200 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                                                        <span>プロジェクトを編集</span>
+                                                    </a>
 
-                                                {{-- delete --}}
-                                                <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" class="relative z-50 h-auto w-auto">
-                                                    <button @click="modalOpen=true"
-                                                        class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 text-red-500 outline-none hover:bg-neutral-200 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">プロジェクトを削除</button>
-                                                    <template x-teleport="body">
-                                                        <div x-show="modalOpen" class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-cloak>
-                                                            <div x-show="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100"
-                                                                x-transition:leave-end="opacity-0" @click="modalOpen=false" class="absolute inset-0 h-full w-full bg-neutral-800 bg-opacity-40">
-                                                            </div>
-                                                            <div x-show="modalOpen" x-trap.inert.noscroll="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                                                                x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                                                                class="relative w-full bg-white px-7 py-6 sm:max-w-lg sm:rounded-lg">
-
-                                                                <div class="flex items-center justify-between pb-2">
-                                                                    <h3 class="text-lg font-semibold">プロジェクトを削除</h3>
-                                                                    <button @click="modalOpen=false" class="absolute right-0 top-0 mr-5 mt-5 flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 hover:bg-neutral-50 hover:text-neutral-800">
-                                                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                    </button>
+                                                    {{-- delete --}}
+                                                    <div x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false" class="relative z-50 h-auto w-auto">
+                                                        <button @click="modalOpen=true"
+                                                            class="group relative flex w-full cursor-default select-none items-center justify-between rounded px-2 py-1.5 text-red-500 outline-none hover:bg-neutral-200 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50">プロジェクトを削除</button>
+                                                        <template x-teleport="body">
+                                                            <div x-show="modalOpen" class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-cloak>
+                                                                <div x-show="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300" x-transition:leave-start="opacity-100"
+                                                                    x-transition:leave-end="opacity-0" @click="modalOpen=false" class="absolute inset-0 h-full w-full bg-neutral-800 bg-opacity-40">
                                                                 </div>
-                                                                <div class="relative mb-4 w-auto">
-                                                                    <p>本当に削除してもよろしいですか？</p>
-                                                                    <p class="text-sm text-red-500">※この操作は取り消せません</p>
-                                                                </div>
-                                                                <div class="flex">
-                                                                    <form class="ml-auto" action="{{ route('projects.destroy', $project->id) }}" method="POST">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit"
-                                                                            class="focus:shadow-outline inline-flex items-center justify-center rounded bg-red-600 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2">
-                                                                            削除
+                                                                <div x-show="modalOpen" x-trap.inert.noscroll="modalOpen" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                                                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                                                    x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="relative w-full bg-white px-7 py-6 sm:max-w-lg sm:rounded-lg">
+
+                                                                    <div class="flex items-center justify-between pb-2">
+                                                                        <h3 class="text-lg font-semibold">プロジェクトを削除</h3>
+                                                                        <button @click="modalOpen=false" class="absolute right-0 top-0 mr-5 mt-5 flex h-8 w-8 items-center justify-center rounded-full text-neutral-600 hover:bg-neutral-50 hover:text-neutral-800">
+                                                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                                            </svg>
                                                                         </button>
-                                                                    </form>
+                                                                    </div>
+                                                                    <div class="relative mb-4 w-auto">
+                                                                        <p>本当に削除してもよろしいですか？</p>
+                                                                        <p class="text-sm text-red-500">※この操作は取り消せません</p>
+                                                                    </div>
+                                                                    <div class="flex">
+                                                                        <form class="ml-auto" action="{{ route('projects.destroy', $project->id) }}" method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit"
+                                                                                class="focus:shadow-outline inline-flex items-center justify-center rounded bg-red-600 px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2">
+                                                                                削除
+                                                                            </button>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </template>
+                                                        </template>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,46 +105,50 @@
                 </div>
 
 
-                <div class="mb-6 rounded border border-neutral-200 bg-white p-8">
+            </div>
 
+            <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
+                {{-- title --}}
+                <div class="border-b border-neutral-200 px-4 py-4">
+                    <p class="text-sm font-bold text-neutral-500">公開状況・公開URL</p>
+                </div>
 
-                    {{-- public url --}}
-                    <div class="mb-4 rounded bg-neutral-100 p-4">
-                        <p class="text-sm text-neutral-400">公開URL（URLは変更できません）</p>
-                        <a class="text-md text-neutral-600 hover:underline" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">
-                            {{ route('postuser.index', ['uuid' => $project->uuid]) }}
-                        </a>
-                    </div>
+                {{-- public url --}}
+                <div class="border-b border-neutral-200 bg-white p-4">
+                    <p class="text-sm text-neutral-400">※URLは変更できません</p>
+                    <a class="text-md text-neutral-600 hover:underline" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">
+                        {{ route('postuser.index', ['uuid' => $project->uuid]) }}
+                    </a>
+                </div>
 
-
-
-                    {{-- controll --}}
-                    <div class="flex items-center gap-4">
+                {{-- controll --}}
+                <div class="px-4 py-3">
+                    <div class="flex flex-row gap-4">
                         {{-- 公開／非公開 --}}
                         <div>
                             @if ($project->status)
                                 {{-- 公開中 --}}
                                 <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="relative flex h-8 w-20 items-center justify-center rounded-full bg-green-600 py-1 pl-2 pr-2.5 text-sm font-semibold text-white">
+                                    <button type="submit" class="relative flex h-7 w-20 items-center justify-center rounded-full bg-green-600 pl-1.5 pr-1.5 text-white">
                                         <svg class="relative h-4 w-4 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                             <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
                                                 clip-rule="evenodd" />
                                         </svg>
-                                        <span>公開中</span>
+                                        <span class="text-sm font-semibold">公開中</span>
                                     </button>
                                 </form>
                             @else
                                 {{-- 非公開 --}}
                                 <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
                                     @csrf
-                                    <button type="sumbit" class="relative flex h-8 w-20 items-center justify-center rounded-full bg-neutral-300 py-1 pl-2 pr-2.5 text-sm font-semibold text-white">
+                                    <button type="sumbit" class="relative flex h-7 w-20 items-center justify-center rounded-full bg-neutral-300 pl-1.5 pr-1.5 text-white">
                                         <svg class="relative h-4 w-4 -translate-x-0.5 opacity-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                             <path fill-rule="evenodd"
                                                 d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
                                                 clip-rule="evenodd" />
                                         </svg>
-                                        <span>非公開</span>
+                                        <span class="text-sm">非公開</span>
                                     </button>
                                 </form>
                             @endif
@@ -154,14 +166,19 @@
                                 @endif
                             </p>
                         </div>
-                        {{-- dropdown menu project --}}
-
                     </div>
+                </div>
+            </div>
 
+            <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
 
+                {{-- title --}}
+                <div class="border-b border-neutral-200 px-4 py-4">
+                    <p class="text-sm font-bold text-neutral-500">プロジェクトの詳細</p>
                 </div>
 
-                <div class="mb-6 rounded border border-neutral-200 bg-white p-6">
+                {{-- content --}}
+                <div class="px-4 pt-6">
                     <div x-data="{
                         tabSelected: 1,
                         tabId: $id('tabs'),
@@ -178,15 +195,15 @@
                         tabButtonActive(tabContent) { const tabId = tabContent.id.split('-').slice(-1); return this.tabSelected == tabId; }
                     }" x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);" class="relative w-full">
 
-                        <div x-ref="tabButtons" class="relative mb-6 inline-grid h-12 w-full select-none grid-cols-4 items-center justify-center rounded-lg bg-neutral-100 p-1 text-neutral-500">
+                        <div x-ref="tabButtons" class="relative mb-6 inline-grid h-10 w-full select-none grid-cols-4 items-center justify-center rounded-lg bg-neutral-100 p-1 text-neutral-500">
                             <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-neutral-200 text-neutral-700': tabButtonActive($el) }"
-                                class="relative z-20 inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">フォーム情報</button>
+                                class="relative z-20 inline-flex h-8 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">フォーム情報</button>
                             <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-neutral-200 text-neutral-700': tabButtonActive($el) }"
-                                class="relative z-20 inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">返信メール情報</button>
+                                class="relative z-20 inline-flex h-8 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">返信メール情報</button>
                             <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-neutral-200 text-neutral-700': tabButtonActive($el) }"
-                                class="relative z-20 inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">ユーザー情報</button>
+                                class="relative z-20 inline-flex h-8 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">ユーザー情報</button>
                             <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-neutral-200 text-neutral-700': tabButtonActive($el) }"
-                                class="relative z-20 inline-flex h-10 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">ページ情報</button>
+                                class="relative z-20 inline-flex h-8 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded px-3 text-sm font-medium transition-all">ページ情報</button>
                             <div x-ref="tabMarker" class="absolute left-0 z-10 h-full w-full duration-300 ease-out" x-cloak>
                                 <div class="h-full w-full rounded bg-neutral-100 shadow-sm"></div>
                             </div>
@@ -197,7 +214,6 @@
                             <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="">
                                 {{-- forms --}}
                                 <div class="mb-8">
-                                    <h4 class="text-md mb-2 font-bold text-neutral-500">フォーム情報</h4>
 
                                     {{-- create --}}
                                     <div class="mb-3 flex justify-end">
@@ -378,25 +394,24 @@
                             <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="relative" x-cloak>
                                 {{-- mail --}}
                                 <div class="mb-8">
-                                    <h4 class="text-md mb-2 font-bold text-neutral-500">返信メール情報</h4>
-                                    <div class="rounded border-0 p-8">
+                                    <div>
                                         <div>
                                             <div class="mb-8">
-                                                <p class="mb-2 text-sm text-neutral-400">メール件名</p>
+                                                <p class="mb-4 border-b border-neutral-300 pb-1 text-sm font-bold text-neutral-400">メール件名</p>
                                                 @if (!$project->mail_subject)
                                                     <span class="text-neutral-400">なし</span>
                                                 @else
-                                                    <div class="text-md rounded bg-neutral-100 p-4">
+                                                    <div class="text-sm">
                                                         {{ $project->mail_subject }}
                                                     </div>
                                                 @endif
                                             </div>
                                             <div>
-                                                <p class="mb-2 text-sm text-neutral-400">メール内容</p>
+                                                <p class="mb-4 border-b border-neutral-300 pb-1 text-sm font-bold text-neutral-400">メール内容</p>
                                                 @if (!$project->mail_content)
                                                     <span class="text-neutral-400">なし</span>
                                                 @else
-                                                    <div class="text-md rounded bg-neutral-100 p-4">
+                                                    <div class="text-sm">
                                                         {!! $project->mail_content !!}
                                                     </div>
                                                 @endif
@@ -409,8 +424,7 @@
                             <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="relative" x-cloak>
                                 {{-- users --}}
                                 <div class="mb-2">
-                                    <h4 class="text-md mb-2 font-bold text-neutral-500">ユーザー情報</h4>
-                                    <div class="rounded border-0 p-8">
+                                    <div>
                                         {{-- @isset($postusers)
                                     <p>アカウントは有りませんでした</p>
                                 @endisset --}}
@@ -461,7 +475,6 @@
                         <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="relative" x-cloak>
                             {{-- description --}}
                             <div class="mb-8">
-                                <h4 class="text-md mb-2 font-bold text-neutral-500">プロジェクトの説明（ユーザーページに表示されます）</h4>
                                 <div class="mb-8 rounded border-0 bg-white p-8">
 
                                     {{-- project message --}}
@@ -475,33 +488,34 @@
                     </div>
                 </div>
 
+            </div>
 
-            </div>
-            {{-- created / modified --}}
-            <div>
-                <span class="pr-4 text-xs text-neutral-500">
-                    プロジェクト作成日：
-                    @if (!$project->created_at)
-                        <span class="text-neutral-700">無し</span>
-                    @else
-                        <span class="text-neutral-700">
-                            {{ \Carbon\Carbon::parse($project->created_at)->format('Y年m月d日') }}
-                            {{-- {{ $project->created_at }} --}}
-                        </span>
-                    @endif
-                </span>
-                <span class="pr-4 text-xs text-neutral-500">
-                    プロジェクト更新日：
-                    @if (!$project->updated_at)
-                        <span class="text-neutral-700">無し</span>
-                    @else
-                        <span class="text-neutral-700">
-                            {{ \Carbon\Carbon::parse($project->updated_at)->format('Y年m月d日') }}
-                            {{-- {{ $project->updated_at }} --}}
-                        </span>
-                    @endif
-                </span>
-            </div>
+        </div>
+
+        {{-- created / modified --}}
+        <div>
+            <span class="pr-4 text-xs text-neutral-500">
+                プロジェクト作成日：
+                @if (!$project->created_at)
+                    <span class="text-neutral-700">無し</span>
+                @else
+                    <span class="text-neutral-700">
+                        {{ \Carbon\Carbon::parse($project->created_at)->format('Y年m月d日') }}
+                        {{-- {{ $project->created_at }} --}}
+                    </span>
+                @endif
+            </span>
+            <span class="pr-4 text-xs text-neutral-500">
+                プロジェクト更新日：
+                @if (!$project->updated_at)
+                    <span class="text-neutral-700">無し</span>
+                @else
+                    <span class="text-neutral-700">
+                        {{ \Carbon\Carbon::parse($project->updated_at)->format('Y年m月d日') }}
+                        {{-- {{ $project->updated_at }} --}}
+                    </span>
+                @endif
+            </span>
         </div>
 
     </div>

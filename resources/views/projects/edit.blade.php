@@ -6,26 +6,28 @@
     @include('layouts.topbar')
 
     <div class="flex flex-row flex-nowrap">
+
         {{-- sidebar --}}
         @include('layouts.sidebar')
 
         <div class="mx-auto h-[calc(100svh_-_56px)] w-full overflow-y-scroll p-6">
-
             {{-- content --}}
             <form action="{{ route('projects.update', $project->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
-                {{-- プロジェクト名・プロジェクトの説明 --}}
-                <div class="mb-8">
-                    <h4 class="text-md mb-2 font-bold text-neutral-500">プロジェクト概要</h4>
-                    <div class="rounded border border-neutral-200 bg-white p-6">
+                <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
+                    {{-- title --}}
+                    <div class="border-b border-neutral-200 px-4 py-4">
+                        <p class="text-sm font-bold text-neutral-500">プロジェクト概要</p>
+                    </div>
+
+                    {{-- content --}}
+                    <div class="px-4 pt-6">
                         {{-- プロジェクト名 --}}
                         <div class="mb-6">
                             <div class="mb-2">
-                                <label class="text-md font-bold">
-                                    プロジェクト名
-                                </label>
+                                <label class="text-md font-bold">プロジェクト名</label>
                                 <span class="relative rounded-full bg-red-600 py-0.5 pl-2 pr-2.5 text-xs font-semibold text-white">
                                     <span>必須</span>
                                 </span>
@@ -47,11 +49,16 @@
                     </div>
                 </div>
 
-                {{-- 公開設定・公開期限 --}}
-                <div class="mb-8">
-                    <h4 class="text-md mb-2 font-bold text-neutral-500">公開情報</h4>
-                    <div class="rounded border border-neutral-200 bg-white p-6">
-                        <div class="flex flex-row items-center gap-2">
+
+                <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
+                    {{-- title --}}
+                    <div class="border-b border-neutral-200 px-4 py-4">
+                        <p class="text-sm font-bold text-neutral-500">公開情報</p>
+                    </div>
+
+                    {{-- content --}}
+                    <div class="px-4 pt-6">
+                        <div class="mb-6 flex flex-row items-center gap-2">
                             {{-- 公開設定 --}}
                             <div class="mr-4">
                                 <label class="text-md font-bold">公開設定</label>
@@ -77,41 +84,44 @@
                 </div>
 
 
+                <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
+                    {{-- title --}}
+                    <div class="border-b border-neutral-200 px-4 py-4">
+                        <p class="text-sm font-bold text-neutral-500">プロジェクト情報</p>
+                    </div>
 
-                {{-- プロジェクトの期間情報・プロジェクトの内容情報 --}}
-                <div class="mb-8">
-                    <h4 class="text-md mb-2 font-bold text-neutral-500">プロジェクト情報</h4>
-                    <div class="roundedr border border-neutral-200 bg-white p-8">
-
-                        {{-- 内容情報 --}}
-                        <div class="mb-6">
-                            <div class="mb-2">
-                                <label class="text-md font-bold">内容情報</label>
-                            </div>
-                            {{-- projectinstance --}}
-                            <textarea id="editor2" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください" class="">{!! old('project_message', $project->project_message) !!}</textarea>
+                    {{-- content --}}
+                    <div class="px-4 pt-6">
+                        <div class="mb-2">
+                            <label class="text-md font-bold">内容情報</label>
+                        </div>
+                        {{-- projectinstance --}}
+                        <div class="mb-4">
+                            <textarea id="editor2" name="project_message" type="text" placeholder="プロジェクトの説明を記入してください">{!! old('project_message', $project->project_message) !!}</textarea>
                         </div>
                     </div>
                 </div>
 
-                {{-- 返信メールの件名・本文 --}}
-                <div class="mb-8">
-                    <h4 class="text-md mb-2 font-bold text-neutral-500">返信メール情報</h4>
-                    <div class="roundedr border border-neutral-200 bg-white p-8">
-                        <div>
-                            <div class="mb-6">
-                                <div class="mb-2">
-                                    <label class="text-md font-bold">返信メールの件名</label>
-                                </div>
-                                <input name="mail_subject" type="text" placeholder="メールの件名を記入してください" value="{{ old('mail_subject', $project->mail_subject) }}" class="text-md ring-offset-background flex h-10 w-1/2 rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-500" />
+
+                <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
+                    {{-- title --}}
+                    <div class="border-b border-neutral-200 px-4 py-4">
+                        <p class="text-sm font-bold text-neutral-500">返信メール情報</p>
+                    </div>
+
+                    <div class="px-4 pt-6">
+                        <div class="mb-6">
+                            <div class="mb-2">
+                                <label class="text-md font-bold">返信メールの件名</label>
                             </div>
-                            <div class="mb-6">
-                                <div class="mb-2">
-                                    <label class="text-md font-bold">返信メールの本文</label>
-                                </div>
-                                {{-- projectinstance --}}
-                                <textarea id="" name="mail_content" type="text" placeholder="メールの返信内容を記入してください" class="text-md flex h-32 min-h-[80px] w-full rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-400">{!! old('mail_content', $project->mail_content) !!}</textarea>
+                            <input name="mail_subject" type="text" placeholder="メールの件名を記入してください" value="{{ old('mail_subject', $project->mail_subject) }}" class="text-md ring-offset-background flex h-10 w-1/2 rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-500" />
+                        </div>
+                        <div class="mb-6">
+                            <div class="mb-2">
+                                <label class="text-md font-bold">返信メールの本文</label>
                             </div>
+                            {{-- projectinstance --}}
+                            <textarea id="" name="mail_content" type="text" placeholder="メールの返信内容を記入してください" class="text-md flex h-32 min-h-[80px] w-full rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-400">{!! old('mail_content', $project->mail_content) !!}</textarea>
                         </div>
                     </div>
                 </div>
@@ -148,7 +158,6 @@
                 </span>
             </div>
 
-        </div>
 
-    </div>
-@endsection
+        </div>
+    @endsection
