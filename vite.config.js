@@ -19,4 +19,14 @@ export default defineConfig({
     define: {
         __PROJECT_ROOT__: JSON.stringify('/laravel_proofsheet_auth/public'),
     },
+    build: {
+        chunkSizeWarningLimit: 1000,
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['vue', 'axios'],
+                },
+            },
+        },
+    },
 });
