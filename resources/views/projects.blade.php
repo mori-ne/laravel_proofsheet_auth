@@ -124,12 +124,11 @@
                         {{-- if --}}
                         @if ($projects->isEmpty())
                             <tr>
-                                <td class="w-full" colspan="3">
-                                    <p class="flex h-32 items-center justify-center rounded-lg border border-dashed border-neutral-300 text-center text-sm text-neutral-600">
+                                <td class="w-full" colspan="4">
+                                    <p class="my-8 flex h-32 items-center justify-center rounded border border-dashed border-neutral-300 text-center text-sm text-neutral-600">
                                         プロジェクトは見つかりませんでした...
                                     </p>
                                 </td>
-                                <td></td>
                             </tr>
                         @endif
 
@@ -233,7 +232,7 @@
                                         <div class="flex items-center justify-start gap-2 border-0 border-neutral-300">
                                             @if ($project->status)
                                                 {{-- 公開中 --}}
-                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
+                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST" class="rounded-full px-2 transition-all hover:bg-green-100">
                                                     @csrf
                                                     <button type="submit">
                                                         @csrf
@@ -245,7 +244,7 @@
                                                 </form>
                                             @else
                                                 {{-- 非公開 --}}
-                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST">
+                                                <form name="toggleStatus" action="{{ route('projects.toggle', ['id' => $project->id]) }}" method="POST" class="rounded-full px-2 transition-all hover:bg-neutral-100">
                                                     <button type="submit">
                                                         @csrf
                                                         <div class="flex flex-row flex-nowrap items-center gap-2">

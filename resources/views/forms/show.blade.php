@@ -18,9 +18,10 @@
                     {{-- form name --}}
                     <div>
                         <p class="mb-2 text-sm text-neutral-400">フォーム名</p>
-                        <h5 class="text-2xl font-bold leading-none text-neutral-900">
+                        <h5 class="mb-2 text-2xl font-bold leading-none text-neutral-900">
                             {{ $form->form_name }}
                         </h5>
+                        <p class="text-neutral-400">{{ $form->project->project_name }}</p>
                     </div>
 
                     {{-- controll form --}}
@@ -110,10 +111,27 @@
             </div>
 
             {{-- input details --}}
-            <div class="mb-3 rounded border-0 bg-white p-8 shadow-md shadow-neutral-200">
-                <p class="text-xs">
-                    {{ $form->input->inputs }}
-                </p>
+            <div class="mb-3 rounded border border-neutral-200 bg-white p-8">
+                <div class="flex flex-row justify-between">
+                    <p class="font-bold">入力項目一覧</p>
+                    <a href="{{ route('forms.inputEdit', $form->id) }}" target="_blank" class="rounded border border-neutral-200 px-3 py-1 text-sm">入力項目エディターを開く</a>
+                </div>
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b-2 border-neutral-300 text-xs font-bold text-neutral-600">
+                            <td class="pb-1">タイトル</td>
+                            <td class="pb-1">入力種別</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($inputs as $key => $input)
+                            <tr class="border-b border-neutral-200">
+                                <td class="py-1 text-sm">{{ $input->inputTitle }}</td>
+                                <td class="py-1">{{ $input->inputType }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
 
             {{-- created / modified --}}

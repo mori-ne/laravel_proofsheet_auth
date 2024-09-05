@@ -32,7 +32,7 @@
                                     <span>必須</span>
                                 </span>
                             </div>
-                            <input name="project_name" type="text" placeholder="プロジェクト名を記入してください" value="{{ old('project_name', $project->project_name) }}" class="text-md ring-offset-background flex h-10 w-1/2 rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-500" />
+                            <input name="project_name" type="text" placeholder="プロジェクト名を記入してください" value="{{ old('project_name', $project->project_name) }}" class="text-md ring-offset-background flex h-10 w-full rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-500" />
                             @error('project_name')
                                 <div class="mt-2 text-red-600">{{ $message }}</div>
                             @enderror
@@ -114,7 +114,7 @@
                             <div class="mb-2">
                                 <label class="text-md font-bold">返信メールの件名</label>
                             </div>
-                            <input name="mail_subject" type="text" placeholder="メールの件名を記入してください" value="{{ old('mail_subject', $project->mail_subject) }}" class="text-md ring-offset-background flex h-10 w-1/2 rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-500" />
+                            <input name="mail_subject" type="text" placeholder="メールの件名を記入してください" value="{{ old('mail_subject', $project->mail_subject) }}" class="text-md ring-offset-background flex h-10 w-full rounded border-0 bg-neutral-100 px-3 py-2 placeholder:text-neutral-500" />
                         </div>
                         <div class="mb-6">
                             <div class="mb-2">

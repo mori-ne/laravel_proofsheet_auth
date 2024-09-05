@@ -93,12 +93,10 @@ class FormController extends Controller
         if (!$form) {
             return redirect('forms');
         }
-        return view('forms.show', compact('form'));
+        $inputs = json_decode($form->input->inputs);
+        return view('forms.show', ['form' => $form, 'inputs' => $inputs]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $projects = Project::all();
@@ -112,9 +110,6 @@ class FormController extends Controller
         return view('forms.edit', ['form' => $form, 'projects' => $projects]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         // バリデーションルールの定義
@@ -166,7 +161,6 @@ class FormController extends Controller
         }
     }
 
-    // 複製
     public function duplicate(string $id)
     {
         $form = Form::with('input')->findOrFail($id);
