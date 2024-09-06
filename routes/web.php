@@ -39,6 +39,8 @@ Route::prefix('admin')->group(function () {
         Route::delete('projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
         Route::post('projects/{id}', [ProjectController::class, 'toggleStatus'])->name('projects.toggle');
         Route::post('projects/duplicate/{id}', [ProjectController::class, 'duplicate'])->name('projects.duplicate');
+        Route::get('projects/user/edit/{id}', [ProjectController::class, 'userEdit'])->name('projects.userEdit');
+        Route::get('projects/user/delete/{id}', [ProjectController::class, 'userDelete'])->name('projects.userDelete');
 
         // forms
         Route::get('forms', [FormController::class, 'index'])->name('forms.index');

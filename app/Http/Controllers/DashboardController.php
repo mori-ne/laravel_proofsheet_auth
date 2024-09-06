@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 // use App\Models\Input;
 use App\Models\Project;
 use App\Models\Form;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -26,6 +27,13 @@ class DashboardController extends Controller
         // 更新日時順のフォーム
         $recentForms = Form::orderBy('updated_at', 'desc')->limit(10)->get();
 
-        return view('dashboard', ['projects' => $projects, 'recentProjects' => $recentProjects, 'forms' => $forms, 'recentForms' => $recentForms]);
+        // 現在時刻
+        $now = Carbon::now();
+        // 1週間後の時刻
+        $oneWeekLater = $now->copy()->addWeek();
+        // 1週間以内の期限＆公開中のタスクを取得
+        $nearLimitProjects = Project::whereBetween('is_deadline', [$now, $oneWeekLater])->where('status', 1)->get();
+
+        return view('dashboard', ['projects' => $projects, 'recentProjects' => $recentProjects, 'forms' => $forms, 'recentForms' => $recentForms, 'nearLimitProjects' => $nearLimitProjects]);
     }
 }

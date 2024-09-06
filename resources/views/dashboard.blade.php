@@ -18,15 +18,53 @@
                     </div>
                 @endif
 
+                @if ($nearLimitProjects->count() > 0)
+                    <div class="w-full rounded border border-red-500 bg-red-50">
+                        {{-- head --}}
+                        <div class="border-b border-red-300 bg-red-500 px-4 py-2">
+                            <p class="text-sm font-bold text-white">公開期限が迫っています！</p>
+                        </div>
+
+                        <div class="px-4 py-2">
+                            {{-- content --}}
+                            <table class="w-full rounded">
+                                <tbody>
+                                    @foreach ($nearLimitProjects as $key => $nearLimitProject)
+                                        <tr class="">
+                                            <td class="w-0 whitespace-nowrap pr-4">
+                                                <p class="rounded bg-red-500 px-2 py-0.5 text-xs font-bold text-white">
+                                                    {{ \Carbon\Carbon::parse($nearLimitProject->is_deadline)->format('Y年m月d日 H時i分') }}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('projects.show', $nearLimitProject->id) }}" class="text-md font-bold text-red-500 hover:underline">
+                                                    {{ $nearLimitProject->project_name }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <div class="flex flex-row justify-end gap-4">
+                                                    <a class="text-sm text-red-500 hover:underline" href="{{ route('projects.show', $nearLimitProject->id) }}">詳細</a>
+                                                    <a class="text-sm text-red-500 hover:underline" href="{{ route('projects.edit', $nearLimitProject->id) }}">編集</a>
+                                                    <a class="text-sm text-red-500 hover:underline" href="{{ route('postuser.index', ['uuid' => $nearLimitProject->uuid]) }}" target="_blank">投稿ページを表示</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="flex flex-row gap-3">
                     {{-- total projects --}}
                     <div class="w-full rounded border border-neutral-200 bg-white">
                         {{-- head --}}
-                        <div class="border-b border-neutral-200 px-4 py-4">
+                        <div class="border-b border-neutral-200 px-4 py-3">
                             <p class="text-sm font-bold text-neutral-500">総プロジェクト数</p>
                         </div>
                         {{-- content --}}
-                        <div class="p-6">
+                        <div class="px-6 py-4">
                             <span class="text-2xl font-bold">{{ $projects->count() }}</span>
                             <span class="text-neutral-400">件</span>
                         </div>
@@ -35,20 +73,22 @@
                     {{-- total forms --}}
                     <div class="w-full rounded border border-neutral-200 bg-white">
                         {{-- head --}}
-                        <div class="border-b border-neutral-200 px-4 py-4">
+                        <div class="border-b border-neutral-200 px-4 py-3">
                             <p class="text-sm font-bold text-neutral-500">総フォーム数</p>
                         </div>
                         {{-- content --}}
-                        <div class="p-6">
+                        <div class="px-6 py-4">
                             <span class="text-2xl font-bold">{{ $forms->count() }}</span>
                             <span class="text-neutral-400">件</span>
                         </div>
                     </div>
                 </div>
 
+
+
                 <div class="w-full rounded border border-neutral-200 bg-white">
                     {{-- head --}}
-                    <div class="border-b border-neutral-200 px-4 py-4">
+                    <div class="border-b border-neutral-200 px-4 py-3">
                         <p class="text-sm font-bold text-neutral-500">最近更新されたプロジェクト</p>
                     </div>
 
@@ -58,28 +98,30 @@
                             <thead>
                                 <tr class="border-b border-neutral-200">
                                     <th class="text-left">
-                                        <p class="pb-1 text-sm font-bold text-neutral-400">更新時間</p>
+                                        <p class="pb-1 text-xs font-bold text-neutral-400">プロジェクト名</p>
                                     </th>
                                     <th class="text-left">
-                                        <p class="pb-1 text-sm font-bold text-neutral-400">プロジェクト名</p>
+                                        <p class="pb-1 text-xs font-bold text-neutral-400">公開日時</p>
                                     </th>
                                     <th class="text-left">
-                                        <p class="pb-1 text-right text-sm font-bold text-neutral-400">コントロール</p>
+                                        <p class="pb-1 text-xs font-bold text-neutral-400">コントロール</p>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($recentProjects as $key => $recentProject)
                                     <tr class="border-b border-neutral-200">
-                                        <td class="w-56 py-2">
-                                            {{ \Carbon\Carbon::parse($recentProject->updated_at)->format('Y年m月d日 H時i分') }}
-                                        </td>
-                                        <td>
+                                        <td class="py-2">
                                             <a href="{{ route('projects.show', $recentProject->id) }}" class="text-md font-bold hover:underline">
                                                 {{ $recentProject->project_name }}
                                             </a>
                                         </td>
-                                        <td>
+                                        <td class="w-0 whitespace-nowrap pr-4">
+                                            <p class="text-sm">
+                                                {{ \Carbon\Carbon::parse($recentProject->is_deadline)->format('Y年m月d日 H時i分') }}
+                                            </p>
+                                        </td>
+                                        <td class="w-0 whitespace-nowrap">
                                             <div class="flex flex-row justify-end gap-4">
                                                 <a class="text-sm text-neutral-600 hover:underline" href="{{ route('projects.show', $recentProject->id) }}">詳細</a>
                                                 <a class="text-sm text-neutral-600 hover:underline" href="{{ route('projects.edit', $recentProject->id) }}">編集</a>
@@ -96,7 +138,7 @@
                 <div class="w-full rounded border border-neutral-200 bg-white">
 
                     {{-- head --}}
-                    <div class="border-b border-neutral-200 px-4 py-4">
+                    <div class="border-b border-neutral-200 px-4 py-3">
                         <p class="text-sm font-bold text-neutral-500">最近更新されたフォーム</p>
                     </div>
 
@@ -106,36 +148,38 @@
                             <thead>
                                 <tr class="border-b border-neutral-200">
                                     <th class="text-left">
-                                        <p class="pb-1 text-sm font-bold text-neutral-400">更新時間</p>
+                                        <p class="pb-1 text-xs font-bold text-neutral-400">フォーム名</p>
                                     </th>
                                     <th class="text-left">
-                                        <p class="pb-1 text-sm font-bold text-neutral-400">フォーム名</p>
+                                        <p class="pb-1 text-xs font-bold text-neutral-400">更新時間</p>
                                     </th>
                                     <th class="text-left">
-                                        <p class="pb-1 text-sm font-bold text-neutral-400">プロジェクト名</p>
+                                        <p class="pb-1 text-xs font-bold text-neutral-400">プロジェクト名</p>
                                     </th>
                                     <th class="text-right">
-                                        <p class="pb-1 text-sm font-bold text-neutral-400">コントロール</p>
+                                        <p class="pb-1 text-xs font-bold text-neutral-400">コントロール</p>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($recentForms as $key => $recentForms)
                                     <tr class="border-b border-neutral-200">
-                                        <td class="w-56 py-2">
-                                            {{ \Carbon\Carbon::parse($recentForms->updated_at)->format('Y年m月d日 H時i分') }}
-                                        </td>
-                                        <td>
+                                        <td class="py-2">
                                             <a href="{{ route('forms.show', $recentForms->id) }}" class="text-md font-bold hover:underline">
                                                 {{ $recentForms->form_name }}
                                             </a>
                                         </td>
-                                        <td class="w-0 whitespace-nowrap">
+                                        <td class="w-0 whitespace-nowrap pr-4">
+                                            <p class="text-sm">
+                                                {{ \Carbon\Carbon::parse($recentForms->updated_at)->format('Y年m月d日 H時i分') }}
+                                            </p>
+                                        </td>
+                                        <td class="w-0 whitespace-nowrap pr-4">
                                             <p class="text-sm">
                                                 {{ $recentForms->project->project_name }}
                                             </p>
                                         </td>
-                                        <td class="w-24">
+                                        <td class="w-0 whitespace-nowrap py-2">
                                             <div class="flex flex-row items-center justify-end gap-4">
                                                 <a class="text-sm text-neutral-600 hover:underline" href="{{ route('forms.show', $recentForms->id) }}">詳細</a>
                                                 <a class="text-sm text-neutral-600 hover:underline" href="{{ route('forms.edit', $recentForms->id) }}">編集</a>

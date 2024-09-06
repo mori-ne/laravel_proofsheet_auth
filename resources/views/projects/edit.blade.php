@@ -18,7 +18,7 @@
 
                 <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
                     {{-- title --}}
-                    <div class="border-b border-neutral-200 px-4 py-4">
+                    <div class="border-b border-neutral-200 px-4 py-3">
                         <p class="text-sm font-bold text-neutral-500">プロジェクト概要</p>
                     </div>
 
@@ -52,7 +52,7 @@
 
                 <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
                     {{-- title --}}
-                    <div class="border-b border-neutral-200 px-4 py-4">
+                    <div class="border-b border-neutral-200 px-4 py-3">
                         <p class="text-sm font-bold text-neutral-500">公開情報</p>
                     </div>
 
@@ -86,7 +86,7 @@
 
                 <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
                     {{-- title --}}
-                    <div class="border-b border-neutral-200 px-4 py-4">
+                    <div class="border-b border-neutral-200 px-4 py-3">
                         <p class="text-sm font-bold text-neutral-500">プロジェクト情報</p>
                     </div>
 
@@ -105,7 +105,7 @@
 
                 <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
                     {{-- title --}}
-                    <div class="border-b border-neutral-200 px-4 py-4">
+                    <div class="border-b border-neutral-200 px-4 py-3">
                         <p class="text-sm font-bold text-neutral-500">返信メール情報</p>
                     </div>
 

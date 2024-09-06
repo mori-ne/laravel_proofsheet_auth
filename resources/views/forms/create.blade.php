@@ -16,7 +16,7 @@
             <div class="w-full rounded border border-neutral-200 bg-white">
 
                 {{-- title --}}
-                <div class="border-b border-neutral-200 px-4 py-4">
+                <div class="border-b border-neutral-200 px-4 py-3">
                     <p class="text-sm font-bold text-neutral-500">フォームを新規作成</p>
                 </div>
 

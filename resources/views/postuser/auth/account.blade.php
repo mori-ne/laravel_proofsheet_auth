@@ -3,7 +3,7 @@
 @section('content')
     <div class="mx-auto max-w-2xl flex-row justify-center">
         <div class="w-full py-10">
-            <div class="h-full rounded border-0 bg-white p-8 shadow-md shadow-neutral-100">
+            <div class="h-full rounded border border-neutral-200 bg-white p-8 shadow-md shadow-neutral-100">
                 <h4 class="mb-4 text-lg font-bold text-neutral-700">アカウント情報</h4>
 
                 <form action="{{ route('postuser.account.edit.name', $uuid) }}" method="POST">

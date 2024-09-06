@@ -245,4 +245,15 @@ class ProjectController extends Controller
 
         return redirect()->back()->with('status', $original->project_name . ' を複製しました');
     }
+
+    public function userEdit($id)
+    {
+        $user = PostUser::where('id', $id)->firstOrFail();
+        // dd($user);
+        return view('projects.useredit', ['user' => $user]);
+    }
+    public function userDelete($id)
+    {
+        dd($id);
+    }
 }

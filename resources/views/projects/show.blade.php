@@ -15,8 +15,8 @@
             {{-- project name / description --}}
             <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
                 {{-- title --}}
-                <div class="border-b border-neutral-200 px-4 py-4">
-                    <p class="text-sm font-bold text-neutral-500">プロジェクトの名</p>
+                <div class="border-b border-neutral-200 px-4 py-3">
+                    <p class="text-sm font-bold text-neutral-500">プロジェクトの名称</p>
                 </div>
 
                 {{-- content --}}
@@ -109,14 +109,14 @@
 
             <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
                 {{-- title --}}
-                <div class="border-b border-neutral-200 px-4 py-4">
+                <div class="border-b border-neutral-200 px-4 py-3">
                     <p class="text-sm font-bold text-neutral-500">公開状況・公開URL</p>
                 </div>
 
                 {{-- public url --}}
                 <div class="border-b border-neutral-200 bg-white p-4">
                     <p class="text-sm text-neutral-400">※URLは変更できません</p>
-                    <a class="text-md text-neutral-600 hover:underline" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">
+                    <a class="text-md text-blue-800 hover:underline" href="{{ route('postuser.index', ['uuid' => $project->uuid]) }}" target="_blank">
                         {{ route('postuser.index', ['uuid' => $project->uuid]) }}
                     </a>
                 </div>
@@ -173,7 +173,7 @@
             <div class="mb-4 w-full rounded border border-neutral-200 bg-white">
 
                 {{-- title --}}
-                <div class="border-b border-neutral-200 px-4 py-4">
+                <div class="border-b border-neutral-200 px-4 py-3">
                     <p class="text-sm font-bold text-neutral-500">プロジェクトの詳細</p>
                 </div>
 
@@ -442,6 +442,9 @@
                                                 <th class="pb-1 pr-6">
                                                     <p class="text-left text-xs font-bold text-neutral-400">メールアドレス</p>
                                                 </th>
+                                                <th class="pb-1 pr-6">
+                                                    <p class="text-left text-xs font-bold text-neutral-400">コントロール</p>
+                                                </th>
                                             </tr>
                                             @foreach ($postusers as $postuser)
                                                 <tr class="border-b border-neutral-200">
@@ -460,6 +463,16 @@
                                                     </td>
                                                     <td class="py-2 pl-3">
                                                         <p>{{ $postuser->email }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <div class="flex flex-row items-center gap-2">
+                                                            <p class="text-sm">
+                                                                <a class="hover:text-blue-700 hover:underline" href="{{ route('projects.userEdit', $postuser->id) }}">編集</a>
+                                                            </p>
+                                                            <p class="text-sm">
+                                                                <a class="hover:text-red-500 hover:underline" href="{{ route('projects.userDelete', $postuser->id) }}">削除</a>
+                                                            </p>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                     </div>
