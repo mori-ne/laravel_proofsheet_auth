@@ -362,12 +362,11 @@ class PostUserController extends Controller
             'old_password.required' => '現在のパスワードは必ず入力してください',
             'new_password.required' => '新しいパスワードは必ず入力してください',
             'retype_new_password.required' => '新しいパスワード（再入力）は必ず入力してください',
-            'retype_new_password.same' => '新しいパスワードと新しいパスワード（再入力）の値が異なります',
+            'retype_new_password.same' => '新しいパスワードと新しいパスワード（再入力）が異なります',
         ]);
         Log::info('Requestのバリデーション');
 
         $user = Auth::guard('postuser')->user();
-
         if (!$user) {
             return redirect()->back()->withErrors(['user' => 'ユーザーが見つかりません。']);
         }
@@ -385,7 +384,7 @@ class PostUserController extends Controller
         // メール送信
         $project = Project::where('uuid', $uuid)->firstOrFail();
         $email = $user->email;
-        $name = $validated['first_name'] . " " . $validated['last_name'];
+        $name = $user->first_name . $user->last_name;
         Mail::to($email)->send(new PostUserEditPasswordMail($project->project_name, $email, $project->uuid, $name));
         Log::info('PostUserEditPasswordMail:メール送信完了');
 

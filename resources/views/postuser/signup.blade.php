@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="rounded border-0 bg-white p-10 shadow-md shadow-neutral-200">
+        <div class="rounded border border-neutral-200 bg-white p-10">
             <form action="{{ route('postuser.verifymailsignup', $uuid) }}" method="POST">
                 @csrf
 

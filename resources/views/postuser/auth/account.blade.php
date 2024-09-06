@@ -15,14 +15,14 @@
                         <div class="flex flex-row gap-4">
                             <div class="w-full">
                                 <label class="mb-1 block text-sm text-neutral-700" for="first_name">お名前（姓）</label>
-                                <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="first_name" value="{{ Auth::guard('postuser')->user()->first_name }}">
+                                <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="text" name="first_name" value="{{ Auth::guard('postuser')->user()->first_name }}">
                                 @if ($errors->has('first_name'))
                                     <p class="error mt-2 text-xs text-red-500">{{ $errors->first('first_name') }}</p>
                                 @endif
                             </div>
                             <div class="w-full">
                                 <label class="mb-1 block text-sm text-neutral-700" for="first_name">お名前（名）</label>
-                                <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="last_name" value="{{ Auth::guard('postuser')->user()->last_name }}">
+                                <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="text" name="last_name" value="{{ Auth::guard('postuser')->user()->last_name }}">
                                 @if ($errors->has('last_name'))
                                     <p class="error mt-2 text-xs text-red-500">{{ $errors->first('last_name') }}</p>
                                 @endif
@@ -37,14 +37,14 @@
                         <h5 class="mb-4 text-lg font-bold text-neutral-500">所属情報</h5>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="affiliate">ご所属</label>
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="affiliate" value="{{ Auth::guard('postuser')->user()->affiliate }}">
+                            <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="text" name="affiliate" value="{{ Auth::guard('postuser')->user()->affiliate }}">
                             @if ($errors->has('affiliate'))
                                 <p class="error mt-2 text-xs text-red-500">{{ $errors->first('affiliate') }}</p>
                             @endif
                         </div>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="zipcode">郵便番号</label>
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="zipcode" value="{{ Auth::guard('postuser')->user()->zipcode }}">
+                            <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="text" name="zipcode" value="{{ Auth::guard('postuser')->user()->zipcode }}">
                             @if ($errors->has('zipcode'))
                                 <p class="error mt-2 text-xs text-red-500">{{ $errors->first('zipcode') }}</p>
                             @endif
@@ -53,19 +53,19 @@
                             <label class="mb-1 block text-sm text-neutral-700" for="address">住所</label>
                             <div class="flex flex-row gap-4">
                                 <div class="mb-4 w-full">
-                                    <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="address_country" value="{{ Auth::guard('postuser')->user()->address_country }}">
+                                    <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="text" name="address_country" value="{{ Auth::guard('postuser')->user()->address_country }}">
                                     @if ($errors->has('address_country'))
                                         <p class="error mt-2 text-xs text-red-500">{{ $errors->first('address_country') }}</p>
                                     @endif
                                 </div>
                                 <div class="mb-4 w-full">
-                                    <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="address_city" value="{{ Auth::guard('postuser')->user()->address_city }}">
+                                    <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="text" name="address_city" value="{{ Auth::guard('postuser')->user()->address_city }}">
                                     @if ($errors->has('address_city'))
                                         <p class="error mt-2 text-xs text-red-500">{{ $errors->first('address_city') }}</p>
                                     @endif
                                 </div>
                             </div>
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="text" name="address_etc" value="{{ Auth::guard('postuser')->user()->address_etc }}">
+                            <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="text" name="address_etc" value="{{ Auth::guard('postuser')->user()->address_etc }}">
                             @if ($errors->has('address_etc'))
                                 <p class="error mt-2 text-xs text-red-500">{{ $errors->first('address_etc') }}</p>
                             @endif
@@ -86,7 +86,7 @@
                         <p class="mb-6 text-sm text-neutral-400">変更にはメールアドレスの再認証が必要です。<br>変更ボタンを押した後に届いたメールから再認証をお願いいたします</p>
                         <div class="mb-4">
                             {{-- <label class="mb-1 block text-sm text-neutral-700" for="first_name">メールアドレス</label> --}}
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="email" name="email" value="{{ Auth::guard('postuser')->user()->email }}">
+                            <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="email" name="email" value="{{ Auth::guard('postuser')->user()->email }}">
                             @if ($errors->has('email'))
                                 <p class="error mt-2 text-xs text-red-500">{{ $errors->first('email') }}</p>
                             @endif
@@ -106,21 +106,21 @@
                         <p class="mb-6 text-sm text-neutral-400">パスワードの変更後は再ログインが必要です</p>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="old_password">現在のパスワード</label>
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="old_password" value="">
+                            <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="password" name="old_password" value="">
                             @if ($errors->has('old_password'))
                                 <p class="error mt-2 text-xs text-red-500">{{ $errors->first('old_password') }}</p>
                             @endif
                         </div>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="new_password">新しいパスワード</label>
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="new_password" value="">
+                            <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="password" name="new_password" value="">
                             @if ($errors->has('new_password'))
                                 <p class="error mt-2 text-xs text-red-500">{{ $errors->first('new_password') }}</p>
                             @endif
                         </div>
                         <div class="mb-4">
                             <label class="mb-1 block text-sm text-neutral-700" for="retype_new_password">新しいパスワード（再入力）</label>
-                            <input class="w-full rounded border-0 bg-neutral-100 shadow-inner" type="password" name="retype_new_password" value="">
+                            <input class="w-full rounded border border-neutral-200 bg-neutral-100" type="password" name="retype_new_password" value="">
                             @if ($errors->has('retype_new_password'))
                                 <p class="error mt-2 text-xs text-red-500">{{ $errors->first('retype_new_password') }}</p>
                             @endif
