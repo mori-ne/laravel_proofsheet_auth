@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostUserRegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Form;
@@ -249,9 +250,16 @@ class ProjectController extends Controller
     public function userEdit($id)
     {
         $user = PostUser::where('id', $id)->firstOrFail();
-        // dd($user);
-        return view('projects.useredit', ['user' => $user]);
+        $project = Project::where('uuid', $user->uuid)->firstOrFail();
+        return view('projects.useredit', ['user' => $user, 'project' => $project]);
     }
+
+    public function userStore($id, PostUserRegisterRequest $request)
+    {
+        $validated = $request->validated();
+        dd($id, $validated);
+    }
+
     public function userDelete($id)
     {
         dd($id);

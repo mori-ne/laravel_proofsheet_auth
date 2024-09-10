@@ -40,6 +40,7 @@ Route::prefix('admin')->group(function () {
         Route::post('projects/{id}', [ProjectController::class, 'toggleStatus'])->name('projects.toggle');
         Route::post('projects/duplicate/{id}', [ProjectController::class, 'duplicate'])->name('projects.duplicate');
         Route::get('projects/user/edit/{id}', [ProjectController::class, 'userEdit'])->name('projects.userEdit');
+        Route::put('projects/user/store/{id}', [ProjectController::class, 'userStore'])->name('projects.userStore');
         Route::get('projects/user/delete/{id}', [ProjectController::class, 'userDelete'])->name('projects.userDelete');
 
         // forms
